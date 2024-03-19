@@ -1,0 +1,273 @@
+<div
+    id="notificationTemplateDefinitions"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-notificationTemplate-button fuse-white mt-24 mr-35"
+                        (click)="SearchNotificationTemplateDefinition()"
+                    >
+                        <span>{{
+                            "NOTIFICATIONTEMPLATE.SEARCH" | translate
+                        }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-notificationTemplate-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "NOTIFICATIONTEMPLATE.CLEAR" | translate }}
+                    </button>
+                    <!-- CLEAR BUTTON -->
+                    <!-- ADD BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        [routerLink]="
+                            '/searchNotificationTemplateDefinition/new'
+                        "
+                        class="add-notificationTemplate-button fuse-white m-10"
+                    >
+                        {{ "NOTIFICATIONTEMPLATE.ADD" | translate }}
+                    </button>
+                    <!-- ADD BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="notificationTemplateDefinitionsForm"
+                    [formGroup]="notificationTemplateDefinitionsForm"
+                    class="notificationTemplate w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "NOTIFICATIONTEMPLATE.SEARCHSTARTDATE"
+                                        | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="SearchStartDate"
+                                    formControlName="SearchStartDate"
+                                    [matDatepicker]="pickerSearchStartDate"
+                                    [(ngModel)]="
+                                        notificationTemplate.SearchStartDate
+                                    "
+                                    (dateChange)="
+                                        onSearchStartDateChange($event)
+                                    "
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerSearchStartDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerSearchStartDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "NOTIFICATIONTEMPLATE.SEARCHENDDATE"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    [matDatepicker]="pickerSearchEndDate"
+                                    formControlName="SearchEndDate"
+                                    [(ngModel)]="
+                                        notificationTemplate.SearchEndDate
+                                    "
+                                    (dateChange)="onSearchEndDateChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerSearchEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker
+                                    #pickerSearchEndDate
+                                ></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "NOTIFICATIONTEMPLATE.TENANT" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TenantId"
+                                    formControlName="TenantId"
+                                    [(value)]="notificationTemplate.TenantId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let notificationTemplate of tenant
+                                        "
+                                        [value]="notificationTemplate.Id"
+                                    >
+                                        {{ notificationTemplate.TenantName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "NOTIFICATIONTEMPLATE.COMPANY" | translate
+                                }}</mat-label>
+                                <input
+                                    type="number"
+                                    matInput
+                                    placeholder="{{
+                                        'NOTIFICATIONTEMPLATE.COMPANY'
+                                            | translate
+                                    }}"
+                                    name="CompanyId"
+                                    formControlName="CompanyId"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "NOTIFICATIONTEMPLATE.TEMPLATETYPE"
+                                        | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TemplateTypeId"
+                                    formControlName="TemplateTypeId"
+                                    [(value)]="
+                                        notificationTemplate.TemplateTypeId
+                                    "
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let notificationTemplate of notificationType
+                                        "
+                                        [value]="notificationTemplate.Id"
+                                    >
+                                        {{ notificationTemplate.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "NOTIFICATIONTEMPLATE.LANGUAGECODE"
+                                        | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="LanguageCodeId"
+                                    formControlName="LanguageCodeId"
+                                    [(value)]="
+                                        notificationTemplate.LanguageCodeId
+                                    "
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let notificationTemplate of languageCode
+                                        "
+                                        [value]="notificationTemplate.Id"
+                                    >
+                                        {{ notificationTemplate.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "NOTIFICATIONTEMPLATE.SUBJECT" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'NOTIFICATIONTEMPLATE.SUBJECT'
+                                            | translate
+                                    }}"
+                                    name="Subject"
+                                    formControlName="Subject"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -1,0 +1,226 @@
+<div id="searchRestApiLog" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Application/RestApiLog/restApiLogs'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "RESTAPILOG.RESTAPILOG" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'RESTAPILOG.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="searchRestApiLogs-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="searchRestApiLogDataSource"
+            >
+                <!-- Id Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "RESTAPILOG.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let restApiLog">
+                        <p class="text-truncate">{{ restApiLog.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- UserName Column -->
+                <ng-container matColumnDef="UserName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "RESTAPILOG.USERNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let restApiLog">
+                        <p class="text-truncate">{{ restApiLog.UserName }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- ServerType Column -->
+                <ng-container matColumnDef="ServerType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "RESTAPILOG.SERVERTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let restApiLog">
+                        <p class="text-truncate">{{ restApiLog.ServerType }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ApiName Column -->
+                <ng-container matColumnDef="ApiName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "RESTAPILOG.APINAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let restApiLog">
+                        <p class="text-truncate">{{ restApiLog.ApiName }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- IpAddress Column -->
+                <ng-container matColumnDef="ClientIp">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "RESTAPILOG.CLIENTIP" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let restApiLog">
+                        <p class="text-truncate">{{ restApiLog.ClientIp }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- ApiStatus Column -->
+                <ng-container matColumnDef="ApiStatus">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "RESTAPILOG.APISTATUS" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let restApiLog">
+                        <p class="text-truncate">{{ restApiLog.ApiStatus }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ControllerName Column -->
+                <ng-container matColumnDef="ControllerName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "RESTAPILOG.CONTROLLERNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let restApiLog">
+                        <p class="text-truncate">
+                            {{ restApiLog.ControllerName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- HttpMethod Column -->
+                <ng-container matColumnDef="HttpMethod">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "RESTAPILOG.HTTPMETHOD" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let restApiLog">
+                        <p class="text-truncate">
+                            {{ restApiLog.HttpMethod }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- ErrorCode Column -->
+                <ng-container matColumnDef="ErrorCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "RESTAPILOG.ERRORCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let restApiLog">
+                        <p class="text-truncate">{{ restApiLog.ErrorCode }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TotalElapsed Column -->
+                <ng-container matColumnDef="TotalElapsed">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "RESTAPILOG.TOTALELAPSED" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let restApiLog">
+                        <p class="text-truncate">
+                            {{ restApiLog.TotalElapsed }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "RESTAPILOG.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let restApiLog" fxHide fxShow.gt-sm>
+                        <span class="text-truncate"
+                            >{{
+                                restApiLog.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let restApiLog; columns: displayedColumns"
+                    class="searchRestApiLog"
+                    [routerLink]="['/searchRestApiLog', restApiLog.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="searchRestApiLogDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

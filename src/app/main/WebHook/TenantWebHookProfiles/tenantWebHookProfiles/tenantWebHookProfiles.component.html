@@ -1,0 +1,270 @@
+<div
+    id="tenantWebHookProfiles"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-tenantWebHook-button fuse-white mt-24 mr-35"
+                        (click)="SearchTenantWebHookDefinition()"
+                    >
+                        <span>{{ "TENANTWEBHOOK.SEARCH" | translate }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-tenantWebHook-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "TENANTWEBHOOK.CLEAR" | translate }}
+                    </button>
+                    <!-- CLEAR BUTTON -->
+                    <!-- ADD BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        [routerLink]="'/searchTenantWebHookProfile/new'"
+                        class="add-tenantWebHook-button fuse-white m-10"
+                    >
+                        {{ "TENANTWEBHOOK.ADD" | translate }}
+                    </button>
+                    <!-- ADD BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="tenantWebHookProfilesForm"
+                    [formGroup]="tenantWebHookProfilesForm"
+                    class="tenantWebHook w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "TENANTWEBHOOK.SEARCHSTARTDATE" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="SearchStartDate"
+                                    formControlName="SearchStartDate"
+                                    [matDatepicker]="pickerSearchStartDate"
+                                    [(ngModel)]="tenantWebHook.SearchStartDate"
+                                    (dateChange)="
+                                        onSearchStartDateChange($event)
+                                    "
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerSearchStartDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerSearchStartDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "TENANTWEBHOOK.SEARCHENDDATE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    [matDatepicker]="pickerSearchEndDate"
+                                    formControlName="SearchEndDate"
+                                    [(ngModel)]="tenantWebHook.SearchEndDate"
+                                    (dateChange)="onSearchEndDateChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerSearchEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker
+                                    #pickerSearchEndDate
+                                ></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "TENANTWEBHOOK.TENANT" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TenantId"
+                                    formControlName="TenantId"
+                                    [(value)]="tenantWebHook.TenantId"
+                                >
+                                    <mat-option
+                                        *ngFor="let tenantWebHook of tenant"
+                                        [value]="tenantWebHook.Id"
+                                    >
+                                        {{ tenantWebHook.TenantName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "TENANTWEBHOOK.WEBHOOKTYPE" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="WebHookTypeId"
+                                    formControlName="WebHookTypeId"
+                                    [(value)]="tenantWebHook.WebHookTypeId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let tenantWebHook of webHookType
+                                        "
+                                        [value]="tenantWebHook.Id"
+                                    >
+                                        {{ tenantWebHook.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "TENANTWEBHOOK.WEBHOOKURL" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'TENANTWEBHOOK.WEBHOOKURL' | translate
+                                    }}"
+                                    name="WebHookUrl"
+                                    formControlName="WebHookUrl"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "TENANTWEBHOOK.WEBHOOKAPIPATH" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'TENANTWEBHOOK.WEBHOOKAPIPATH'
+                                            | translate
+                                    }}"
+                                    name="WebHookApiPath"
+                                    formControlName="WebHookApiPath"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "TENANTWEBHOOK.HTTPHEADERAPIKEYNAME"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'TENANTWEBHOOK.HTTPHEADERAPIKEYNAME'
+                                            | translate
+                                    }}"
+                                    name="HttpHeaderApiKeyName"
+                                    formControlName="HttpHeaderApiKeyName"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "TENANTWEBHOOK.ENCRYPTEDAPIKEY" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'TENANTWEBHOOK.ENCRYPTEDAPIKEY'
+                                            | translate
+                                    }}"
+                                    name="EncryptedApiKey"
+                                    formControlName="EncryptedApiKey"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / CENTER -->
+</div>

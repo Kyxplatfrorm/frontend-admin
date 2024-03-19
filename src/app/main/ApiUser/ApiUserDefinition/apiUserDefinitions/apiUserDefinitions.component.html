@@ -1,0 +1,364 @@
+<div id="apiUserDefinitions" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-apiUser-button fuse-white mt-24 mr-35"
+                        (click)="SearchApiUserDefinition()"
+                    >
+                        <span>{{ "USER.SEARCH" | translate }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-apiUser-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "USER.CLEAR" | translate }}
+                    </button>
+                    <!-- CLEAR BUTTON -->
+                    <!-- ADD BUTTON -->
+                    <button
+                        mat-raised-button
+                        [routerLink]="'/searchApiUserDefinition/new'"
+                        class="add-apiUser-button fuse-white mt-24 mt-md-0"
+                    >
+                        <span>{{ "USER.ADD" | translate }}</span>
+                    </button>
+                    <!-- / ADD BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="apiUserDefinitionsForm"
+                    [formGroup]="apiUserDefinitionsForm"
+                    class="apiUser w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.INSERTBEGINDATETIME" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="InsertBeginDateTime"
+                                    formControlName="InsertBeginDateTime"
+                                    placeholder="{{
+                                        'USER.INSERTBEGINDATETIME' | translate
+                                    }}"
+                                    [matDatepicker]="pickerInsertBeginDate"
+                                    value="InsertBeginDateTime"
+                                    [(ngModel)]="apiUser.InsertBeginDateTime"
+                                    (dateChange)="
+                                        onDateInsertBeginChange($event)
+                                    "
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerInsertBeginDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerInsertBeginDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.INSERTENDDATETIME" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="InsertEndDateTime"
+                                    formControlName="InsertEndDateTime"
+                                    placeholder="{{
+                                        'USER.INSERTENDDATETIME' | translate
+                                    }}"
+                                    [matDatepicker]="pickerInsertEndDate"
+                                    value="InsertEndDateTime"
+                                    [(ngModel)]="apiUser.InsertEndDateTime"
+                                    (dateChange)="onDateInsertEndChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerInsertEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerInsertEndDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.UPDATEBEGINDATETIME" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="UpdateBeginDateTime"
+                                    formControlName="UpdateBeginDateTime"
+                                    placeholder="{{
+                                        'USER.UPDATEBEGINDATETIME' | translate
+                                    }}"
+                                    [matDatepicker]="pickerUpdateBeginDate"
+                                    value="UpdateBeginDateTime"
+                                    [(ngModel)]="apiUser.UpdateBeginDateTime"
+                                    (dateChange)="
+                                        onDateUpdateBeginChange($event)
+                                    "
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerUpdateBeginDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerUpdateBeginDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.UPDATEENDDATETIME" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="UpdateEndDateTime"
+                                    formControlName="UpdateEndDateTime"
+                                    placeholder="{{
+                                        'USER.UPDATEENDDATETIME' | translate
+                                    }}"
+                                    [matDatepicker]="pickerUpdateEndDate"
+                                    value="UpdateEndDateTime"
+                                    [(ngModel)]="apiUser.UpdateEndDateTime"
+                                    (dateChange)="onDateUpdateEndChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerUpdateEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerUpdateEndDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.USERNAME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'USER.USERNAME' | translate
+                                    }}"
+                                    name="UserName"
+                                    formControlName="UserName"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.EMAIL" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'USER.EMAIL' | translate }}"
+                                    name="Email"
+                                    formControlName="Email"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.APIKEY" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'USER.APIKEY' | translate
+                                    }}"
+                                    name="ApiKey"
+                                    formControlName="ApiKey"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.USERFULLNAME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'USER.USERFULLNAME' | translate
+                                    }}"
+                                    name="UserFullName"
+                                    formControlName="UserFullName"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.USERTYPEID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="UserTypeId"
+                                    formControlName="UserTypeId"
+                                    [(value)]="apiUser.UserTypeId"
+                                    placeholder="{{
+                                        'USER.USERTYPEID' | translate
+                                    }}"
+                                >
+                                    <mat-option
+                                        *ngFor="let apiUser of userTypeList"
+                                        [value]="apiUser.Id"
+                                    >
+                                        {{ apiUser.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.TENANTID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TenantId"
+                                    formControlName="TenantId"
+                                    [(value)]="apiUser.TenantId"
+                                    placeholder="{{
+                                        'USER.TENANTID' | translate
+                                    }}"
+                                >
+                                    <mat-option
+                                        *ngFor="let apiUser of tenantList"
+                                        [value]="apiUser.Id"
+                                    >
+                                        {{ apiUser.TenantName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.SELECTEDUSERSTATUS" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    multiple
+                                    name="SelectedUserStatus"
+                                    formControlName="SelectedUserStatus"
+                                    [(value)]="apiUser.SelectedUserStatus"
+                                >
+                                    <mat-option
+                                        *ngFor="let apiUser of userStatusList"
+                                        [value]="apiUser.Id"
+                                    >
+                                        {{ apiUser.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- / CENTER -->
+</div>

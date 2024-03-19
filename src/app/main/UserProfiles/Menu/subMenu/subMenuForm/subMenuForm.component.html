@@ -1,0 +1,148 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="subMenuForm">
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{ "MENU.MENUORDER" | translate }}</mat-label>
+
+                    <input
+                        name="MenuOrder"
+                        formControlName="MenuOrder"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{ "MENU.MENUCODE" | translate }}</mat-label>
+
+                    <input
+                        name="MenuCode"
+                        formControlName="MenuCode"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{ "MENU.MENUNAME" | translate }}</mat-label>
+
+                    <input
+                        name="MenuName"
+                        formControlName="MenuName"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{ "MENU.TRANSLATEKEY" | translate }}</mat-label>
+
+                    <input
+                        name="TranslateKey"
+                        formControlName="TranslateKey"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{ "MENU.MENUICON" | translate }}</mat-label>
+
+                    <input
+                        name="MenuIcon"
+                        formControlName="MenuIcon"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{ "MENU.MENUURL" | translate }}</mat-label>
+
+                    <input name="MenuUrl" formControlName="MenuUrl" matInput />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{
+                        "MENU.CONTROLLERNAME" | translate
+                    }}</mat-label>
+
+                    <input
+                        name="ControllerName"
+                        formControlName="ControllerName"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{
+                        "MENU.RELATEDCONTROLLERNAME" | translate
+                    }}</mat-label>
+
+                    <input
+                        name="RelatedControllerName"
+                        formControlName="RelatedControllerName"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', subMenuForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "MENU.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(subMenuForm)"
+            [disabled]="subMenuForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "MENU.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', subMenuForm])"
+            [disabled]="subMenuForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "MENU.SAVE" | translate }}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,336 @@
+<div
+    id="switchTransactionCodeMap"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Switch/SwitchTransactionCodeMap/switchTransactionCodeMaps'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{
+                        "SWITCHTRANSACTIONCODEMAP.SWITCHTRANSACTIONCODEMAP"
+                            | translate
+                    }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'SWITCHTRANSACTIONCODEMAP.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button
+                mat-raised-button
+                class="add-switchTransactionCodeMap-button fuse-white mt-24 mt-md-0"
+                (click)="SwitchTransactionCodeMap()"
+            >
+                <span>{{ "SWITCHTRANSACTIONCODEMAP.ADD" | translate }}</span>
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="switchTransactionCodeMaps-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="switchTransactionCodeMapDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTRANSACTIONCODEMAP.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTransactionCodeMap">
+                        <p class="text-truncate">
+                            {{ switchTransactionCodeMap.Id }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- NetworkTypeName Column -->
+                <ng-container matColumnDef="NetworkTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTRANSACTIONCODEMAP.NETWORKTYPENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTransactionCodeMap">
+                        <p class="text-truncate">
+                            {{ switchTransactionCodeMap.NetworkTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- IsActive Column -->
+                <ng-container matColumnDef="IsActive">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTRANSACTIONCODEMAP.ISACTIVE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTransactionCodeMap">
+                        <mat-icon
+                            *ngIf="switchTransactionCodeMap.IsActive"
+                            class="active-icon green-600 s-16"
+                            >check</mat-icon
+                        >
+                        <mat-icon
+                            *ngIf="!switchTransactionCodeMap.IsActive"
+                            class="active-icon red-500 s-16"
+                            >close</mat-icon
+                        >
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Description Column -->
+                <ng-container matColumnDef="Description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTRANSACTIONCODEMAP.DESCRIPTION" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTransactionCodeMap">
+                        <p class="text-truncate">
+                            {{ switchTransactionCodeMap.Description }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TransactionEntryTypeName Column -->
+                <ng-container matColumnDef="TransactionEntryTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTRANSACTIONCODEMAP.TRANSACTIONENTRYTYPENAME"
+                            | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTransactionCodeMap">
+                        <p class="text-truncate">
+                            {{
+                                switchTransactionCodeMap.TransactionEntryTypeName
+                            }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ProcessingCode Column -->
+                <ng-container matColumnDef="ProcessingCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTRANSACTIONCODEMAP.PROCESSINGCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTransactionCodeMap">
+                        <p class="text-truncate">
+                            {{ switchTransactionCodeMap.ProcessingCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TransactionAmount Column -->
+                <ng-container matColumnDef="TransactionAmount">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTRANSACTIONCODEMAP.TRANSACTIONAMOUNT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTransactionCodeMap">
+                        <p class="text-truncate">
+                            {{ switchTransactionCodeMap.TransactionAmount }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Mti Column -->
+                <ng-container matColumnDef="Mti">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTRANSACTIONCODEMAP.MTI" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTransactionCodeMap">
+                        <p class="text-truncate">
+                            {{ switchTransactionCodeMap.Mti }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Priority Column -->
+                <ng-container matColumnDef="Priority">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTRANSACTIONCODEMAP.PRIORITY" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTransactionCodeMap">
+                        <p class="text-truncate">
+                            {{ switchTransactionCodeMap.Priority }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "SWITCHTRANSACTIONCODEMAP.INSERTDATETIME"
+                                | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let switchTransactionCodeMap"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                switchTransactionCodeMap.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-sm
+                        >{{
+                            "SWITCHTRANSACTIONCODEMAP.UPDATEDATETIME"
+                                | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let switchTransactionCodeMap"
+                        fxHide
+                        fxShow.gt-xs
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                switchTransactionCodeMap.UpdateDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss"
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let switchTransactionCodeMap">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="
+                                        DeleteSwitchTransactionCodeMap(
+                                            switchTransactionCodeMap
+                                        )
+                                    "
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                    <span
+                                        >{{
+                                            "SWITCHTRANSACTIONCODEMAP.REMOVE"
+                                                | translate
+                                        }}
+                                    </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="
+                        let switchTransactionCodeMap;
+                        columns: displayedColumns
+                    "
+                    (click)="EditSwitchMessageProfile(switchTransactionCodeMap)"
+                    class="switchTransactionCodeMap"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="
+                    switchTransactionCodeMapDataSource.filteredData?.length
+                "
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

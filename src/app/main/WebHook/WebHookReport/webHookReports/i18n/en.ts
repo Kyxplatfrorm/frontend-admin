@@ -1,0 +1,25 @@
+export const locale = {
+    lang: "en",
+    data: {
+        WEBHOOKREPORT: {
+            SEARCH: "SEARCH",
+            CLEAR: "CLEAR",
+            ADD: "ADD",
+            SEARCHSTARTDATE: "Search Start Date",
+            SEARCHENDDATE: "Search End Date",
+            COMPANYID: "Company Id",
+            WEBHOOKTYPE: "WebHook Type",
+            RUNSTATUS: "WebHook Run Status",
+            WEBHOOKPROFILEID: "WebHook Profile Id",
+            HTTPSTATUSCODE: "Http Status Code",
+            RETRYCOUNT: "Retry Count",
+            APPLICATIONID: "Application Id",
+            TOTALELAPSED: "Total Elapsed(ms)",
+            HTTPPOSTURL: "Http Post Url",
+            REFERENCENUMBER: "Reference Number",
+            RESULTMESSAGE: "Result Message",
+            RECORDTYPE: "Record Type",
+            TENANT: "Tenant",
+        },
+    },
+};

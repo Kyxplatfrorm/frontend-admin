@@ -1,0 +1,355 @@
+<div id="generateKey" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "GENERATEKEY.GENERATEKEY" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="generateKeyForm"
+                    [formGroup]="generateKeyForm"
+                    class="generateKey w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'GENERATEKEY.GENERATEKEYINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATEKEY.KEYTYPE" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="KeyTypeId"
+                                            formControlName="KeyTypeId"
+                                            [(value)]="generateKey.KeyTypeId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let generateKey of hsmImportExportKey
+                                                "
+                                                [value]="generateKey.Id"
+                                            >
+                                                {{ generateKey.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATEKEY.KEYSCHEMA" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATEKEY.KEYSCHEMA'
+                                                    | translate
+                                            }}"
+                                            name="KeySchema"
+                                            formControlName="KeySchema"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <div class="checkbox">
+                                        <mat-checkbox
+                                            name="ExportKey"
+                                            formControlName="ExportKey"
+                                            [(ngModel)]="generateKey.ExportKey"
+                                            >{{
+                                                "GENERATEKEY.EXPORTKEY"
+                                                    | translate
+                                            }}</mat-checkbox
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="generateKey.ExportKey"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATEKEY.ZMKTMKTYPE" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="ZmkTmkTypeId"
+                                            formControlName="ZmkTmkTypeId"
+                                            [(value)]="generateKey.ZmkTmkTypeId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let generateKey of keyZmkTmkList
+                                                "
+                                                [value]="generateKey.Id"
+                                            >
+                                                {{ generateKey.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="generateKey.ExportKey"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATEKEY.ENCRYPTEDMASTERKEY"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATEKEY.ENCRYPTEDMASTERKEY'
+                                                    | translate
+                                            }}"
+                                            name="EncryptedMasterKey"
+                                            formControlName="EncryptedMasterKey"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="generateKey.ExportKey"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATEKEY.KEYEXPORTSCHEMA"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATEKEY.KEYEXPORTSCHEMA'
+                                                    | translate
+                                            }}"
+                                            name="KeyExportSchema"
+                                            formControlName="KeyExportSchema"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="generateKey.ExportKey"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATEKEY.ATALLAVARIANT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATEKEY.ATALLAVARIANT'
+                                                    | translate
+                                            }}"
+                                            name="AtallaVariant"
+                                            formControlName="AtallaVariant"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <button
+                                    style="margin-right: 10px"
+                                    mat-raised-button
+                                    class="save-generateKey-button"
+                                    (click)="ClearButton()"
+                                >
+                                    <span>{{
+                                        "GENERATEKEY.CLEAR" | translate
+                                    }}</span>
+                                </button>
+                                <button
+                                    mat-raised-button
+                                    class="save-generateKey-button"
+                                    (click)="GenerateKeyButton()"
+                                >
+                                    <span>{{
+                                        "GENERATEKEY.GENERATE" | translate
+                                    }}</span>
+                                </button>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                    style="margin-top: 60px"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATEKEY.HSMERRORCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATEKEY.HSMERRORCODE'
+                                                    | translate
+                                            }}"
+                                            name="HsmErrorCode"
+                                            formControlName="HsmErrorCode"
+                                            [(ngModel)]="generateHsmErrorCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATEKEY.HSMERRORDESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATEKEY.HSMERRORDESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="HsmErrorDescription"
+                                            formControlName="HsmErrorDescription"
+                                            [(ngModel)]="
+                                                generateHsmErrorDescription
+                                            "
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATEKEY.KEYUNDERLMK"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATEKEY.KEYUNDERLMK'
+                                                    | translate
+                                            }}"
+                                            name="KeyUnderLmk"
+                                            formControlName="KeyUnderLmk"
+                                            [(ngModel)]="hsmUtilitykeyUnderLmk"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATEKEY.KEYUNDERZMK"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATEKEY.KEYUNDERZMK'
+                                                    | translate
+                                            }}"
+                                            name="KeyUnderZmk"
+                                            formControlName="KeyUnderZmk"
+                                            [(ngModel)]="hsmUtilitykeyUnderZmk"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

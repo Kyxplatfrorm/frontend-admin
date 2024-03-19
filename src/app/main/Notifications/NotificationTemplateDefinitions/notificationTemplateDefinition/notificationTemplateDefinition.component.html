@@ -1,0 +1,453 @@
+<div
+    id="notificationTemplateDefinition"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Notifications/NotificationTemplateDefinitions/searchNotificationTemplateDefinition'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="notificationTemplate-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="notificationTemplate.images[0]"
+                        [src]="notificationTemplate.images[0].url"
+                    />
+                    <img
+                        *ngIf="!notificationTemplate.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{
+                            "NOTIFICATIONTEMPLATE.NOTIFICATIONTEMPLATE"
+                                | translate
+                        }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "NOTIFICATIONTEMPLATE.NOTIFICATIONTEMPLATEDETAIL"
+                                | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-notificationTemplate-button"
+                [disabled]="
+                    notificationTemplateDefinitionForm.invalid ||
+                    notificationTemplateDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateNotificationTemplateDefinition()"
+            >
+                <span>{{ "NOTIFICATIONTEMPLATE.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-notificationTemplate-button"
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateNotificationTemplateDefinition()"
+            >
+                <span>{{ "NOTIFICATIONTEMPLATE.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="notificationTemplateDefinitionForm"
+                    [formGroup]="notificationTemplateDefinitionForm"
+                    class="notificationTemplate w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'NOTIFICATIONTEMPLATE.NOTIFICATIONTEMPLATEINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsEncrypted"
+                                        formControlName="IsEncrypted"
+                                        >{{
+                                            "NOTIFICATIONTEMPLATE.ISENCRYPTED"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsDefaultTemplate"
+                                        formControlName="IsDefaultTemplate"
+                                        >{{
+                                            "NOTIFICATIONTEMPLATE.ISDEFAULTTEMPLATE"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsCompanyTemplate"
+                                        formControlName="IsCompanyTemplate"
+                                        >{{
+                                            "NOTIFICATIONTEMPLATE.ISCOMPANYTEMPLATE"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONTEMPLATE.COMPANY"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONTEMPLATE.COMPANY'
+                                                    | translate
+                                            }}"
+                                            name="CompanyId"
+                                            formControlName="CompanyId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONTEMPLATE.TENANT"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="
+                                                notificationTemplate.TenantId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let notificationTemplate of tenant
+                                                "
+                                                [value]="
+                                                    notificationTemplate.Id
+                                                "
+                                            >
+                                                {{
+                                                    notificationTemplate.TenantName
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                notificationTemplate.TenantId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                onClearTenant();
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONTEMPLATE.TEMPLATETYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TemplateTypeId"
+                                            formControlName="TemplateTypeId"
+                                            [(value)]="
+                                                notificationTemplate.TemplateTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let notificationTemplate of notificationType
+                                                "
+                                                [value]="
+                                                    notificationTemplate.Id
+                                                "
+                                            >
+                                                {{
+                                                    notificationTemplate.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                notificationTemplate.TemplateTypeId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                notificationTemplate.TemplateTypeId =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONTEMPLATE.LANGUAGECODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="LanguageCodeId"
+                                            formControlName="LanguageCodeId"
+                                            [(value)]="
+                                                notificationTemplate.LanguageCodeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let notificationTemplate of languageCode
+                                                "
+                                                [value]="
+                                                    notificationTemplate.Id
+                                                "
+                                            >
+                                                {{
+                                                    notificationTemplate.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                notificationTemplate.LanguageCodeId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                notificationTemplate.LanguageCodeId =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONTEMPLATE.TEMPLATECODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONTEMPLATE.TEMPLATECODE'
+                                                    | translate
+                                            }}"
+                                            name="TemplateCode"
+                                            formControlName="TemplateCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONTEMPLATE.SUBJECT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONTEMPLATE.SUBJECT'
+                                                    | translate
+                                            }}"
+                                            name="Subject"
+                                            formControlName="Subject"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasExpiryDateTime"
+                                        formControlName="HasExpiryDateTime"
+                                        [(ngModel)]="
+                                            notificationTemplate.HasExpiryDateTime
+                                        "
+                                        >{{
+                                            "NOTIFICATIONTEMPLATE.HASEXPIRYDATE"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="
+                                            notificationTemplate.HasExpiryDateTime
+                                        "
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONTEMPLATE.EXPIRYSECONDCOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONTEMPLATE.EXPIRYSECONDCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="ExpirySecondCount"
+                                            formControlName="ExpirySecondCount"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'NOTIFICATIONTEMPLATE.CONTENT' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONTEMPLATE.CONTENT"
+                                                | translate
+                                        }}</mat-label>
+                                        <textarea
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONTEMPLATE.CONTENT'
+                                                    | translate
+                                            }}"
+                                            name="Content"
+                                            formControlName="Content"
+                                            rows="25"
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

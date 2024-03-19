@@ -1,0 +1,243 @@
+<div
+    id="tenantCountryProfiles"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Tenants/TenantCountryProfile/tenantCountryProfiles'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "TENANTCOUNTRY.TENANTCOUNTRYPROFILES" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'TENANTCOUNTRY.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button
+                mat-raised-button
+                (click)="newTenantCountry()"
+                class="add-tenantCountry-button fuse-white mt-24 mt-md-0"
+            >
+                <span>{{ "TENANTCOUNTRY.ADD" | translate }}</span>
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="tenantCountryProfiles-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                fusePerfectScrollbar
+                [dataSource]="tenantCountryProfilesDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "TENANTCOUNTRY.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let tenantCountry">
+                        <p class="text-truncate">{{ tenantCountry.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TenantName Column -->
+                <ng-container matColumnDef="TenantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "TENANTCOUNTRY.TENANTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let tenantCountry">
+                        <p class="text-truncate">
+                            {{ tenantCountry.TenantName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- CountryName Column -->
+                <ng-container matColumnDef="CountryName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "TENANTCOUNTRY.COUNTRYNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let tenantCountry">
+                        <p class="text-truncate">
+                            {{ tenantCountry.CountryName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "TENANTCOUNTRY.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let tenantCountry"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                tenantCountry.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-sm
+                        >{{
+                            "TENANTCOUNTRY.UPDATEDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let tenantCountry"
+                        fxHide
+                        fxShow.gt-xs
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                tenantCountry.UpdateDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss"
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let tenantCountry">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="
+                                        DeleteTenantCountryProfile(
+                                            tenantCountry
+                                        )
+                                    "
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                    <span
+                                        >{{
+                                            "TENANTCOUNTRY.REMOVE" | translate
+                                        }}
+                                    </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let tenantCountry; columns: displayedColumns"
+                    class="tenantCountry"
+                    (click)="EditTenantCountry(tenantCountry)"
+                    [@animate]="{
+                        value: '*',
+                        params: { y: '100%' }
+                    }"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="tenantCountryProfilesDataSource.filteredData?.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

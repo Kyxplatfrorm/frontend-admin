@@ -1,0 +1,122 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0">
+        <form [formGroup]="sessionConfigForm">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                >
+                    <mat-label>{{
+                        "SWITCHAPPLICATION.SESSION" | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="SessionId"
+                        formControlName="SessionId"
+                        [(value)]="switchApplication.SessionId"
+                    >
+                        <mat-option
+                            *ngFor="
+                                let switchApplication of applicationSessionList
+                            "
+                            [value]="switchApplication.Id"
+                        >
+                            {{ switchApplication.Description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                >
+                    <mat-label>{{
+                        "SWITCHAPPLICATION.CONFIGKEY" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'SWITCHAPPLICATION.CONFIGKEY' | translate
+                        }}"
+                        name="ConfigKey"
+                        formControlName="ConfigKey"
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                >
+                    <mat-label>{{
+                        "SWITCHAPPLICATION.CONFIGVALUE" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'SWITCHAPPLICATION.CONFIGVALUE' | translate
+                        }}"
+                        name="ConfigValue"
+                        formControlName="ConfigValue"
+                    />
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', sessionConfigForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "SWITCHAPPLICATION.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(sessionConfigForm)"
+            [disabled]="sessionConfigForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "SWITCHAPPLICATION.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', sessionConfigForm])"
+            [disabled]="sessionConfigForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "SWITCHAPPLICATION.SAVE" | translate }}
+        </button>
+    </div>
+</div>

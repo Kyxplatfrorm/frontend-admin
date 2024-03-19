@@ -1,0 +1,28 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        WEBHOOKMONITORING: {
+            WEBHOOKMONITORING: "WebHook İzleme",
+            ADD: "EKLE",
+            ID: "Id",
+            TENANTNAME: "Üye",
+            TOTALELAPSED: "Toplam Geçen Süre(ms)",
+            WEBHOOKTYPENAME: "WebHook Tipi",
+            RUNSTATUSNAME: "WebHook Çalışma Durumu",
+            RECORDTYPE: "Kayıt Tipi",
+            HTTPSTATUSCODE: "Http Durum Kodu",
+            HTTPPOSTURL: "Http Gönderme Urlsi",
+            RESULTMESSAGE: "Sonuç Mesajı",
+            REFERENCENUMBERTYPE: "Referans Numarası Tipi",
+            STARTDATETIME: "Başlangıç Tarihi",
+            ENDDATETIME: "Bitiş Tarihi",
+            INSERTDATETIME: "Ekleme Tarihi",
+            QUEUEDATETIME: "Queue Tarihi",
+            DUEDATETIME: "Due Tarihi",
+            UPDATEDATETIME: "Güncelleme Tarihi",
+            SEARCHTEXT: "Webhook izleme için arayınız",
+            OK: "TAMAM",
+            REMOVE: "Sil",
+        },
+    },
+};

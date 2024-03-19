@@ -1,0 +1,295 @@
+<div id="myProfiles" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row " fxLayoutAlign="start center">
+                <div
+                    class="myProfile-image mr-10 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="myProfile.images[0]"
+                        [src]="myProfile.images[0].url"
+                    />
+                    <img
+                        *ngIf="!myProfile.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/country-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="subtitle secondary-text">
+                        <span>{{ "MYPROFILE.MYPROFILE" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-80">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'MYPROFILE.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+            <!-- SAVE BUTTON -->
+            <button
+                mat-raised-button
+                color="basic"
+                class="add-myProfile-button fuse-white mt-24 ml-40 mt-md-0"
+                [disabled]="myProfileForm.invalid || myProfileForm.pristine"
+                (click)="UpdateCurrentUser()"
+            >
+                {{ "MYPROFILE.SAVE" | translate }}
+            </button>
+            <!-- / SAVE BUTTON -->
+
+            <!-- CHANGEPASSWORD BUTTON -->
+            <button
+                mat-raised-button
+                color="basic"
+                class="add-myProfile-button fuse-white mt-24 mt-md-0"
+                (click)="newForm()"
+            >
+                {{ "MYPROFILE.CHANGEPASSWORD" | translate }}
+            </button>
+            <!-- / CHANGEPASSWORD BUTTON -->
+        </div>
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="myProfileForm"
+                    [formGroup]="myProfileForm"
+                    class="myProfile w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{ 'MYPROFILE.MYPROFILEINFO' | translate }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="myProfile mb-20" fxLayout="column">
+                                    <div class="avatar-container">
+                                        <img
+                                            class="avatar"
+                                            src="assets/images/avatars/Velazquez.jpg"
+                                        />
+                                        <div class="upload">
+                                            <div class="round">
+                                                <input
+                                                    type="file"
+                                                    (change)="
+                                                        onFileSelected($event)
+                                                    "
+                                                />
+                                                <mat-icon>camera_alt</mat-icon>
+                                                <button (click)="uploadFile()">
+                                                    Upload
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "MYPROFILE.USERNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'MYPROFILE.USERNAME' | translate
+                                            }}"
+                                            name="UserName"
+                                            formControlName="UserName"
+                                            readonly
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "MYPROFILE.USERFULLNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'MYPROFILE.USERFULLNAME'
+                                                    | translate
+                                            }}"
+                                            name="UserFullName"
+                                            formControlName="UserFullName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "MYPROFILE.TENANTNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'MYPROFILE.TENANTNAME'
+                                                    | translate
+                                            }}"
+                                            name="TenantName"
+                                            formControlName="TenantName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "MYPROFILE.EMAIL" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'MYPROFILE.EMAIL' | translate
+                                            }}"
+                                            name="Email"
+                                            formControlName="Email"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "MYPROFILE.INTERNATIONALPHONECODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'MYPROFILE.INTERNATIONALPHONECODE'
+                                                    | translate
+                                            }}"
+                                            name="InternationalPhoneCode"
+                                            formControlName="InternationalPhoneCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "MYPROFILE.PHONENUMBER" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'MYPROFILE.PHONENUMBER'
+                                                    | translate
+                                            }}"
+                                            name="PhoneNumber"
+                                            formControlName="PhoneNumber"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "MYPROFILE.UTCTIMEOFFSET"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'MYPROFILE.UTCTIMEOFFSET'
+                                                    | translate
+                                            }}"
+                                            name="UtcTimeOffset"
+                                            formControlName="UtcTimeOffset"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

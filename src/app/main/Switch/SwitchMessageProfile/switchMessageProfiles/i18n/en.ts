@@ -1,0 +1,27 @@
+export const locale = {
+    lang: "en",
+    data: {
+        SWITCHMESSAGE: {
+            SWITCHMESSAGE: "Switch Message ",
+            SEARCHTEXT: "Search for a switch message profiles",
+            ADD: "ADD",
+            SAVE: "SAVE",
+            DELETE: "DELETE",
+            REMOVE: "Remove",
+            UPDATEDATETIME: "Update Date Time",
+            INSERTDATETIME: "Insert Date Time",
+            ID: "Id",
+            NETWORKTYPENAME: "Network Type Name",
+            NETWORKMESSAGETYPENAME: "Network Message Type Name",
+            REQUESTMTI: "Request Mti",
+            RESPONSEMTI: "Response Mti",
+            REQUESTMESSAGEPROFILE: "Request Message Profile",
+            RESPONSEMESSAGEPROFILE: "Response Message Profile",
+            NETWORKMESSAGETYPE: "Network Message Type",
+            NETWORKTYPE: "Network Type",
+            SWITCHMESSAGEPROFILEADDED: "Switch Message Profile Added",
+            SWITCHMESSAGEPROFILESAVED: "Switch Message Profile Saved",
+            OK: "OK",
+        },
+    },
+};

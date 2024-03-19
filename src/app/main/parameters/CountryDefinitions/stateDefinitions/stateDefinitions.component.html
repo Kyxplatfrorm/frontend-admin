@@ -1,0 +1,574 @@
+<div id="stateDefinitions" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Parameters/CountryDefinitions/countryDefinitions'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="state-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="country.images[0]"
+                        [src]="country.images[0].url"
+                    />
+                    <img
+                        *ngIf="!country.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/country-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "STATE.NEWCOUNTRY" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "STATE.COUNTRYDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'STATE.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-state-button"
+                [disabled]="
+                    stateDefinitionsForm.invalid ||
+                    stateDefinitionsForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="createCountry()"
+            >
+                <span>{{ "STATE.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-state-button"
+                [disabled]="
+                    stateDefinitionsForm.invalid ||
+                    stateDefinitionsForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="updateCountry()"
+            >
+                <span>{{ "STATE.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="stateDefinitionsForm"
+                    [formGroup]="stateDefinitionsForm"
+                    class="state w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab label="{{ 'STATE.COUNTRYINFO' | translate }}">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasState"
+                                        formControlName="HasState"
+                                        [(ngModel)]="country.HasState"
+                                        >{{
+                                            "STATE.HASSTATE" | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "STATE.EXTERNALCOUNTRYCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'STATE.EXTERNALCOUNTRYCODE'
+                                                    | translate
+                                            }}"
+                                            name="ExternalCountryCode"
+                                            formControlName="ExternalCountryCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "STATE.DEFAULTCURRENCYCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'STATE.DEFAULTCURRENCYCODE'
+                                                    | translate
+                                            }}"
+                                            name="DefaultCurrencyCode"
+                                            formControlName="DefaultCurrencyCode"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "STATE.COUNTRYCODE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'STATE.COUNTRYCODE' | translate
+                                            }}"
+                                            name="CountryCode"
+                                            formControlName="CountryCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "STATE.COUNTRYNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'STATE.COUNTRYNAME' | translate
+                                            }}"
+                                            name="CountryName"
+                                            formControlName="CountryName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "STATE.COUNTRYISOCODE2" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'STATE.COUNTRYISOCODE2'
+                                                    | translate
+                                            }}"
+                                            name="CountryIsoCode2"
+                                            formControlName="CountryIsoCode2"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "STATE.COUNTRYISOCODE3" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'STATE.COUNTRYISOCODE3'
+                                                    | translate
+                                            }}"
+                                            name="CountryIsoCode3"
+                                            formControlName="CountryIsoCode3"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "STATE.MINPHONELENGTH" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'STATE.MINPHONELENGTH'
+                                                    | translate
+                                            }}"
+                                            name="MinPhoneLength"
+                                            formControlName="MinPhoneLength"
+                                        />
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "STATE.MAXPHONELENGTH" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'STATE.MAXPHONELENGTH'
+                                                    | translate
+                                            }}"
+                                            name="MaxPhoneLength"
+                                            formControlName="MaxPhoneLength"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "STATE.COUNTRYPHONECODE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'STATE.COUNTRYPHONECODE'
+                                                    | translate
+                                            }}"
+                                            name="CountryPhoneCode"
+                                            formControlName="CountryPhoneCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "STATE.PHONEMASK" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'STATE.PHONEMASK' | translate
+                                            }}"
+                                            name="PhoneMask"
+                                            formControlName="PhoneMask"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsGlobalRegistrationEnabled"
+                                        formControlName="IsGlobalRegistrationEnabled"
+                                        fxFlex="52"
+                                        >{{
+                                            "STATE.ISGLOBALREGISTRATIONENABLED"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                    <mat-checkbox
+                                        name="IsLocalRegistrationEnabled"
+                                        formControlName="IsLocalRegistrationEnabled"
+                                        >{{
+                                            "STATE.ISLOCALREGISTRATIONENABLED"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "STATE.ICONURL" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'STATE.ICONURL' | translate
+                                        }}"
+                                        name="IconUrl"
+                                        formControlName="IconUrl"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{ 'STATE.STATE' | translate }}"
+                            *ngIf="country.HasState"
+                        >
+                            <mat-table
+                                class="states-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                fusePerfectScrollbar
+                                [dataSource]="stateDefinitionsDataSource"
+                            >
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="Id">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "STATE.ID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let state">
+                                        <p class="text-truncate">
+                                            {{ state.Id }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- CountryCode Column -->
+                                <ng-container matColumnDef="CountryCode">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "STATE.COUNTRYCODE" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let state">
+                                        <p class="text-truncate">
+                                            {{ state.CountryCode }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- StateCode Column -->
+                                <ng-container matColumnDef="StateCode">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "STATE.STATECODE" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let state">
+                                        <p class="text-truncate">
+                                            {{ state.StateCode }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- StateAlphaCode Column -->
+                                <ng-container matColumnDef="StateAlphaCode">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "STATE.STATEALPHACODE" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let state">
+                                        <p class="text-truncate">
+                                            {{ state.StateAlphaCode }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- StateName Column -->
+                                <ng-container matColumnDef="StateName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "STATE.STATENAME" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let state">
+                                        <p class="text-truncate">
+                                            {{ state.StateName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell *matCellDef="let state">
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="deleteState(state)"
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "STATE.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let state;
+                                        columns: displayedColumns
+                                    "
+                                    class="state"
+                                    (click)="editState(state)"
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="state-button"
+                                id="add-state-button"
+                                (click)="newForm()"
+                                aria-label="add state"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="
+                            stateDefinitionsDataSource.filteredData?.length
+                        "
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

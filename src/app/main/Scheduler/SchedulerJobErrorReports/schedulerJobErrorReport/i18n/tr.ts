@@ -1,0 +1,26 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        SCHEDULERJOBERROR: {
+            SCHEDULERJOBERRORREPORT: "Zamanlayıcı İş Hata Raporu",
+            SCHEDULERJOBERRORREPORTDETAIL: "Zamanlayıcı İş Hata Rapor Detayı",
+            TENANTNAME: "Üye İsmi",
+            SCHEDULERJOBERRORREPORTINFO: "Zamanlayıcı İş Hata Rapor Bilgisi",
+            ISTENANTBASEDJOB: "Üye Bazlı Bir İş mi ?",
+            ENDDATETIME: "Bitiş Tarihi",
+            STARTDATETIME: "Başlangıç Tarihi",
+            TENANT: "Üye",
+            SERVERCODE: "Server Kodu",
+            RUNSTATUS: "Çalışma Durumu",
+            DESCRIPTION: "Açıklama",
+            TOTALELAPSED: "Toplam Geçen Süre(ms)",
+            MACHINENAME: "Makine İsmi",
+            ERRORMESSAGE: "Hata Mesajı",
+            SCHEDULERJOBDESCRIPTION: "Zamanlayıcı İş Açıklaması",
+            INSERTDATE: "Giriş Tarihi",
+            SCHEDULERJOB: "Zamanlayıcı İşi",
+            SCHEDULERJOBDETAIL: "Zamanlayıcı İş Detayı",
+            SCHEDULERJOBQUEE: "Zamanlayıcı İş Kuyruğu",
+        },
+    },
+};

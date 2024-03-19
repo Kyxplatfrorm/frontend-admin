@@ -1,0 +1,116 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0">
+        <form [formGroup]="apiPermissionProfileForm">
+            <div class="checkbox">
+                <mat-checkbox
+                    name="HasApiLimitProfile"
+                    formControlName="HasApiLimitProfile"
+                    [(ngModel)]="apiPermissionProfile.HasApiLimitProfile"
+                    >{{
+                        "APIPERMISSION.HASAPILIMITPROFILE" | translate
+                    }}</mat-checkbox
+                >
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "APIPERMISSION.APIDEFINITION" | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="ApiDefinitionId"
+                        formControlName="ApiDefinitionId"
+                        [(value)]="apiPermissionProfile.ApiDefinitionId"
+                    >
+                        <mat-option
+                            *ngFor="let apiPermissionProfile of apiDefinition"
+                            [value]="apiPermissionProfile.Id"
+                        >
+                            {{ apiPermissionProfile.Description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                    *ngIf="apiPermissionProfile.HasApiLimitProfile"
+                >
+                    <mat-label>{{
+                        "APIPERMISSION.APILIMITPROFILE" | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="ApiLimitProfileId"
+                        formControlName="ApiLimitProfileId"
+                        [(value)]="apiPermissionProfile.ApiLimitProfileId"
+                    >
+                        <mat-option
+                            *ngFor="let apiPermissionProfile of apiLimitProfile"
+                            [value]="apiPermissionProfile.Id"
+                        >
+                            {{ apiPermissionProfile.Description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', apiPermissionProfileForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "APIPERMISSION.DELETE" | translate }}
+        </button>
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(apiPermissionProfileForm)"
+            [disabled]="apiPermissionProfileForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "APIPERMISSION.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', apiPermissionProfileForm])"
+            [disabled]="apiPermissionProfileForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "APIPERMISSION.SAVE" | translate }}
+        </button>
+    </div>
+</div>

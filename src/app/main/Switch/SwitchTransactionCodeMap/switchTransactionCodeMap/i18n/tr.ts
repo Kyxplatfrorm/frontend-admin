@@ -1,0 +1,31 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        SWITCHTRANSACTIONCODEMAP: {
+            SWITCHTRANSACTIONCODEMAP: "Switch İşlem Kod Haritası",
+            SEARCHTEXT: "Anahtar işlem kod haritası arayınız",
+            ADD: "EKLE",
+            SAVE: "KAYDET",
+            DELETE: "SİL",
+            REMOVE: "Sil",
+            UPDATEDATETIME: "Güncelleme Tarihi",
+            INSERTDATETIME: "Ekleme Tarihi",
+            ID: "Id",
+            NETWORKTYPENAME: "Netwotk Tipi",
+            ISACTIVE: "Aktif mi",
+            DESCRIPTION: "Açıklama",
+            TRANSACTIONENTRYTYPENAME: "İşlem Giriş Tipi",
+            PROCESSINGCODE: "İşleme Kodu",
+            TRANSACTIONAMOUNT: "İşlem Tutarı",
+            MTI: "Mti",
+            PRIORITY: "Öncelik",
+            SWITCHTRANSACTIONCODEMAPADDED: "Switch İşlem Kod Haritası Eklendi",
+            SWITCHTRANSACTIONCODEMAPSAVED:
+                "Switch İşlem Kod Haritası Kaydedildi",
+            OK: "TAMAM",
+            TRANSACTIONENTRYTYPE: "İşlem Giriş Türü",
+            TRANSACTIONCODE: "İşlem Kodu",
+            NETWORKTYPE: "Network Tipi",
+        },
+    },
+};

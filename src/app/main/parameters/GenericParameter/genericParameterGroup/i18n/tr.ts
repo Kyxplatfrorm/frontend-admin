@@ -1,0 +1,36 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        GENERICPARAMETER: {
+            GENERICGENERICPARAMETERGROUPDEFINITION: "Parametere Tanımı",
+            SEARCHTEXT: "Parametre tanımı arayınız",
+            ADDNEWGENERICPARAMETERGROUPDEFINITION:
+                "Yeni Parametere Tanımı Ekleyiniz",
+            ID: "Id",
+            GROUPCODE: "Grup Kodu",
+            DESCRIPTION: "Açıklama",
+            INSERTDATETIME: "Ekleme Tarihi",
+            UPDATEDATETIME: "Güncelleme Tarihi",
+            REMOVE: "Sil",
+            DELETE: "SİL",
+            ADD: "EKLE",
+            SAVE: "KAYDET",
+            GENERICPARAMETERADDED: "Parametre Eklendi",
+            OK: "TAMAM",
+            GENERICPARAMETERSAVED: "Parametre Kaydedildi",
+            PARAMETERKEY: "Parametre Anahtarı",
+            NEWGENERICPARAMETER: "Yeni Parametre",
+            GENERICPARAMETERDETAIL: "Parametre Detayı",
+            GENERICPARAMETERINFO: "Parametre Bilgisi",
+            GENERICPARAMETER: "Parametre",
+            PARAMETERVALUE: "Parametre Değeri",
+            PARAMETERVALUE1: "Parametre Değeri 1",
+            PARAMETERVALUE2: "Parametre Değeri 2",
+            PARAMETERVALUE3: "Parametre Değeri 3",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Lütfen geçerli bir bilgi giriniz",
+            OK: "TAMAM",
+        },
+    },
+};

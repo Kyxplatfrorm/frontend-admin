@@ -1,0 +1,136 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="myProfileForm">
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{
+                        "MYPROFILE.OLDPASSWORD" | translate
+                    }}</mat-label>
+                    <input
+                        name="OldPassword"
+                        formControlName="OldPassword"
+                        matInput
+                        [type]="oldPassword ? 'text' : 'password'"
+                    />
+                    <mat-icon matSuffix (click)="visibilityOldPassword()">{{
+                        oldPassword ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                    <mat-error>
+                        {{ "MYPROFILE.ENTERREQUIRED" | translate }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{
+                        "MYPROFILE.NEWPASSWORD" | translate
+                    }}</mat-label>
+
+                    <input
+                        name="NewPassword"
+                        formControlName="NewPassword"
+                        matInput
+                        [type]="newPassword ? 'text' : 'password'"
+                    />
+                    <mat-icon matSuffix (click)="visibilityNewPassword()">{{
+                        newPassword ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                    <mat-error>
+                        {{ "MYPROFILE.ENTERPASSWORD" | translate }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{
+                        "MYPROFILE.NEWPASSWORD2" | translate
+                    }}</mat-label>
+
+                    <input
+                        name="NewPassword2"
+                        formControlName="NewPassword2"
+                        matInput
+                        [type]="newPassword2 ? 'text' : 'password'"
+                    />
+                    <mat-icon matSuffix (click)="visibilityNewPassword2()">{{
+                        newPassword2 ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                    <mat-error
+                        *ngIf="
+                            myProfileForm
+                                .get('NewPassword2')
+                                .hasError('required')
+                        "
+                    >
+                        {{ "MYPROFILE.ENTERPASSWORD" | translate }}
+                    </mat-error>
+                    <mat-error
+                        *ngIf="
+                            !myProfileForm
+                                .get('NewPassword2')
+                                .hasError('required') &&
+                            myProfileForm
+                                .get('NewPassword2')
+                                .hasError('passwordsNotMatching')
+                        "
+                    >
+                        {{ "MYPROFILE.PASSWORDMATCH" | translate }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', myProfileForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "MYPROFILE.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(myProfileForm)"
+            [disabled]="myProfileForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "MYPROFILE.CHANGE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', myProfileForm])"
+            [disabled]="myProfileForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "MYPROFILE.SAVE" | translate }}
+        </button>
+    </div>
+</div>

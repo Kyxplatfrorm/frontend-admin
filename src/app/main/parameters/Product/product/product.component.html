@@ -1,0 +1,385 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Parameters/Product/products'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="product-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="product.images[0]"
+                        [src]="product.images[0].url"
+                    />
+                    <img
+                        *ngIf="!product.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "PRODUCT.NEWPRODUCT" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "PRODUCT.PRODUCTDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'PRODUCT.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-product-button"
+                [disabled]="productForm.invalid || productForm.pristine"
+                *ngIf="pageType === 'new'"
+                (click)="CreateProduct()"
+            >
+                <span>{{ "PRODUCT.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-product-button"
+                [disabled]="productForm.invalid || productForm.pristine"
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateProduct()"
+            >
+                <span>{{ "PRODUCT.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="productForm"
+                    [formGroup]="productForm"
+                    class="product w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{ 'PRODUCT.PRODUCTINFO' | translate }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "PRODUCT.ID" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'PRODUCT.ID' | translate
+                                        }}"
+                                        name="Id"
+                                        formControlName="Id"
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "PRODUCT.CODE" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'PRODUCT.CODE' | translate
+                                        }}"
+                                        name="Code"
+                                        formControlName="Code"
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "PRODUCT.DESCRIPTION" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'PRODUCT.DESCRIPTION' | translate
+                                        }}"
+                                        name="Description"
+                                        formControlName="Description"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{ 'PRODUCT.PRODUCTMODULE' | translate }}"
+                        >
+                            <mat-table
+                                class="product-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                fusePerfectScrollbar
+                                [dataSource]="productDataSource"
+                            >
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="Id">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "PRODUCT.ID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let product">
+                                        <p class="text-truncate">
+                                            {{ product.Id }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ProductName Column -->
+                                <ng-container matColumnDef="ProductName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "PRODUCT.PRODUCTNAME" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let product">
+                                        <p class="text-truncate">
+                                            {{ product.ProductName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- ApplicationType Column -->
+                                <ng-container matColumnDef="ApplicationType">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "PRODUCT.APPLICATIONTYPE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let product">
+                                        <p class="text-truncate">
+                                            {{ product.ApplicationType }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- UserType Column -->
+                                <ng-container matColumnDef="UserType">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "PRODUCT.USERTYPE" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let product">
+                                        <p class="text-truncate">
+                                            {{ product.UserType }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Description Column -->
+                                <ng-container matColumnDef="Description">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "PRODUCT.DESCRIPTION" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let product"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ product.Description }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- InsertDateTime Column -->
+                                <ng-container matColumnDef="InsertDateTime">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "PRODUCT.INSERTDATETIME" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let product"
+                                        fxHide
+                                        fxShow.gt-sm
+                                    >
+                                        <span class="text-truncate"
+                                            >{{
+                                                product.InsertDateTime
+                                                    | date
+                                                        : "dd/MM/YYYY HH:mm:ss "
+                                            }}
+                                        </span>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell *matCellDef="let product">
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteProduct(product)
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "PRODUCT.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let product;
+                                        columns: displayedColumns
+                                    "
+                                    class="product"
+                                    (click)="EditProduct(product)"
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+
+                            <button
+                                mat-fab
+                                class="product-button"
+                                id="add-product-button"
+                                (click)="newForm()"
+                                aria-label="add product"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="productDataSource.filteredData?.length"
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

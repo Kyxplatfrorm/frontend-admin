@@ -1,0 +1,27 @@
+export const locale = {
+    lang: "en",
+    data: {
+        SESSION: {
+            SESSIONDETAIL: "Session Report Detail",
+            SESSIONINFO: "Session Information",
+            USERID: "User Id",
+            USERNAME: "User Name",
+            USERFULLNAME: "User Full Name",
+            CHANNELCODE: "Channel Code",
+            USERTYPE: "User Type",
+            SESSIONSTATUS: "Session Status",
+            SERVER: "Server",
+            CLIENTIP: "Client Ip",
+            FORWARDERIP: "Forwarder Ip",
+            UTCTIMEOFFSET: "Utc Time Offset",
+            SESSIONACTIVETIMEMINUTES: "Session Active Time Minutes",
+            TENANTID: "Tenant",
+            CUSTOMERTYPE: "Customer Type",
+            CUSTOMERID: "Customer Id",
+            CHECKIP: "Check Ip",
+            HASSESSIONTIMEOUT: "Has Session Time Out",
+            SAVE: "SAVE",
+            USERTYPEID: "User Type Id",
+        },
+    },
+};

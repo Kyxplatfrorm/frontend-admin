@@ -1,0 +1,28 @@
+export const locale = {
+    lang: "en",
+    data: {
+        RESTAPILOG: {
+            SEARCH: "SEARCH",
+            CLEAR: "CLEAR",
+            USERNAME: "User Name",
+            APINAME: "Api Name",
+            SERVERNAME: "Server Name",
+            SERVERTYPE: "Server Type",
+            APISTATUS: "Api Status",
+            APIREFERENCENUMBER: "Api Reference Number",
+            TOTALELAPSED: "Total Elapsed(ms)",
+            HTTPRESPONSECODE: "Http Response Code",
+            USERTYPEID: "User Type",
+            SEARCHSTARTDATE: "Search Start Date",
+            SEARCHENDDATE: "Search End Date",
+            SEARCHSTARTTIME: "Search Start Time",
+            SEARCHENDTIME: "Search End Time",
+            DATE: "MM-DD-YYYY",
+            CONTROLLERNAME: "Controller Name",
+            TENANTID: "Tenant",
+            APIRUNSTATUSID: "Api Run Status",
+            IPADDRESS: "Ip Address",
+            HTTPMETHOD: "Http Method",
+        },
+    },
+};

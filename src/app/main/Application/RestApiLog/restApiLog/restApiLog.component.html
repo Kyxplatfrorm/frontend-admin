@@ -1,0 +1,822 @@
+<div id="restApiLogs" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Application/RestApiLog/searchRestApiLog'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="restApiLog-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="restApiLog.images[0]"
+                        [src]="restApiLog.images[0].url"
+                    />
+                    <img
+                        *ngIf="!restApiLog.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "RESTAPILOG.RESTAPILOGDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="restApiLogForm"
+                    [formGroup]="restApiLogForm"
+                    class="restApiLog w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'RESTAPILOG.RESTAPILOGINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.UNIQUEREFERENCEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.UNIQUEREFERENCEID'
+                                                    | translate
+                                            }}"
+                                            name="UniqueReferenceId"
+                                            formControlName="UniqueReferenceId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.APIREFERENCENUMBER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.APIREFERENCENUMBER'
+                                                    | translate
+                                            }}"
+                                            name="ApiReferenceNumber"
+                                            formControlName="ApiReferenceNumber"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.TOTALELAPSED"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.TOTALELAPSED'
+                                                    | translate
+                                            }}"
+                                            name="TotalElapsed"
+                                            formControlName="TotalElapsed"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.INSERTDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.INSERTDATETIME'
+                                                    | translate
+                                            }}"
+                                            name="InsertDateTime"
+                                            formControlName="InsertDateTime"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.PROCESSID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.PROCESSID'
+                                                    | translate
+                                            }}"
+                                            name="ProcessId"
+                                            formControlName="ProcessId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.APICHANNEL" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.APICHANNEL'
+                                                    | translate
+                                            }}"
+                                            name="ApiChannel"
+                                            formControlName="ApiChannel"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.APISTEPNUMBER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.APISTEPNUMBER'
+                                                    | translate
+                                            }}"
+                                            name="ApiStepNumber"
+                                            formControlName="ApiStepNumber"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.HTTPRESPONSECODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.HTTPRESPONSECODE'
+                                                    | translate
+                                            }}"
+                                            name="HttpResponseCode"
+                                            formControlName="HttpResponseCode"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.SESSIONID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.SESSIONID'
+                                                    | translate
+                                            }}"
+                                            name="SessionId"
+                                            formControlName="SessionId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.USERID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.USERID' | translate
+                                            }}"
+                                            name="UserId"
+                                            formControlName="UserId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.SERVICENAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.SERVICENAME'
+                                                    | translate
+                                            }}"
+                                            name="ServiceName"
+                                            formControlName="ServiceName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.USERNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.USERNAME'
+                                                    | translate
+                                            }}"
+                                            name="UserName"
+                                            formControlName="UserName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.USERFULLNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.USERFULLNAME'
+                                                    | translate
+                                            }}"
+                                            name="UserFullName"
+                                            formControlName="UserFullName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.SERVERTYPE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.SERVERTYPE'
+                                                    | translate
+                                            }}"
+                                            name="ServerType"
+                                            formControlName="ServerType"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.SERVERNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.SERVERNAME'
+                                                    | translate
+                                            }}"
+                                            name="ServerName"
+                                            formControlName="ServerName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.APIURL" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.APIURL' | translate
+                                            }}"
+                                            name="ApiUrl"
+                                            formControlName="ApiUrl"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsExternalCall"
+                                        formControlName="IsExternalCall"
+                                        >{{
+                                            "RESTAPILOG.ISEXTERNALCALL"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.APIHOST" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.APIHOST' | translate
+                                            }}"
+                                            name="ApiHost"
+                                            formControlName="ApiHost"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.APINAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.APINAME' | translate
+                                            }}"
+                                            name="ApiName"
+                                            formControlName="ApiName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.CONTROLLERNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.CONTROLLERNAME'
+                                                    | translate
+                                            }}"
+                                            name="ControllerName"
+                                            formControlName="ControllerName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.APISTATUS" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.APISTATUS'
+                                                    | translate
+                                            }}"
+                                            name="ApiStatus"
+                                            formControlName="ApiStatus"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.ERORCODE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.ERORCODE'
+                                                    | translate
+                                            }}"
+                                            name="ErrorCode"
+                                            formControlName="ErrorCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.ERRORDESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.ERRORDESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="ErrorDescription"
+                                            formControlName="ErrorDescription"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.USERAGENT" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.USERAGENT'
+                                                    | translate
+                                            }}"
+                                            name="UserAgent"
+                                            formControlName="UserAgent"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.CLIENTIP" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.CLIENTIP'
+                                                    | translate
+                                            }}"
+                                            name="ClientIp"
+                                            formControlName="ClientIp"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.FORWARDERIP" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.FORWARDERIP'
+                                                    | translate
+                                            }}"
+                                            name="ForwarderIp"
+                                            formControlName="ForwarderIp"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.HTTPMETHOD" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.HTTPMETHOD'
+                                                    | translate
+                                            }}"
+                                            name="HttpMethod"
+                                            formControlName="HttpMethod"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.APIFULLNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.APIFULLNAME'
+                                                    | translate
+                                            }}"
+                                            name="ApiFullName"
+                                            formControlName="ApiFullName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.TOTALEXTERNALELAPSED"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.TOTALEXTERNALELAPSED'
+                                                    | translate
+                                            }}"
+                                            name="TotalExternalElapsed"
+                                            formControlName="TotalExternalElapsed"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'RESTAPILOG.RESPONSEREQUEST' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.REQUEST" | translate
+                                        }}</mat-label>
+                                        <textarea
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.REQUEST' | translate
+                                            }}"
+                                            name="Request"
+                                            formControlName="Request"
+                                            rows="15"
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.RESPONSE" | translate
+                                        }}</mat-label>
+                                        <textarea
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.RESPONSE'
+                                                    | translate
+                                            }}"
+                                            name="Response"
+                                            formControlName="Response"
+                                            rows="15"
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'RESTAPILOG.DEBUGLOGEXCEPTION' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.DEBUGLOG" | translate
+                                        }}</mat-label>
+                                        <textarea
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.DEBUGLOG'
+                                                    | translate
+                                            }}"
+                                            name="DebugLog"
+                                            formControlName="DebugLog"
+                                            rows="15"
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "RESTAPILOG.EXCEPTION" | translate
+                                        }}</mat-label>
+                                        <textarea
+                                            matInput
+                                            placeholder="{{
+                                                'RESTAPILOG.EXCEPTION'
+                                                    | translate
+                                            }}"
+                                            name="Exception"
+                                            formControlName="Exception"
+                                            rows="15"
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

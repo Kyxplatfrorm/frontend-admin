@@ -1,0 +1,231 @@
+<div id="aes" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "AES.AESDEFINITION" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="aesForm"
+                    [formGroup]="aesForm"
+                    class="aes w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab label="{{ 'AES.AESINFO' | translate }}">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "AES.ENCRYPTIONTYPE" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="EncryptionTypeId"
+                                            formControlName="EncryptionTypeId"
+                                            [(value)]="aes.EncryptionTypeId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let aes of encryptionType
+                                                "
+                                                [value]="aes.Id"
+                                            >
+                                                {{ aes.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "AES.ENCRYPTIONMODE" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="EncryptionModeId"
+                                            formControlName="EncryptionModeId"
+                                            [(value)]="aes.EncryptionModeId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let aes of encryptionMode
+                                                "
+                                                [value]="aes.Id"
+                                            >
+                                                {{ aes.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "AES.DATA" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'AES.DATA' | translate
+                                            }}"
+                                            name="Data"
+                                            formControlName="Data"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "AES.KEY" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'AES.KEY' | translate
+                                            }}"
+                                            name="Key"
+                                            formControlName="Key"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "AES.IV" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'AES.IV' | translate
+                                            }}"
+                                            name="Iv"
+                                            formControlName="Iv"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <button
+                                    style="margin-right: 10px"
+                                    mat-raised-button
+                                    class="save-aes-button"
+                                    (click)="ClearButton()"
+                                >
+                                    <span>{{ "AES.CLEAR" | translate }}</span>
+                                </button>
+                                <button
+                                    mat-raised-button
+                                    class="save-aes-button"
+                                    (click)="AesButton()"
+                                >
+                                    <span>{{ "AES.AES" | translate }}</span>
+                                </button>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                    style="margin-top: 60px"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "AES.RESULT" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'AES.RESULT' | translate
+                                            }}"
+                                            name="Result"
+                                            formControlName="Result"
+                                            [(ngModel)]="aesResult"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

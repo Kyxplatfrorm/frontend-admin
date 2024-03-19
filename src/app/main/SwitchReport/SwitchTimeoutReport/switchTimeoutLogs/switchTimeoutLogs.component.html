@@ -1,0 +1,454 @@
+<div id="switchTimeoutLogs" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                      
+                        class="add-switchTimeout-button fuse-white mt-24 mr-35"
+                        (click)="SearchSwitchTimeoutLog()"
+                    >
+                        <span>{{ "SWITCHTIMEOUT.SEARCH" | translate }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-switchTimeout-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "SWITCHTIMEOUT.CLEAR" | translate }}
+                    </button>
+
+                    <!-- CLEAR BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="switchTimeoutLogsForm"
+                    [formGroup]="switchTimeoutLogsForm"
+                    class="switchTimeout w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.SEARCHSTARTDATE" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="SearchStartDate"
+                                    formControlName="SearchStartDate"
+                                    [matDatepicker]="pickerStartDate"
+                                    [(ngModel)]="switchTimeout.SearchStartDate"
+                                    (dateChange)="onDateChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerStartDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerStartDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.SEARCHENDDATE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    [matDatepicker]="pickerEndDate"
+                                    formControlName="SearchEndDate"
+                                    [(ngModel)]="switchTimeout.SearchEndDate"
+                                    (dateChange)="onDateEndChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerEndDate></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.SEARCHSTARTTIME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.SEARCHSTARTTIME'
+                                            | translate
+                                    }}"
+                                    name="SearchStartTime"
+                                    formControlName="SearchStartTime"
+                                />
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.SEARCHENDTIME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.SEARCHENDTIME'
+                                            | translate
+                                    }}"
+                                    name="SearchEndTime"
+                                    formControlName="SearchEndTime"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.APPLICATIONTYPE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.APPLICATIONTYPE'
+                                            | translate
+                                    }}"
+                                    name="ApplicationType"
+                                    formControlName="ApplicationType"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.SERVERNAME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.SERVERNAME' | translate
+                                    }}"
+                                    name="ServerName"
+                                    formControlName="ServerName"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.APPLICATIONID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="ApplicationId"
+                                    formControlName="ApplicationId"
+                                    [(value)]="switchTimeout.ApplicationId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let switchTimeout of switchApplicationsList
+                                        "
+                                        [value]="switchTimeout.Id"
+                                    >
+                                        {{ switchTimeout.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.SESSIONID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="SessionId"
+                                    formControlName="SessionId"
+                                    [(value)]="switchTimeout.SessionId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let switchTimeout of switchApplicationSessionList
+                                        "
+                                        [value]="switchTimeout.Id"
+                                    >
+                                        {{ switchTimeout.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.REMOTEIPADDRESS" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.REMOTEIPADDRESS'
+                                            | translate
+                                    }}"
+                                    name="RemoteIpAddress"
+                                    formControlName="RemoteIpAddress"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.REMOTEPORT" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    type="number"
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.REMOTEPORT' | translate
+                                    }}"
+                                    name="RemotePort"
+                                    formControlName="RemotePort"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.LOCALIPADDRESS" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.LOCALIPADDRESS'
+                                            | translate
+                                    }}"
+                                    name="LocalIpAddress"
+                                    formControlName="LocalIpAddress"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.LOCALPORT" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    type="number"
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.LOCALPORT' | translate
+                                    }}"
+                                    name="LocalPort"
+                                    formControlName="LocalPort"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.CARDTOKENNUMBER" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.CARDTOKENNUMBER'
+                                            | translate
+                                    }}"
+                                    name="CardTokenNumber"
+                                    formControlName="CardTokenNumber"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.MERCHANTCODE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.MERCHANTCODE' | translate
+                                    }}"
+                                    name="MerchantCode"
+                                    formControlName="MerchantCode"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.TERMINALID" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.TERMINALID' | translate
+                                    }}"
+                                    name="TerminalId"
+                                    formControlName="TerminalId"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.MTI" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    type="number"
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.MTI' | translate
+                                    }}"
+                                    name="Mti"
+                                    formControlName="Mti"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.RRN" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.RRN' | translate
+                                    }}"
+                                    name="Rrn"
+                                    formControlName="Rrn"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHTIMEOUT.AUTHORIZATIONCODE"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHTIMEOUT.AUTHORIZATIONCODE'
+                                            | translate
+                                    }}"
+                                    name="AuthorizationCode"
+                                    formControlName="AuthorizationCode"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / CENTER -->
+</div>

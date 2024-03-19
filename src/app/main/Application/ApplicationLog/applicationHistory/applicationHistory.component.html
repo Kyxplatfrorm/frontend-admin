@@ -1,0 +1,521 @@
+<div
+    id="applicationLogHistories"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Application/ApplicationLog/applicationLog'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="applicationlog-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="applicationlog.images[0]"
+                        [src]="applicationlog.images[0].url"
+                    />
+                    <img
+                        *ngIf="!applicationlog.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "APPLICATIONLOG.APPLICATIONLOGDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'APPLICATIONLOG.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="applicationLogHistoryForm"
+                    [formGroup]="applicationLogHistoryForm"
+                    class="applicationLogHistory w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'APPLICATIONLOG.APPLICATIONLOGINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONLOG.APPLICATIONID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATIONLOG.APPLICATIONID'
+                                                    | translate
+                                            }}"
+                                            name="ApplicationId"
+                                            formControlName="ApplicationId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONLOG.LASTLOGID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATIONLOG.LASTLOGID'
+                                                    | translate
+                                            }}"
+                                            name="LastLogId"
+                                            formControlName="LastLogId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsRunning"
+                                        formControlName="IsRunning"
+                                        >{{
+                                            "APPLICATIONLOG.ISRUNNING"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONLOG.SERVERNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATIONLOG.SERVERNAME'
+                                                    | translate
+                                            }}"
+                                            name="ServerName"
+                                            formControlName="ServerName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONLOG.PROCESSID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATIONLOG.PROCESSID'
+                                                    | translate
+                                            }}"
+                                            name="ProcessId"
+                                            formControlName="ProcessId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONLOG.APPLICATIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATIONLOG.APPLICATIONTYPE'
+                                                    | translate
+                                            }}"
+                                            name="ApplicationType"
+                                            formControlName="ApplicationType"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONLOG.SERVİCENAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATIONLOG.SERVİCENAME'
+                                                    | translate
+                                            }}"
+                                            name="ServiceName"
+                                            formControlName="ServiceName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONLOG.PROCESSNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATIONLOG.PROCESSNAME'
+                                                    | translate
+                                            }}"
+                                            name="ProcessName"
+                                            formControlName="ProcessName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONLOG.FIRSTSTARTDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATIONLOG.FIRSTSTARTDATETIME'
+                                                    | translate
+                                            }}"
+                                            name="FirtStartDateTime"
+                                            formControlName="FirtStartDateTime"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONLOG.STARTDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATIONLOG.STARTDATETIME'
+                                                    | translate
+                                            }}"
+                                            name="StartDateTime"
+                                            formControlName="StartDateTime"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONLOG.ENDDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATIONLOG.ENDDATETIME'
+                                                    | translate
+                                            }}"
+                                            name="EndDateTime"
+                                            formControlName="EndDateTime"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{ 'APPLICATIONLOG.HISTORY' | translate }}"
+                        >
+                            <mat-table
+                                class="applicationLogHistories-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                fusePerfectScrollbar
+                                [dataSource]="applicationLogHistoryDataSource"
+                            >
+                                <!-- ServerName Column -->
+                                <ng-container matColumnDef="ServerName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "APPLICATIONLOG.SERVERNAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let applicationlog"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ applicationlog.ServerName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ProcessId Column -->
+                                <ng-container matColumnDef="ProcessId">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "APPLICATIONLOG.PROCESSID"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let applicationlog"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ applicationlog.ProcessId }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ApplicationType Column -->
+                                <ng-container matColumnDef="ApplicationType">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "APPLICATIONLOG.APPLICATIONTYPE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let applicationlog"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ applicationlog.ApplicationType }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ServiceName Column -->
+                                <ng-container matColumnDef="ServiceName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "APPLICATIONLOG.SERVİCENAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let applicationlog"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ applicationlog.ServiceName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- StartDateTime Column -->
+                                <ng-container matColumnDef="StartDateTime">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "APPLICATIONLOG.STARTDATETIME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let applicationlog"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ applicationlog.StartDateTime }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- EndDateTime Column -->
+                                <ng-container matColumnDef="EndDateTime">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "APPLICATIONLOG.ENDDATETIME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let applicationlog"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ applicationlog.EndDateTime }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let applicationlog;
+                                        columns: displayedColumns
+                                    "
+                                    class="applicationLog"
+                                >
+                                </mat-row>
+                            </mat-table>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="
+                            applicationLogHistoryDataSource.filteredData?.length
+                        "
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

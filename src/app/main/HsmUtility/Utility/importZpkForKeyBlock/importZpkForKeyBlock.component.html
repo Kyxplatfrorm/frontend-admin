@@ -1,0 +1,215 @@
+<div
+    id="importZpkForKeyBlock"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "IMPORTKEY.IMPORTZPKFORKEYBLOCK" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="importZpkForKeyBlockForm"
+                    [formGroup]="importZpkForKeyBlockForm"
+                    class="importKey w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'IMPORTKEY.IMPORTZPKFORKEYBLOCKINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "IMPORTKEY.ZPKUNDERZMK" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'IMPORTKEY.ZPKUNDERZMK'
+                                                    | translate
+                                            }}"
+                                            name="ZpkUnderZmk"
+                                            formControlName="ZpkUnderZmk"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "IMPORTKEY.ZMKUNDERLMK" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'IMPORTKEY.ZMKUNDERLMK'
+                                                    | translate
+                                            }}"
+                                            name="ZmkUnderLmk"
+                                            formControlName="ZmkUnderLmk"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <button
+                                    style="margin-right: 10px"
+                                    mat-raised-button
+                                    class="save-importKey-button"
+                                    (click)="ClearButton()"
+                                >
+                                    <span>{{
+                                        "IMPORTKEY.CLEAR" | translate
+                                    }}</span>
+                                </button>
+                                <button
+                                    mat-raised-button
+                                    class="save-importKey-button"
+                                    (click)="ImportZpkForKeyBlockButton()"
+                                >
+                                    <span>{{
+                                        "IMPORTKEY.IMPORTKEY1" | translate
+                                    }}</span>
+                                </button>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                    style="margin-top: 60px"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "IMPORTKEY.HSMERRORCODE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'IMPORTKEY.HSMERRORCODE'
+                                                    | translate
+                                            }}"
+                                            name="HsmErrorCode"
+                                            formControlName="HsmErrorCode"
+                                            [(ngModel)]="generateHsmErrorCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "IMPORTKEY.HSMERRORDESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'IMPORTKEY.HSMERRORDESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="HsmErrorDescription"
+                                            formControlName="HsmErrorDescription"
+                                            [(ngModel)]="
+                                                generateHsmErrorDescription
+                                            "
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "IMPORTKEY.KEYUNDERLMKWITHKCV"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'IMPORTKEY.KEYUNDERLMKWITHKCV'
+                                                    | translate
+                                            }}"
+                                            name="KeyUnderLmkWithKcv"
+                                            formControlName="KeyUnderLmkWithKcv"
+                                            [(ngModel)]="hsmKeyUnderLmkWithKcv"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

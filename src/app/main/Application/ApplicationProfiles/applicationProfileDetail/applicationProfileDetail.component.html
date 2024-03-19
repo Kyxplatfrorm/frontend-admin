@@ -1,0 +1,364 @@
+<div id="profiledetails" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Application/ApplicationProfiles/applicationProfiles'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="applicationprofile-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="applicationprofile.images[0]"
+                        [src]="applicationprofile.images[0].url"
+                    />
+                    <img
+                        *ngIf="!applicationprofile.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "APPLICATION.NEWAPPLICATIONPROFILE" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "APPLICATION.APPLICATIONPROFILEDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-applicationprofile-button"
+                [disabled]="
+                    applicationProfileDetailForm.invalid ||
+                    applicationProfileDetailForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateAppProfileDetail()"
+            >
+                <span>{{ "APPLICATION.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-applicationprofile-button"
+                [disabled]="
+                    applicationProfileDetailForm.invalid ||
+                    applicationProfileDetailForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateAppProfileDetail()"
+            >
+                <span>{{ "APPLICATION.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="applicationProfileDetailForm"
+                    [formGroup]="applicationProfileDetailForm"
+                    class="applicationprofile w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'APPLICATION.APPLICATIONPROFLEINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.PROFILENAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATION.PROFILENAME'
+                                                    | translate
+                                            }}"
+                                            name="ProfileName"
+                                            formControlName="ProfileName"
+                                        />
+                                        <mat-error>
+                                            {{
+                                                "APPLICATION.PROFILENAMEREQUIRED"
+                                                    | translate
+                                            }}
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.SWAGGERBASEPATH"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATION.SWAGGERBASEPATH'
+                                                    | translate
+                                            }}"
+                                            name="SwaggerBasePath"
+                                            formControlName="SwaggerBasePath"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.SQLLOGTIMEOUTTHRESHOLD"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATION.SQLLOGTIMEOUTTHRESHOLD'
+                                                    | translate
+                                            }}"
+                                            type="number"
+                                            name="SqlLogTimeoutThreshold"
+                                            formControlName="SqlLogTimeoutThreshold"
+                                        />
+                                        <mat-error>
+                                            {{
+                                                "APPLICATION.SQLLOGTIMEOUTTHRESHOLDREQUIRED"
+                                                    | translate
+                                            }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.TIMEZONEINMINUTE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATION.TIMEZONEINMINUTE'
+                                                    | translate
+                                            }}"
+                                            type="number"
+                                            name="TimeZoneInMinute"
+                                            formControlName="TimeZoneInMinute"
+                                        />
+                                        <mat-error>
+                                            {{
+                                                "APPLICATION.TIMEZONEINMINUTEREQUIRED"
+                                                    | translate
+                                            }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        *ngIf="
+                                            applicationprofile.HasCommandTimeout
+                                        "
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.COMMANDTIMEOUT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATION.COMMANDTIMEOUT'
+                                                    | translate
+                                            }}"
+                                            type="number"
+                                            name="CommandTimeout"
+                                            formControlName="CommandTimeout"
+                                        />
+                                        <mat-error>
+                                            {{
+                                                "APPLICATION.COMMANDTIMEOUTREQUIRED"
+                                                    | translate
+                                            }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="EnableSwagger"
+                                        formControlName="EnableSwagger"
+                                        fxFlex="52"
+                                        >{{
+                                            "APPLICATION.ENABLESWAGGER"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                    <mat-checkbox
+                                        name="MaskJsonRequest"
+                                        formControlName="MaskJsonRequest"
+                                        >{{
+                                            "APPLICATION.MASKJSONREQUEST"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="DisableRestLog"
+                                        formControlName="DisableRestLog"
+                                        fxFlex="52"
+                                        >{{
+                                            "APPLICATION.DISABLERESTLOG"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                    <mat-checkbox
+                                        name="LoadExternalWebApi"
+                                        formControlName="LoadExternalWebApi"
+                                        >{{
+                                            "APPLICATION.LOADEXTERNALWEBAPI"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="DisableOperationLogging"
+                                        formControlName="DisableOperationLogging"
+                                        fxFlex="52"
+                                        >{{
+                                            "APPLICATION.DISABLEOPERATIONLOGGING"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                    <mat-checkbox
+                                        name="DisableMonitoring"
+                                        formControlName="DisableMonitoring"
+                                        >{{
+                                            "APPLICATION.DISABLEMONITORING"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="EnableSwaggerLogin"
+                                        formControlName="EnableSwaggerLogin"
+                                        fxFlex="52"
+                                        >{{
+                                            "APPLICATION.ENABLESWAGGERLOGIN"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                    <mat-checkbox
+                                        name="LogHttpGetApiCalls"
+                                        formControlName="LogHttpGetApiCalls"
+                                        >{{
+                                            "APPLICATION.LOGHTTPGETAPICALLS"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasCommandTimeout"
+                                        formControlName="HasCommandTimeout"
+                                        [(ngModel)]="
+                                            applicationprofile.HasCommandTimeout
+                                        "
+                                        >{{
+                                            "APPLICATION.HASCOMMANDTIMEOUT"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

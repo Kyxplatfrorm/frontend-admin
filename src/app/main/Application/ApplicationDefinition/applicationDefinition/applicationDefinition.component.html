@@ -1,0 +1,406 @@
+<div
+    id="applicationDefinitions"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Application/ApplicationDefinition/applicationDefinitions'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="applicationdefinition-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="applicationdefinition.images[0]"
+                        [src]="applicationdefinition.images[0].url"
+                    />
+                    <img
+                        *ngIf="!applicationdefinition.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "APPLICATION.NEWAPPLICATIONDEFINITION" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "APPLICATION.APPLICATIONDEFINITIONDETAIL"
+                                | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-applicationDefinition-button"
+                [disabled]="
+                    applicationDefinitionForm.invalid ||
+                    applicationDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateApplicationDefinition()"
+            >
+                <span>{{ "APPLICATION.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-applicationDefinition-button"
+                [disabled]="
+                    applicationDefinitionForm.invalid ||
+                    applicationDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateApplicationDefinition()"
+            >
+                <span>{{ "APPLICATION.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="applicationDefinitionForm"
+                    [formGroup]="applicationDefinitionForm"
+                    class="applicationDefinition w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'APPLICATION.APPLICATIONDEFINITIONINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.APPLICATIONTYPEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="ApplicationTypeId"
+                                            formControlName="ApplicationTypeId"
+                                            [(value)]="
+                                                applicationdefinition.ApplicationTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let applicationdefinition of parameterApplicationList
+                                                "
+                                                [value]="
+                                                    applicationdefinition.Id
+                                                "
+                                            >
+                                                {{
+                                                    applicationdefinition.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.USERTYPEID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="UserTypeId"
+                                            formControlName="UserTypeId"
+                                            [(value)]="
+                                                applicationdefinition.UserTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let applicationdefinition of parameterUserList
+                                                "
+                                                [value]="
+                                                    applicationdefinition.Id
+                                                "
+                                            >
+                                                {{
+                                                    applicationdefinition.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.SERVERADDRESS"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATION.SERVERADDRESS'
+                                                    | translate
+                                            }}"
+                                            name="ServerAddress"
+                                            formControlName="ServerAddress"
+                                            required
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.APPLICATIONPROFILEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="ApplicationProfileId"
+                                            formControlName="ApplicationProfileId"
+                                            [(value)]="
+                                                applicationdefinition.ApplicationProfileId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let applicationdefinition of applicationProfileList
+                                                "
+                                                [value]="
+                                                    applicationdefinition.Id
+                                                "
+                                            >
+                                                {{
+                                                    applicationdefinition.ProfileName
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.CLUSTERID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATION.CLUSTERID'
+                                                    | translate
+                                            }}"
+                                            name="ClusterId"
+                                            formControlName="ClusterId"
+                                            required
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.INSTANCEID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATION.INSTANCEID'
+                                                    | translate
+                                            }}"
+                                            name="InstanceId"
+                                            formControlName="InstanceId"
+                                            required
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.THREADCOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATION.THREADCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="ThreadCount"
+                                            formControlName="ThreadCount"
+                                            required
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        *ngIf="applicationdefinition.HasRestApi"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.RESTAPIPORT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATION.RESTAPIPORT'
+                                                    | translate
+                                            }}"
+                                            name="RestApiPort"
+                                            formControlName="RestApiPort"
+                                            required
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasRestApi"
+                                        formControlName="HasRestApi"
+                                        [(ngModel)]="
+                                            applicationdefinition.HasRestApi
+                                        "
+                                        >{{
+                                            "APPLICATION.HASRESTAPI" | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.SERVICENAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATION.SERVICENAME'
+                                                    | translate
+                                            }}"
+                                            name="ServiceName"
+                                            formControlName="ServiceName"
+                                            required
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATION.DESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATION.DESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                            required
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

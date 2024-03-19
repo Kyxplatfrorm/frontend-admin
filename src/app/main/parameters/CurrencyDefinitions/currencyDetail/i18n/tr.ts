@@ -1,0 +1,30 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        CURRENCY: {
+            NEWCURRENCY: "Yeni Döviz",
+            CURRENCYDETAIL: "Döviz Detayı",
+            ADD: "EKLE",
+            SAVE: "KAYDET",
+            CURRENCYINFO: "Döviz Bilgisi",
+            ISCRYPTOCURRENCY: "Kripto Para Birimi",
+            CURRENCYCODE: "Döviz Kodu",
+            CURRENCYCODENUMERIC: "Döviz Sayısal Kodu",
+            CURRENCYCODEEXTERNAL: "Harici Döviz Kodu",
+            CURRENCYSYMBOL: "Döviz Sembolü",
+            COUNTRYNAME: "Ülke İsmi",
+            CURRENCYNAME: "Döviz İsmi",
+            ICONURL: "Simge Adresi",
+            ISSETTLEMENTCURRENCY: "Takas Para Birimi",
+            CURRENCYSAVED: "Döviz  Kaydedildi",
+            CURRENCYADDED: "Döviz  Eklendi",
+            OK: "TAMAM",
+            CURRENCYCODEREQUIRED: "Döviz Kodu Zorunludur.",
+            CURRENCYNAMEREQUIRED: "Döviz İsmi Zorunludur. ",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Lütfen geçerli bir bilgi giriniz",
+            OK: "TAMAM",
+        },
+    },
+};

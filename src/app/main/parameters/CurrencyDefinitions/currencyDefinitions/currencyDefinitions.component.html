@@ -1,0 +1,234 @@
+<div id="currencies" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "CURRENCY.CURRENCYDEFINITIONS" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'CURRENCY.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button
+                mat-raised-button
+                [routerLink]="'/currency/new'"
+                class="add-currency-button fuse-white mt-24 mt-md-0"
+            >
+                <span>{{ "CURRENCY.ADD" | translate }}</span>
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="currencies-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                fusePerfectScrollbar
+                [dataSource]="currencydefinitionsDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CURRENCY.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let currency">
+                        <p class="text-truncate">{{ currency.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- CurrencyCode Column -->
+                <ng-container matColumnDef="CurrencyCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CURRENCY.CURRENCYCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let currency">
+                        <p class="text-truncate">
+                            {{ currency.CurrencyCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- CurrencyCodeNumeric Column -->
+                <ng-container matColumnDef="CurrencyCodeNumeric">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CURRENCY.CURRENCYCODENUMERIC" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let currency">
+                        <p class="text-truncate">
+                            {{ currency.CurrencyCodeNumeric }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- CountryName Column -->
+                <ng-container matColumnDef="CountryName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CURRENCY.COUNTRYNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let currency">
+                        <p class="text-truncate">
+                            {{ currency.CountryName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- CurrencyName Column -->
+                <ng-container matColumnDef="CurrencyName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CURRENCY.CURRENCYNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let currency">
+                        <p class="text-truncate">
+                            {{ currency.CurrencyName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "CURRENCY.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let currency" fxHide fxShow.gt-sm>
+                        <span class="text-truncate"
+                            >{{
+                                currency.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-sm
+                        >{{
+                            "CURRENCY.UPDATEDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let currency" fxHide fxShow.gt-xs>
+                        <span class="text-truncate"
+                            >{{
+                                currency.UpdateDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss"
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let currency">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="deleteCurrency(currency)"
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                    <span
+                                        >{{ "CURRENCY.REMOVE" | translate }}
+                                    </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let currency; columns: displayedColumns"
+                    class="currency"
+                    [routerLink]="['/Parameters/currency', currency.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="currencydefinitionsDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

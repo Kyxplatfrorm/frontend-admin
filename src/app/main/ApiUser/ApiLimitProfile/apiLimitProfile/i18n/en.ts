@@ -1,0 +1,27 @@
+export const locale = {
+    lang: "en",
+    data: {
+        APILIMITPROFILE: {
+            APILIMITPROFILEADDED: "Api Limit Profile Added",
+            OK: "OK",
+            APILIMITPROFILESAVED: "Api Limit Profile Saved",
+            ADD: "ADD",
+            SAVE: "SAVE",
+            NEWAPILIMITPROFILE: "New Api Limit Profile",
+            APILIMITPROFILEDETAIL: "Api Limit Profile Detail",
+            APILIMITPROFILEINFO: "Api Limit Profile Information",
+            ISBUILTINDEFINITION: "Is Builtin Definition",
+            HASVALIDDAYS: "Has Valid Days",
+            HASVALIDHOURS: "Has Valid Hours",
+            HASDAILYMAXEXECUTIONCOUNT: "Has Daily Max Execution Count",
+            HASMAXTPSCOUNT: "Has Max Tps Count",
+            VALIDDAYS: "Valid Days",
+            VALIDSTARTTIME: "Valid Start Time",
+            VALIDENDTTIME: "Valid End Time",
+            DAILYMAXEXECUTIONCOUNT: "Daily Max Execution Count",
+            MAXTPSCOUNT: "Max Tps Count",
+            PROFILENAME: "Profile Name",
+            TENANTID: "Tenant",
+        },
+    },
+};

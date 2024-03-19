@@ -1,0 +1,117 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="searchUserForm">
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{ "USER.NEWPASSWORD" | translate }}</mat-label>
+
+                    <input
+                        name="NewPassword"
+                        formControlName="NewPassword"
+                        [type]="newPassword ? 'text' : 'password'"
+                        matInput
+                    />
+                    <mat-icon matSuffix (click)="visibilityNewPassword()">{{
+                        newPassword ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                    <mat-error
+                        >{{ "USER.ENTERREQUIRED" | translate }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{ "USER.NEWPASSWORD2" | translate }}</mat-label>
+
+                    <input
+                        name="NewPassword2"
+                        formControlName="NewPassword2"
+                        [type]="newPassword2 ? 'text' : 'password'"
+                        matInput
+                    />
+                    <mat-icon
+                        matSuffix
+                        (click)="visibilityNewPasswordRepeat()"
+                        >{{
+                            newPassword2 ? "visibility_off" : "visibility"
+                        }}</mat-icon
+                    >
+                    <mat-error
+                        *ngIf="
+                            searchUserForm
+                                .get('NewPassword2')
+                                .hasError('required')
+                        "
+                    >
+                        {{ "USER.ENTERPASSWORD" | translate }}
+                    </mat-error>
+                    <mat-error
+                        *ngIf="
+                            !searchUserForm
+                                .get('NewPassword2')
+                                .hasError('required') &&
+                            searchUserForm
+                                .get('NewPassword2')
+                                .hasError('passwordsNotMatching')
+                        "
+                    >
+                        {{ "USER.PASSWORDMATCH" | translate }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', searchUserForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "USER.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(searchUserForm)"
+            [disabled]="searchUserForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "USER.SETPASSWORD2" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', searchUserForm])"
+            [disabled]="searchUserForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "USER.SAVE" | translate }}
+        </button>
+    </div>
+</div>

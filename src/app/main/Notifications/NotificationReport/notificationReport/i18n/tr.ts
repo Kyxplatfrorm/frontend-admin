@@ -1,0 +1,32 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        NOTIFICATIONREPORT: {
+            NOTIFICATIONREPORT: "Bildirim Raporu",
+            NOTIFICATIONREPORTDETAIL: "Bildirim Rapor Detayı",
+            ADD: "EKLE",
+            SAVE: "KAYDET",
+            NOTIFICATIONREPORTINFO: "Bildirim Rapor Bilgisi",
+            CUSTOMERNAME: "Müşteri İsmi",
+            NOTIFICATIONTYPE: "Bildirim Tipi",
+            NOTIFICATIONTEMPLATE: "Bildirim Şablonu",
+            LANGUAGECODE: "Dil Kodu",
+            SENTSTATUS: "Gönderilme Durumu",
+            COMPANY: "Şirket",
+            SESSION: "Oturum",
+            RECEIVERADDRESS: "Alıcı Adresi",
+            SUBJECT: "Konu",
+            CONTENT: "İçerik",
+            MAXRETRYCOUNT: "Maksimum Yeniden Deneme Sayısı",
+            ATTEMPTCOUNT: "Deneme Sayısı",
+            ISENCRYPTED: "Şifrelenmiş",
+            HASEXPIRYDATE: "Son Kullanma Tarihi Var mı?",
+            EXPIRYDATETIME: "Son Kullanma Tarihi",
+            PRIORITY: "Öncelik",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Lütfen geçerli bir bilgi giriniz",
+            OK: "TAMAM",
+        },
+    },
+};

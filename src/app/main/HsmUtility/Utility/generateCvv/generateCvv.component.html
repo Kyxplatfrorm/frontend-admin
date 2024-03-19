@@ -1,0 +1,257 @@
+<div id="generateCvv" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "GENERATECVV.GENERATECVV" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="genereateCvvForm"
+                    [formGroup]="genereateCvvForm"
+                    class="generateCvv w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'GENERATECVV.GENERATECVVINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATECVV.CVVKEY" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATECVV.CVVKEY' | translate
+                                            }}"
+                                            name="CvvKey"
+                                            formControlName="CvvKey"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATECVV.CARDNUMBER" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATECVV.CARDNUMBER'
+                                                    | translate
+                                            }}"
+                                            name="CardNumber"
+                                            formControlName="CardNumber"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATECVV.EXPIRYDATEYYMM"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATECVV.EXPIRYDATEYYMM'
+                                                    | translate
+                                            }}"
+                                            name="ExpiryDateYYMM"
+                                            formControlName="ExpiryDateYYMM"
+                                        />
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATECVV.SERVICECODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATECVV.SERVICECODE'
+                                                    | translate
+                                            }}"
+                                            name="ServiceCode"
+                                            formControlName="ServiceCode"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <button
+                                    style="margin-right: 10px"
+                                    mat-raised-button
+                                    class="save-generateCvv-button"
+                                    (click)="ClearButton()"
+                                >
+                                    <span>{{
+                                        "GENERATECVV.CLEAR" | translate
+                                    }}</span>
+                                </button>
+                                <button
+                                    mat-raised-button
+                                    class="save-generateCvv-button"
+                                    (click)="GenerateCvvButton()"
+                                >
+                                    <span>{{
+                                        "GENERATECVV.GENERATE" | translate
+                                    }}</span>
+                                </button>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                    style="margin-top: 60px"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATECVV.HSMERRORCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATECVV.HSMERRORCODE'
+                                                    | translate
+                                            }}"
+                                            name="HsmErrorCode"
+                                            formControlName="HsmErrorCode"
+                                            [(ngModel)]="generateHsmErrorCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATECVV.HSMERRORDESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATECVV.HSMERRORDESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="HsmErrorDescription"
+                                            formControlName="HsmErrorDescription"
+                                            [(ngModel)]="
+                                                generateHsmErrorDescription
+                                            "
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "GENERATECVV.CVV" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'GENERATECVV.CVV' | translate
+                                            }}"
+                                            name="Cvv"
+                                            formControlName="Cvv"
+                                            [(ngModel)]="cvv"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

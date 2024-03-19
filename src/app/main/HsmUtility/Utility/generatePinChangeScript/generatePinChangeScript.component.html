@@ -1,0 +1,402 @@
+<div
+    id="generatePinChangeScript"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "PINCHANGESCRIPT.GENERATEPINCHANGESCRIPT" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="generatePinChangeScriptForm"
+                    [formGroup]="generatePinChangeScriptForm"
+                    class="generatePinChangeScript w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'PINCHANGESCRIPT.GENERATEPINCHANGESCRIPTINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.ACUNDERLMK"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.ACUNDERLMK'
+                                                    | translate
+                                            }}"
+                                            name="AcUnderLmk"
+                                            formControlName="AcUnderLmk"
+                                        />
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.ENCUNDERLMK"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.ENCUNDERLMK'
+                                                    | translate
+                                            }}"
+                                            name="EncUnderLmk"
+                                            formControlName="EncUnderLmk"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.MACKEYUNDERLMK"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.MACKEYUNDERLMK'
+                                                    | translate
+                                            }}"
+                                            name="MacKeyUnderLmk"
+                                            formControlName="MacKeyUnderLmk"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.ZPKUNDERLMK"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.ZPKUNDERLMK'
+                                                    | translate
+                                            }}"
+                                            name="ZpkUnderLmk"
+                                            formControlName="ZpkUnderLmk"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.CARDNUMBER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.CARDNUMBER'
+                                                    | translate
+                                            }}"
+                                            name="CardNumber"
+                                            formControlName="CardNumber"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.PANSEQUENCENUMBER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.PANSEQUENCENUMBER'
+                                                    | translate
+                                            }}"
+                                            name="PanSequenceNumber"
+                                            formControlName="PanSequenceNumber"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.ATC" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.ATC'
+                                                    | translate
+                                            }}"
+                                            name="Atc"
+                                            formControlName="Atc"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.ARQC" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.ARQC'
+                                                    | translate
+                                            }}"
+                                            name="Arqc"
+                                            formControlName="Arqc"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.PINBLOCKFORMAT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.PINBLOCKFORMAT'
+                                                    | translate
+                                            }}"
+                                            name="PinBlockFormat"
+                                            formControlName="PinBlockFormat"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.PINBLOCK"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.PINBLOCK'
+                                                    | translate
+                                            }}"
+                                            name="PinBlock"
+                                            formControlName="PinBlock"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <button
+                                    style="margin-right: 10px"
+                                    mat-raised-button
+                                    class="save-generatePinChangeScript-button"
+                                    (click)="ClearButton()"
+                                >
+                                    <span>{{
+                                        "PINCHANGESCRIPT.CLEAR" | translate
+                                    }}</span>
+                                </button>
+                                <button
+                                    mat-raised-button
+                                    class="save-generatePinChangeScript-button"
+                                    (click)="PinChangeScriptButton()"
+                                >
+                                    <span>{{
+                                        "PINCHANGESCRIPT.PINCHANGESCRIPT1"
+                                            | translate
+                                    }}</span>
+                                </button>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                    style="margin-top: 60px"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.HSMERRORCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.HSMERRORCODE'
+                                                    | translate
+                                            }}"
+                                            name="HsmErrorCode"
+                                            formControlName="HsmErrorCode"
+                                            [(ngModel)]="generateHsmErrorCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.HSMERRORDESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.HSMERRORDESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="HsmErrorDescription"
+                                            formControlName="HsmErrorDescription"
+                                            [(ngModel)]="
+                                                generateHsmErrorDescription
+                                            "
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINCHANGESCRIPT.ISSUERSCRIPT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINCHANGESCRIPT.ISSUERSCRIPT'
+                                                    | translate
+                                            }}"
+                                            name="IssuerScript"
+                                            formControlName="IssuerScript"
+                                            [(ngModel)]="hsmIssuerScript"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

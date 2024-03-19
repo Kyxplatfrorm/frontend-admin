@@ -1,0 +1,31 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        PRODUCT: {
+            PRODUCTID: "Ürün",
+            APPLICATIONTYPE: "Uygulama Tipi",
+            USERTYPE: "Kullanıcı Tipi",
+            DESCRIPTION: "Açıklama",
+            SAVE: "KAYDET",
+            ADD: "EKLE",
+            DELETE: "SİL",
+            PRODUCTADDED: "Ürün Eklendi",
+            PRODUCTSAVED: "Ürün Kaydedildi",
+            OK: "TAMAM",
+            ID: "Id",
+            SEARCHTEXT: "Bir ürün modeli arayınız",
+            NEWPRODUCT: "Yeni Ürün",
+            PRODUCTDETAIL: "Ürün Detayı",
+            PRODUCTINFO: "Ürün Bilgisi",
+            PRODUCTCODE: "Ürün Kodu",
+            PRODUCTMODULE: "Ürün Modülleri",
+            PRODUCTNAME: "Ürün İsmi",
+            INSERTDATETIME: "Ekleme Tarihi",
+            REMOVE: "Sil",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Lütfen geçerli bir bilgi giriniz",
+            OK: "TAMAM",
+        },
+    },
+};

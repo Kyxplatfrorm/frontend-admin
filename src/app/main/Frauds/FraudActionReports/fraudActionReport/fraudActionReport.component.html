@@ -1,0 +1,657 @@
+<div id="fraudActionReport" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Frauds/FraudActionReports/searchFraudActionReports'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="fraudAction mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="fraudAction.images[0]"
+                        [src]="fraudAction.images[0].url"
+                    />
+                    <img
+                        *ngIf="!fraudAction.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "FRAUDACTION.FRAUDACTIONREPORT" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "FRAUDACTION.FRAUDACTIONREPORTDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="fraudActionReportForm"
+                    [formGroup]="fraudActionReportForm"
+                    class="fraudAction w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'FRAUDACTION.FRAUDACTIONREPORTINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.USERNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.USERNAME'
+                                                    | translate
+                                            }}"
+                                            name="UserName"
+                                            formControlName="UserName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.SESSIONID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.SESSIONID'
+                                                    | translate
+                                            }}"
+                                            name="SessionId"
+                                            formControlName="SessionId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.USERID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.USERID' | translate
+                                            }}"
+                                            name="UserId"
+                                            formControlName="UserId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.CUSTOMERID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.CUSTOMERID'
+                                                    | translate
+                                            }}"
+                                            name="CustomerId"
+                                            formControlName="CustomerId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.COMPANYID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.COMPANYID'
+                                                    | translate
+                                            }}"
+                                            name="CompanyId"
+                                            formControlName="CompanyId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.COMPANYPOSID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.COMPANYPOSID'
+                                                    | translate
+                                            }}"
+                                            name="CompanyPosId"
+                                            formControlName="CompanyPosId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.TENANT" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="fraudAction.TenantId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let fraudAction of tenantDefinition
+                                                "
+                                                [value]="fraudAction.Id"
+                                            >
+                                                {{ fraudAction.TenantName }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="fraudAction.TenantId"
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                fraudAction.TenantId =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.REFERENCENUMBER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.REFERENCENUMBER'
+                                                    | translate
+                                            }}"
+                                            name="ReferenceNumber"
+                                            formControlName="ReferenceNumber"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.CARDTOKEN" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.CARDTOKEN'
+                                                    | translate
+                                            }}"
+                                            name="CardToken"
+                                            formControlName="CardToken"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.TRANSACTIONAMOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.TRANSACTIONAMOUNT'
+                                                    | translate
+                                            }}"
+                                            name="TransactionAmount"
+                                            formControlName="TransactionAmount"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.TRANSACTIONCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.TRANSACTIONCODE'
+                                                    | translate
+                                            }}"
+                                            name="TransactionCode"
+                                            formControlName="TransactionCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.APPLICATIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="ApplicationTypeId"
+                                            formControlName="ApplicationTypeId"
+                                            [(value)]="
+                                                fraudAction.ApplicationTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let fraudAction of applicationType
+                                                "
+                                                [value]="fraudAction.Id"
+                                            >
+                                                {{ fraudAction.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                fraudAction.ApplicationTypeId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                onClearApplicaitonType();
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.FRAUDRULEACTIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="FraudRuleActionTypeId"
+                                            formControlName="FraudRuleActionTypeId"
+                                            [(value)]="
+                                                fraudAction.FraudRuleActionTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let fraudAction of fraudRuleActionType
+                                                "
+                                                [value]="fraudAction.Id"
+                                            >
+                                                {{ fraudAction.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                fraudAction.FraudRuleActionTypeId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                fraudAction.FraudRuleActionTypeId =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.FRAUDRULEACTIONSTATUS"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="FraudRuleActionStatusId"
+                                            formControlName="FraudRuleActionStatusId"
+                                            [(value)]="
+                                                fraudAction.FraudRuleActionStatusId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let fraudAction of fraudRuleActionStatus
+                                                "
+                                                [value]="fraudAction.Id"
+                                            >
+                                                {{ fraudAction.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                fraudAction.FraudRuleActionStatusId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                fraudAction.FraudRuleActionStatusId =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.CLIENTIP" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.CLIENTIP'
+                                                    | translate
+                                            }}"
+                                            name="ClientIp"
+                                            formControlName="ClientIp"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.INSERTDATE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.INSERTDATE'
+                                                    | translate
+                                            }}"
+                                            name="InsertDate"
+                                            formControlName="InsertDate"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.FRAUDRULEACTIONDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.FRAUDRULEACTIONDATETIME'
+                                                    | translate
+                                            }}"
+                                            name="FraudRuleActionDateTime"
+                                            formControlName="FraudRuleActionDateTime"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.FRAUDRULEACTIONUSER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.FRAUDRULEACTIONUSER'
+                                                    | translate
+                                            }}"
+                                            name="FraudRuleActionUser"
+                                            formControlName="FraudRuleActionUser"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.FRAUDAPIID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.FRAUDAPIID'
+                                                    | translate
+                                            }}"
+                                            name="FraudApiId"
+                                            formControlName="FraudApiId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.FRAUDAPINAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.FRAUDAPINAME'
+                                                    | translate
+                                            }}"
+                                            name="FraudApiName"
+                                            formControlName="FraudApiName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.FRAUDRULEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.FRAUDRULEID'
+                                                    | translate
+                                            }}"
+                                            name="FraudRuleId"
+                                            formControlName="FraudRuleId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDACTION.FRAUDRULENAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDACTION.FRAUDRULENAME'
+                                                    | translate
+                                            }}"
+                                            name="FraudRuleName"
+                                            formControlName="FraudRuleName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -1,0 +1,310 @@
+<div id="pluginDetails" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Parameters/Plugin/plugins'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="pluginDetail-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="plugin.images[0]"
+                        [src]="plugin.images[0].url"
+                    />
+                    <img
+                        *ngIf="!plugin.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "PLUGIN.NEWPLUGIN" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "PLUGIN.PLUGINDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-pluginDetail-button"
+                [disabled]="
+                    pluginDetailForm.invalid || pluginDetailForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreatePluginDetail()"
+            >
+                <span>{{ "PLUGIN.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-pluginDetail-button"
+                [disabled]="
+                    pluginDetailForm.invalid || pluginDetailForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdatePluginDetail()"
+            >
+                <span>{{ "PLUGIN.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="pluginDetailForm"
+                    [formGroup]="pluginDetailForm"
+                    class="pluginDetail w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab label="{{ 'PLUGIN.PLUGININFO' | translate }}">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    class="checkbox"
+                                    style="margin-bottom: 10px"
+                                >
+                                    <mat-checkbox
+                                        name="IsDefault"
+                                        formControlName="IsDefault"
+                                        >{{
+                                            "PLUGIN.ISDEFAULT" | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PLUGIN.TENANTID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="plugin.TenantId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let tenant of tenantList
+                                                "
+                                                [value]="tenant.Id"
+                                            >
+                                                {{ tenant.TenantName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PLUGIN.PLUGINCODE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PLUGIN.PLUGINCODE' | translate
+                                            }}"
+                                            name="PluginCode"
+                                            formControlName="PluginCode"
+                                            required
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PLUGIN.PLUGINGROUPCODE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PLUGIN.PLUGINGROUPCODE'
+                                                    | translate
+                                            }}"
+                                            name="PluginGroupCode"
+                                            formControlName="PluginGroupCode"
+                                            required
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PLUGIN.PLUGINDESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PLUGIN.PLUGINDESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="PluginDescription"
+                                            formControlName="PluginDescription"
+                                            required
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PLUGIN.PLUGINPATH" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PLUGIN.PLUGINPATH' | translate
+                                            }}"
+                                            name="PluginPath"
+                                            formControlName="PluginPath"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PLUGIN.PLUGINASSEMBLYNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PLUGIN.PLUGINASSEMBLYNAME'
+                                                    | translate
+                                            }}"
+                                            name="PluginAssemblyName"
+                                            formControlName="PluginAssemblyName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PLUGIN.PLUGINCONFIG" | translate
+                                        }}</mat-label>
+                                        <textarea
+                                            matInput
+                                            placeholder="{{
+                                                'PLUGIN.PLUGINCONFIG'
+                                                    | translate
+                                            }}"
+                                            name="PluginConfig"
+                                            formControlName="PluginConfig"
+                                            rows="15"
+                                            required
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PLUGIN.PLUGINFULLCLASSNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PLUGIN.PLUGINFULLCLASSNAME'
+                                                    | translate
+                                            }}"
+                                            name="PluginFullClassName"
+                                            formControlName="PluginFullClassName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

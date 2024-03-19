@@ -1,0 +1,367 @@
+<div id="switchParseErrorLog" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/SwitchReport/SwitchParseErrorReport/searchParseErrorLogs'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="switchParseError-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="switchParseError.images[0]"
+                        [src]="switchParseError.images[0].url"
+                    />
+                    <img
+                        *ngIf="!switchParseError.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "SWITCHERRORLOG.SWITCHERRORLOGDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="switchParseErrorLogForm"
+                    [formGroup]="switchParseErrorLogForm"
+                    class="switchParseError w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'SWITCHERRORLOG.SWITCHERRORLOGINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHERRORLOG.APPLICATIONID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="ApplicationId"
+                                            formControlName="ApplicationId"
+                                            [(value)]="
+                                                switchParseError.ApplicationId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let switchParseError of switchApplicationsList
+                                                "
+                                                [value]="switchParseError.Id"
+                                            >
+                                                {{
+                                                    switchParseError.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHERRORLOG.SESSIONID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="SessionId"
+                                            formControlName="SessionId"
+                                            [(value)]="
+                                                switchParseError.SessionId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let switchParseError of switchApplicationSessionList
+                                                "
+                                                [value]="switchParseError.Id"
+                                            >
+                                                {{
+                                                    switchParseError.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHERRORLOG.APPLICATIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHERRORLOG.APPLICATIONTYPE'
+                                                    | translate
+                                            }}"
+                                            name="ApplicationType"
+                                            formControlName="ApplicationType"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHERRORLOG.TRANSACTIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHERRORLOG.TRANSACTIONTYPE'
+                                                    | translate
+                                            }}"
+                                            name="TransactionType"
+                                            formControlName="TransactionType"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHERRORLOG.REMOTEIPADDRESS"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHERRORLOG.REMOTEIPADDRESS'
+                                                    | translate
+                                            }}"
+                                            name="RemoteIpAddress"
+                                            formControlName="RemoteIpAddress"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHERRORLOG.REMOTEPORT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHERRORLOG.REMOTEPORT'
+                                                    | translate
+                                            }}"
+                                            name="RemotePort"
+                                            formControlName="RemotePort"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHERRORLOG.LOCALIPADDRESS"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHERRORLOG.LOCALIPADDRESS'
+                                                    | translate
+                                            }}"
+                                            name="LocalIpAddress"
+                                            formControlName="LocalIpAddress"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHERRORLOG.LOCALPORT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHERRORLOG.LOCALPORT'
+                                                    | translate
+                                            }}"
+                                            name="LocalPort"
+                                            formControlName="LocalPort"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHERRORLOG.SERVERNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHERRORLOG.SERVERNAME'
+                                                    | translate
+                                            }}"
+                                            name="ServerName"
+                                            formControlName="ServerName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHERRORLOG.INSERTDATE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHERRORLOG.INSERTDATE'
+                                                    | translate
+                                            }}"
+                                            name="InsertDate"
+                                            formControlName="InsertDate"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHERRORLOG.HEXMESSAGE"
+                                                | translate
+                                        }}</mat-label>
+                                        <textarea
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHERRORLOG.HEXMESSAGE'
+                                                    | translate
+                                            }}"
+                                            name="HexMessage"
+                                            formControlName="HexMessage"
+                                            rows="3"
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

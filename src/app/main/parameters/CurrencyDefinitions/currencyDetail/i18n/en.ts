@@ -1,0 +1,30 @@
+export const locale = {
+    lang: "en",
+    data: {
+        CURRENCY: {
+            NEWCURRENCY: "New Currency",
+            CURRENCYDETAIL: "Currency Detail",
+            ADD: "ADD",
+            SAVE: "SAVE",
+            CURRENCYINFO: "Currency Information",
+            ISCRYPTOCURRENCY: "Is Crypto Currency",
+            CURRENCYCODE: "Currency Code",
+            CURRENCYCODENUMERIC: "Currency Code Numeric",
+            CURRENCYCODEEXTERNAL: "Currency Code External",
+            CURRENCYSYMBOL: "Currency Symbol",
+            COUNTRYNAME: "Country Name",
+            CURRENCYNAME: "Currency Name",
+            ICONURL: "Icon Url",
+            ISSETTLEMENTCURRENCY: "Is Settlement Currency",
+            CURRENCYSAVED: "Currency  Saved",
+            CURRENCYADDED: "Currency  Added",
+            OK: "OK",
+            CURRENCYCODEREQUIRED: "Currency Code Required",
+            CURRENCYNAMEREQUIRED: "Currency Name Required",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Please enter a valid information",
+            OK: "OK",
+        },
+    },
+};

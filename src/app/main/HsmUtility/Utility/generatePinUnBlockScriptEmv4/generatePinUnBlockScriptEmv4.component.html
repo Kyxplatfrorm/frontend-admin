@@ -1,0 +1,360 @@
+<div
+    id="generatePinUnBlockScriptEmv4"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{
+                        "PINUNBLOCKSCRIPTEMV4.GENERATEPINUNBLOCKSCRIPTEMV4"
+                            | translate
+                    }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="generatePinUnBlockScriptEmv4Form"
+                    [formGroup]="generatePinUnBlockScriptEmv4Form"
+                    class="generatePinUnBlockScriptEmv4 w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'PINUNBLOCKSCRIPTEMV4.GENERATEPINUNBLOCKSCRIPTEMV4TINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINUNBLOCKSCRIPTEMV4.MACKEYUNDERLMK"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINUNBLOCKSCRIPTEMV4.MACKEYUNDERLMK'
+                                                    | translate
+                                            }}"
+                                            name="MacKeyUnderLmk"
+                                            formControlName="MacKeyUnderLmk"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINUNBLOCKSCRIPTEMV4.SCHEMAID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINUNBLOCKSCRIPTEMV4.SCHEMAID'
+                                                    | translate
+                                            }}"
+                                            name="SchemaId"
+                                            formControlName="SchemaId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINUNBLOCKSCRIPTEMV4.CARDNUMBER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINUNBLOCKSCRIPTEMV4.CARDNUMBER'
+                                                    | translate
+                                            }}"
+                                            name="CardNumber"
+                                            formControlName="CardNumber"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINUNBLOCKSCRIPTEMV4.PANSEQUENCENUMBER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINUNBLOCKSCRIPTEMV4.PANSEQUENCENUMBER'
+                                                    | translate
+                                            }}"
+                                            name="PanSequenceNumber"
+                                            formControlName="PanSequenceNumber"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINUNBLOCKSCRIPTEMV4.ATC"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINUNBLOCKSCRIPTEMV4.ATC'
+                                                    | translate
+                                            }}"
+                                            name="Atc"
+                                            formControlName="Atc"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINUNBLOCKSCRIPTEMV4.ARQC"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINUNBLOCKSCRIPTEMV4.ARQC'
+                                                    | translate
+                                            }}"
+                                            name="Arqc"
+                                            formControlName="Arqc"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINUNBLOCKSCRIPTEMV4.MODEFLAG"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINUNBLOCKSCRIPTEMV4.MODEFLAG'
+                                                    | translate
+                                            }}"
+                                            name="ModeFlag"
+                                            formControlName="ModeFlag"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINUNBLOCKSCRIPTEMV4.BRANCHANDHEIGTHMODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINUNBLOCKSCRIPTEMV4.BRANCHANDHEIGTHMODE'
+                                                    | translate
+                                            }}"
+                                            name="BranchAndHeigthMode"
+                                            formControlName="BranchAndHeigthMode"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <button
+                                    style="margin-right: 10px"
+                                    mat-raised-button
+                                    class="save-generatePinUnBlockScriptEmv4-button"
+                                    (click)="ClearButton()"
+                                >
+                                    <span>{{
+                                        "PINUNBLOCKSCRIPTEMV4.CLEAR" | translate
+                                    }}</span>
+                                </button>
+                                <button
+                                    mat-raised-button
+                                    class="save-generatePinUnBlockScriptEmv4-button"
+                                    (click)="PinUnBlockScriptEmv4Button()"
+                                >
+                                    <span>{{
+                                        "PINUNBLOCKSCRIPTEMV4.PINUNBLOCKSCRIPTEMV41"
+                                            | translate
+                                    }}</span>
+                                </button>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                    style="margin-top: 60px"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINUNBLOCKSCRIPTEMV4.HSMERRORCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINUNBLOCKSCRIPTEMV4.HSMERRORCODE'
+                                                    | translate
+                                            }}"
+                                            name="HsmErrorCode"
+                                            formControlName="HsmErrorCode"
+                                            [(ngModel)]="generateHsmErrorCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINUNBLOCKSCRIPTEMV4.HSMERRORDESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINUNBLOCKSCRIPTEMV4.HSMERRORDESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="HsmErrorDescription"
+                                            formControlName="HsmErrorDescription"
+                                            [(ngModel)]="
+                                                generateHsmErrorDescription
+                                            "
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "PINUNBLOCKSCRIPTEMV4.ISSUERSCRIPT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'PINUNBLOCKSCRIPTEMV4.ISSUERSCRIPT'
+                                                    | translate
+                                            }}"
+                                            name="IssuerScript"
+                                            formControlName="IssuerScript"
+                                            [(ngModel)]="hsmIssuerScript"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

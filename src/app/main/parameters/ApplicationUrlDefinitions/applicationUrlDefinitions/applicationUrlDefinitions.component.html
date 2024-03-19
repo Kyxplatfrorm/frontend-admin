@@ -1,0 +1,255 @@
+<div
+    id="applicationUrlDefinitions"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-applicationUrl-button fuse-white mt-24 mr-35"
+                        (click)="SearchApplicationUrlDefinition()"
+                    >
+                        <span>{{ "APPLICATIONURL.SEARCH" | translate }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-applicationUrl-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "APPLICATIONURL.CLEAR" | translate }}
+                    </button>
+                    <!-- CLEAR BUTTON -->
+                    <!-- ADD BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        [routerLink]="'/searchApplicationUrlDefinitions/new'"
+                        class="add-applicationUrl-button fuse-white m-10"
+                    >
+                        {{ "APPLICATIONURL.ADD" | translate }}
+                    </button>
+                    <!-- ADD BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="applicationUrlDefinitionsForm"
+                    [formGroup]="applicationUrlDefinitionsForm"
+                    class="applicationUrl w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "APPLICATIONURL.SEARCHSTARTDATE" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="SearchStartDate"
+                                    formControlName="SearchStartDate"
+                                    [matDatepicker]="pickerSearchStartDate"
+                                    [(ngModel)]="applicationUrl.SearchStartDate"
+                                    (dateChange)="
+                                        onSearchStartDateChange($event)
+                                    "
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerSearchStartDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerSearchStartDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "APPLICATIONURL.SEARCHENDDATE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    [matDatepicker]="pickerSearchEndDate"
+                                    formControlName="SearchEndDate"
+                                    [(ngModel)]="applicationUrl.SearchEndDate"
+                                    (dateChange)="onSearchEndDateChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerSearchEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker
+                                    #pickerSearchEndDate
+                                ></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "APPLICATIONURL.TENANT" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TenantId"
+                                    formControlName="TenantId"
+                                    [(value)]="applicationUrl.TenantId"
+                                >
+                                    <mat-option
+                                        *ngFor="let applicationUrl of tenant"
+                                        [value]="applicationUrl.Id"
+                                    >
+                                        {{ applicationUrl.TenantName }}
+                                    </mat-option>
+                                </mat-select>
+                                <button
+                                    style="font-size: 13px"
+                                    *ngIf="applicationUrl.TenantId"
+                                    matSuffix
+                                    mat-icon-button
+                                    aria-label="Clear"
+                                    (click)="
+                                        applicationUrl.TenantId = undefined;
+                                        $event.stopPropagation()
+                                    "
+                                >
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "APPLICATIONURL.APPLICATIONTYPE" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="ApplicationTypeId"
+                                    formControlName="ApplicationTypeId"
+                                    [(value)]="applicationUrl.ApplicationTypeId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let applicationUrl of applicationType
+                                        "
+                                        [value]="applicationUrl.Id"
+                                    >
+                                        {{ applicationUrl.Description }}
+                                    </mat-option>
+                                </mat-select>
+                                <button
+                                    style="font-size: 13px"
+                                    *ngIf="applicationUrl.ApplicationTypeId"
+                                    matSuffix
+                                    mat-icon-button
+                                    aria-label="Clear"
+                                    (click)="
+                                        applicationUrl.ApplicationTypeId =
+                                            undefined;
+                                        $event.stopPropagation()
+                                    "
+                                >
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "APPLICATIONURL.URL" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'APPLICATIONURL.URL' | translate
+                                    }}"
+                                    name="Url"
+                                    formControlName="Url"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "APPLICATIONURL.DESCRIPTION" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'APPLICATIONURL.DESCRIPTION' | translate
+                                    }}"
+                                    name="Description"
+                                    formControlName="Description"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -1,0 +1,436 @@
+<div
+    id="schedulerInstantJobProfile"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Schedulers/SchedulerInstantJobProfiles/schedulerInstantJobProfiles'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="schedulerInstant-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="schedulerInstant.images[0]"
+                        [src]="schedulerInstant.images[0].url"
+                    />
+                    <img
+                        *ngIf="!schedulerInstant.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{
+                            "SCHEDULERINSTANTJOB.SCHEDULERINSTANTJOBPROFILE"
+                                | translate
+                        }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "SCHEDULERINSTANTJOB.SCHEDULERINSTANTJOBPROFILEDETAIL"
+                                | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-schedulerInstant-button"
+                [disabled]="
+                    schedulerInstantJobProfileForm.invalid ||
+                    schedulerInstantJobProfileForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateSchedulerInstantJobProfile()"
+            >
+                <span>{{ "SCHEDULERINSTANTJOB.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-schedulerInstant-button"
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateSchedulerInstantJobProfile()"
+            >
+                <span>{{ "SCHEDULERINSTANTJOB.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="schedulerInstantJobProfileForm"
+                    [formGroup]="schedulerInstantJobProfileForm"
+                    class="schedulerInstant w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'SCHEDULERINSTANTJOB.SCHEDULERINSTANTJOBPROFILEINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsTenantBasedJob"
+                                        formControlName="IsTenantBasedJob"
+                                        >{{
+                                            "SCHEDULERINSTANTJOB.ISTENANTBASEDJOB"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERINSTANTJOB.TENANT"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="
+                                                schedulerInstant.TenantId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let schedulerInstant of tenant
+                                                "
+                                                [value]="schedulerInstant.Id"
+                                            >
+                                                {{
+                                                    schedulerInstant.TenantName
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="schedulerInstant.TenantId"
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                onClearTenant();
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERINSTANTJOB.SCHEDULERJOBTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="SchedulerJobTypeId"
+                                            formControlName="SchedulerJobTypeId"
+                                            [(value)]="
+                                                schedulerInstant.SchedulerJobTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let schedulerInstant of schedulerJobTypes
+                                                "
+                                                [value]="schedulerInstant.Id"
+                                            >
+                                                {{
+                                                    schedulerInstant.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                schedulerInstant.SchedulerJobTypeId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                onClearSchedulerJobType();
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERINSTANTJOB.SERVERCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERINSTANTJOB.SERVERCODE'
+                                                    | translate
+                                            }}"
+                                            name="ServerCode"
+                                            formControlName="ServerCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERINSTANTJOB.DESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERINSTANTJOB.DESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERINSTANTJOB.PROFILECODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERINSTANTJOB.PROFILECODE'
+                                                    | translate
+                                            }}"
+                                            name="ProfileCode"
+                                            formControlName="ProfileCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERINSTANTJOB.APPLICATIONPARAMETER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERINSTANTJOB.APPLICATIONPARAMETER'
+                                                    | translate
+                                            }}"
+                                            name="ApplicationParameter"
+                                            formControlName="ApplicationParameter"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERINSTANTJOB.APPLICATIONPATH"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERINSTANTJOB.APPLICATIONPATH'
+                                                    | translate
+                                            }}"
+                                            name="ApplicationPath"
+                                            formControlName="ApplicationPath"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERINSTANTJOB.APPLICATIONNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERINSTANTJOB.APPLICATIONNAME'
+                                                    | translate
+                                            }}"
+                                            name="ApplicationName"
+                                            formControlName="ApplicationName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERINSTANTJOB.FULLCLASSNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERINSTANTJOB.FULLCLASSNAME'
+                                                    | translate
+                                            }}"
+                                            name="FullClassName"
+                                            formControlName="FullClassName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERINSTANTJOB.PROCEDURENAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERINSTANTJOB.PROCEDURENAME'
+                                                    | translate
+                                            }}"
+                                            name="ProcedureName"
+                                            formControlName="ProcedureName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERINSTANTJOB.METHODNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERINSTANTJOB.METHODNAME'
+                                                    | translate
+                                            }}"
+                                            name="MethodName"
+                                            formControlName="MethodName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

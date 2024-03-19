@@ -1,0 +1,25 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        APIPERMISSION: {
+            APIPERMISSIONPROFILEADDED: "Api İzin Profili Eklendi",
+            APIPERMISSIONPROFILESAVED: "Api İzin Profili Kaydedildi",
+            OK: "TAMAM",
+            NEWAPIPERMISSIONPROFILE: "Yeni Api İzin Profili",
+            APIPERMISSIONDETAIL1: "Api İzin Profil Detayı",
+            SEARCHTEXT: "Api izin profili arayınız",
+            ADD: "EKLE",
+            SAVE: "KAYDET",
+            APIPERMISSIONPROFILE: "Api İzin Profili",
+            PROFILENAME: "Profil İsmi",
+            PERMISSIONCHECKTYPE: "İzin Kontrol Tipi",
+            APIPERMISSIONDETAIL: "Api İzin Profil Detayı",
+            APIDEFINITIONNAME: "Api Tanım İsmi",
+            APILIMITPROFILENAME: "Api Limit Profil İsmi",
+            ISACTIVE: "Akfif mi",
+            REMOVE: "Sil",
+            USERTYPEID: "Kullanıcı Tipi",
+            TENANTID: "Tenant",
+        },
+    },
+};

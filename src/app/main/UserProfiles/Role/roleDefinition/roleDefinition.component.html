@@ -1,0 +1,246 @@
+<div id="roleDefinition" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="['/roleProduct', moduleId]"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <div
+                    class="roleDefinition-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img *ngIf="role.images[0]" [src]="role.images[0].url" />
+                    <img
+                        *ngIf="!role.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "ROLE.NEWROLE" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "ROLE.ROLEDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-80">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'ROLE.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-roleDefinition-button"
+                [disabled]="roleForm.invalid || roleForm.pristine"
+                *ngIf="pageType === 'new'"
+                (click)="CreateRole()"
+            >
+                <span>{{ "ROLE.ADD" | translate }}</span>
+            </button>
+            <button
+                mat-raised-button
+                class="save-roleDefinition-button"
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateRole()"
+            >
+                <span>{{ "ROLE.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="roleForm"
+                    [formGroup]="roleForm"
+                    class="role w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab label="{{ 'ROLE.ROLEINFO' | translate }}">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                    *ngIf="pageType === 'new'"
+                                >
+                                    <mat-label>{{
+                                        "ROLE.TENANT" | translate
+                                    }}</mat-label>
+                                    <mat-select
+                                        name="TenantId"
+                                        formControlName="TenantId"
+                                        [(value)]="role.TenantId"
+                                    >
+                                        <mat-option
+                                            *ngFor="
+                                                let role of tenantDefinition
+                                            "
+                                            [value]="role.Id"
+                                        >
+                                            {{ role.TenantName }}
+                                        </mat-option>
+                                    </mat-select>
+                                    <button
+                                        style="font-size: 13px"
+                                        *ngIf="role.TenantId"
+                                        matSuffix
+                                        mat-icon-button
+                                        aria-label="Clear"
+                                        (click)="
+                                            role.TenantId = undefined;
+                                            $event.stopPropagation()
+                                        "
+                                    >
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </mat-form-field>
+
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "ROLE.PRODUCTMODULEID" | translate
+                                    }}</mat-label>
+                                    <input
+                                        type="number"
+                                        matInput
+                                        placeholder="{{
+                                            'ROLE.PRODUCTMODULEID' | translate
+                                        }}"
+                                        name="ProductModuleId"
+                                        formControlName="ProductModuleId"
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "ROLE.ROLENAME" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'ROLE.ROLENAME' | translate
+                                        }}"
+                                        name="RoleName"
+                                        formControlName="RoleName"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="{{ 'ROLE.MENU' | translate }}">
+                            <mat-tree
+                                [dataSource]="dataSource"
+                                [treeControl]="treeControl"
+                            >
+                                <mat-tree-node
+                                    *matTreeNodeDef="let node"
+                                    matTreeNodeToggle
+                                    matTreeNodePadding
+                                >
+                                    <button mat-icon-button disabled></button>
+                                    <mat-checkbox
+                                        class="checklist-leaf-node"
+                                        [checked]="
+                                            checklistSelection.isSelected(node)
+                                        "
+                                        (change)="
+                                            todoLeafItemSelectionToggle(node)
+                                        "
+                                        >{{ node.name }}</mat-checkbox
+                                    >
+                                </mat-tree-node>
+
+                                <mat-tree-node
+                                    *matTreeNodeDef="let node; when: hasChild"
+                                    matTreeNodePadding
+                                >
+                                    <button
+                                        mat-icon-button
+                                        matTreeNodeToggle
+                                        [attr.aria-label]="
+                                            'Toggle ' + node.name
+                                        "
+                                    >
+                                        <mat-icon class="mat-icon-rtl-mirror">
+                                            {{
+                                                treeControl.isExpanded(node)
+                                                    ? "expand_more"
+                                                    : "chevron_right"
+                                            }}
+                                        </mat-icon>
+                                    </button>
+                                    <mat-checkbox
+                                        [checked]="descendantsAllSelected(node)"
+                                        [indeterminate]="
+                                            descendantsPartiallySelected(node)
+                                        "
+                                        (change)="todoItemSelectionToggle(node)"
+                                        >{{ node.name }}</mat-checkbox
+                                    >
+                                </mat-tree-node>
+                            </mat-tree>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

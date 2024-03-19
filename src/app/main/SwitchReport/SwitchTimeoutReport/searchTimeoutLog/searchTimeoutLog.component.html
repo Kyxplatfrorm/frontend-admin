@@ -1,0 +1,361 @@
+<div id="searchTimeoutLog" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/SwitchReport/SwitchTimeoutReport/switchTimeoutLogs'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "SWITCHTIMEOUT.SWITCHTIMEOUTLOG" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'SWITCHTIMEOUT.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="searchTimeoutLogs-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="searchSwitchTimeoutLogDataSource"
+            >
+                <!-- Id Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">{{ switchTimeout.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ApplicationName Column -->
+                <ng-container matColumnDef="ApplicationName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.APPLICATIONNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.ApplicationName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- SessionName Column -->
+                <ng-container matColumnDef="SessionName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.SESSIONNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.SessionName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ApplicationType Column -->
+                <ng-container matColumnDef="ApplicationType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.APPLICATIONTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.ApplicationType }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- TransactionType Column -->
+                <ng-container matColumnDef="TransactionType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.TRANSACTIONTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.TransactionType }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- CardTokenNumber Column -->
+                <ng-container matColumnDef="CardTokenNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.CARDTOKENNUMBER" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.CardTokenNumber }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- Mti Column -->
+                <ng-container matColumnDef="Mti">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.MTI" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.Mti }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- Rrn Column -->
+                <ng-container matColumnDef="Rrn">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.RRN" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.Rrn }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- AcquirerId Column -->
+                <ng-container matColumnDef="AcquirerId">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.ACQUIRERID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.AcquirerId }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- MerchantCode Column -->
+                <ng-container matColumnDef="MerchantCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.MERCHANTCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.MerchantCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- TerminalId Column -->
+                <ng-container matColumnDef="TerminalId">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.TERMINALID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.TerminalId }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- TransactionAmount Column -->
+                <ng-container matColumnDef="TransactionAmount">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.TRANSACTIONAMOUNT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.TransactionAmount }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- TransactionCurrencyCode Column -->
+                <ng-container matColumnDef="TransactionCurrencyCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.TRANSACTIONCURRENCYCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.TransactionCurrencyCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TxnDescription Column -->
+                <ng-container matColumnDef="TxnDescription">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.TXNDESCRIPTION" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.TxnDescription }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- AuthorizationCode Column -->
+                <ng-container matColumnDef="AuthorizationCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.AUTHORIZATIONCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.AuthorizationCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ProcessingCode Column -->
+                <ng-container matColumnDef="ProcessingCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.PROCESSINGCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.ProcessingCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- ServerName Column -->
+                <ng-container matColumnDef="ServerName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.SERVERNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.ServerName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- RemoteIpAddress Column -->
+                <ng-container matColumnDef="RemoteIpAddress">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.REMOTEIPADDRESS" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.RemoteIpAddress }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- LocalIpAddress Column -->
+                <ng-container matColumnDef="LocalIpAddress">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHTIMEOUT.LOCALIPADDRESS" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchTimeout">
+                        <p class="text-truncate">
+                            {{ switchTimeout.LocalIpAddress }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "SWITCHTIMEOUT.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let switchTimeout"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                switchTimeout.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let switchTimeout; columns: displayedColumns"
+                    class="searchTimeoutLog"
+                    [routerLink]="['/searchTimeoutLog', switchTimeout.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <button
+                style="margin-bottom: 50px"
+                mat-fab
+                class="switchTimeout-button"
+                id="add-switchTimeout-button"
+                (click)="exportToExcel()"
+                aria-label="add switchTimeout"
+                [@animate]="{
+                    value: '*',
+                    params: { delay: '300ms', scale: '.2' }
+                }"
+            >
+                <mat-icon>vertical_align_bottom</mat-icon>
+            </button>
+
+            <mat-paginator
+                #paginator
+                [length]="searchSwitchTimeoutLogDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

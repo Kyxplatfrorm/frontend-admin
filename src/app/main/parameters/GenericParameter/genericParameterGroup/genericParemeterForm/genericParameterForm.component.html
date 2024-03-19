@@ -1,0 +1,112 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="genericParameterForm">
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{
+                        "GENERICPARAMETER.PARAMETERKEY" | translate
+                    }}</mat-label>
+
+                    <input
+                        name="ParameterKey"
+                        formControlName="ParameterKey"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{
+                        "GENERICPARAMETER.PARAMETERVALUE" | translate
+                    }}</mat-label>
+
+                    <input
+                        name="ParameterValue"
+                        formControlName="ParameterValue"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{
+                        "GENERICPARAMETER.PARAMETERVALUE1" | translate
+                    }}</mat-label>
+
+                    <input
+                        name="ParameterValue1"
+                        formControlName="ParameterValue1"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{
+                        "GENERICPARAMETER.DESCRIPTION" | translate
+                    }}</mat-label>
+
+                    <input
+                        name="Description"
+                        formControlName="Description"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', genericParameterForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "GENERICPARAMETER.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(genericParameterForm)"
+            [disabled]="genericParameterForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "GENERICPARAMETER.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', genericParameterForm])"
+            [disabled]="genericParameterForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "GENERICPARAMETER.SAVE" | translate }}
+        </button>
+    </div>
+</div>

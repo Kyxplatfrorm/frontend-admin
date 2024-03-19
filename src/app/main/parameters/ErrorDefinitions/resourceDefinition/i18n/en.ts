@@ -1,0 +1,30 @@
+export const locale = {
+    lang: "en",
+    data: {
+        RESOURCE: {
+            NEWERROR: "New Error Definition",
+            ERRORDETAIL: "Error Definition Detail",
+            SAVE: "SAVE",
+            ADD: "ADD",
+            ERRORINFO: "Error Information",
+            ERRORCODE: "Error Code",
+            NUMERICERRORCODE: "Numeric Error Code",
+            ERRORDESCRIPTION: "Error Description",
+            RESOURCE: "Resource",
+            LANGUAGE: "Language",
+            REMOVE: "Remove",
+            DESCRIPTION: "Description",
+            DELETE: "DELETE",
+            RESOURCEADDED: "Error Added",
+            RESOURCESAVED: "Error Saved",
+            OK: "OK",
+            ERRORID: "Error Id",
+            ID: "Id",
+            SEARCHTEXT: "Search for a resource",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Please enter a valid information",
+            OK: "OK",
+        },
+    },
+};

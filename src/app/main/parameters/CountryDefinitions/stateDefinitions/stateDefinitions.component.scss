@@ -1,0 +1,135 @@
+#stateDefinitions {
+    .header {
+        .state-image {
+            overflow: hidden;
+            width: 56px;
+            min-width: 56px;
+            max-width: 56px;
+            height: 56px;
+            min-height: 56px;
+            max-height: 56px;
+            border-radius: 4px;
+            img {
+                height: 100%;
+                width: auto;
+                max-width: none;
+            }
+        }
+        .subtitle {
+            margin: 6px 0 0 0;
+        }
+    }
+    .search-wrapper {
+        width: 100%;
+        max-width: 480px;
+        border-radius: 28px;
+        overflow: hidden;
+
+        .search {
+            width: 100%;
+            height: 48px;
+            line-height: 48px;
+            padding: 0 18px;
+            background-color: white;
+            color: gray;
+
+            input {
+                width: 100%;
+                height: 48px;
+                min-height: 48px;
+                max-height: 48px;
+                padding: 0 16px;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+    .states-table {
+        flex: 1 1 auto;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        .mat-header-row {
+            min-height: 64px;
+        }
+        .state {
+            position: relative;
+            cursor: pointer;
+            height: 84px;
+        }
+        .mat-cell {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+        }
+        .mat-column-Id {
+            flex: 0 1 100px;
+            justify-content: center;
+        }
+        .mat-column-CountryCode {
+            flex: 0 1 900px;
+            justify-content: center;
+        }
+
+        .mat-column-StateCode {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+
+        .mat-column-StateAlphaCode {
+            flex: 0 1 700px;
+            justify-content: center;
+        }
+        .mat-column-StateName {
+            flex: 0 1 500px;
+            justify-content: center;
+        }
+        .mat-column-Buttons {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+    }
+    .content {
+        .mat-tab-group,
+        .mat-tab-body-wrapper,
+        .tab-content {
+            flex: 1 1 auto;
+            max-width: 100%;
+        }
+        .mat-tab-body-content {
+            display: flex;
+        }
+        .mat-tab-label {
+            height: 64px;
+        }
+        .state-image {
+            overflow: hidden;
+            width: 128px;
+            height: 128px;
+            margin-right: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            img {
+                height: 100%;
+                width: auto;
+                max-width: none;
+            }
+        }
+        .checkbox {
+            margin-bottom: 20px;
+        }
+
+        // Temporary prefix alignment fix
+        .mat-form-field-appearance-outline .mat-form-field-prefix,
+        .mat-form-field-appearance-outline .mat-form-field-suffix {
+            top: 0;
+        }
+    }
+}
+#add-state-button {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    padding: 0;
+    z-index: 99;
+}

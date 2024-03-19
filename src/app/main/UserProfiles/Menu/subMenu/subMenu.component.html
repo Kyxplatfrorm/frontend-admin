@@ -1,0 +1,449 @@
+<div id="subMenus" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="['/menuProduct', menuModuleId]"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="menu-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img *ngIf="menu.images[0]" [src]="menu.images[0].url" />
+                    <img
+                        *ngIf="!menu.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "MENU.NEWMENU" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "MENU.MENUDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'MENU.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-menu-button"
+                [disabled]="subMenuForm.invalid || subMenuForm.pristine"
+                *ngIf="pageType === 'new'"
+                (click)="CreateMenu()"
+            >
+                <span>{{ "MENU.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-menu-button"
+                [disabled]="subMenuForm.invalid || subMenuForm.pristine"
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateMenu()"
+            >
+                <span>{{ "MENU.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="subMenuForm"
+                    [formGroup]="subMenuForm"
+                    class="menu w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab label="{{ 'MENU.MENU' | translate }}">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "MENU.MENUORDER" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'MENU.MENUORDER' | translate
+                                        }}"
+                                        name="MenuOrder"
+                                        formControlName="MenuOrder"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "MENU.MENUCODE" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'MENU.MENUCODE' | translate
+                                        }}"
+                                        name="MenuCode"
+                                        formControlName="MenuCode"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "MENU.MENUNAME" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'MENU.MENUNAME' | translate
+                                        }}"
+                                        name="MenuName"
+                                        formControlName="MenuName"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "MENU.TRANSLATEKEY" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'MENU.TRANSLATEKEY' | translate
+                                        }}"
+                                        name="TranslateKey"
+                                        formControlName="TranslateKey"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasParentMenu"
+                                        formControlName="HasParentMenu"
+                                        [(ngModel)]="menu.HasParentMenu"
+                                        >{{
+                                            "MENU.HASPARENTMENU" | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                    *ngIf="menu.HasParentMenu"
+                                >
+                                    <mat-label>{{
+                                        "MENU.PARENTMENUID" | translate
+                                    }}</mat-label>
+                                    <mat-select
+                                        placeholder="{{
+                                            'MENU.PARENTMENUID' | translate
+                                        }}"
+                                        name="ParentMenuId"
+                                        formControlName="ParentMenuId"
+                                        [(value)]="menu.ParentMenuId"
+                                    >
+                                        <mat-option
+                                            *ngFor="let menu of parentMenu"
+                                            [value]="menu.Id"
+                                        >
+                                            {{ menu.Description }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="{{ 'MENU.SUBMENU' | translate }}">
+                            <mat-table
+                                class="subMenus-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                [dataSource]="subMenuDataSource"
+                            >
+                                <!-- MenuOrder Column -->
+                                <ng-container matColumnDef="MenuOrder">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "MENU.MENUORDER" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let menu">
+                                        <p class="text-truncate">
+                                            {{ menu.MenuOrder }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- MenuCode Column -->
+                                <ng-container matColumnDef="MenuCode">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "MENU.MENUCODE" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let menu">
+                                        <p class="text-truncate">
+                                            {{ menu.MenuCode }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- MenuName Column -->
+                                <ng-container matColumnDef="MenuName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "MENU.MENUNAME" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let menu">
+                                        <p class="text-truncate">
+                                            {{ menu.MenuName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- TranslateKey Column -->
+                                <ng-container matColumnDef="TranslateKey">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "MENU.TRANSLATEKEY" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let menu">
+                                        <p class="text-truncate">
+                                            {{ menu.TranslateKey }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- MenuIcon Column -->
+                                <ng-container matColumnDef="MenuIcon">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "MENU.MENUICON" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let menu">
+                                        <p class="text-truncate">
+                                            {{ menu.MenuIcon }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- MenuUrl Column -->
+                                <ng-container matColumnDef="MenuUrl">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "MENU.MENUURL" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let menu">
+                                        <p class="text-truncate">
+                                            {{ menu.MenuUrl }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- ControllerName Column -->
+                                <ng-container matColumnDef="ControllerName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "MENU.CONTROLLERNAME" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let menu">
+                                        <p class="text-truncate">
+                                            {{ menu.ControllerName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- RelatedControllerName Column -->
+                                <ng-container
+                                    matColumnDef="RelatedControllerName"
+                                >
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "MENU.RELATEDCONTROLLERNAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let menu">
+                                        <p class="text-truncate">
+                                            {{ menu.RelatedControllerName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell *matCellDef="let menu">
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteSubMenu(menu)
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "MENU.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                    fusePerfectScrollbar
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let menu;
+                                        columns: displayedColumns
+                                    "
+                                    class="menu"
+                                    (click)="EditMenu(menu)"
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="menu-button"
+                                id="add-menu-button"
+                                (click)="NewForm()"
+                                aria-label="add menu"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="subMenuDataSource.filteredData?.length"
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

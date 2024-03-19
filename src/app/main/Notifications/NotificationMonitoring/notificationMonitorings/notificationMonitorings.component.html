@@ -1,0 +1,306 @@
+<div
+    id="notificationMonitorings"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{
+                        "NOTIFICATIONMONITORING.NOTIFICATIONMONITORINGDEFINITON"
+                            | translate
+                    }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'NOTIFICATIONMONITORING.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button
+                mat-raised-button
+                [routerLink]="'/notificationMonitorings/new'"
+                class="add-notificationMonitoring-button fuse-white mt-24 mt-md-0"
+            >
+                <span>{{ "NOTIFICATIONMONITORING.ADD" | translate }}</span>
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="notificationMonitorings-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="notificationMonitoringsDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "NOTIFICATIONMONITORING.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let notificationMonitoring">
+                        <p class="text-truncate">
+                            {{ notificationMonitoring.Id }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TenantName Column -->
+                <ng-container matColumnDef="TenantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "NOTIFICATIONMONITORING.TENANTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let notificationMonitoring">
+                        <p class="text-truncate">
+                            {{ notificationMonitoring.TenantName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- CustomerName Column -->
+                <ng-container matColumnDef="CustomerName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "NOTIFICATIONMONITORING.CUSTOMERNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let notificationMonitoring">
+                        <p class="text-truncate">
+                            {{ notificationMonitoring.CustomerName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- NotificationTypeName Column -->
+                <ng-container matColumnDef="NotificationTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "NOTIFICATIONMONITORING.NOTIFICATIONTYPENAME"
+                            | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let notificationMonitoring">
+                        <p class="text-truncate">
+                            {{ notificationMonitoring.NotificationTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- LanguageCodeName Column -->
+                <ng-container matColumnDef="LanguageCodeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "NOTIFICATIONMONITORING.LANGUAGECODENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let notificationMonitoring">
+                        <p class="text-truncate">
+                            {{ notificationMonitoring.LanguageCodeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ReceiverAddress Column -->
+                <ng-container matColumnDef="ReceiverAddress">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "NOTIFICATIONMONITORING.RECEIVERADDRESS" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let notificationMonitoring">
+                        <p class="text-truncate">
+                            {{ notificationMonitoring.ReceiverAddress }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Subject Column -->
+                <ng-container matColumnDef="Subject">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "NOTIFICATIONMONITORING.SUBJECT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let notificationMonitoring">
+                        <p class="text-truncate">
+                            {{ notificationMonitoring.Subject }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- SentStatusName Column -->
+                <ng-container matColumnDef="SentStatusName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "NOTIFICATIONMONITORING.SENTSTATUSNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let notificationMonitoring">
+                        <p class="text-truncate">
+                            {{ notificationMonitoring.SentStatusName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "NOTIFICATIONMONITORING.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let notificationMonitoring"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                notificationMonitoring.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-sm
+                        >{{
+                            "NOTIFICATIONMONITORING.UPDATEDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let notificationMonitoring"
+                        fxHide
+                        fxShow.gt-xs
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                notificationMonitoring.UpdateDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss"
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let notificationMonitoring">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="
+                                        DeleteNotificationMonitoring(
+                                            notificationMonitoring
+                                        )
+                                    "
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                    <span
+                                        >{{
+                                            "NOTIFICATIONMONITORING.REMOVE"
+                                                | translate
+                                        }}
+                                    </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="
+                        let notificationMonitoring;
+                        columns: displayedColumns
+                    "
+                    class="notificationMonitoring"
+                    [routerLink]="[
+                        '/notificationMonitorings',
+                        notificationMonitoring.Id
+                    ]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="notificationMonitoringsDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

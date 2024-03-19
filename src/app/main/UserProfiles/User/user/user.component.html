@@ -1,0 +1,698 @@
+<div id="user" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/UserProfiles/User/searchUser'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="user-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img *ngIf="user.images[0]" [src]="user.images[0].url" />
+                    <img
+                        *ngIf="!user.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/country-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "USER.USERDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'USER.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-user-button"
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateUser()"
+            >
+                <span>{{ "USER.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="userForm"
+                    [formGroup]="userForm"
+                    class="user w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab label="{{ 'USER.USERINFO' | translate }}">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="user mb-20" fxLayout="column">
+                                    <div class="avatar-container">
+                                        <img
+                                            class="avatar"
+                                            src="assets/images/avatars/Velazquez.jpg"
+                                        />
+                                        <div class="upload">
+                                            <div class="round">
+                                                <input type="file" />
+                                                <mat-icon>camera_alt</mat-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.USERNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.USERNAME' | translate
+                                            }}"
+                                            name="UserName"
+                                            formControlName="UserName"
+                                            readonly
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.USERFULLNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.USERFULLNAME' | translate
+                                            }}"
+                                            name="UserFullName"
+                                            formControlName="UserFullName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.USERTYPEID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="UserTypeId"
+                                            formControlName="UserTypeId"
+                                            [(value)]="user.UserTypeId"
+                                            placeholder="{{
+                                                'USER.USERTYPEID' | translate
+                                            }}"
+                                            [disabled]="true"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let user of userTypeList
+                                                "
+                                                [value]="user.Id"
+                                            >
+                                                {{ user.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.USERSTATUSID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="UserStatusId"
+                                            formControlName="UserStatusId"
+                                            [(value)]="user.UserStatusId"
+                                            placeholder="{{
+                                                'USER.USERSTATUSID' | translate
+                                            }}"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let user of userStatusList
+                                                "
+                                                [value]="user.Id"
+                                            >
+                                                {{ user.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.UTCTIMEOFFSET" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.UTCTIMEOFFSET' | translate
+                                            }}"
+                                            name="UtcTimeOffset"
+                                            formControlName="UtcTimeOffset"
+                                        />
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.TENANTID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="user.TenantId"
+                                            placeholder="{{
+                                                'USER.TENANTID' | translate
+                                            }}"
+                                        >
+                                            <mat-option
+                                                *ngFor="let user of tenantList"
+                                                [value]="user.Id"
+                                            >
+                                                {{ user.TenantName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.USERPORFILEID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="UserProfileId"
+                                            formControlName="UserProfileId"
+                                            [(value)]="user.UserProfileId"
+                                            placeholder="{{
+                                                'USER.USERPORFILEID' | translate
+                                            }}"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let user of userProfileList
+                                                "
+                                                [value]="user.Id"
+                                            >
+                                                {{ user.ProfileCode }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.EMAIL" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.EMAIL' | translate
+                                            }}"
+                                            name="Email"
+                                            formControlName="Email"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.INTERNATIONALPHONECODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.INTERNATIONALPHONECODE'
+                                                    | translate
+                                            }}"
+                                            name="InternationalPhoneCode"
+                                            formControlName="InternationalPhoneCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.PHONENUMBER" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.PHONENUMBER' | translate
+                                            }}"
+                                            name="PhoneNumber"
+                                            formControlName="PhoneNumber"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="MustChangePwd"
+                                        formControlName="MustChangePwd"
+                                        fxFlex="52"
+                                        >{{
+                                            "USER.MUSTCHANGEPWD" | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.CUSTOMERTYPEID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="CustomerTypeId"
+                                            formControlName="CustomerTypeId"
+                                            [(value)]="user.CustomerTypeId"
+                                            placeholder="{{
+                                                'USER.CUSTOMERTYPEID'
+                                                    | translate
+                                            }}"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let user of customerTypeList
+                                                "
+                                                [value]="user.Id"
+                                            >
+                                                {{ user.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.CUSTOMERID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.CUSTOMERID' | translate
+                                            }}"
+                                            name="CustomerId"
+                                            formControlName="CustomerId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.COMPANYID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            type="number"
+                                            placeholder="{{
+                                                'USER.COMPANYID' | translate
+                                            }}"
+                                            name="CompanyId"
+                                            formControlName="CompanyId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.PASSWORDRESETDATETIME"
+                                                | translate
+                                        }}</mat-label>
+
+                                        <input
+                                            matInput
+                                            name="PasswordResetDateTime"
+                                            formControlName="PasswordResetDateTime"
+                                            [matDatepicker]="
+                                                pickerPasswordResetDate
+                                            "
+                                            [(ngModel)]="datePasswordResetDate"
+                                            value="PasswordResetDateTime"
+                                        />
+
+                                        <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="pickerPasswordResetDate"
+                                        >
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker
+                                            #pickerPasswordResetDate
+                                        >
+                                        </mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.WRONGATTEMPTCOUNT" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.WRONGATTEMPTCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="WrongAttemptCount"
+                                            formControlName="WrongAttemptCount"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.LOGINMETHODTYPEID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="LoginMethodTypeId"
+                                            formControlName="LoginMethodTypeId"
+                                            [(value)]="user.LoginMethodTypeId"
+                                            placeholder="{{
+                                                'USER.LOGINMETHODTYPEID'
+                                                    | translate
+                                            }}"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let user of loginMethodType
+                                                "
+                                                [value]="user.Id"
+                                            >
+                                                {{ user.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="ForceTwoFormFactorAuth"
+                                        formControlName="ForceTwoFormFactorAuth"
+                                        fxFlex="52"
+                                        [(ngModel)]="
+                                            user.ForceTwoFormFactorAuth
+                                        "
+                                        >{{
+                                            "USER.FORCETWOFORMFACTORAUTH"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="user.ForceTwoFormFactorAuth"
+                                    >
+                                        <mat-label>{{
+                                            "USER.TWOFORMFACTORAUTHTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TwoFormFactorAuthTypeId"
+                                            formControlName="TwoFormFactorAuthTypeId"
+                                            [(value)]="
+                                                user.TwoFormFactorAuthTypeId
+                                            "
+                                            placeholder="{{
+                                                'USER.TWOFORMFACTORAUTHTYPE'
+                                                    | translate
+                                            }}"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let user of twoFormFactorAuthType
+                                                "
+                                                [value]="user.Id"
+                                            >
+                                                {{ user.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="{{ 'USER.USERROLE' | translate }}">
+                            <div class="checkboxlist">
+                                <section
+                                    class="sectioncheckboxlist"
+                                    *ngFor="let user of roleList"
+                                >
+                                    <mat-checkbox
+                                        (change)="
+                                            UpdateSelectedRoles($event, user.Id)
+                                        "
+                                        [checked]="user.IsChecked"
+                                        class="sectioncheckbox"
+                                        [(value)]="user.Id"
+                                    >
+                                        {{ user.RoleName }}</mat-checkbox
+                                    >
+                                </section>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="{{ 'USER.IPRESTRICTION' | translate }}">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <div class="box">
+                                        <mat-checkbox
+                                            name="HasIpRestriction"
+                                            formControlName="HasIpRestriction"
+                                            [(ngModel)]="user.HasIpRestriction"
+                                            >{{
+                                                "USER.HASIPRESTRICTION"
+                                                    | translate
+                                            }}</mat-checkbox
+                                        >
+                                    </div>
+                                </div>
+                                <div fxLayout="row">
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        fxFlex="48"
+                                        *ngIf="user.HasIpRestriction"
+                                    >
+                                        <mat-label>{{
+                                            "USER.IPADDRESS" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.IPADDRESS' | translate
+                                            }}"
+                                            name="IpAddress"
+                                            formControlName="IpAddress"
+                                            #ipAddressInput
+                                            (input)="formatIpAddress($event)"
+                                        />
+                                    </mat-form-field>
+
+                                    <button
+                                        *ngIf="user.HasIpRestriction"
+                                        mat-raised-button
+                                        style="
+                                            height: 56px;
+                                            margin-top: 5px;
+                                            margin-left: 10px;
+                                            background-color: #607d8b;
+                                            color: white;
+                                        "
+                                        (click)="
+                                            addIpAddress(
+                                                userForm.controls['IpAddress']
+                                                    .value
+                                            )
+                                        "
+                                    >
+                                        <span>{{
+                                            "USER.ADD" | translate
+                                        }}</span>
+                                    </button>
+                                </div>
+                                <mat-selection-list
+                                    *ngIf="user.HasIpRestriction"
+                                >
+                                    <ng-container
+                                        *ngFor="
+                                            let user of permittedIpAddressList;
+                                            let i = index
+                                        "
+                                    >
+                                        <mat-list-option>
+                                            <div fxLayout="row">
+                                                <div
+                                                    fxFlex="90"
+                                                    style="margin-top: 10px"
+                                                >
+                                                    {{ user }}
+                                                </div>
+                                                <button
+                                                    mat-icon-button
+                                                    (click)="clearIpAddress(i)"
+                                                >
+                                                    <mat-icon>clear</mat-icon>
+                                                </button>
+                                            </div>
+                                        </mat-list-option>
+                                    </ng-container>
+                                </mat-selection-list>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -1,0 +1,191 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="switchMessageProfileForm">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHMESSAGE.NETWORKMESSAGETYPE" | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="NetworkMessageTypeId"
+                        formControlName="NetworkMessageTypeId"
+                        [(ngModel)]="switchMessageProfile.NetworkMessageTypeId"
+                        [(value)]="switchMessageProfile.NetworkMessageTypeId"
+                    >
+                        <mat-option
+                            *ngFor="
+                                let switchMessageProfile of switchNetworkMessageType
+                            "
+                            [value]="switchMessageProfile.Id"
+                        >
+                            {{ switchMessageProfile.Description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHMESSAGE.NETWORKTYPE" | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="NetworkTypeId"
+                        formControlName="NetworkTypeId"
+                        [(ngModel)]="switchMessageProfile.NetworkTypeId"
+                        [(value)]="switchMessageProfile.NetworkTypeId"
+                        disabled
+                    >
+                        <mat-option
+                            *ngFor="let switchMessageProfile of netWorkType"
+                            [value]="switchMessageProfile.Id"
+                        >
+                            {{ switchMessageProfile.Description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHMESSAGE.REQUESTMTI" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'SWITCHMESSAGE.REQUESTMTI' | translate
+                        }}"
+                        name="RequestMti"
+                        formControlName="RequestMti"
+                    />
+                </mat-form-field>
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHMESSAGE.RESPONSEMTI" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'SWITCHMESSAGE.RESPONSEMTI' | translate
+                        }}"
+                        name="ResponseMti"
+                        formControlName="ResponseMti"
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHMESSAGE.REQUESTMESSAGEPROFILE" | translate
+                    }}</mat-label>
+                    <textarea
+                        matInput
+                        placeholder="{{
+                            'SWITCHMESSAGE.REQUESTMESSAGEPROFILE' | translate
+                        }}"
+                        name="RequestMessageProfile"
+                        formControlName="RequestMessageProfile"
+                        rows="10"
+                    >
+                    </textarea>
+                </mat-form-field>
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHMESSAGE.RESPONSEMESSAGEPROFILE" | translate
+                    }}</mat-label>
+                    <textarea
+                        matInput
+                        placeholder="{{
+                            'SWITCHMESSAGE.RESPONSEMESSAGEPROFILE' | translate
+                        }}"
+                        name="ResponseMessageProfile"
+                        formControlName="ResponseMessageProfile"
+                        rows="10"
+                    >
+                    </textarea>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', switchMessageProfileForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "SWITCHMESSAGE.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(switchMessageProfileForm)"
+            [disabled]="switchMessageProfileForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "SWITCHMESSAGE.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', switchMessageProfileForm])"
+            [disabled]="switchMessageProfileForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "SWITCHMESSAGE.SAVE" | translate }}
+        </button>
+    </div>
+</div>

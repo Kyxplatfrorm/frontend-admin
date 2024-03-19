@@ -1,0 +1,135 @@
+<div
+    id="environmentDefinitions"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-environmentDefinition-button fuse-white mt-24 mr-35"
+                        (click)="UpdateEnvironmentDefinition()"
+                    >
+                        <span>{{ "ENVIRONMENT.UPDATE" | translate }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="environmentDefinitionsForm"
+                    [formGroup]="environmentDefinitionsForm"
+                    class="environmentDefinition w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div class="checkbox">
+                            <mat-checkbox
+                                name="IsProduction"
+                                formControlName="IsProduction"
+                                >{{
+                                    "ENVIRONMENT.ISPRODUCTION" | translate
+                                }}</mat-checkbox
+                            >
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "ENVIRONMENT.ENVIRONMENTTYPEID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="EnvironmentTypeId"
+                                    formControlName="EnvironmentTypeId"
+                                    [(value)]="
+                                        environmentDefinition.EnvironmentTypeId
+                                    "
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let environmentDefinition of environmentType
+                                        "
+                                        [value]="environmentDefinition.Id"
+                                    >
+                                        {{ environmentDefinition.Description }}
+                                    </mat-option>
+                                </mat-select>
+                                <button
+                                    style="font-size: 13px"
+                                    *ngIf="
+                                        environmentDefinition.EnvironmentTypeId
+                                    "
+                                    matSuffix
+                                    mat-icon-button
+                                    aria-label="Clear"
+                                    (click)="
+                                        environmentDefinition.EnvironmentTypeId =
+                                            undefined;
+                                        $event.stopPropagation()
+                                    "
+                                >
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "ENVIRONMENT.DESCRIPTION" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ENVIRONMENT.DESCRIPTION' | translate
+                                    }}"
+                                    name="Description"
+                                    formControlName="Description"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / CENTER -->
+</div>

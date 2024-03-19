@@ -1,0 +1,158 @@
+#user {
+    .header {
+        .user-image {
+            overflow: hidden;
+            width: 56px;
+            min-width: 56px;
+            max-width: 56px;
+            height: 56px;
+            min-height: 56px;
+            max-height: 56px;
+            border-radius: 4px;
+            img {
+                height: 100%;
+                width: auto;
+                max-width: none;
+            }
+        }
+        .subtitle {
+            margin: 6px 0 0 0;
+        }
+    }
+    .search-wrapper {
+        width: 100%;
+        max-width: 480px;
+        border-radius: 28px;
+        overflow: hidden;
+
+        .search {
+            width: 100%;
+            height: 48px;
+            line-height: 48px;
+            padding: 0 18px;
+            background-color: white;
+            color: gray;
+
+            input {
+                width: 100%;
+                height: 48px;
+                min-height: 48px;
+                max-height: 48px;
+                padding: 0 16px;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+    .content {
+        .mat-tab-group,
+        .mat-tab-body-wrapper,
+        .tab-content {
+            flex: 1 1 auto;
+            max-width: 100%;
+        }
+        .upload {
+            width: 85px;
+            position: relative;
+        }
+
+        .upload .round {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: gray;
+            width: 32px;
+            height: 25px;
+            line-height: 33px;
+            text-align: center;
+            border-radius: 50%;
+            overflow: hidden;
+            visibility: hidden;
+        }
+
+        .upload .round input[type="file"] {
+            position: absolute;
+            transform: scale(2);
+            opacity: 0;
+        }
+
+        input[type="file"]::-webkit-file-upload-button {
+            cursor: pointer;
+        }
+
+        .mat-tab-body-content {
+            display: flex;
+        }
+
+        .mat-tab-label {
+            height: 64px;
+        }
+        .user-image {
+            overflow: hidden;
+            width: 128px;
+            height: 128px;
+            margin-right: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            img {
+                height: 100%;
+                width: auto;
+                max-width: none;
+            }
+        }
+        .checkbox {
+            margin-bottom: 20px;
+        }
+        .sectioncheckboxlist {
+            display: flex;
+            align-content: center;
+            align-items: center;
+            height: 30px;
+        }
+
+        .checkboxlist {
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+
+        .user {
+            .avatar-container {
+                .avatar {
+                    width: 70px;
+                    height: 70px;
+                }
+            }
+        }
+
+        .navbar-content {
+            padding-top: 0;
+
+            // Material 2 specific style
+            .material2 {
+                .nav-item {
+                    .nav-link {
+                        border-radius: 20px;
+                        margin: 0 12px;
+                        padding: 0 12px;
+                    }
+                }
+            }
+        }
+
+        // Temporary prefix alignment fix
+        .mat-form-field-appearance-outline .mat-form-field-prefix,
+        .mat-form-field-appearance-outline .mat-form-field-suffix {
+            top: 0;
+        }
+    }
+}
+#add-user-button {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    padding: 0;
+    z-index: 99;
+}
+mat-list-option .mat-pseudo-checkbox {
+    display: none;
+}

@@ -1,0 +1,27 @@
+export const locale = {
+    lang: "en",
+    data: {
+        SWITCHTIMEOUT: {
+            SEARCH: "SEARCH",
+            CLEAR: "CLEAR",
+            SEARCHSTARTDATE: "Search Start Date",
+            SEARCHENDDATE: "Search End Date",
+            SEARCHSTARTTIME: "Search Start Time",
+            SEARCHENDTIME: "Search End Time",
+            APPLICATIONTYPE: "Application Type",
+            SERVERNAME: "Server Name",
+            APPLICATIONID: "Application",
+            SESSIONID: "Session",
+            REMOTEIPADDRESS: "Remote Ip Address",
+            REMOTEPORT: "Remote Port",
+            LOCALIPADDRESS: "Local Ip Address",
+            LOCALPORT: "Local Port",
+            AUTHORIZATIONCODE: "Authorization Code",
+            RRN: "Rrn",
+            MTI: "Mti",
+            TERMINALID: "Terminal Id",
+            MERCHANTCODE: "Merchant Code",
+            CARDTOKENNUMBER: "Card Token Number",
+        },
+    },
+};

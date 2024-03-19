@@ -1,0 +1,121 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="productForm">
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{ "PRODUCT.ID" | translate }}</mat-label>
+
+                    <input
+                        type="number"
+                        name="Id"
+                        formControlName="Id"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{ "PRODUCT.PRODUCTID" | translate }}</mat-label>
+
+                    <input
+                        type="number"
+                        name="ProductId"
+                        formControlName="ProductId"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{
+                        "PRODUCT.APPLICATIONTYPE" | translate
+                    }}</mat-label>
+
+                    <input
+                        name="ApplicationType"
+                        formControlName="ApplicationType"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{ "PRODUCT.USERTYPE" | translate }}</mat-label>
+
+                    <input
+                        name="UserType"
+                        formControlName="UserType"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>{{
+                        "PRODUCT.DESCRIPTION" | translate
+                    }}</mat-label>
+
+                    <input
+                        name="Description"
+                        formControlName="Description"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', productForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "PRODUCT.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(productForm)"
+            [disabled]="productForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "PRODUCT.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', productForm])"
+            [disabled]="productForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "PRODUCT.SAVE" | translate }}
+        </button>
+    </div>
+</div>

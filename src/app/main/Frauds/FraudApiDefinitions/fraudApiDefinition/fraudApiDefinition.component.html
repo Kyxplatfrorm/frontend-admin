@@ -1,0 +1,244 @@
+<div id="fraudApiDefinition" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Frauds/FraudApiDefinitions/searchFraudApiDefinitions'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="fraudApi mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="fraudApi.images[0]"
+                        [src]="fraudApi.images[0].url"
+                    />
+                    <img
+                        *ngIf="!fraudApi.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "FRAUDAPI.FRAUDAPIDEFINITION" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "FRAUDAPI.FRAUDAPIDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-fraudApi-button"
+                [disabled]="
+                    fraudApiDefinitionForm.invalid ||
+                    fraudApiDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateFraudApiDefinition()"
+            >
+                <span>{{ "FRAUDAPI.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-fraudApi-button"
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateFraudApiDefinition()"
+            >
+                <span>{{ "FRAUDAPI.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="fraudApiDefinitionForm"
+                    [formGroup]="fraudApiDefinitionForm"
+                    class="fraudApi w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{ 'FRAUDAPI.FRAUDAPIINFO' | translate }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasFraudRule"
+                                        formControlName="HasFraudRule"
+                                        >{{
+                                            "FRAUDAPI.HASFRAUDRULE" | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="LogApiCallCounts"
+                                        formControlName="LogApiCallCounts"
+                                        >{{
+                                            "FRAUDAPI.LOGAPICALLCOUNTS"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDAPI.APPLICATIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="ApplicationTypeId"
+                                            formControlName="ApplicationTypeId"
+                                            [(value)]="
+                                                fraudApi.ApplicationTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let fraudApi of applicationType
+                                                "
+                                                [value]="fraudApi.Id"
+                                            >
+                                                {{ fraudApi.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="fraudApi.ApplicationTypeId"
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                onClearApplicaitonType();
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDAPI.DESCRIPTION" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDAPI.DESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDAPI.CONTROLLERNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDAPI.CONTROLLERNAME'
+                                                    | translate
+                                            }}"
+                                            name="ControllerName"
+                                            formControlName="ControllerName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDAPI.ACTIONNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDAPI.ACTIONNAME'
+                                                    | translate
+                                            }}"
+                                            name="ActionName"
+                                            formControlName="ActionName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

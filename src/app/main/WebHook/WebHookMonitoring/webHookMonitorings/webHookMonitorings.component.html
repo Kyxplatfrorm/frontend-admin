@@ -1,0 +1,345 @@
+<div id="webHookMonitorings" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "WEBHOOKMONITORING.WEBHOOKMONITORING" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'WEBHOOKMONITORING.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button
+                mat-raised-button
+                [routerLink]="'/webHookMonitorings/new'"
+                class="add-webHookMonitoring-button fuse-white mt-24 mt-md-0"
+            >
+                <span>{{ "WEBHOOKMONITORING.ADD" | translate }}</span>
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="webHookMonitorings-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="webHookMonitoringsDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "WEBHOOKMONITORING.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let webHookMonitoring">
+                        <p class="text-truncate">
+                            {{ webHookMonitoring.Id }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TenantName Column -->
+                <ng-container matColumnDef="TenantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "WEBHOOKMONITORING.TENANTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let webHookMonitoring">
+                        <p class="text-truncate">
+                            {{ webHookMonitoring.TenantName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TotalElapsed Column -->
+                <ng-container matColumnDef="TotalElapsed">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "WEBHOOKMONITORING.TOTALELAPSED" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let webHookMonitoring">
+                        <p class="text-truncate">
+                            {{ webHookMonitoring.TotalElapsed }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- WebHookTypeName Column -->
+                <ng-container matColumnDef="WebHookTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "WEBHOOKMONITORING.WEBHOOKTYPENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let webHookMonitoring">
+                        <p class="text-truncate">
+                            {{ webHookMonitoring.WebHookTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- RunStatusName Column -->
+                <ng-container matColumnDef="RunStatusName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "WEBHOOKMONITORING.RUNSTATUSNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let webHookMonitoring">
+                        <p class="text-truncate">
+                            {{ webHookMonitoring.RunStatusName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- RecordType Column -->
+                <ng-container matColumnDef="RecordType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "WEBHOOKMONITORING.RECORDTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let webHookMonitoring">
+                        <p class="text-truncate">
+                            {{ webHookMonitoring.RecordType }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- HttpStatusCode Column -->
+                <ng-container matColumnDef="HttpStatusCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "WEBHOOKMONITORING.HTTPSTATUSCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let webHookMonitoring">
+                        <p class="text-truncate">
+                            {{ webHookMonitoring.HttpStatusCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- HttpPostUrl Column -->
+                <ng-container matColumnDef="HttpPostUrl">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "WEBHOOKMONITORING.HTTPPOSTURL" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let webHookMonitoring">
+                        <p class="text-truncate">
+                            {{ webHookMonitoring.HttpPostUrl }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ResultMessage Column -->
+                <ng-container matColumnDef="ResultMessage">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "WEBHOOKMONITORING.RESULTMESSAGE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let webHookMonitoring">
+                        <p class="text-truncate">
+                            {{ webHookMonitoring.ResultMessage }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ReferenceNumberType Column -->
+                <ng-container matColumnDef="ReferenceNumberType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "WEBHOOKMONITORING.REFERENCENUMBERTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let webHookMonitoring">
+                        <p class="text-truncate">
+                            {{ webHookMonitoring.ReferenceNumberType }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- DueDateTime Column -->
+                <ng-container matColumnDef="DueDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "WEBHOOKMONITORING.DUEDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let webHookMonitoring"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                webHookMonitoring.DueDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "WEBHOOKMONITORING.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let webHookMonitoring"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                webHookMonitoring.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-sm
+                        >{{
+                            "WEBHOOKMONITORING.UPDATEDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let webHookMonitoring"
+                        fxHide
+                        fxShow.gt-xs
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                webHookMonitoring.UpdateDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss"
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let webHookMonitoring">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="
+                                        DeleteWebHookMonitoring(
+                                            webHookMonitoring
+                                        )
+                                    "
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                    <span
+                                        >{{
+                                            "WEBHOOKMONITORING.REMOVE"
+                                                | translate
+                                        }}
+                                    </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="
+                        let webHookMonitoring;
+                        columns: displayedColumns
+                    "
+                    class="webHookMonitoring"
+                    [routerLink]="['/webHookMonitorings', webHookMonitoring.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="webHookMonitoringsDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

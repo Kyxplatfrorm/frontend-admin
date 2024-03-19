@@ -1,0 +1,344 @@
+<div id="tenantLimitProfile" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Tenants/TenantLimitProfile/tenantLimitProfiles'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="tenantLimit-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="tenantLimit.images[0]"
+                        [src]="tenantLimit.images[0].url"
+                    />
+                    <img
+                        *ngIf="!tenantLimit.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "LIMIT.NEWLIMIT" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "LIMIT.LIMITDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'LIMIT.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-tenantLimit-button"
+                [disabled]="
+                    tenantLimitProfileForm.invalid ||
+                    tenantLimitProfileForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateTenantLimitProfile()"
+            >
+                <span>{{ "LIMIT.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="tenantLimitProfileForm"
+                    [formGroup]="tenantLimitProfileForm"
+                    class="tenantLimit w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'LIMIT.TENANTLIMITPROFILEINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "LIMIT.TENANT" | translate
+                                    }}</mat-label>
+                                    <mat-select
+                                        name="TenantId"
+                                        formControlName="TenantId"
+                                        [(value)]="tenantLimit.TenantId"
+                                        disabled
+                                    >
+                                        <mat-option
+                                            *ngFor="
+                                                let tenantLimit of tenantDefinitionList
+                                            "
+                                            [value]="tenantLimit.Id"
+                                        >
+                                            {{ tenantLimit.TenantName }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "LIMIT.CURRENCYID" | translate
+                                    }}</mat-label>
+                                    <mat-select
+                                        name="CurrencyId"
+                                        formControlName="CurrencyId"
+                                        [(ngModel)]="tenantLimit.CurrencyId"
+                                        [(value)]="tenantLimit.CurrencyId"
+                                    >
+                                        <mat-option
+                                            *ngFor="
+                                                let tenantLimit of limitCurrency
+                                            "
+                                            [value]="tenantLimit.Id"
+                                        >
+                                            {{ tenantLimit.Description }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{ 'LIMIT.TENANTLIMITPROFILE' | translate }}"
+                        >
+                            <mat-table
+                                class="tenantLimitProfiles-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                fusePerfectScrollbar
+                                [dataSource]="tenantLimitProfileDataSource"
+                            >
+                                <!-- ProfileId Column -->
+                                <ng-container matColumnDef="ProfileId">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "LIMIT.PROFILEID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let tenantLimit">
+                                        <p class="text-truncate">
+                                            {{ tenantLimit.ProfileId }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- TransactionGroupName Column -->
+                                <ng-container
+                                    matColumnDef="TransactionGroupName"
+                                >
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "LIMIT.TRANSACTIONGROUPNAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let tenantLimit">
+                                        <p class="text-truncate">
+                                            {{
+                                                tenantLimit.TransactionGroupName
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- InsertDateTime Column -->
+                                <ng-container matColumnDef="InsertDateTime">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "LIMIT.INSERTDATETIME" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let tenantLimit">
+                                        <p class="text-truncate">
+                                            {{ tenantLimit.InsertDateTime }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- UpdateDateTime Column -->
+                                <ng-container matColumnDef="UpdateDateTime">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "LIMIT.UPDATEDATETIME" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let tenantLimit">
+                                        <p class="text-truncate">
+                                            {{ tenantLimit.UpdateDateTime }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell *matCellDef="let tenantLimit">
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteTenantLimitProfileDetail(
+                                                            tenantLimit
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span
+                                                        >{{
+                                                            "LIMIT.REMOVE"
+                                                                | translate
+                                                        }}
+                                                    </span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let tenantLimit;
+                                        columns: displayedColumns
+                                    "
+                                    class="tenantLimit"
+                                    (click)="
+                                        EditTenantLimitProfile(tenantLimit)
+                                    "
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="tenantLimit-button"
+                                id="add-tenantLimit-button"
+                                aria-label="add tenantLimit"
+                                (click)="newForm()"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="
+                            tenantLimitProfileDataSource.filteredData?.length
+                        "
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

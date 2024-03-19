@@ -1,0 +1,750 @@
+<div id="fraudRuleDefinition" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Frauds/FraudRuleDefinitions/searchFraudRuleDefinitions'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="fraudRule mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="fraudRule.images[0]"
+                        [src]="fraudRule.images[0].url"
+                    />
+                    <img
+                        *ngIf="!fraudRule.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "FRAUDRULE.FRAUDRULEDEFINITION" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "FRAUDRULE.FRAUDRULEDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-fraudRule-button"
+                [disabled]="
+                    fraudRuleDefinitionForm.invalid ||
+                    fraudRuleDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateFraudRuleDefinition()"
+            >
+                <span>{{ "FRAUDRULE.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-fraudRule-button"
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateFraudRuleDefinition()"
+            >
+                <span>{{ "FRAUDRULE.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="fraudRuleDefinitionForm"
+                    [formGroup]="fraudRuleDefinitionForm"
+                    class="fraudRule w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{ 'FRAUDRULE.FRAUDRULEINFO' | translate }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <div
+                                        class="checkbox"
+                                        fxLayout="column"
+                                        fxLayoutAlign="start"
+                                        fxFlex="48"
+                                    >
+                                        <mat-checkbox
+                                            name="IsBuiltInDefinition"
+                                            formControlName="IsBuiltInDefinition"
+                                            style="margin-bottom: 20px"
+                                            >{{
+                                                "FRAUDRULE.ISBUILTINDEFINITION"
+                                                    | translate
+                                            }}</mat-checkbox
+                                        >
+                                        <mat-checkbox
+                                            name="IsActive"
+                                            formControlName="IsActive"
+                                            >{{
+                                                "FRAUDRULE.ISACTIVE" | translate
+                                            }}</mat-checkbox
+                                        >
+                                    </div>
+                                    <div
+                                        class="checkbox"
+                                        fxLayout="column"
+                                        fxLayoutAlign="start"
+                                        fxFlex="48"
+                                    >
+                                        <mat-checkbox
+                                            name="LogFraudRule"
+                                            formControlName="LogFraudRule"
+                                            style="margin-bottom: 20px"
+                                            >{{
+                                                "FRAUDRULE.LOGFRAUDRULE"
+                                                    | translate
+                                            }}</mat-checkbox
+                                        >
+                                        <mat-checkbox
+                                            name="HasFraudQuery"
+                                            formControlName="HasFraudQuery"
+                                            [(ngModel)]="
+                                                fraudRule.HasFraudQuery
+                                            "
+                                            >{{
+                                                "FRAUDRULE.HASFRAUDQUERY"
+                                                    | translate
+                                            }}</mat-checkbox
+                                        >
+                                    </div>
+                                </div>
+                                <mat-checkbox
+                                    name="SendNotification"
+                                    formControlName="SendNotification"
+                                    style="margin-bottom: 20px"
+                                    >{{
+                                        "FRAUDRULE.SENDNOTIFICATION" | translate
+                                    }}</mat-checkbox
+                                >
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDRULE.TENANT" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="fraudRule.TenantId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let fraudRule of tenantDefinition
+                                                "
+                                                [value]="fraudRule.Id"
+                                            >
+                                                {{ fraudRule.TenantName }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="fraudRule.TenantId"
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                onClearTenant();
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDRULE.FRAUDGROUP" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="FraudGroupId"
+                                            formControlName="FraudGroupId"
+                                            [(value)]="fraudRule.FraudGroupId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let fraudRule of fraudGroupDefinition
+                                                "
+                                                [value]="fraudRule.Id"
+                                            >
+                                                {{ fraudRule.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="fraudRule.FraudGroupId"
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                onClearFraudGroup();
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDRULE.FRAUDRULEACTIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="FraudRuleActionTypeId"
+                                            formControlName="FraudRuleActionTypeId"
+                                            [(value)]="
+                                                fraudRule.FraudRuleActionTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let fraudRule of fraudRuleActionType
+                                                "
+                                                [value]="fraudRule.Id"
+                                            >
+                                                {{ fraudRule.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                fraudRule.FraudRuleActionTypeId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                onClearFraudRuleActionType();
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDRULE.FRAUDRULECHECKTIMETYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="FraudRuleCheckTimeTypeId"
+                                            formControlName="FraudRuleCheckTimeTypeId"
+                                            [(value)]="
+                                                fraudRule.FraudRuleCheckTimeTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let fraudRule of fraudRuleCheckTimeType
+                                                "
+                                                [value]="fraudRule.Id"
+                                            >
+                                                {{ fraudRule.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                fraudRule.FraudRuleCheckTimeTypeId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                onClearFraudRuleCheckTimeType();
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDRULE.FRAUDRULECHECKTIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDRULE.FRAUDRULECHECKTIME'
+                                                    | translate
+                                            }}"
+                                            name="FraudRuleCheckTime"
+                                            formControlName="FraudRuleCheckTime"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDRULE.FRAUDRULECHECKCOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDRULE.FRAUDRULECHECKCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="FraudRuleCheckCount"
+                                            formControlName="FraudRuleCheckCount"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDRULE.FRAUDRULECHECKAMOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDRULE.FRAUDRULECHECKAMOUNT'
+                                                    | translate
+                                            }}"
+                                            name="FraudRuleCheckAmount"
+                                            formControlName="FraudRuleCheckAmount"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDRULE.DESCRIPTION" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDRULE.DESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDRULE.NOTIFICATIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="NotificationTypeId"
+                                            formControlName="NotificationTypeId"
+                                            [(value)]="
+                                                fraudRule.NotificationTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let fraudRule of notificationType
+                                                "
+                                                [value]="fraudRule.Id"
+                                            >
+                                                {{ fraudRule.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="fraudRule.NotificationTypeId"
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                onClearNotificationType();
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDRULE.NOTIFICATIONTEMPLATECODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDRULE.NOTIFICATIONTEMPLATECODE'
+                                                    | translate
+                                            }}"
+                                            name="NotificationTemplateCode"
+                                            formControlName="NotificationTemplateCode"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDRULE.ERRORCODE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDRULE.ERRORCODE'
+                                                    | translate
+                                            }}"
+                                            name="ErrorCode"
+                                            formControlName="ErrorCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDRULE.ERRORDESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDRULE.ERRORDESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="ErrorDescription"
+                                            formControlName="ErrorDescription"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{ 'FRAUDRULE.FRAUDQUERY' | translate }}"
+                            *ngIf="fraudRule.HasFraudQuery"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                    fxFlex="48"
+                                >
+                                    <mat-label>{{
+                                        "FRAUDRULE.FRAUDQUERY" | translate
+                                    }}</mat-label>
+                                    <textarea
+                                        matInput
+                                        placeholder="{{
+                                            'FRAUDRULE.FRAUDQUERY' | translate
+                                        }}"
+                                        name="FraudQuery"
+                                        formControlName="FraudQuery"
+                                        rows="25"
+                                    >
+                                    </textarea>
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'FRAUDRULE.FRAUDRULEAPIRELATION' | translate
+                            }}"
+                        >
+                            <mat-table
+                                class="fraudRuleApiRelations-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                [dataSource]="fraudRuleApiRelationDataSource"
+                            >
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="Id">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "FRAUDRULE.ID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let fraudRule">
+                                        <p class="text-truncate">
+                                            {{ fraudRule.Id }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- IsActive Column -->
+                                <ng-container matColumnDef="IsActive">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "FRAUDRULE.ISACTIVE" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let fraudRule">
+                                        <mat-icon
+                                            *ngIf="fraudRule.IsActive"
+                                            class="active-icon green-600 s-16"
+                                            >check</mat-icon
+                                        >
+                                        <mat-icon
+                                            *ngIf="!fraudRule.IsActive"
+                                            class="active-icon red-500 s-16"
+                                            >close</mat-icon
+                                        >
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- FraudRuleName Column -->
+                                <ng-container matColumnDef="FraudRuleName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "FRAUDRULE.FRAUDRULENAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let fraudRule">
+                                        <p class="text-truncate">
+                                            {{ fraudRule.FraudRuleName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Priority Column -->
+                                <ng-container matColumnDef="Priority">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "FRAUDRULE.PRIORITY" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let fraudRule">
+                                        <p class="text-truncate">
+                                            {{ fraudRule.Priority }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell *matCellDef="let fraudRule">
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteFraudRuleApiRelation(
+                                                            fraudRule
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "FRAUDRULE.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                    fusePerfectScrollbar
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let fraudRule;
+                                        columns: displayedColumns
+                                    "
+                                    class="fraudRule"
+                                    (click)="
+                                        EditFraudRuleApiRelation(fraudRule)
+                                    "
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="fraudRule-button"
+                                id="add-fraudRule-button"
+                                (click)="FraudRuleApiRelationForm()"
+                                aria-label="add fraudRule"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="
+                            fraudRuleApiRelationDataSource.filteredData?.length
+                        "
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -1,0 +1,490 @@
+<div id="switchConnection" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Switch/SwitchConnection/switchConnections'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "SWITCHCONNECTION.SWITCHCONNECTION" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'SWITCHCONNECTION.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-tab-group #tabGroup>
+                <mat-tab
+                    label="{{
+                        'SWITCHCONNECTION.SWITCHCONNCETION' | translate
+                    }}"
+                >
+                    <mat-table
+                        class="switchConnections-table"
+                        #table
+                        matSort
+                        fusePerfectScrollbar
+                        [@animateStagger]="{ value: '50' }"
+                        [dataSource]="switchConnectionDataSource"
+                    >
+                        <!-- ID Column -->
+                        <ng-container matColumnDef="Id">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.ID" | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <p class="text-truncate">
+                                    {{ switchConnection.Id }}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- ApplicationName Column -->
+                        <ng-container matColumnDef="ApplicationName">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.APPLICATIONNAME"
+                                        | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <p class="text-truncate">
+                                    {{ switchConnection.ApplicationName }}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- SessionName Column -->
+                        <ng-container matColumnDef="SessionName">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.SESSIONNAME" | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <p class="text-truncate">
+                                    {{ switchConnection.SessionName }}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- ConnectionType Column -->
+                        <ng-container matColumnDef="ConnectionType">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.CONNECTIONTYPE"
+                                        | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <p class="text-truncate">
+                                    {{ switchConnection.ConnectionType }}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- IsConnected Column -->
+                        <ng-container matColumnDef="IsConnected">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.ISCONNECTED" | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <mat-icon
+                                    *ngIf="switchConnection.IsConnected"
+                                    class="active-icon green-600 s-16"
+                                    >check</mat-icon
+                                >
+                                <mat-icon
+                                    *ngIf="!switchConnection.IsConnected"
+                                    class="active-icon red-500 s-16"
+                                    >close</mat-icon
+                                >
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- RemoteIpAddress Column -->
+                        <ng-container matColumnDef="RemoteIpAddress">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.REMOTEIPADDRESS"
+                                        | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <p class="text-truncate">
+                                    {{ switchConnection.RemoteIpAddress }}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- LocalIpAddress Column -->
+                        <ng-container matColumnDef="LocalIpAddress">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.LOCALIPADDRESS"
+                                        | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <p class="text-truncate">
+                                    {{ switchConnection.LocalIpAddress }}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- ConnectionStartDateTime Column -->
+                        <ng-container matColumnDef="ConnectionStartDateTime">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                fxHide
+                                fxShow.gt-xs
+                                >{{
+                                    "SWITCHCONNECTION.CONNCETIONSTARTDATETIME"
+                                        | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell
+                                *matCellDef="let switchConnection"
+                                fxHide
+                                fxShow.gt-sm
+                            >
+                                <span class="text-truncate"
+                                    >{{
+                                        switchConnection.ConnectionStartDateTime
+                                            | date : "dd/MM/YYYY HH:mm:ss "
+                                    }}
+                                </span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- ConnectionEndDateTime Column -->
+                        <ng-container matColumnDef="ConnectionEndDateTime">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                fxHide
+                                fxShow.gt-sm
+                                >{{
+                                    "SWITCHCONNECTION.CONNECTIONENDDATETIME"
+                                        | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell
+                                *matCellDef="let switchConnection"
+                                fxHide
+                                fxShow.gt-xs
+                            >
+                                <span class="text-truncate"
+                                    >{{
+                                        switchConnection.ConnectionEndDateTime
+                                            | date : "dd/MM/YYYY HH:mm:ss"
+                                    }}
+                                </span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row
+                            *matHeaderRowDef="displayedColumns; sticky: true"
+                        ></mat-header-row>
+
+                        <mat-row
+                            *matRowDef="
+                                let switchConnection;
+                                columns: displayedColumns
+                            "
+                            (dblclick)="onRowDoubleClick(switchConnection)"
+                            class="switchConnection"
+                        >
+                        </mat-row> </mat-table
+                ></mat-tab>
+                <mat-tab
+                    label="{{
+                        'SWITCHCONNECTION.SWITCHCONNCETIONLOG' | translate
+                    }}"
+                >
+                    <mat-table
+                        class="switchConnections-table"
+                        #table
+                        matSort
+                        [@animateStagger]="{ value: '50' }"
+                        [dataSource]="switchConnectionLogDataSource"
+                    >
+                        <!-- ID Column -->
+                        <ng-container matColumnDef="Id">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.ID" | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <p class="text-truncate">
+                                    {{ switchConnection.Id }}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- ApplicationName Column -->
+                        <ng-container matColumnDef="ApplicationName">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.APPLICATIONNAME"
+                                        | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <p class="text-truncate">
+                                    {{ switchConnection.ApplicationName }}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- SessionName Column -->
+                        <ng-container matColumnDef="SessionName">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.SESSIONNAME" | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <p class="text-truncate">
+                                    {{ switchConnection.SessionName }}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- ConnectionType Column -->
+                        <ng-container matColumnDef="ConnectionType">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.CONNECTIONTYPE"
+                                        | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <p class="text-truncate">
+                                    {{ switchConnection.ConnectionType }}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- IsConnected Column -->
+                        <ng-container matColumnDef="IsConnected">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.ISCONNECTED" | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <mat-icon
+                                    *ngIf="switchConnection.IsConnected"
+                                    class="active-icon green-600 s-16"
+                                    >check</mat-icon
+                                >
+                                <mat-icon
+                                    *ngIf="!switchConnection.IsConnected"
+                                    class="active-icon red-500 s-16"
+                                    >close</mat-icon
+                                >
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- RemoteIpAddress Column -->
+                        <ng-container matColumnDef="RemoteIpAddress">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.REMOTEIPADDRESS"
+                                        | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <p class="text-truncate">
+                                    {{ switchConnection.RemoteIpAddress }}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- LocalIpAddress Column -->
+                        <ng-container matColumnDef="LocalIpAddress">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                >{{
+                                    "SWITCHCONNECTION.LOCALIPADDRESS"
+                                        | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell *matCellDef="let switchConnection">
+                                <p class="text-truncate">
+                                    {{ switchConnection.LocalIpAddress }}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- ConnectionStartDateTime Column -->
+                        <ng-container matColumnDef="ConnectionStartDateTime">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                fxHide
+                                fxShow.gt-xs
+                                >{{
+                                    "SWITCHCONNECTION.CONNCETIONSTARTDATETIME"
+                                        | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell
+                                *matCellDef="let switchConnection"
+                                fxHide
+                                fxShow.gt-sm
+                            >
+                                <span class="text-truncate"
+                                    >{{
+                                        switchConnection.ConnectionStartDateTime
+                                            | date : "dd/MM/YYYY HH:mm:ss "
+                                    }}
+                                </span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- ConnectionEndDateTime Column -->
+                        <ng-container matColumnDef="ConnectionEndDateTime">
+                            <mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                fxHide
+                                fxShow.gt-sm
+                                >{{
+                                    "SWITCHCONNECTION.CONNECTIONENDDATETIME"
+                                        | translate
+                                }}</mat-header-cell
+                            >
+                            <mat-cell
+                                *matCellDef="let switchConnection"
+                                fxHide
+                                fxShow.gt-xs
+                            >
+                                <span class="text-truncate"
+                                    >{{
+                                        switchConnection.ConnectionEndDateTime
+                                            | date : "dd/MM/YYYY HH:mm:ss"
+                                    }}
+                                </span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row
+                            *matHeaderRowDef="displayedColumns2; sticky: true"
+                            fusePerfectScrollbar
+                        ></mat-header-row>
+
+                        <mat-row
+                            *matRowDef="
+                                let switchConnection;
+                                columns: displayedColumns2
+                            "
+                            class="switchConnection"
+                        >
+                        </mat-row> </mat-table
+                ></mat-tab>
+            </mat-tab-group>
+        </div>
+        <mat-paginator
+            #paginator
+            [length]="switchConnectionDataSource.filteredData.length"
+            [pageIndex]="0"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+        >
+        </mat-paginator>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

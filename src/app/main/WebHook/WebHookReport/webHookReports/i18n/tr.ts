@@ -1,0 +1,25 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        WEBHOOKREPORT: {
+            SEARCH: "ARAMA",
+            CLEAR: "TEMİZLE",
+            ADD: "EKLE",
+            SEARCHSTARTDATE: "Arama Başlangıç Tarihi",
+            SEARCHENDDATE: "Arama Bitiş Tarihi",
+            COMPANYID: "Şirket Id",
+            WEBHOOKTYPE: "WebHook Tipi",
+            RUNSTATUS: "WebHook Çalıştırma Durumu",
+            WEBHOOKPROFILEID: "WebHook Profil Id",
+            HTTPSTATUSCODE: "HTTP Durum Kodu",
+            RETRYCOUNT: "Tekrar Deneme Sayısı",
+            APPLICATIONID: "Uygulama Id",
+            TOTALELAPSED: "Toplam Geçen Süre(ms)",
+            HTTPPOSTURL: "HTTP Post Url",
+            REFERENCENUMBER: "Referans Numarası",
+            RESULTMESSAGE: "Sonuç Mesajı",
+            RECORDTYPE: "Kayıt Tipi",
+            TENANT: "Üye",
+        },
+    },
+};

@@ -1,0 +1,93 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="tenantCountryProfileForm">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                >
+                    <mat-label>{{
+                        "TENANTCOUNTRY.COUNTRY" | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="CountryId"
+                        formControlName="CountryId"
+                        [(value)]="tenantCountry.CountryId"
+                        placeholder="{{ 'TENANTCOUNTRY.COUNTRY' | translate }}"
+                    >
+                        <mat-option
+                            *ngFor="let tenantCountry of countryList"
+                            [value]="tenantCountry.Id"
+                        >
+                            {{ tenantCountry.CountryName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="checkbox" style="margin-bottom: 20px">
+                <mat-checkbox
+                    name="IsRegistrationEnabled"
+                    formControlName="IsRegistrationEnabled"
+                    >{{
+                        "TENANTCOUNTRY.ISREGISTRATIONENABLED" | translate
+                    }}</mat-checkbox
+                >
+            </div>
+          
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', tenantCountryProfileForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "TENANTCOUNTRY.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(tenantCountryProfileForm)"
+            [disabled]="tenantCountryProfileForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "TENANTCOUNTRY.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', tenantCountryProfileForm])"
+            [disabled]="tenantCountryProfileForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "TENANTCOUNTRY.SAVE" | translate }}
+        </button>
+    </div>
+</div>

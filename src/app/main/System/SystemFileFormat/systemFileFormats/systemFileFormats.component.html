@@ -1,0 +1,261 @@
+<div id="systemFileFormats" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-systemFileFormat-button fuse-white mt-24 mr-35"
+                        (click)="SearchSystemFileFormat()"
+                    >
+                        <span>{{ "SYSTEMFILEFORMAT.SEARCH" | translate }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-systemFileFormat-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "SYSTEMFILEFORMAT.CLEAR" | translate }}
+                    </button>
+                    <!-- CLEAR BUTTON -->
+                    <!-- ADD BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        [routerLink]="'/searchSystemFileFormat/new'"
+                        class="add-systemFileFormat-button fuse-white m-10"
+                    >
+                        {{ "SYSTEMFILEFORMAT.ADD" | translate }}
+                    </button>
+                    <!-- ADD BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="systemFileFormatsForm"
+                    [formGroup]="systemFileFormatsForm"
+                    class="systemFileFormat w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SYSTEMFILEFORMAT.SEARCHSTARTDATE"
+                                        | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="SearchStartDate"
+                                    formControlName="SearchStartDate"
+                                    [matDatepicker]="pickerSearchStartDate"
+                                    [(ngModel)]="
+                                        systemFileFormat.SearchStartDate
+                                    "
+                                    (dateChange)="
+                                        onSearchStartDateChange($event)
+                                    "
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerSearchStartDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerSearchStartDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SYSTEMFILEFORMAT.SEARCHENDDATE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    [matDatepicker]="pickerSearchEndDate"
+                                    formControlName="SearchEndDate"
+                                    [(ngModel)]="systemFileFormat.SearchEndDate"
+                                    (dateChange)="onSearchEndDateChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerSearchEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker
+                                    #pickerSearchEndDate
+                                ></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SYSTEMFILEFORMAT.FILEFORMATTYPE"
+                                        | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="FileFormatTypeId"
+                                    formControlName="FileFormatTypeId"
+                                    [(value)]="
+                                        systemFileFormat.FileFormatTypeId
+                                    "
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let systemFileFormat of fileFormatType
+                                        "
+                                        [value]="systemFileFormat.Id"
+                                    >
+                                        {{ systemFileFormat.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SYSTEMFILEFORMAT.FILEDIRECTIONTYPE"
+                                        | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="FileDirectionTypeId"
+                                    formControlName="FileDirectionTypeId"
+                                    [(value)]="
+                                        systemFileFormat.FileDirectionTypeId
+                                    "
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let systemFileFormat of fileDirectionType
+                                        "
+                                        [value]="systemFileFormat.Id"
+                                    >
+                                        {{ systemFileFormat.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SYSTEMFILEFORMAT.FILEFORMATCODE"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SYSTEMFILEFORMAT.FILEFORMATCODE'
+                                            | translate
+                                    }}"
+                                    name="FileFormatCode"
+                                    formControlName="FileFormatCode"
+                                />
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SYSTEMFILEFORMAT.FILENAMEFORMAT"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SYSTEMFILEFORMAT.FILENAMEFORMAT'
+                                            | translate
+                                    }}"
+                                    name="FileNameFormat"
+                                    formControlName="FileNameFormat"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SYSTEMFILEFORMAT.DESCRIPTION" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SYSTEMFILEFORMAT.DESCRIPTION'
+                                            | translate
+                                    }}"
+                                    name="Description"
+                                    formControlName="Description"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / CENTER -->
+</div>

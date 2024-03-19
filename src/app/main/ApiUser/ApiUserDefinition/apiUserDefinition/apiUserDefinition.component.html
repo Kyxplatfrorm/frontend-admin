@@ -1,0 +1,615 @@
+<div id="apiUserDefinition" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/ApiUser/ApiUserDefinition/searchApiUserDefinition'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="apiUser-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="apiUser.images[0]"
+                        [src]="apiUser.images[0].url"
+                    />
+                    <img
+                        *ngIf="!apiUser.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/country-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "USER.NEWAPIUSERDEFINITION" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "USER.APIUSERDEFINITIONDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'USER.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-apiUser-button"
+                [disabled]="
+                    apiUserDefinitionForm.invalid ||
+                    apiUserDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateApiUserDefinition()"
+            >
+                <span>{{ "USER.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-apiUser-button"
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateApiUserDefinition()"
+            >
+                <span>{{ "USER.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="apiUserDefinitionForm"
+                    [formGroup]="apiUserDefinitionForm"
+                    class="apiUser w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab label="{{ 'USER.APIUSERINFO' | translate }}">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="user mb-20" fxLayout="column">
+                                    <div class="avatar-container">
+                                        <img
+                                            class="avatar"
+                                            src="assets/images/avatars/Velazquez.jpg"
+                                        />
+                                        <div class="upload">
+                                            <div class="round">
+                                                <input type="file" />
+                                                <mat-icon>camera_alt</mat-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.USERNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.USERNAME' | translate
+                                            }}"
+                                            name="UserName"
+                                            formControlName="UserName"
+                                            [disabled]="pageType !== 'new'"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.USERFULLNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.USERFULLNAME' | translate
+                                            }}"
+                                            name="UserFullName"
+                                            formControlName="UserFullName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.USERSTATUSID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="UserStatusId"
+                                            formControlName="UserStatusId"
+                                            [(value)]="apiUser.UserStatusId"
+                                            placeholder="{{
+                                                'USER.USERSTATUSID' | translate
+                                            }}"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let apiUser of userStatusList
+                                                "
+                                                [value]="apiUser.Id"
+                                            >
+                                                {{ apiUser.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.EMAIL" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.EMAIL' | translate
+                                            }}"
+                                            name="Email"
+                                            formControlName="Email"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.TENANTID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="apiUser.TenantId"
+                                            placeholder="{{
+                                                'USER.TENANTID' | translate
+                                            }}"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let apiUser of tenantList
+                                                "
+                                                [value]="apiUser.Id"
+                                            >
+                                                {{ apiUser.TenantName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.COMPANYID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.COMPANYID' | translate
+                                            }}"
+                                            name="CompanyId"
+                                            formControlName="CompanyId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasApiPermissionProfile"
+                                        formControlName="HasApiPermissionProfile"
+                                        fxFlex="52"
+                                        [(ngModel)]="
+                                            apiUser.HasApiPermissionProfile
+                                        "
+                                        >{{
+                                            "USER.HASAPIPERMISSIONPROFILE"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                    <mat-checkbox
+                                        name="HasExpiryDate"
+                                        formControlName="HasExpiryDate"
+                                        [(ngModel)]="apiUser.HasExpiryDate"
+                                        >{{
+                                            "USER.HASEXPIRYDATE" | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="apiUser.HasApiPermissionProfile"
+                                    >
+                                        <mat-label>{{
+                                            "USER.APIPERMISSIONPROFILE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="ApiPermissionProfileId"
+                                            formControlName="ApiPermissionProfileId"
+                                            [(value)]="
+                                                apiUser.ApiPermissionProfileId
+                                            "
+                                            placeholder="{{
+                                                'USER.APIPERMISSIONPROFILE'
+                                                    | translate
+                                            }}"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let apiUser of apiPermissionProfiles
+                                                "
+                                                [value]="apiUser.Id"
+                                            >
+                                                {{ apiUser.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="pageType == 'new'"
+                                    >
+                                        <mat-label>{{
+                                            "USER.USERTYPEID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="UserTypeId"
+                                            formControlName="UserTypeId"
+                                            [(value)]="apiUser.UserTypeId"
+                                            placeholder="{{
+                                                'USER.USERTYPEID' | translate
+                                            }}"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let apiUser of userTypeList
+                                                "
+                                                [value]="apiUser.Id"
+                                            >
+                                                {{ apiUser.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                    *ngIf="apiUser.HasExpiryDate"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.STARTDATETIME" | translate
+                                        }}</mat-label>
+
+                                        <input
+                                            matInput
+                                            name="StartDateTime"
+                                            formControlName="StartDateTime"
+                                            [matDatepicker]="
+                                                pickerStartDateTime
+                                            "
+                                            [(ngModel)]="apiUser.StartDateTime"
+                                            (dateChange)="
+                                                onStartDateTimeChange($event)
+                                            "
+                                        />
+
+                                        <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="pickerStartDateTime"
+                                        >
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #pickerStartDateTime>
+                                        </mat-datepicker>
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.ENDDATETIME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            [matDatepicker]="pickerEndDateTime"
+                                            formControlName="EndDateTime"
+                                            [(ngModel)]="apiUser.EndDateTime"
+                                            (dateChange)="
+                                                onEndDateTimeChange($event)
+                                            "
+                                        />
+
+                                        <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="pickerEndDateTime"
+                                        >
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker
+                                            #pickerEndDateTime
+                                        ></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                ></div>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab label="{{ 'USER.IPRESTRICTION' | translate }}">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <div class="box">
+                                        <mat-checkbox
+                                            name="HasIpRestriction"
+                                            formControlName="HasIpRestriction"
+                                            [(ngModel)]="
+                                                apiUser.HasIpRestriction
+                                            "
+                                            >{{
+                                                "USER.HASIPRESTRICTION"
+                                                    | translate
+                                            }}</mat-checkbox
+                                        >
+                                    </div>
+                                </div>
+                                <div fxLayout="row">
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        fxFlex="48"
+                                        *ngIf="apiUser.HasIpRestriction"
+                                    >
+                                        <mat-label>{{
+                                            "USER.IPADDRESS" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.IPADDRESS' | translate
+                                            }}"
+                                            name="IpAddress"
+                                            formControlName="IpAddress"
+                                            #ipAddressInput
+                                            (input)="formatIpAddress($event)"
+                                        />
+                                    </mat-form-field>
+
+                                    <button
+                                        *ngIf="apiUser.HasIpRestriction"
+                                        mat-raised-button
+                                        style="
+                                            height: 56px;
+                                            margin-top: 5px;
+                                            margin-left: 10px;
+                                            background-color: #607d8b;
+                                            color: white;
+                                        "
+                                        (click)="
+                                            addIpAddress(
+                                                apiUserDefinitionForm.controls[
+                                                    'IpAddress'
+                                                ].value
+                                            )
+                                        "
+                                    >
+                                        <span>{{
+                                            "USER.ADD" | translate
+                                        }}</span>
+                                    </button>
+                                </div>
+                                <mat-selection-list
+                                    *ngIf="apiUser.HasIpRestriction"
+                                >
+                                    <ng-container
+                                        *ngFor="
+                                            let apiUser of permittedIpAddressList;
+                                            let i = index
+                                        "
+                                    >
+                                        <mat-list-option>
+                                            <div fxLayout="row">
+                                                <div
+                                                    fxFlex="90"
+                                                    style="margin-top: 10px"
+                                                >
+                                                    {{ apiUser }}
+                                                </div>
+                                                <button
+                                                    mat-icon-button
+                                                    (click)="clearIpAddress(i)"
+                                                >
+                                                    <mat-icon>clear</mat-icon>
+                                                </button>
+                                            </div>
+                                        </mat-list-option>
+                                    </ng-container>
+                                </mat-selection-list>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{ 'USER.APIKEY' | translate }}"
+                            *ngIf="pageType === 'edit'"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.APIKEY" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.APIKEY' | translate
+                                            }}"
+                                            name="ApiKey"
+                                            formControlName="ApiKey"
+                                            [type]="
+                                                apiKey ? 'text' : 'password'
+                                            "
+                                        />
+                                        <mat-icon
+                                            matSuffix
+                                            (click)="visibilityApiKey()"
+                                            >{{
+                                                apiKey
+                                                    ? "visibility_off"
+                                                    : "visibility"
+                                            }}</mat-icon
+                                        >
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "USER.SECRETKEY" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'USER.SECRETKEY' | translate
+                                            }}"
+                                            name="SecretKey"
+                                            formControlName="SecretKey"
+                                            [type]="
+                                                secretKey ? 'text' : 'password'
+                                            "
+                                        />
+                                        <mat-icon
+                                            matSuffix
+                                            (click)="visibilitySecretKey()"
+                                            >{{
+                                                secretKey
+                                                    ? "visibility_off"
+                                                    : "visibility"
+                                            }}</mat-icon
+                                        >
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>
