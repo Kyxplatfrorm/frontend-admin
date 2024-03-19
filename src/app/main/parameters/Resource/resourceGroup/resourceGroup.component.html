@@ -1,0 +1,375 @@
+<div id="resourceGroups" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Parameters/Resource/resourceGroups'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="resourceGroup-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="resourceGroup.images[0]"
+                        [src]="resourceGroup.images[0].url"
+                    />
+                    <img
+                        *ngIf="!resourceGroup.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "RESOURCEGROUP.NEWRESOURCEGROUP" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "RESOURCEGROUP.RESOURCEGROUPDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'RESOURCEGROUP.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-resourceGroup-button"
+                [disabled]="
+                    resourceGroupForm.invalid || resourceGroupForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateResourceGroup()"
+            >
+                <span>{{ "RESOURCEGROUP.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-resourceGroup-button"
+                [disabled]="
+                    resourceGroupForm.invalid || resourceGroupForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateResourceGroup()"
+            >
+                <span>{{ "RESOURCEGROUP.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="resourceGroupForm"
+                    [formGroup]="resourceGroupForm"
+                    class="resourceGroup w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'RESOURCEGROUP.RESOURCEGROUPINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "RESOURCEGROUP.GROUPCODE" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'RESOURCEGROUP.GROUPCODE'
+                                                | translate
+                                        }}"
+                                        name="GroupCode"
+                                        formControlName="GroupCode"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "RESOURCEGROUP.DESCRIPTION" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'RESOURCEGROUP.DESCRIPTION'
+                                                | translate
+                                        }}"
+                                        name="Description"
+                                        formControlName="Description"
+                                        required
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{ 'RESOURCEGROUP.RESOURCE' | translate }}"
+                        >
+                            <mat-table
+                                class="resourceGroups-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                fusePerfectScrollbar
+                                [dataSource]="resourceGroupDataSource"
+                            >
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="Id">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "RESOURCEGROUP.ID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let resourceGroup">
+                                        <p class="text-truncate">
+                                            {{ resourceGroup.Id }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- LanguageCode Column -->
+                                <ng-container matColumnDef="LanguageCode">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "RESOURCEGROUP.LANGUAGECODE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let resourceGroup">
+                                        <p class="text-truncate">
+                                            {{ resourceGroup.LanguageCode }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- ResourceGroupCode Column -->
+                                <ng-container matColumnDef="ResourceGroupCode">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "RESOURCEGROUP.RESOURCEGROUPCODE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let resourceGroup"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                resourceGroup.ResourceGroupCode
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ResourceCode Column -->
+                                <ng-container matColumnDef="ResourceCode">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "RESOURCEGROUP.RESOURCECODE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let resourceGroup"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ resourceGroup.ResourceCode }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Description Column -->
+                                <ng-container matColumnDef="Description">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "RESOURCEGROUP.DESCRIPTION"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let resourceGroup"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ resourceGroup.Description }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell *matCellDef="let resourceGroup">
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteResourceGroup(
+                                                            resourceGroup
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "RESOURCEGROUP.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let resourceGroup;
+                                        columns: displayedColumns
+                                    "
+                                    class="resourceGroup"
+                                    (click)="editResource(resourceGroup)"
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="resourceGroup-button"
+                                id="add-resourceGroup-button"
+                                (click)="newForm()"
+                                aria-label="add resourceGroup"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="resourceGroupDataSource.filteredData?.length"
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -1,0 +1,514 @@
+<div
+    id="schedulerJobErrorReport"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Schedulers/SchedulerJobErrorReports/searchSchedulerJobErrorReports'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="schedulerJobErrorReport mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="schedulerJobErrorReport.images[0]"
+                        [src]="schedulerJobErrorReport.images[0].url"
+                    />
+                    <img
+                        *ngIf="!schedulerJobErrorReport.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{
+                            "SCHEDULERJOBERROR.SCHEDULERJOBERRORREPORT"
+                                | translate
+                        }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "SCHEDULERJOBERROR.SCHEDULERJOBERRORREPORTDETAIL"
+                                | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="schedulerJobErrorReportForm"
+                    [formGroup]="schedulerJobErrorReportForm"
+                    class="schedulerJobErrorReport w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'SCHEDULERJOBERROR.SCHEDULERJOBERRORREPORTINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsTenantBasedJob"
+                                        formControlName="IsTenantBasedJob"
+                                        >{{
+                                            "SCHEDULERJOBERROR.ISTENANTBASEDJOB"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.STARTDATETIME"
+                                                | translate
+                                        }}</mat-label>
+
+                                        <input
+                                            matInput
+                                            name="StartDateTime"
+                                            formControlName="StartDateTime"
+                                            [matDatepicker]="
+                                                pickerStartDateTime
+                                            "
+                                            [(ngModel)]="
+                                                schedulerJobErrorReport.StartDateTime
+                                            "
+                                            (dateChange)="
+                                                onStartDateTimeChange($event)
+                                            "
+                                        />
+
+                                        <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="pickerStartDateTime"
+                                        >
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #pickerStartDateTime>
+                                        </mat-datepicker>
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.ENDDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            [matDatepicker]="pickerEndDateTime"
+                                            formControlName="EndDateTime"
+                                            [(ngModel)]="
+                                                schedulerJobErrorReport.EndDateTime
+                                            "
+                                            (dateChange)="
+                                                onEndDateTimeChange($event)
+                                            "
+                                        />
+
+                                        <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="pickerEndDateTime"
+                                        >
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker
+                                            #pickerEndDateTime
+                                        ></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.TENANT"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="
+                                                schedulerJobErrorReport.TenantId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let schedulerJobErrorReport of tenant
+                                                "
+                                                [value]="
+                                                    schedulerJobErrorReport.Id
+                                                "
+                                            >
+                                                {{
+                                                    schedulerJobErrorReport.TenantName
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                schedulerJobErrorReport.TenantId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                schedulerJobErrorReport.TenantId =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.TOTALELAPSED"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOBERROR.TOTALELAPSED'
+                                                    | translate
+                                            }}"
+                                            name="TotalElapsed"
+                                            formControlName="TotalElapsed"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.INSERTDATE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOBERROR.INSERTDATE'
+                                                    | translate
+                                            }}"
+                                            name="InsertDate"
+                                            formControlName="InsertDate"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.SCHEDULERJOB"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOBERROR.SCHEDULERJOB'
+                                                    | translate
+                                            }}"
+                                            name="SchedulerJobId"
+                                            formControlName="SchedulerJobId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.SCHEDULERJOBDETAIL"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOBERROR.SCHEDULERJOBDETAIL'
+                                                    | translate
+                                            }}"
+                                            name="SchedulerJobDetailId"
+                                            formControlName="SchedulerJobDetailId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.SCHEDULERJOBQUEE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOBERROR.SCHEDULERJOBQUEE'
+                                                    | translate
+                                            }}"
+                                            name="SchedulerJobQueueId"
+                                            formControlName="SchedulerJobQueueId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.RUNSTATUS"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="RunStatusId"
+                                            formControlName="RunStatusId"
+                                            [(value)]="
+                                                schedulerJobErrorReport.RunStatusId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let schedulerJobErrorReport of runStatus
+                                                "
+                                                [value]="
+                                                    schedulerJobErrorReport.Id
+                                                "
+                                            >
+                                                {{
+                                                    schedulerJobErrorReport.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                schedulerJobErrorReport.RunStatusId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                schedulerJobErrorReport.RunStatusId =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.DESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOBERROR.DESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.ERRORMESSAGE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOBERROR.ERRORMESSAGE'
+                                                    | translate
+                                            }}"
+                                            name="ErrorMessage"
+                                            formControlName="ErrorMessage"
+                                        />
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.SERVERCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOBERROR.SERVERCODE'
+                                                    | translate
+                                            }}"
+                                            name="ServerCode"
+                                            formControlName="ServerCode"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.MACHINENAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOBERROR.MACHINENAME'
+                                                    | translate
+                                            }}"
+                                            name="MachineName"
+                                            formControlName="MachineName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOBERROR.SCHEDULERJOBDESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOBERROR.SCHEDULERJOBDESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="SchedulerJobDescription"
+                                            formControlName="SchedulerJobDescription"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

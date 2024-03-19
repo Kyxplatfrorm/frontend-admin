@@ -1,0 +1,467 @@
+<div id="restApiLogs" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-restApiLogs-button fuse-white mt-24 mr-35"
+                        (click)="SearchRestApiLog()"
+                    >
+                        <span>{{ "RESTAPILOG.SEARCH" | translate }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-restApiLogs-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "RESTAPILOG.CLEAR" | translate }}
+                    </button>
+
+                    <!-- CLEAR BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="restApiLogsForm"
+                    [formGroup]="restApiLogsForm"
+                    class="restApiLog w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.SEARCHSTARTDATE" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="SearchStartDate"
+                                    formControlName="SearchStartDate"
+                                    [matDatepicker]="pickerStartDate"
+                                    [(ngModel)]="restApiLog.SearchStartDate"
+                                    (dateChange)="onDateChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerStartDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerStartDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.SEARCHENDDATE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    [matDatepicker]="pickerEndDate"
+                                    formControlName="SearchEndDate"
+                                    [(ngModel)]="restApiLog.SearchEndDate"
+                                    (dateChange)="onDateEndChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerEndDate></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.SEARCHSTARTTIME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'RESTAPILOG.SEARCHSTARTTIME' | translate
+                                    }}"
+                                    name="SearchStartTime"
+                                    formControlName="SearchStartTime"
+                                />
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.SEARCHENDTIME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'RESTAPILOG.SEARCHENDTIME' | translate
+                                    }}"
+                                    name="SearchEndTime"
+                                    formControlName="SearchEndTime"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.TENANTID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TenantId"
+                                    formControlName="TenantId"
+                                    [(value)]="restApiLog.TenantId"
+                                    placeholder="{{
+                                        'RESTAPILOG.TENANTID' | translate
+                                    }}"
+                                >
+                                    <mat-option
+                                        *ngFor="let restApiLog of tenant"
+                                        [value]="restApiLog.Id"
+                                    >
+                                        {{ restApiLog.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.USERNAME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'RESTAPILOG.USERNAME' | translate
+                                    }}"
+                                    name="UserName"
+                                    formControlName="UserName"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.APINAME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'RESTAPILOG.APINAME' | translate
+                                    }}"
+                                    name="ApiName"
+                                    formControlName="ApiName"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.SERVERNAME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'RESTAPILOG.SERVERNAME' | translate
+                                    }}"
+                                    name="ServerName"
+                                    formControlName="ServerName"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.USERTYPEID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="UserTypeId"
+                                    formControlName="UserTypeId"
+                                    [(value)]="restApiLog.UserTypeId"
+                                    placeholder="{{
+                                        'RESTAPILOG.USERTYPEID' | translate
+                                    }}"
+                                >
+                                    <mat-option
+                                        *ngFor="let restApiLog of userTypeList"
+                                        [value]="restApiLog.Id"
+                                    >
+                                        {{ restApiLog.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.SERVERTYPE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'RESTAPILOG.SERVERTYPE' | translate
+                                    }}"
+                                    name="ServerType"
+                                    formControlName="ServerType"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.APIRUNSTATUSID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="ApiRunStatusId"
+                                    formControlName="ApiRunStatusId"
+                                    [(value)]="restApiLog.ApiRunStatusId"
+                                    placeholder="{{
+                                        'RESTAPILOG.APIRUNSTATUSID' | translate
+                                    }}"
+                                >
+                                    <mat-option
+                                        *ngFor="let restApiLog of apiRunStatus"
+                                        [value]="restApiLog.Id"
+                                    >
+                                        {{ restApiLog.Description }}
+                                    </mat-option>
+                                </mat-select>
+                                <button
+                                    style="font-size: 13px"
+                                    *ngIf="restApiLog.ApiRunStatusId"
+                                    matSuffix
+                                    mat-icon-button
+                                    aria-label="Clear"
+                                    (click)="
+                                        restApiLog.ApiRunStatusId = undefined;
+                                        $event.stopPropagation()
+                                    "
+                                >
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.APIREFERENCENUMBER" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'RESTAPILOG.APIREFERENCENUMBER'
+                                            | translate
+                                    }}"
+                                    name="ApiReferenceNumber"
+                                    formControlName="ApiReferenceNumber"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.TOTALELAPSED" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    type="number"
+                                    placeholder="{{
+                                        'RESTAPILOG.TOTALELAPSED' | translate
+                                    }}"
+                                    name="TotalElapsed"
+                                    formControlName="TotalElapsed"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.HTTPRESPONSECODE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    type="number"
+                                    placeholder="{{
+                                        'RESTAPILOG.HTTPRESPONSECODE'
+                                            | translate
+                                    }}"
+                                    name="HttpResponseCode"
+                                    formControlName="HttpResponseCode"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.CONTROLLERNAME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'RESTAPILOG.CONTROLLERNAME' | translate
+                                    }}"
+                                    name="ControllerName"
+                                    formControlName="ControllerName"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.IPADDRESS" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'RESTAPILOG.IPADDRESS' | translate
+                                    }}"
+                                    name="ClientIp"
+                                    formControlName="ClientIp"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "RESTAPILOG.HTTPMETHOD" | translate
+                                }}</mat-label>
+
+                                <mat-select
+                                    name="HttpMethodId"
+                                    formControlName="HttpMethodId"
+                                    [(value)]="restApiLog.HttpMethodId"
+                                >
+                                    <mat-option
+                                        *ngFor="let restApiLog of httpMethod"
+                                        [value]="restApiLog.Id"
+                                    >
+                                        {{ restApiLog.Description }}
+                                    </mat-option>
+                                </mat-select>
+                                <button
+                                    style="font-size: 13px"
+                                    *ngIf="restApiLog.HttpMethodId"
+                                    matSuffix
+                                    mat-icon-button
+                                    aria-label="Clear"
+                                    (click)="
+                                        restApiLog.HttpMethodId = undefined;
+                                        $event.stopPropagation()
+                                    "
+                                >
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / CENTER -->
+</div>

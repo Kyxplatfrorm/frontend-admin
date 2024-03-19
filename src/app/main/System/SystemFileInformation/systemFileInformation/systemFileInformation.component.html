@@ -1,0 +1,435 @@
+<div
+    id="systemFileInformation"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/System/SystemFileInformation/searchSystemFileInformation'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="systemFileInformation-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="systemFileInformation.images[0]"
+                        [src]="systemFileInformation.images[0].url"
+                    />
+                    <img
+                        *ngIf="!systemFileInformation.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "SYSTEMFILEINFORMATION.SYSTEMFILEINFORMATIONDETAIL"
+                                | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="systemFileInformationForm"
+                    [formGroup]="systemFileInformationForm"
+                    class="systemFileInformation w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'SYSTEMFILEINFORMATION.SYSTEMFILEINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsTenantFile"
+                                        formControlName="IsTenantFile"
+                                        >{{
+                                            "SYSTEMFILEINFORMATION.ISTENANTFILE"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMFILEINFORMATION.TENANTID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="
+                                                systemFileInformation.TenantId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemFileInformation of tenant
+                                                "
+                                                [value]="
+                                                    systemFileInformation.Id
+                                                "
+                                            >
+                                                {{
+                                                    systemFileInformation.TenantName
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMFILEINFORMATION.FILEFORMATTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="FileFormatTypeId"
+                                            formControlName="FileFormatTypeId"
+                                            [(value)]="
+                                                systemFileInformation.FileFormatTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemFileInformation of fileFormatType
+                                                "
+                                                [value]="
+                                                    systemFileInformation.Id
+                                                "
+                                            >
+                                                {{
+                                                    systemFileInformation.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMFILEINFORMATION.FILEDIRECTIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="FileDirectionTypeId"
+                                            formControlName="FileDirectionTypeId"
+                                            [(value)]="
+                                                systemFileInformation.FileDirectionTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemFileInformation of fileDirectionType
+                                                "
+                                                [value]="
+                                                    systemFileInformation.Id
+                                                "
+                                            >
+                                                {{
+                                                    systemFileInformation.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMFILEINFORMATION.FILESTATUS"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="FileStatusId"
+                                            formControlName="FileStatusId"
+                                            [(value)]="
+                                                systemFileInformation.FileStatusId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemFileInformation of fileStatusType
+                                                "
+                                                [value]="
+                                                    systemFileInformation.Id
+                                                "
+                                            >
+                                                {{
+                                                    systemFileInformation.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMFILEINFORMATION.FILESOURCE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="FileSourceId"
+                                            formControlName="FileSourceId"
+                                            [(value)]="
+                                                systemFileInformation.FileSourceId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemFileInformation of fileSourceType
+                                                "
+                                                [value]="
+                                                    systemFileInformation.Id
+                                                "
+                                            >
+                                                {{
+                                                    systemFileInformation.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMFILEINFORMATION.FILENAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMFILEINFORMATION.FILENAME'
+                                                    | translate
+                                            }}"
+                                            name="FileName"
+                                            formControlName="FileName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMFILEINFORMATION.INSERTDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMFILEINFORMATION.INSERTDATETIME'
+                                                    | translate
+                                            }}"
+                                            name="InsertDateTime"
+                                            formControlName="InsertDateTime"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMFILEINFORMATION.FILEFORMATCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMFILEINFORMATION.FILEFORMATCODE'
+                                                    | translate
+                                            }}"
+                                            name="FileFormatCode"
+                                            formControlName="FileFormatCode"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMFILEINFORMATION.FILESIZE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMFILEINFORMATION.FILESIZE'
+                                                    | translate
+                                            }}"
+                                            name="FileSize"
+                                            formControlName="FileSize"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMFILEINFORMATION.DAILYFILEINDEX"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMFILEINFORMATION.DAILYFILEINDEX'
+                                                    | translate
+                                            }}"
+                                            name="DailyFileIndex"
+                                            formControlName="DailyFileIndex"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMFILEINFORMATION.RECORDCOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMFILEINFORMATION.RECORDCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="RecordCount"
+                                            formControlName="RecordCount"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMFILEINFORMATION.REJECTCOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMFILEINFORMATION.REJECTCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="RejectCount"
+                                            formControlName="RejectCount"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -1,0 +1,510 @@
+<div id="notificationReport" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Notifications/NotificationReport/searchNotificationReport'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="notificationReport-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="notificationReport.images[0]"
+                        [src]="notificationReport.images[0].url"
+                    />
+                    <img
+                        *ngIf="!notificationReport.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{
+                            "NOTIFICATIONREPORT.NOTIFICATIONREPORT" | translate
+                        }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "NOTIFICATIONREPORT.NOTIFICATIONREPORTDETAIL"
+                                | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-notificationReport-button"
+                [disabled]="
+                    notificationReportForm.invalid ||
+                    notificationReportForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateNotificationReport()"
+            >
+                <span>{{ "NOTIFICATIONREPORT.ADD" | translate }}</span>
+            </button>
+
+            <!-- <button
+                mat-raised-button
+                class="save-notificationReport-button"
+                [disabled]="
+                    notificationReportForm.invalid ||
+                    notificationReportForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateNotificationReport()"
+            >
+                <span>{{ "NOTIFICATIONReport.SAVE" | translate }}</span>
+            </button> -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="notificationReportForm"
+                    [formGroup]="notificationReportForm"
+                    class="notificationReport w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'NOTIFICATIONREPORT.NOTIFICATIONREPORTINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsEncrypted"
+                                        formControlName="IsEncrypted"
+                                        >{{
+                                            "NOTIFICATIONREPORT.ISENCRYPTED"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.CUSTOMERNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONREPORT.CUSTOMERNAME'
+                                                    | translate
+                                            }}"
+                                            name="CustomerName"
+                                            formControlName="CustomerName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.NOTIFICATIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="NotificationTypeId"
+                                            formControlName="NotificationTypeId"
+                                            [(value)]="
+                                                notificationReport.NotificationTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let notificationReport of notificationType
+                                                "
+                                                [value]="notificationReport.Id"
+                                            >
+                                                {{
+                                                    notificationReport.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.NOTIFICATIONTEMPLATE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TemplateId"
+                                            formControlName="TemplateId"
+                                            [(value)]="
+                                                notificationReport.TemplateId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let notificationReport of notificationTemplate
+                                                "
+                                                [value]="notificationReport.Id"
+                                            >
+                                                {{
+                                                    notificationReport.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.LANGUAGECODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="LanguageCodeId"
+                                            formControlName="LanguageCodeId"
+                                            [(value)]="
+                                                notificationReport.LanguageCodeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let notificationReport of languageCode
+                                                "
+                                                [value]="notificationReport.Id"
+                                            >
+                                                {{
+                                                    notificationReport.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.SENTSTATUS"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="SentStatusId"
+                                            formControlName="SentStatusId"
+                                            [(value)]="
+                                                notificationReport.SentStatusId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let notificationReport of sentStatus
+                                                "
+                                                [value]="notificationReport.Id"
+                                            >
+                                                {{
+                                                    notificationReport.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.COMPANY"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONREPORT.COMPANY'
+                                                    | translate
+                                            }}"
+                                            name="CompanyId"
+                                            formControlName="CompanyId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.RECEIVERADDRESS"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONREPORT.RECEIVERADDRESS'
+                                                    | translate
+                                            }}"
+                                            name="ReceiverAddress"
+                                            formControlName="ReceiverAddress"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.SUBJECT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONREPORT.SUBJECT'
+                                                    | translate
+                                            }}"
+                                            name="Subject"
+                                            formControlName="Subject"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.MAXRETRYCOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONREPORT.MAXRETRYCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="MaxRetryCount"
+                                            formControlName="MaxRetryCount"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.ATTEMPTCOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONREPORT.ATTEMPTCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="AttemptCount"
+                                            formControlName="AttemptCount"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasExpiryDateTime"
+                                        formControlName="HasExpiryDateTime"
+                                        [(ngModel)]="
+                                            notificationReport.HasExpiryDateTime
+                                        "
+                                        >{{
+                                            "NOTIFICATIONREPORT.HASEXPIRYDATE"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="
+                                            notificationReport.HasExpiryDateTime
+                                        "
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.EXPIRYDATETIME"
+                                                | translate
+                                        }}</mat-label>
+
+                                        <input
+                                            matInput
+                                            name="ExpiryDateTime"
+                                            formControlName="ExpiryDateTime"
+                                            [matDatepicker]="
+                                                pickerExpiryDateTime
+                                            "
+                                            (dateChange)="
+                                                onExpiryDateTimeChange($event)
+                                            "
+                                        />
+
+                                        <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="pickerExpiryDateTime"
+                                        >
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #pickerExpiryDateTime>
+                                        </mat-datepicker>
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.PRIORITY"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONREPORT.PRIORITY'
+                                                    | translate
+                                            }}"
+                                            name="Priority"
+                                            formControlName="Priority"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'NOTIFICATIONREPORT.CONTENT' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "NOTIFICATIONREPORT.CONTENT"
+                                                | translate
+                                        }}</mat-label>
+                                        <textarea
+                                            matInput
+                                            placeholder="{{
+                                                'NOTIFICATIONREPORT.CONTENT'
+                                                    | translate
+                                            }}"
+                                            name="Content"
+                                            formControlName="Content"
+                                            rows="25"
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

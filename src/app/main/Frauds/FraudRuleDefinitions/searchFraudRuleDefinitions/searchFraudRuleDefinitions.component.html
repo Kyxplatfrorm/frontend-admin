@@ -1,0 +1,305 @@
+<div
+    id="searchFraudRuleDefinitions"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Frauds/FraudRuleDefinitions/fraudRuleDefinitions'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "FRAUDRULE.FRAUDRULEDEFINATION" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'FRAUDRULE.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button
+                mat-raised-button
+                [routerLink]="'/searchFraudRuleDefinitions/new'"
+                class="add-fraudRule-button fuse-white mt-24 mt-md-0"
+            >
+                <span>{{ "FRAUDRULE.ADD" | translate }}</span>
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="searchFraudRuleDefinitions-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="searchFraudRuleDefinitionsDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "FRAUDRULE.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let fraudRule">
+                        <p class="text-truncate">
+                            {{ fraudRule.Id }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TenantName Column -->
+                <ng-container matColumnDef="TenantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "FRAUDRULE.TENANTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let fraudRule">
+                        <p class="text-truncate">
+                            {{ fraudRule.TenantName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Description Column -->
+                <ng-container matColumnDef="Description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "FRAUDRULE.DESCRIPTION" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let fraudRule">
+                        <p class="text-truncate">
+                            {{ fraudRule.Description }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- FraudGroupName Column -->
+                <ng-container matColumnDef="FraudGroupName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "FRAUDRULE.FRAUDGROUPNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let fraudRule">
+                        <p class="text-truncate">
+                            {{ fraudRule.FraudGroupName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- FraudRuleActionTypeName Column -->
+                <ng-container matColumnDef="FraudRuleActionTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "FRAUDRULE.FRAUDRULEACTIONTYPENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let fraudRule">
+                        <p class="text-truncate">
+                            {{ fraudRule.FraudRuleActionTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- FraudRuleCheckTimeTypeName Column -->
+                <ng-container matColumnDef="FraudRuleCheckTimeTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "FRAUDRULE.FRAUDRULECHECKTIMETYPENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let fraudRule">
+                        <p class="text-truncate">
+                            {{ fraudRule.FraudRuleCheckTimeTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- NotificationTypeName Column -->
+                <ng-container matColumnDef="NotificationTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "FRAUDRULE.NOTIFICATIONTYPENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let fraudRule">
+                        <p class="text-truncate">
+                            {{ fraudRule.NotificationTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- NotificationTemplateCode Column -->
+                <ng-container matColumnDef="NotificationTemplateCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "FRAUDRULE.NOTIFICATIONTEMPLATECODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let fraudRule">
+                        <p class="text-truncate">
+                            {{ fraudRule.NotificationTemplateCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ErrorDescription Column -->
+                <ng-container matColumnDef="ErrorDescription">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "FRAUDRULE.ERRORDESCRIPTION" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let fraudRule">
+                        <p class="text-truncate">
+                            {{ fraudRule.ErrorDescription }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "FRAUDRULE.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let fraudRule" fxHide fxShow.gt-sm>
+                        <span class="text-truncate"
+                            >{{
+                                fraudRule.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-sm
+                        >{{
+                            "FRAUDRULE.UPDATEDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let fraudRule" fxHide fxShow.gt-xs>
+                        <span class="text-truncate"
+                            >{{
+                                fraudRule.UpdateDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss"
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let fraudRule">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="
+                                        DeleteFraudRuleDefinition(fraudRule)
+                                    "
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                    <span
+                                        >{{ "FRAUDRULE.REMOVE" | translate }}
+                                    </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let fraudRule; columns: displayedColumns"
+                    class="fraudRule"
+                    [routerLink]="['/searchFraudRuleDefinitions', fraudRule.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="
+                    searchFraudRuleDefinitionsDataSource.filteredData.length
+                "
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

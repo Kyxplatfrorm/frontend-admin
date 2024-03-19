@@ -1,0 +1,26 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        USER: {
+            APIUSERDEFINITION: "Api Kullanıcı Tanımı",
+            SEARCHTEXT: "Api kullanıcı tanımı arayınız",
+            ID: "Id",
+            TENANTNAME: "Üye İsmi",
+            USERTYPE: "Kullanıcı Tipi",
+            USERNAME: "Kullanıcı İsmi",
+            USERSTATUS: "Kullanıcı Durumu",
+            HASAPIKEY: "Api Anahtarı",
+            WRONGATTEMPTCOUNT: "Yanlış Giriş Sayısı",
+            USERPROFILE: "Kullanıcı Profili",
+            INSERTDATETIME: "Ekleme Tarihi",
+            UPDATEDATETIME: "Güncelleme Tarihi",
+            RESETPASSWORDRETRYCOUNT: "Şifre Deneme Sayısını Sıfırla ",
+            RESETPASSWORD: "Şifreyi Sıfırla",
+            OK: "TAMAM",
+            EMAIL: "Email",
+            DELETE: "Sil",
+            ADD: "EKLE",
+            COMPANYNAME: "Şirket İsmi",
+        },
+    },
+};

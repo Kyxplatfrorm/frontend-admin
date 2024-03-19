@@ -1,0 +1,119 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="fraudRuleApiRelationForm">
+            <div class="checkbox">
+                <mat-checkbox name="IsActive" formControlName="IsActive">{{
+                    "FRAUDRULE.ISACTIVE" | translate
+                }}</mat-checkbox>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "FRAUDRULE.FRAUDAPI" | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="FraudApiId"
+                        formControlName="FraudApiId"
+                        [(value)]="fraudRule.FraudApiId"
+                    >
+                        <mat-option
+                            *ngFor="let fraudRule of fraudApiDefinitionList"
+                            [value]="fraudRule.Id"
+                        >
+                            {{ fraudRule.Description }}
+                        </mat-option>
+                    </mat-select>
+                    <button
+                        style="font-size: 13px"
+                        *ngIf="fraudRule.FraudApiId"
+                        matSuffix
+                        mat-icon-button
+                        aria-label="Clear"
+                        (click)="
+                            fraudRule.FraudApiId = undefined;
+                            $event.stopPropagation()
+                        "
+                    >
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "FRAUDRULE.PRIORITY" | translate
+                    }}</mat-label>
+
+                    <input
+                        name="Priority"
+                        formControlName="Priority"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', fraudRuleApiRelationForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "FRAUDRULE.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(fraudRuleApiRelationForm)"
+            [disabled]="fraudRuleApiRelationForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "FRAUDRULE.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', fraudRuleApiRelationForm])"
+            [disabled]="fraudRuleApiRelationForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "FRAUDRULE.SAVE" | translate }}
+        </button>
+    </div>
+</div>

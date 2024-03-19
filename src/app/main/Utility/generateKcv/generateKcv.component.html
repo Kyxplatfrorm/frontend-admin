@@ -1,0 +1,139 @@
+<div id="generateKcv" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "KCV.GENERATEKCVDEFINITION" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="generateKcvForm"
+                    [formGroup]="generateKcvForm"
+                    class="kcv w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{ 'KCV.GENERATEKCVINFO' | translate }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-60-p"
+                                >
+                                    <mat-label>{{
+                                        "KCV.KEY" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'KCV.KEY' | translate
+                                        }}"
+                                        name="Key"
+                                        formControlName="Key"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <div class="button">
+                                    <section>
+                                        <div class="button-row">
+                                            <button
+                                                mat-raised-button
+                                                color="basic"
+                                                (click)="GenerateKcvButton()"
+                                            >
+                                                {{
+                                                    "KCV.GENERATEKCV"
+                                                        | translate
+                                                }}
+                                            </button>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="clear">
+                                    <section>
+                                        <div class="clear">
+                                            <button
+                                                mat-raised-button
+                                                color="basic"
+                                                (click)="ClearButton()"
+                                            >
+                                                {{ "KCV.CLEAR" | translate }}
+                                            </button>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-60-p"
+                                    >
+                                        <mat-label>{{
+                                            "KCV.RESULT" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'KCV.RESULT' | translate
+                                            }}"
+                                            name="Result"
+                                            formControlName="Result"
+                                            [(ngModel)]="kcvResult"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

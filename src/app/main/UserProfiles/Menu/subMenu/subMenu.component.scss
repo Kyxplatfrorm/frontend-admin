@@ -1,0 +1,146 @@
+#subMenus {
+    .header {
+        .menu-image {
+            overflow: hidden;
+            width: 56px;
+            min-width: 56px;
+            max-width: 56px;
+            height: 56px;
+            min-height: 56px;
+            max-height: 56px;
+            border-radius: 4px;
+            img {
+                height: 100%;
+                width: auto;
+                max-width: none;
+            }
+        }
+        .subtitle {
+            margin: 6px 0 0 0;
+        }
+    }
+    .search-wrapper {
+        width: 100%;
+        max-width: 480px;
+        border-radius: 28px;
+        overflow: hidden;
+        .search {
+            width: 100%;
+            height: 48px;
+            line-height: 48px;
+            padding: 0 18px;
+            background-color: white;
+            color: gray;
+
+            input {
+                width: 100%;
+                height: 48px;
+                min-height: 48px;
+                max-height: 48px;
+                padding: 0 16px;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+    .subMenus-table {
+        flex: 1 1 auto;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        .mat-header-row {
+            min-height: 64px;
+            width: 200vh;
+        }
+        .menu {
+            position: relative;
+            cursor: pointer;
+            height: 84px;
+            width: 200vh;
+        }
+        .mat-cell {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+        }
+        .mat-column-MenuOrder {
+            flex: 0 1 150px;
+            justify-content: center;
+        }
+        .mat-column-MenuCode {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+        .mat-column-MenuName {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+        .mat-column-TranslateKey {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+        .mat-column-MenuIcon {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+        .mat-column-MenuUrl {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+        .mat-column-ControllerName {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+        .mat-column-RelatedControllerName {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+        .mat-column-Buttons {
+            flex: 0 1 80px;
+            justify-content: center;
+        }
+    }
+    .content {
+        .mat-tab-group,
+        .mat-tab-body-wrapper,
+        .tab-content {
+            flex: 1 1 auto;
+            max-width: 100%;
+        }
+        .mat-tab-body-content {
+            display: flex;
+        }
+        .mat-tab-label {
+            height: 64px;
+        }
+        .menu-image {
+            overflow: hidden;
+            width: 128px;
+            height: 128px;
+            margin-right: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            img {
+                height: 100%;
+                width: auto;
+                max-width: none;
+            }
+        }
+        .checkbox {
+            margin-bottom: 20px;
+        }
+
+        // Temporary prefix alignment fix
+        .mat-form-field-appearance-outline .mat-form-field-prefix,
+        .mat-form-field-appearance-outline .mat-form-field-suffix {
+            top: 0;
+        }
+    }
+}
+#add-menu-button {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    padding: 0;
+    z-index: 99;
+}

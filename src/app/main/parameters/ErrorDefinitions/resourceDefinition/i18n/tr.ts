@@ -1,0 +1,30 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        RESOURCE: {
+            ERRORCODE: "Hata Kodu",
+            NUMERICERRORCODE: "Sayısal Hata Kodu",
+            ERRORDESCRIPTION: "Hata Açıklaması",
+            SAVE: "KAYDET",
+            ADD: "EKLE",
+            ERRORDETAIL: "Hata Bilgisi Detayı",
+            NEWERROR: "Yeni Hata Bilgisi",
+            LANGUAGE: "Dil",
+            ERRORINFO: "Hata Bilgisi",
+            RESOURCE: "Kaynaklar",
+            REMOVE: "Sil",
+            DESCRIPTION: "Açıklama",
+            DELETE: "SİL",
+            RESOURCEADDED: "Hata Eklendi",
+            RESOURCESAVED: "Hata Kaydedildi",
+            OK: "TAMAM",
+            ERRORID: "Hata Id",
+            ID: "Id",
+            SEARCHTEXT: "Bir kaynak arayınız",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Lütfen geçerli bir bilgi giriniz",
+            OK: "TAMAM",
+        },
+    },
+};

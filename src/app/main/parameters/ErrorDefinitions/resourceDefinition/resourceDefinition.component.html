@@ -1,0 +1,355 @@
+<div id="resoruceDefinitions" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Parameters/ErrorDefinitions/errorDefinitions'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="resoruceDefinitions-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="resource.images[0]"
+                        [src]="resource.images[0].url"
+                    />
+                    <img
+                        *ngIf="!resource.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "RESOURCE.NEWERROR" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "RESOURCE.ERRORDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'RESOURCE.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-resoruceDefinitions-button"
+                [disabled]="
+                    errorResourceForm.invalid || errorResourceForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="createErrorDefinition()"
+            >
+                <span>{{ "RESOURCE.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-resoruceDefinitions-button"
+                [disabled]="
+                    errorResourceForm.invalid || errorResourceForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="updateErrorDefinition()"
+            >
+                <span>{{ "RESOURCE.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="errorResourceForm"
+                    [formGroup]="errorResourceForm"
+                    class="resource w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab label="{{ 'RESOURCE.ERRORINFO' | translate }}">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "RESOURCE.ERRORCODE" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'RESOURCE.ERRORCODE' | translate
+                                        }}"
+                                        name="ErrorCode"
+                                        formControlName="ErrorCode"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "RESOURCE.NUMERICERRORCODE" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'RESOURCE.NUMERICERRORCODE'
+                                                | translate
+                                        }}"
+                                        name="NumericErrorCode"
+                                        formControlName="NumericErrorCode"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "RESOURCE.ERRORDESCRIPTION" | translate
+                                    }}</mat-label>
+                                    <textarea
+                                        matInput
+                                        placeholder="{{
+                                            'RESOURCE.ERRORDESCRIPTION'
+                                                | translate
+                                        }}"
+                                        name="ErrorDescription"
+                                        formControlName="ErrorDescription"
+                                        rows="5"
+                                    >
+                                    </textarea>
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="{{ 'RESOURCE.RESOURCE' | translate }}">
+                            <mat-table
+                                class="resoruceDefinitions-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                fusePerfectScrollbar
+                                [dataSource]="resourceDefinitionDataSource"
+                            >
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="Id">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "RESOURCE.ID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let resource">
+                                        <p class="text-truncate">
+                                            {{ resource.Id }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- LanguageCode Column -->
+                                <ng-container matColumnDef="LanguageCode">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "RESOURCE.LANGUAGE" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let resource">
+                                        <p class="text-truncate">
+                                            {{ resource.LanguageCode }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- ResourceCode Column -->
+                                <ng-container matColumnDef="ResourceCode">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "RESOURCE.ERRORCODE" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let resource">
+                                        <p class="text-truncate">
+                                            {{ resource.ResourceCode }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Description Column -->
+                                <ng-container matColumnDef="Description">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "RESOURCE.ERRORDESCRIPTION"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let resource"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ resource.Description }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell *matCellDef="let resource">
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        deleteResource(resource)
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "RESOURCE.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let resource;
+                                        columns: displayedColumns
+                                    "
+                                    class="resource"
+                                    (click)="editResourceDefinition(resource)"
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+
+                            <button
+                                mat-fab
+                                class="resource-button"
+                                id="add-resource-button"
+                                (click)="newForm()"
+                                aria-label="add resource"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="
+                            resourceDefinitionDataSource.filteredData?.length
+                        "
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

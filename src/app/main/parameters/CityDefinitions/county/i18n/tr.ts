@@ -1,0 +1,31 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        COUNTY: {
+            CITYCODE: "Şehir Kodu",
+            CITYNAME: "Şehir İsmi",
+            DELETE: "SİL",
+            ADD: "EKLE",
+            SAVE: "KAYDET",
+            NEWCITY: "Yeni Şehir",
+            CITYDETAIL: "Şehir Detayı",
+            CITYINFORMATION: "Şehir Bilgisi",
+            COUNTRYCODE: "Ülke Kodu",
+            STATECODE: "Eyalet Kodu",
+            COUNTY: "İlçeler",
+            ID: "Id",
+            COUNTYNAME: "İlçe İsmi",
+            REMOVE: "Sil",
+            COUNTRYID: "Ülke Id",
+            STATEID: "Eyalet ",
+            OK: "TAMAM",
+            CITYSAVED: "Şehir Kaydedildi",
+            CITYADDED: "Şehir Eklendi",
+            SEARCHTEXT: "Bir ilçe arayınız",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Lütfen geçerli bir bilgi giriniz",
+            OK: "TAMAM",
+        },
+    },
+};

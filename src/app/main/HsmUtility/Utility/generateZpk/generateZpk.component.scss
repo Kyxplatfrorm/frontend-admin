@@ -1,0 +1,101 @@
+@import "src/@fuse/scss/fuse";
+generateZpk {
+    #generateZpk {
+        .top-bg {
+            @include media-breakpoint("lt-md") {
+                height: 256px;
+            }
+        }
+
+        > .center {
+            > .header {
+                @include media-breakpoint("lt-md") {
+                    padding: 8px 0;
+                    height: 192px !important;
+                    min-height: 192px !important;
+                    max-height: 192px !important;
+                }
+            }
+        }
+    }
+    .tab-content {
+        flex: 1 1 auto;
+        max-width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .content {
+        .mat-tab-group,
+        .mat-tab-body-wrapper,
+        .mat-tab-body-content {
+            display: flex;
+        }
+        .mat-tab-label {
+            height: 64px;
+        }
+        .generateZpk-image {
+            overflow: hidden;
+            width: 128px;
+            height: 128px;
+            margin-right: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+
+            img {
+                height: 100%;
+                width: auto;
+                max-width: none;
+            }
+        }
+
+        // Temporary prefix alignment fix
+        .mat-form-field-appearance-outline .mat-form-field-prefix,
+        .mat-form-field-appearance-outline .mat-form-field-suffix {
+            top: 0;
+        }
+    }
+    section {
+        margin-bottom: 20px;
+        float: right;
+    }
+    .button-row {
+        align-items: center;
+        max-width: 600px;
+    }
+    .button-row .mat-mdc-button-base {
+        margin: 8px 8px 8px 0;
+    }
+    .button {
+        width: 60%;
+    }
+    .clear {
+        width: 60%;
+    }
+    .checkbox {
+        margin-bottom: 20px;
+    }
+
+    .generateZpk-table {
+        flex: 1 1 auto;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+
+        .mat-header-row {
+            min-height: 64px;
+        }
+
+        .generateZpk {
+            position: relative;
+            cursor: pointer;
+            height: 84px;
+        }
+
+        .mat-cell {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+        }
+    }
+}

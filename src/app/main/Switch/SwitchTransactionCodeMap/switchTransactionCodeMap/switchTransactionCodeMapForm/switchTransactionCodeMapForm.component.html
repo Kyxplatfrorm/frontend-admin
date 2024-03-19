@@ -1,0 +1,251 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="switchTransactionCodeMapForm">
+            <div class="checkbox">
+                <mat-checkbox
+                    style="margin-bottom: 20px"
+                    name="IsActive"
+                    formControlName="IsActive"
+                    >{{
+                        "SWITCHTRANSACTIONCODEMAP.ISACTIVE" | translate
+                    }}</mat-checkbox
+                >
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHTRANSACTIONCODEMAP.TRANSACTIONENTRYTYPE"
+                            | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="TransactionEntryTypeId"
+                        formControlName="TransactionEntryTypeId"
+                        [(ngModel)]="
+                            switchTransactionCodeMap.TransactionEntryTypeId
+                        "
+                        [(value)]="
+                            switchTransactionCodeMap.TransactionEntryTypeId
+                        "
+                    >
+                        <mat-option
+                            *ngFor="
+                                let switchTransactionCodeMap of switchTransactionEntryType
+                            "
+                            [value]="switchTransactionCodeMap.Id"
+                        >
+                            {{ switchTransactionCodeMap.Description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHTRANSACTIONCODEMAP.NETWORKTYPE" | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="NetworkTypeId"
+                        formControlName="NetworkTypeId"
+                        [(ngModel)]="switchTransactionCodeMap.NetworkTypeId"
+                        [(value)]="switchTransactionCodeMap.NetworkTypeId"
+                        disabled
+                    >
+                        <mat-option
+                            *ngFor="let switchTransactionCodeMap of netWorkType"
+                            [value]="switchTransactionCodeMap.Id"
+                        >
+                            {{ switchTransactionCodeMap.Description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHTRANSACTIONCODEMAP.TRANSACTIONCODE" | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="TransactionCodeId"
+                        formControlName="TransactionCodeId"
+                        [(ngModel)]="switchTransactionCodeMap.TransactionCodeId"
+                        [(value)]="switchTransactionCodeMap.TransactionCodeId"
+                    >
+                        <mat-option
+                            *ngFor="
+                                let switchTransactionCodeMap of transactionCode
+                            "
+                            [value]="switchTransactionCodeMap.Id"
+                        >
+                            {{ switchTransactionCodeMap.Description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHTRANSACTIONCODEMAP.TRANSACTIONAMOUNT" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'SWITCHTRANSACTIONCODEMAP.TRANSACTIONAMOUNT'
+                                | translate
+                        }}"
+                        name="TransactionAmount"
+                        formControlName="TransactionAmount"
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHTRANSACTIONCODEMAP.MTI" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'SWITCHTRANSACTIONCODEMAP.MTI' | translate
+                        }}"
+                        name="Mti"
+                        formControlName="Mti"
+                    />
+                </mat-form-field>
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHTRANSACTIONCODEMAP.PRIORITY" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'SWITCHTRANSACTIONCODEMAP.PRIORITY' | translate
+                        }}"
+                        name="Priority"
+                        formControlName="Priority"
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHTRANSACTIONCODEMAP.PROCESSINGCODE" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'SWITCHTRANSACTIONCODEMAP.PROCESSINGCODE'
+                                | translate
+                        }}"
+                        name="ProcessingCode"
+                        formControlName="ProcessingCode"
+                    />
+                </mat-form-field>
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHTRANSACTIONCODEMAP.DESCRIPTION" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'SWITCHTRANSACTIONCODEMAP.DESCRIPTION' | translate
+                        }}"
+                        name="Description"
+                        formControlName="Description"
+                    />
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="
+                matDialogRef.close(['delete', switchTransactionCodeMapForm])
+            "
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "SWITCHTRANSACTIONCODEMAP.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(switchTransactionCodeMapForm)"
+            [disabled]="switchTransactionCodeMapForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "SWITCHTRANSACTIONCODEMAP.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', switchTransactionCodeMapForm])"
+            [disabled]="switchTransactionCodeMapForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "SWITCHTRANSACTIONCODEMAP.SAVE" | translate }}
+        </button>
+    </div>
+</div>

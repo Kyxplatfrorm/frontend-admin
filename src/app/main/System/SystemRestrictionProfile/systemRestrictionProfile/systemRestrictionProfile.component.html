@@ -1,0 +1,646 @@
+<div
+    id="systemRestrictionProfile"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <div
+                    class="systemRestriction-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="systemRestriction.images[0]"
+                        [src]="systemRestriction.images[0].url"
+                    />
+                    <img
+                        *ngIf="!systemRestriction.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{
+                            "SYSTEMRESTRICTION.NEWSYSTEMRESTRICTIONPROFILE"
+                                | translate
+                        }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "SYSTEMRESTRICTION.SYSTEMRESTRICTIONPROFILEDETAIL"
+                                | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'SYSTEMRESTRICTION.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-systemRestriction-button"
+                (click)="UpdateSystemRestrictionProfile()"
+            >
+                <span>{{ "SYSTEMRESTRICTION.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="systemRestrictionProfileForm"
+                    [formGroup]="systemRestrictionProfileForm"
+                    class="systemRestriction w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'SYSTEMRESTRICTION.SYSTEMRESTRICTIONPROFILE'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasInternationalUsage"
+                                        formControlName="HasInternationalUsage"
+                                        fxFlex="35"
+                                        >{{
+                                            "SYSTEMRESTRICTION.HASINTERNATIONALUSAGE"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                    <mat-checkbox
+                                        name="HasECommerceUsage"
+                                        formControlName="HasECommerceUsage"
+                                        fxFlex="35"
+                                        >{{
+                                            "SYSTEMRESTRICTION.HASECOMMERCEUSAGE"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                    <div
+                                        fxLayout="row"
+                                        fxLayoutAlign="space-between"
+                                        fxFlex="30"
+                                    ></div>
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasMotoUsage"
+                                        formControlName="HasMotoUsage"
+                                        fxFlex="35"
+                                        >{{
+                                            "SYSTEMRESTRICTION.HASMOTOUSAGE"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                    <mat-checkbox
+                                        name="HasAtmUsage"
+                                        formControlName="HasAtmUsage"
+                                        fxFlex="35"
+                                        >{{
+                                            "SYSTEMRESTRICTION.HASATMUSAGE"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                    <div
+                                        fxLayout="row"
+                                        fxLayoutAlign="space-between"
+                                        fxFlex="30"
+                                    ></div>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMRESTRICTION.MERCHANTRESTRICTIONCHECKTYPEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="MerchantRestrictionCheckTypeId"
+                                            formControlName="MerchantRestrictionCheckTypeId"
+                                            [(value)]="
+                                                systemRestriction.MerchantRestrictionCheckTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemRestriction of restrictionCheckType
+                                                "
+                                                [value]="systemRestriction.Id"
+                                            >
+                                                {{
+                                                    systemRestriction.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMRESTRICTION.MERCHANTNAMERESTRICTIONCHECKTYPEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="MerchantNameRestrictionCheckTypeId"
+                                            formControlName="MerchantNameRestrictionCheckTypeId"
+                                            [(value)]="
+                                                systemRestriction.MerchantNameRestrictionCheckTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemRestriction of restrictionCheckType
+                                                "
+                                                [value]="systemRestriction.Id"
+                                            >
+                                                {{
+                                                    systemRestriction.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMRESTRICTION.MCCRESTRICTIONCHECKTYPEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="MccRestrictionCheckTypeId"
+                                            formControlName="MccRestrictionCheckTypeId"
+                                            [(value)]="
+                                                systemRestriction.MccRestrictionCheckTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemRestriction of restrictionCheckType
+                                                "
+                                                [value]="systemRestriction.Id"
+                                            >
+                                                {{
+                                                    systemRestriction.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMRESTRICTION.TRANSACTIONRESTRICTIONCHECKTYPEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TransactionRestrictionCheckTypeId"
+                                            formControlName="TransactionRestrictionCheckTypeId"
+                                            [(value)]="
+                                                systemRestriction.TransactionRestrictionCheckTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemRestriction of restrictionCheckType
+                                                "
+                                                [value]="systemRestriction.Id"
+                                            >
+                                                {{
+                                                    systemRestriction.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMRESTRICTION.COUNTRYRESTRICTIONCHECKTYPEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="CountryRestrictionCheckTypeId"
+                                            formControlName="CountryRestrictionCheckTypeId"
+                                            [(value)]="
+                                                systemRestriction.CountryRestrictionCheckTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemRestriction of restrictionCheckType
+                                                "
+                                                [value]="systemRestriction.Id"
+                                            >
+                                                {{
+                                                    systemRestriction.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMRESTRICTION.ACQUIRERRESTRICTIONCHECKTYPEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="AcquirerRestrictionCheckTypeId"
+                                            formControlName="AcquirerRestrictionCheckTypeId"
+                                            [(value)]="
+                                                systemRestriction.AcquirerRestrictionCheckTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemRestriction of restrictionCheckType
+                                                "
+                                                [value]="systemRestriction.Id"
+                                            >
+                                                {{
+                                                    systemRestriction.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMRESTRICTION.TENANTRESTRICTIONCHECKTYPEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantRestrictionCheckTypeId"
+                                            formControlName="TenantRestrictionCheckTypeId"
+                                            [(value)]="
+                                                systemRestriction.TenantRestrictionCheckTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemRestriction of restrictionCheckType
+                                                "
+                                                [value]="systemRestriction.Id"
+                                            >
+                                                {{
+                                                    systemRestriction.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMRESTRICTION.MINIMUMTRANSACTIONAMOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMRESTRICTION.MINIMUMTRANSACTIONAMOUNT'
+                                                    | translate
+                                            }}"
+                                            name="MinimumTransactionAmount"
+                                            formControlName="MinimumTransactionAmount"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMRESTRICTION.MAXIMUMTRANSACTIONAMOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMRESTRICTION.MAXIMUMTRANSACTIONAMOUNT'
+                                                    | translate
+                                            }}"
+                                            name="MaximumTransactionAmount"
+                                            formControlName="MaximumTransactionAmount"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'SYSTEMRESTRICTION.SYSTEMRESTRICTION'
+                                    | translate
+                            }}"
+                        >
+                            <mat-table
+                                class="systemRestrictionProfile-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                fusePerfectScrollbar
+                                [dataSource]="
+                                    systemRestrictionProfileDataSource
+                                "
+                            >
+                                <!-- RestrictionCheckType Column -->
+                                <ng-container
+                                    matColumnDef="RestrictionCheckType"
+                                >
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SYSTEMRESTRICTION.RESTRICTIONCHECKTYPE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let systemRestriction"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                systemRestriction.RestrictionCheckType
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- RestrictionType Column -->
+                                <ng-container matColumnDef="RestrictionType">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SYSTEMRESTRICTION.RESTRICTIONTYPE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let systemRestriction"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                systemRestriction.RestrictionType
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- RestrictionCode Column -->
+                                <ng-container matColumnDef="RestrictionCode">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SYSTEMRESTRICTION.RESTRICTIONCODE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let systemRestriction"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                systemRestriction.RestrictionCode
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- RestrictionCodeDescription Column -->
+                                <ng-container
+                                    matColumnDef="RestrictionCodeDescription"
+                                >
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SYSTEMRESTRICTION.RESTRICTIONCODEDESCRIPTION"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let systemRestriction"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                systemRestriction.RestrictionCodeDescription
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell
+                                        *matCellDef="let systemRestriction"
+                                    >
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteSystemRestrictionProfileDetail(
+                                                            systemRestriction
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "SYSTEMRESTRICTION.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let systemRestriction;
+                                        columns: displayedColumns
+                                    "
+                                    class="systemRestriction"
+                                    (click)="
+                                        EditSystemRestrictionProfile(
+                                            systemRestriction
+                                        )
+                                    "
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="systemRestriction-button"
+                                id="add-systemRestriction-button"
+                                (click)="SystemRestrictionForm()"
+                                aria-label="add systemRestriction"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="
+                            systemRestrictionProfileDataSource.filteredData
+                                ?.length
+                        "
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

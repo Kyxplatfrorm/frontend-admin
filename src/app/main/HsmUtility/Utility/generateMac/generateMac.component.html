@@ -1,0 +1,202 @@
+<div id="generateMac" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "GENERATEMAC.GENERATEMAC" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="generateMacForm"
+                    [formGroup]="generateMacForm"
+                    class="generateMac w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'GENERATEMAC.GENERATEMACINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-60-p"
+                                >
+                                    <mat-label>{{
+                                        "GENERATEMAC.MACKEYUNDERLMK" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'GENERATEMAC.MACKEYUNDERLMK'
+                                                | translate
+                                        }}"
+                                        name="MacKeyUnderLmk"
+                                        formControlName="MacKeyUnderLmk"
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-60-p"
+                                >
+                                    <mat-label>{{
+                                        "GENERATEMAC.MACDATA" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'GENERATEMAC.MACDATA' | translate
+                                        }}"
+                                        name="MacData"
+                                        formControlName="MacData"
+                                    />
+                                </mat-form-field>
+
+                                <div class="button">
+                                    <section>
+                                        <div class="button-row">
+                                            <button
+                                                mat-raised-button
+                                                color="basic"
+                                                (click)="GenerateMacButton()"
+                                            >
+                                                {{
+                                                    "GENERATEMAC.GENERATEMAC2"
+                                                        | translate
+                                                }}
+                                            </button>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="clear">
+                                    <section>
+                                        <div class="clear">
+                                            <button
+                                                mat-raised-button
+                                                color="basic"
+                                                (click)="ClearButton()"
+                                            >
+                                                {{
+                                                    "GENERATEMAC.CLEAR"
+                                                        | translate
+                                                }}
+                                            </button>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-60-p"
+                                >
+                                    <mat-label>{{
+                                        "GENERATEMAC.HSMERRORCODE" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'GENERATEMAC.HSMERRORCODE'
+                                                | translate
+                                        }}"
+                                        name="HsmErrorCode"
+                                        formControlName="HsmErrorCode"
+                                        [(ngModel)]="generateHsmErrorCode"
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-60-p"
+                                >
+                                    <mat-label>{{
+                                        "GENERATEMAC.HSMERRORDESCRIPTION"
+                                            | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'GENERATEMAC.HSMERRORDESCRIPTION'
+                                                | translate
+                                        }}"
+                                        name="HsmErrorDescription"
+                                        formControlName="HsmErrorDescription"
+                                        [(ngModel)]="
+                                            generateHsmErrorDescription
+                                        "
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-60-p"
+                                >
+                                    <mat-label>{{
+                                        "GENERATEMAC.MAC" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'GENERATEMAC.MAC' | translate
+                                        }}"
+                                        name="Mac"
+                                        formControlName="Mac"
+                                        [(ngModel)]="hsmMac"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

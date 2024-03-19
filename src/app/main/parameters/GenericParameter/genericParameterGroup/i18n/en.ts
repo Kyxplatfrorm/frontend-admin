@@ -1,0 +1,36 @@
+export const locale = {
+    lang: "en",
+    data: {
+        GENERICPARAMETER: {
+            GENERICGENERICPARAMETERGROUPDEFINITION: "Parameter Definition",
+            SEARCHTEXT: "Search for a generic parameter definition",
+            ADDNEWGENERICPARAMETERGROUPDEFINITION:
+                "Add New Generic Parameter  Definition",
+            ID: "Id",
+            GROUPCODE: "Group Code",
+            DESCRIPTION: "Description",
+            INSERTDATETIME: "Insert Date Time",
+            UPDATEDATETIME: "Update Date Time",
+            REMOVE: "Remove",
+            DELETE: "DELETE",
+            ADD: "ADD",
+            SAVE: "SAVE",
+            GENERICPARAMETERADDED: "Generic Parameter Added",
+            OK: "OK",
+            GENERICPARAMETERSAVED: "Generic Paremeter Saved",
+            PARAMETERKEY: "Parameter Key",
+            NEWGENERICPARAMETER: "New Generic Parameter",
+            GENERICPARAMETERDETAIL: "Generic Parameter Detail",
+            GENERICPARAMETERINFO: "Generic Parameter Information",
+            GENERICPARAMETER: "Generic Parameter",
+            PARAMETERVALUE: "Parameter Value",
+            PARAMETERVALUE1: "Parameter Value 1",
+            PARAMETERVALUE2: "Parameter Value 2",
+            PARAMETERVALUE3: "Parameter Value 3",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Please enter a valid information",
+            OK: "OK",
+        },
+    },
+};

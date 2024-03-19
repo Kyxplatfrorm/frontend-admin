@@ -1,0 +1,381 @@
+<div id="userdetails" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/UserProfiles/userProfiles'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="userdetail-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="userprofile.images[0]"
+                        [src]="userprofile.images[0].url"
+                    />
+                    <img
+                        *ngIf="!userprofile.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/userprofiles-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "UI.NEWUSERPROFILE" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "UI.USERPROFILEDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-userdetail-button"
+                [disabled]="
+                    userProfileDetailForm.invalid ||
+                    userProfileDetailForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="createUserProfileDetail()"
+            >
+                <span>{{ "UI.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-userdetail-button"
+                [disabled]="
+                    userProfileDetailForm.invalid ||
+                    userProfileDetailForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="updateUserProfileDetail()"
+            >
+                <span>{{ "UI.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="userProfileDetailForm"
+                    [formGroup]="userProfileDetailForm"
+                    class="userdetail w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab label="{{ 'UI.USERPROFLEINFO' | translate }}">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="ForceTwoFactorAuth"
+                                        formControlName="ForceTwoFactorAuth"
+                                        >{{
+                                            "UI.FORCETWOFACTORAUTH" | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "UI.PROFILECODE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'UI.PROFILECODE' | translate
+                                            }}"
+                                            name="ProfileCode"
+                                            formControlName="ProfileCode"
+                                        />
+                                        <mat-error>
+                                            {{
+                                                "UI.PROFILECODEREQUIRED"
+                                                    | translate
+                                            }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "UI.TEMPORARILYPASSWORDVALIDHOURS"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'UI.TEMPORARILYPASSWORDVALIDHOURS'
+                                                    | translate
+                                            }}"
+                                            name="TemporarilyPasswordValidHours"
+                                            formControlName="TemporarilyPasswordValidHours"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "UI.MINIMUMPASSWORDLENGTH"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'UI.MINIMUMPASSWORDLENGTH'
+                                                    | translate
+                                            }}"
+                                            name="MinimumPasswordLenght"
+                                            formControlName="MinimumPasswordLenght"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "UI.PASSWORDNUMERICLENGTH"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'UI.PASSWORDNUMERICLENGTH'
+                                                    | translate
+                                            }}"
+                                            name="PasswordNumericLenght"
+                                            formControlName="PasswordNumericLenght"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "UI.PASSWORDSMALLLETTERLENGTH"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'UI.PASSWORDSMALLLETTERLENGTH'
+                                                    | translate
+                                            }}"
+                                            name="PasswordSmallLetterLength"
+                                            formControlName="PasswordSmallLetterLength"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "UI.PASSWORDSPECIALCHARACTERLENGTH"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'UI.PASSWORDSPECIALCHARACTERLENGTH'
+                                                    | translate
+                                            }}"
+                                            name="PasswordSpecialCharacterLength"
+                                            formControlName="PasswordSpecialCharacterLength"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "UI.PASSWORDRENEWPERIOD" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'UI.PASSWORDRENEWPERIOD'
+                                                    | translate
+                                            }}"
+                                            name="PasswordRenewPeriod"
+                                            formControlName="PasswordRenewPeriod"
+                                        />
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "UI.LASTPASSWORDCHECKCOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'UI.LASTPASSWORDCHECKCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="LastPasswordCheckCount"
+                                            formControlName="LastPasswordCheckCount"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasSessionTimeOut"
+                                        formControlName="HasSessionTimeOut"
+                                        [(ngModel)]="
+                                            userprofile.HasSessionTimeOut
+                                        "
+                                        >{{
+                                            "UI.HASSESSIONTIMEOUT" | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        *ngIf="userprofile.HasSessionTimeOut"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "UI.SESSIONTIMEINMINUTES"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'UI.SESSIONTIMEINMINUTES'
+                                                    | translate
+                                            }}"
+                                            name="SessionTimeInMinutes"
+                                            formControlName="SessionTimeInMinutes"
+                                        />
+                                        <mat-error>
+                                            {{
+                                                "UI.SESSIONTIMEINMINUTESREQUIRED"
+                                                    | translate
+                                            }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "UI.PASSWORDBIGLETTERLENGTH"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'UI.PASSWORDBIGLETTERLENGTH'
+                                                    | translate
+                                            }}"
+                                            name="PasswordBigLetterLength"
+                                            formControlName="PasswordBigLetterLength"
+                                        />
+                                        <mat-error>
+                                            {{
+                                                "UI.PASSWORDBIGLETTERLENGTHREQUIRED"
+                                                    | translate
+                                            }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

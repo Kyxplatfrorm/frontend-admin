@@ -1,0 +1,26 @@
+export const locale = {
+    lang: "en",
+    data: {
+        USER: {
+            APIUSERDEFINITION: "Api User Definition",
+            SEARCHTEXT: "Search for a api user definition",
+            ID: "Id",
+            TENANTNAME: "Tenant Name",
+            USERTYPE: "User Type",
+            USERNAME: "User Name",
+            USERSTATUS: "User Status",
+            HASAPIKEY: "Has Api Key",
+            WRONGATTEMPTCOUNT: "Wrong Attempt Count",
+            USERPROFILE: "User Profile",
+            INSERTDATETIME: "Insert Date Time",
+            UPDATEDATETIME: "Update Date Time",
+            RESETPASSWORDRETRYCOUNT: "Reset Password Retry Count",
+            RESETPASSWORD: "Reset Password",
+            OK: "OK",
+            EMAIL: "Email",
+            DELETE: "Delete",
+            ADD: "ADD",
+            COMPANYNAME: "Company Name",
+        },
+    },
+};

@@ -1,0 +1,411 @@
+<div
+    id="translatePinZpkToZpk2"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "TRANSLATEPINZPK.TRANSLATEPINZPKTOZPK2" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="translatePinZpkToZpk2Form"
+                    [formGroup]="translatePinZpkToZpk2Form"
+                    class="translatePinZpkToZpk2 w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'TRANSLATEPINZPK.TRANSLATEPINZPKTOZPK2INFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.SOURCEZPKUNDERLMK"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.SOURCEZPKUNDERLMK'
+                                                    | translate
+                                            }}"
+                                            name="SourceZpkUnderLmk"
+                                            formControlName="SourceZpkUnderLmk"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.CARDNUMBER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.CARDNUMBER'
+                                                    | translate
+                                            }}"
+                                            name="CardNumber"
+                                            formControlName="CardNumber"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.SOURCEPINBLOCKFORMAT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.SOURCEPINBLOCKFORMAT'
+                                                    | translate
+                                            }}"
+                                            name="SourcePinBlockFormat"
+                                            formControlName="SourcePinBlockFormat"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.PINUNDERSOURCEZPK"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.PINUNDERSOURCEZPK'
+                                                    | translate
+                                            }}"
+                                            name="PinUnderSourceZpk"
+                                            formControlName="PinUnderSourceZpk"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.DESTINATIONZPKUNDERLMK"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.DESTINATIONZPKUNDERLMK'
+                                                    | translate
+                                            }}"
+                                            name="DestinationZpkUnderLmk"
+                                            formControlName="DestinationZpkUnderLmk"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.DESTINATIONPINBLOCKFORMAT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.DESTINATIONPINBLOCKFORMAT'
+                                                    | translate
+                                            }}"
+                                            name="DestinationPinBlockFormat"
+                                            formControlName="DestinationPinBlockFormat"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.MAKSIMUMPINLENGTH"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.MAKSIMUMPINLENGTH'
+                                                    | translate
+                                            }}"
+                                            name="MaksimumPinLength"
+                                            formControlName="MaksimumPinLength"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.LMKTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.LMKTYPE'
+                                                    | translate
+                                            }}"
+                                            name="LmkType"
+                                            formControlName="LmkType"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <button
+                                    style="margin-right: 10px"
+                                    mat-raised-button
+                                    class="save-translatePinZpkToZpk2-button"
+                                    (click)="ClearButton()"
+                                >
+                                    <span>{{
+                                        "TRANSLATEPINZPK.CLEAR" | translate
+                                    }}</span>
+                                </button>
+                                <button
+                                    mat-raised-button
+                                    class="save-translatePinZpkToZpk2-button"
+                                    (click)="TranslatePinUnderZpkToZpk2Button()"
+                                >
+                                    <span>{{
+                                        "TRANSLATEPINZPK.TRANSLATEPINZPK1"
+                                            | translate
+                                    }}</span>
+                                </button>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                    style="margin-top: 60px"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.HSMERRORCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.HSMERRORCODE'
+                                                    | translate
+                                            }}"
+                                            name="HsmErrorCode"
+                                            formControlName="HsmErrorCode"
+                                            [(ngModel)]="generateHsmErrorCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.HSMERRORDESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.HSMERRORDESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="HsmErrorDescription"
+                                            formControlName="HsmErrorDescription"
+                                            [(ngModel)]="
+                                                generateHsmErrorDescription
+                                            "
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.LENGTHOFTHEPIN"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.LENGTHOFTHEPIN'
+                                                    | translate
+                                            }}"
+                                            name="LengthOfThePin"
+                                            formControlName="LengthOfThePin"
+                                            [(ngModel)]="hsmLengthOfThePin"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.PINUNDERDESTINATIONZPK"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.PINUNDERDESTINATIONZPK'
+                                                    | translate
+                                            }}"
+                                            name="PinUnderDestinationZpk"
+                                            formControlName="PinUnderDestinationZpk"
+                                            [(ngModel)]="
+                                                hsmPinUnderDestinationZpk
+                                            "
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TRANSLATEPINZPK.DESTINATIONPINBLOCKFORMAT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'TRANSLATEPINZPK.DESTINATIONPINBLOCKFORMAT'
+                                                    | translate
+                                            }}"
+                                            name="DestinationPinBlockFormat"
+                                            formControlName="DestinationPinBlockFormat"
+                                            [(ngModel)]="
+                                                hsmDestinationPinBlockFormat
+                                            "
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

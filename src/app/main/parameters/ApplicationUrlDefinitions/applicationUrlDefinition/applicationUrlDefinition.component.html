@@ -1,0 +1,267 @@
+<div
+    id="applicationUrlDefinition"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Parameters/ApplicationUrlDefinitions/searchApplicationUrlDefinitions'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="applicationUrl mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="applicationUrl.images[0]"
+                        [src]="applicationUrl.images[0].url"
+                    />
+                    <img
+                        *ngIf="!applicationUrl.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "APPLICATIONURL.APPLICATIONURL" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "APPLICATIONURL.APPLICATIONURLDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-applicationUrl-button"
+                [disabled]="
+                    applicationUrlDefinitionForm.invalid ||
+                    applicationUrlDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateApplicationUrlDefinition()"
+            >
+                <span>{{ "APPLICATIONURL.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-applicationUrl-button"
+                [disabled]="
+                    applicationUrlDefinitionForm.invalid ||
+                    applicationUrlDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateApplicationUrlDefinition()"
+            >
+                <span>{{ "APPLICATIONURL.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="applicationUrlDefinitionForm"
+                    [formGroup]="applicationUrlDefinitionForm"
+                    class="applicationUrl w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'APPLICATIONURL.APPLICATIONURLINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsDefaultDefinition"
+                                        formControlName="IsDefaultDefinition"
+                                        >{{
+                                            "APPLICATIONURL.ISDEFAULTDEFINITION"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONURL.TENANT" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="applicationUrl.TenantId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let applicationUrl of tenant
+                                                "
+                                                [value]="applicationUrl.Id"
+                                            >
+                                                {{ applicationUrl.TenantName }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="applicationUrl.TenantId"
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                applicationUrl.TenantId =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONURL.APPLICATIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="ApplicationTypeId"
+                                            formControlName="ApplicationTypeId"
+                                            [(value)]="
+                                                applicationUrl.ApplicationTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let applicationUrl of applicationType
+                                                "
+                                                [value]="applicationUrl.Id"
+                                            >
+                                                {{ applicationUrl.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                applicationUrl.ApplicationTypeId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                applicationUrl.ApplicationTypeId =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONURL.DESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATIONURL.DESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APPLICATIONURL.URL" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APPLICATIONURL.URL' | translate
+                                            }}"
+                                            name="Url"
+                                            formControlName="Url"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

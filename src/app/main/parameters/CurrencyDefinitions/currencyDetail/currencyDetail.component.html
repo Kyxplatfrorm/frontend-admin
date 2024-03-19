@@ -1,0 +1,313 @@
+<div id="currencydetails" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Parameters/CurrencyDefinitions/currencyDefinitions'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="currencydetail-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="currency.images[0]"
+                        [src]="currency.images[0].url"
+                    />
+                    <img
+                        *ngIf="!currency.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/currency-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "CURRENCY.NEWCURRENCY" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "CURRENCY.CURRENCYDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-currencydetail-button"
+                [disabled]="
+                    currencyDetailForm.invalid || currencyDetailForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="createCurrency()"
+            >
+                <span>{{ "CURRENCY.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-currencydetail-button"
+                [disabled]="
+                    currencyDetailForm.invalid || currencyDetailForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="updateCurrency()"
+            >
+                <span>{{ "CURRENCY.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="currencyDetailForm"
+                    [formGroup]="currencyDetailForm"
+                    class="currencydetail w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{ 'CURRENCY.CURRENCYINFO' | translate }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsCryptoCurrency"
+                                        formControlName="IsCryptoCurrency"
+                                        >{{
+                                            "CURRENCY.ISCRYPTOCURRENCY"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CURRENCY.CURRENCYCODE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CURRENCY.CURRENCYCODE'
+                                                    | translate
+                                            }}"
+                                            name="CurrencyCode"
+                                            formControlName="CurrencyCode"
+                                            required
+                                        />
+                                        <mat-error>
+                                            {{
+                                                "CURRENCY.CURRENCYCODEREQUIRED"
+                                                    | translate
+                                            }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CURRENCY.CURRENCYCODENUMERIC"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CURRENCY.CURRENCYCODENUMERIC'
+                                                    | translate
+                                            }}"
+                                            name="CurrencyCodeNumeric"
+                                            formControlName="CurrencyCodeNumeric"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CURRENCY.CURRENCYCODEEXTERNAL"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CURRENCY.CURRENCYCODEEXTERNAL'
+                                                    | translate
+                                            }}"
+                                            name="CurrencyCodeExternal"
+                                            formControlName="CurrencyCodeExternal"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CURRENCY.CURRENCYSYMBOL"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CURRENCY.CURRENCYSYMBOL'
+                                                    | translate
+                                            }}"
+                                            name="CurrencySymbol"
+                                            formControlName="CurrencySymbol"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CURRENCY.ICONURL" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CURRENCY.ICONURL' | translate
+                                            }}"
+                                            name="IconUrl"
+                                            formControlName="IconUrl"
+                                        />
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CURRENCY.CURRENCYNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CURRENCY.CURRENCYNAME'
+                                                    | translate
+                                            }}"
+                                            name="CurrencyName"
+                                            formControlName="CurrencyName"
+                                            required
+                                        />
+                                        <mat-error>
+                                            {{
+                                                "CURRENCY.CURRENCYNAMEREQUIRED"
+                                                    | translate
+                                            }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsSettlementCurrency"
+                                        formControlName="IsSettlementCurrency"
+                                        >{{
+                                            "CURRENCY.ISSETTLEMENTCURRENCY"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CURRENCY.COUNTRYNAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CURRENCY.COUNTRYNAME'
+                                                    | translate
+                                            }}"
+                                            name="CountryName"
+                                            formControlName="CountryName"
+                                            required="{{
+                                                currency.IsSettlementCurrency
+                                            }}"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

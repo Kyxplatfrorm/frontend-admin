@@ -1,0 +1,25 @@
+export const locale = {
+    lang: "en",
+    data: {
+        RESTAPILOG: {
+            RESTAPILOG: "Rest Api Log",
+            SEARCHTEXT: "Search for a rest api log",
+            ID: "Id",
+            APICHANNEL: "Api Channel",
+            USERNAME: "User Name",
+            SERVERTYPE: "Server Type",
+            SERVICENAME: "Service Name",
+            SERVERNAME: "Server Name",
+            APINAME: "Api Name",
+            APISTATUS: "Api Status",
+            ERRORCODE: "Error Code",
+            ERRORDESCRIPTION: "Error Description",
+            TOTALELAPSED: "Total Elapsed(ms)",
+            EXCEPTION: "Exception",
+            INSERTDATETIME: "Insert Date Time",
+            CLIENTIP: "Ip Address",
+            CONTROLLERNAME: "Controller Name",
+            HTTPMETHOD: "Http Method",
+        },
+    },
+};

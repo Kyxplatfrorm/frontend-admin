@@ -1,0 +1,430 @@
+<div id="users" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-user-button fuse-white mt-24 mr-35"
+                        (click)="SearchUser()"
+                    >
+                        <span>{{ "USER.SEARCH" | translate }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-user-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "USER.CLEAR" | translate }}
+                    </button>
+                    <!-- CLEAR BUTTON -->
+                    <!-- ADD BUTTON -->
+                    <button
+                        mat-raised-button
+                        [routerLink]="'/UserProfiles/User/userNew'"
+                        class="add-user-button fuse-white mt-24 mt-md-0"
+                    >
+                        <span>{{ "USER.ADD" | translate }}</span>
+                    </button>
+                    <!-- / ADD BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="usersForm"
+                    [formGroup]="usersForm"
+                    class="user w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.INSERTBEGINDATETIME" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="InsertBeginDateTime"
+                                    formControlName="InsertBeginDateTime"
+                                    placeholder="{{
+                                        'USER.INSERTBEGINDATETIME' | translate
+                                    }}"
+                                    [matDatepicker]="pickerInsertBeginDate"
+                                    value="InsertBeginDateTime"
+                                    [(ngModel)]="user.InsertBeginDateTime"
+                                    (dateChange)="
+                                        onDateInsertBeginChange($event)
+                                    "
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerInsertBeginDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerInsertBeginDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.INSERTENDDATETIME" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="InsertEndDateTime"
+                                    formControlName="InsertEndDateTime"
+                                    placeholder="{{
+                                        'USER.INSERTENDDATETIME' | translate
+                                    }}"
+                                    [matDatepicker]="pickerInsertEndDate"
+                                    value="InsertEndDateTime"
+                                    [(ngModel)]="user.InsertEndDateTime"
+                                    (dateChange)="onDateInsertEndChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerInsertEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerInsertEndDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.UPDATEBEGINDATETIME" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="UpdateBeginDateTime"
+                                    formControlName="UpdateBeginDateTime"
+                                    placeholder="{{
+                                        'USER.UPDATEBEGINDATETIME' | translate
+                                    }}"
+                                    [matDatepicker]="pickerUpdateBeginDate"
+                                    value="UpdateBeginDateTime"
+                                    [(ngModel)]="user.UpdateBeginDateTime"
+                                    (dateChange)="
+                                        onDateUpdateBeginChange($event)
+                                    "
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerUpdateBeginDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerUpdateBeginDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.UPDATEENDDATETIME" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="UpdateEndDateTime"
+                                    formControlName="UpdateEndDateTime"
+                                    placeholder="{{
+                                        'USER.UPDATEENDDATETIME' | translate
+                                    }}"
+                                    [matDatepicker]="pickerUpdateEndDate"
+                                    value="UpdateEndDateTime"
+                                    [(ngModel)]="user.UpdateEndDateTime"
+                                    (dateChange)="onDateUpdateEndChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerUpdateEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerUpdateEndDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.USERTYPEID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="UserTypeId"
+                                    formControlName="UserTypeId"
+                                    [(value)]="user.UserTypeId"
+                                    placeholder="{{
+                                        'USER.USERTYPEID' | translate
+                                    }}"
+                                >
+                                    <mat-option
+                                        *ngFor="let user of userTypeList"
+                                        [value]="user.Id"
+                                    >
+                                        {{ user.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.USERNAME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'USER.USERNAME' | translate
+                                    }}"
+                                    name="UserName"
+                                    formControlName="UserName"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.EMAIL" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'USER.EMAIL' | translate }}"
+                                    name="Email"
+                                    formControlName="Email"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.PHONENUMBER" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'USER.PHONENUMBER' | translate
+                                    }}"
+                                    name="PhoneNumber"
+                                    formControlName="PhoneNumber"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.USERFULLNAME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'USER.USERFULLNAME' | translate
+                                    }}"
+                                    name="UserFullName"
+                                    formControlName="UserFullName"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.SELECTEDUSERSTATUS" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    multiple
+                                    name="SelectedUserStatus"
+                                    formControlName="SelectedUserStatus"
+                                    [(value)]="user.SelectedUserStatus"
+                                >
+                                    <mat-option
+                                        *ngFor="let user of userStatusList"
+                                        [value]="user.Id"
+                                    >
+                                        {{ user.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.TENANTID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TenantId"
+                                    formControlName="TenantId"
+                                    [(value)]="user.TenantId"
+                                    placeholder="{{
+                                        'USER.TENANTID' | translate
+                                    }}"
+                                >
+                                    <mat-option
+                                        *ngFor="let user of tenantList"
+                                        [value]="user.Id"
+                                    >
+                                        {{ user.TenantName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.CUSTOMERTYPEID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="CustomerTypeId"
+                                    formControlName="CustomerTypeId"
+                                    [(value)]="user.CustomerTypeId"
+                                    placeholder="{{
+                                        'USER.CUSTOMERTYPEID' | translate
+                                    }}"
+                                >
+                                    <mat-option
+                                        *ngFor="let user of customerTypeList"
+                                        [value]="user.Id"
+                                    >
+                                        {{ user.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.CUSTOMERID" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    type="number"
+                                    placeholder="{{
+                                        'USER.CUSTOMERID' | translate
+                                    }}"
+                                    name="CustomerId"
+                                    formControlName="CustomerId"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "USER.COMPANYID" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'USER.COMPANYID' | translate
+                                    }}"
+                                    name="CompanyId"
+                                    formControlName="CompanyId"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- / CENTER -->
+</div>

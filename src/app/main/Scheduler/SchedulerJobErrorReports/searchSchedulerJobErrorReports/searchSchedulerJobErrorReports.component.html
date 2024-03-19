@@ -1,0 +1,244 @@
+<div
+    id="searchSchedulerJobErrorReports"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Schedulers/SchedulerJobErrorReports/schedulerJobErrorReports'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{
+                        "SCHEDULERJOBERROR.SCHEDULERJOBERRORREPORT" | translate
+                    }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'SCHEDULERJOBERROR.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="searchSchedulerJobErrorReports-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="searchSchedulerJobErrorReportsDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBERROR.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJob">
+                        <p class="text-truncate">
+                            {{ schedulerJob.Id }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TenantName Column -->
+                <ng-container matColumnDef="TenantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBERROR.TENANTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobErrorReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobErrorReport.TenantName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Description Column -->
+                <ng-container matColumnDef="Description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBERROR.DESCRIPTION" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobErrorReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobErrorReport.Description }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TotalElapsed Column -->
+                <ng-container matColumnDef="TotalElapsed">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBERROR.TOTALELAPSED" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobErrorReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobErrorReport.TotalElapsed }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- MachineName Column -->
+                <ng-container matColumnDef="MachineName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBERROR.MACHINENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobErrorReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobErrorReport.MachineName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- RunStatusName Column -->
+                <ng-container matColumnDef="RunStatusName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBERROR.RUNSTATUSNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobErrorReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobErrorReport.RunStatusName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- SchedulerJobDescription Column -->
+                <ng-container matColumnDef="SchedulerJobDescription">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBERROR.SCHEDULERJOBDESCRIPTION" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobErrorReport">
+                        <p class="text-truncate">
+                            {{
+                                schedulerJobErrorReport.SchedulerJobDescription
+                            }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ServerCode Column -->
+                <ng-container matColumnDef="ServerCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBERROR.SERVERCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJob">
+                        <p class="text-truncate">
+                            {{ schedulerJob.ServerCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "SCHEDULERJOBERROR.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let schedulerJobErrorReport"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                schedulerJobErrorReport.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="
+                        let schedulerJobErrorReport;
+                        columns: displayedColumns
+                    "
+                    class="schedulerJobErrorReport"
+                    [routerLink]="[
+                        '/searchSchedulerJobErrorReports',
+                        schedulerJobErrorReport.Id
+                    ]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="
+                    searchSchedulerJobErrorReportsDataSource.filteredData.length
+                "
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

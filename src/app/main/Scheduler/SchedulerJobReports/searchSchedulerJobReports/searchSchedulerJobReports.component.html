@@ -1,0 +1,288 @@
+<div
+    id="searchSchedulerJobReports"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Schedulers/SchedulerJobReports/schedulerJobReports'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "SCHEDULERJOBREPORT.SCHEDULERJOBREPORT" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'SCHEDULERJOBREPORT.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="searchSchedulerJobReports-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="searchSchedulerJobReportsDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBREPORT.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobReport.Id }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TenantName Column -->
+                <ng-container matColumnDef="TenantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBREPORT.TENANTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobReport.TenantName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ServerCode Column -->
+                <ng-container matColumnDef="ServerCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBREPORT.SERVERCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobReport.ServerCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- MachineName Column -->
+                <ng-container matColumnDef="MachineName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBREPORT.MACHINENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobReport.MachineName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Description Column -->
+                <ng-container matColumnDef="Description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBREPORT.DESCRIPTION" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobReport.Description }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- SchedulerJobId Column -->
+                <ng-container matColumnDef="SchedulerJobId">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBREPORT.SCHEDULERJOBID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobReport.SchedulerJobId }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- RunStatusName Column -->
+                <ng-container matColumnDef="RunStatusName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBREPORT.RUNSTATUSNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobReport.RunStatusName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- SchedulerJobTypeName Column -->
+                <ng-container matColumnDef="SchedulerJobTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBREPORT.SCHEDULERJOBTYPENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobReport.SchedulerJobTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- FullClassName Column -->
+                <ng-container matColumnDef="FullClassName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBREPORT.FULLCLASSNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobReport.FullClassName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ApplicationParameter Column -->
+                <ng-container matColumnDef="ApplicationParameter">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBREPORT.APPLICATIONPARAMETER" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobReport.ApplicationParameter }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TotalElapsed Column -->
+                <ng-container matColumnDef="TotalElapsed">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBREPORT.TOTALELAPSED" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobReport.TotalElapsed }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ResultMessage Column -->
+                <ng-container matColumnDef="ResultMessage">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SCHEDULERJOBREPORT.RESULTMESSAGE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let schedulerJobReport">
+                        <p class="text-truncate">
+                            {{ schedulerJobReport.ResultMessage }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "SCHEDULERJOBREPORT.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let schedulerJobReport"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                schedulerJobReport.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="
+                        let schedulerJobReport;
+                        columns: displayedColumns
+                    "
+                    class="schedulerJobReport"
+                    [routerLink]="[
+                        '/searchSchedulerJobReports',
+                        schedulerJobReport.Id
+                    ]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="
+                    searchSchedulerJobReportsDataSource.filteredData.length
+                "
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

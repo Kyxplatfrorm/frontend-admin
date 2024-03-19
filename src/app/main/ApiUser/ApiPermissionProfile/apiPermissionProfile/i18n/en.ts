@@ -1,0 +1,25 @@
+export const locale = {
+    lang: "en",
+    data: {
+        APIPERMISSION: {
+            APIPERMISSIONPROFILEADDED: "Api Permission Profile Added",
+            APIPERMISSIONPROFILESAVED: "Api Permission Profile Saved",
+            OK: "OK",
+            NEWAPIPERMISSIONPROFILE: "New Api Permission Profile",
+            APIPERMISSIONDETAIL1: "Api Permission Profile Detail",
+            SEARCHTEXT: "Search for a api permission profile",
+            ADD: "ADD",
+            SAVE: "SAVE",
+            APIPERMISSIONPROFILE: "Api Permission Profile",
+            PROFILENAME: "Profile Name",
+            PERMISSIONCHECKTYPE: "Permission Check Type",
+            APIPERMISSIONDETAIL: "Api Permission Profile Detail",
+            APIDEFINITIONNAME: "Api Definition Name",
+            APILIMITPROFILENAME: "Api Limit Profile Name",
+            ISACTIVE: "Is Active",
+            REMOVE: "Remove",
+            USERTYPEID: "User Type",
+            TENANTID: "Tenant",
+        },
+    },
+};

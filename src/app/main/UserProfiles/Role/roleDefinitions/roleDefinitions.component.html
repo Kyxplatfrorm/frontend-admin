@@ -1,0 +1,195 @@
+<div id="roleDefinitions" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="['/roleProducts', moduleId]"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "ROLE.ROLEDEFINITION" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'ROLE.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+            <!-- ADD BUTTON -->
+            <button
+                mat-raised-button
+                [routerLink]="'/roleDefinitions/new'"
+                class="add-role-button fuse-white mt-24 mt-md-0"
+            >
+                <span>{{ "ROLE.ADD" | translate }}</span>
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="roledefinitions-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                fusePerfectScrollbar
+                [dataSource]="roleDefinitonsDataSoruce"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "ROLE.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let role">
+                        <p class="text-truncate">{{ role.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- RoleName Column -->
+                <ng-container matColumnDef="RoleName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "ROLE.ROLENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let role">
+                        <p class="text-truncate">{{ role.RoleName }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "ROLE.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let role" fxHide fxShow.gt-sm>
+                        <span class="text-truncate"
+                            >{{
+                                role.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-sm
+                        >{{
+                            "ROLE.UPDATEDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let role" fxHide fxShow.gt-xs>
+                        <span class="text-truncate"
+                            >{{
+                                role.UpdateDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss"
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let role">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="DeleteRole(role)"
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                    <span
+                                        >{{ "ROLE.REMOVE" | translate }}
+                                    </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let role; columns: displayedColumns"
+                    class="role"
+                    [routerLink]="['/roleDefinitions', role.Id]"
+                >
+                </mat-row>
+            </mat-table>
+            <mat-paginator
+                #paginator
+                [length]="roleDefinitonsDataSoruce.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

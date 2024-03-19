@@ -1,0 +1,1534 @@
+<div
+    id="switchApplicationDefinition"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Switch/SwitchApplicationDefinition/switchApplicationDefinitions'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="switchApplication-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="switchApplication.images[0]"
+                        [src]="switchApplication.images[0].url"
+                    />
+                    <img
+                        *ngIf="!switchApplication.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{
+                            "SWITCHAPPLICATION.NEWSWITCHAPPLICATION" | translate
+                        }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "SWITCHAPPLICATION.SWITCHAPPLICATIONDETAIL"
+                                | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'SWITCHAPPLICATION.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+            <button
+                mat-raised-button
+                class="save-switchApplication-button"
+                [disabled]="
+                    switchApplicaitonDefinitionForm.invalid ||
+                    switchApplicaitonDefinitionForm.pristine
+                "
+                (click)="CreateSwitchApplication()"
+                *ngIf="pageType === 'new'"
+            >
+                <span>{{ "SWITCHAPPLICATION.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-switchApplication-button"
+                [disabled]="
+                    switchApplicaitonDefinitionForm.invalid ||
+                    switchApplicaitonDefinitionForm.pristine
+                "
+                (click)="UpdateSwitchApplication()"
+                *ngIf="pageType === 'edit'"
+            >
+                <span>{{ "SWITCHAPPLICATION.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="switchApplicaitonDefinitionForm"
+                    [formGroup]="switchApplicaitonDefinitionForm"
+                    class="switchApplication w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'SWITCHAPPLICATION.SWITCHAPPLICATIONINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHAPPLICATION.USERTYPEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="UserTypeId"
+                                            formControlName="UserTypeId"
+                                            [(value)]="
+                                                switchApplication.UserTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let switchApplication of userTypeList
+                                                "
+                                                [value]="switchApplication.Id"
+                                            >
+                                                {{
+                                                    switchApplication.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHAPPLICATION.APPLICATIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="ApplicationTypeId"
+                                            formControlName="ApplicationTypeId"
+                                            [(value)]="
+                                                switchApplication.ApplicationTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let switchApplication of switchApplicationType
+                                                "
+                                                [value]="switchApplication.Id"
+                                            >
+                                                {{
+                                                    switchApplication.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHAPPLICATION.SERVERADDRESS"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHAPPLICATION.SERVERADDRESS'
+                                                    | translate
+                                            }}"
+                                            name="ServerAddress"
+                                            formControlName="ServerAddress"
+                                        />
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHAPPLICATION.APPLICATIONPROFILEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="ApplicationProfileId"
+                                            formControlName="ApplicationProfileId"
+                                            [(value)]="
+                                                switchApplication.ApplicationProfileId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let switchApplication of applicationProfileList
+                                                "
+                                                [value]="switchApplication.Id"
+                                            >
+                                                {{
+                                                    switchApplication.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHAPPLICATION.CLUSTERID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHAPPLICATION.CLUSTERID'
+                                                    | translate
+                                            }}"
+                                            name="ClusterId"
+                                            formControlName="ClusterId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHAPPLICATION.INSTANCEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHAPPLICATION.INSTANCEID'
+                                                    | translate
+                                            }}"
+                                            name="InstanceId"
+                                            formControlName="InstanceId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasRestApi"
+                                        formControlName="HasRestApi"
+                                        [(ngModel)]="
+                                            switchApplication.HasRestApi
+                                        "
+                                        >{{
+                                            "SWITCHAPPLICATION.HASRESTAPI"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHAPPLICATION.THREADCOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHAPPLICATION.THREADCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="ThreadCount"
+                                            formControlName="ThreadCount"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="switchApplication.HasRestApi"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHAPPLICATION.RESTAPIPORT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHAPPLICATION.RESTAPIPORT'
+                                                    | translate
+                                            }}"
+                                            name="RestApiPort"
+                                            formControlName="RestApiPort"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHAPPLICATION.SERVICENAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHAPPLICATION.SERVICENAME'
+                                                    | translate
+                                            }}"
+                                            name="ServiceName"
+                                            formControlName="ServiceName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHAPPLICATION.DESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHAPPLICATION.DESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'SWITCHAPPLICATION.HSMCONNECTION' | translate
+                            }}"
+                        >
+                            <mat-table
+                                class="hsmConnectionLists-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                [dataSource]="hsmConnectionDataSource"
+                            >
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="Id">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.ID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.Id }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- HsmServiceName Column -->
+                                <ng-container matColumnDef="HsmServiceName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.HSMSERVICENAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                switchApplication.HsmServiceName
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ConnectionCount Column -->
+                                <ng-container matColumnDef="ConnectionCount">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.CONNECTIONCOUNT"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                switchApplication.ConnectionCount
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ConnectionTimeout Column -->
+                                <ng-container matColumnDef="ConnectionTimeout">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.CONNECTIONTIMEOUT"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                switchApplication.ConnectionTimeout
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ConnectionCheckTimeSecond Column -->
+                                <ng-container
+                                    matColumnDef="ConnectionCheckTimeSecond"
+                                >
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.CONNECTIONCHECKTIMESECOND"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                switchApplication.ConnectionCheckTimeSecond
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                    >
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteSwitchApplicationHsmConnection(
+                                                            switchApplication
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "SWITCHAPPLICATION.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns1;
+                                        sticky: true
+                                    "
+                                    fusePerfectScrollbar
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let switchApplication;
+                                        columns: displayedColumns1
+                                    "
+                                    (click)="
+                                        EditSwitchApplicationHsmConnection(
+                                            switchApplication
+                                        )
+                                    "
+                                    class="switchApplication"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="switchApplication-button"
+                                id="add-switchApplication-button"
+                                (click)="newHsmConncetionForm()"
+                                aria-label="add switchApplication"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'SWITCHAPPLICATION.SESSION' | translate
+                            }}"
+                        >
+                            <mat-table
+                                class="sessionLists-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                [dataSource]="sessionDataSource"
+                            >
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="Id">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.ID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.Id }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Description Column -->
+                                <ng-container matColumnDef="Description">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.DESCRIPTION"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.Description }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Priority Column -->
+                                <ng-container matColumnDef="Priority">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.PRIORITY"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.Priority }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ConnectionType Column -->
+                                <ng-container matColumnDef="ConnectionType">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.CONNECTIONTYPE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                switchApplication.ConnectionType
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- EndPointType Column -->
+                                <ng-container matColumnDef="EndPointType">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.ENDPOINTTYPE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.EndPointType }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- PinBlockFormat Column -->
+                                <ng-container matColumnDef="PinBlockFormat">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.PINBLOCKFORMAT"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                switchApplication.PinBlockFormat
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- ConnectionTimeout Column -->
+                                <ng-container matColumnDef="ConnectionTimeout">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.CONNECTIONTIMEOUT"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                switchApplication.ConnectionTimeout
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ConnectionCheckTimeSecond Column -->
+                                <ng-container
+                                    matColumnDef="ConnectionCheckTimeSecond"
+                                >
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.CONNECTIONCHECKTIMESECOND"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                switchApplication.ConnectionCheckTimeSecond
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                    >
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteSwitchApplicationSession(
+                                                            switchApplication
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "SWITCHAPPLICATION.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns2;
+                                        sticky: true
+                                    "
+                                    fusePerfectScrollbar
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let switchApplication;
+                                        columns: displayedColumns2
+                                    "
+                                    (click)="
+                                        EditSwitchApplicationSession(
+                                            switchApplication
+                                        )
+                                    "
+                                    class="switchApplication"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="switchApplication-button"
+                                id="add-switchApplication-button"
+                                aria-label="add switchApplication"
+                                (click)="newSessionForm()"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'SWITCHAPPLICATION.ROUTING' | translate
+                            }}"
+                        >
+                            <mat-table
+                                class="routingLists-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                [dataSource]="routingDataSource"
+                            >
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="Id">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.ID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.Id }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- RoutingRuleName Column -->
+                                <ng-container matColumnDef="RoutingRuleName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.ROUTINGRULENAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                switchApplication.RoutingRuleName
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- FromSession Column -->
+                                <ng-container matColumnDef="FromSession">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.FROMSESSION"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.FromSession }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ToSession Column -->
+                                <ng-container matColumnDef="ToSession">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.TOSESSION"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.ToSession }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Priority Column -->
+                                <ng-container matColumnDef="Priority">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.PRIORITY"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.Priority }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                    >
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteSwitchApplicationRouting(
+                                                            switchApplication
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "SWITCHAPPLICATION.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns3;
+                                        sticky: true
+                                    "
+                                    fusePerfectScrollbar
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let switchApplication;
+                                        columns: displayedColumns3
+                                    "
+                                    (click)="
+                                        EditSwitchApplicationRouting(
+                                            switchApplication
+                                        )
+                                    "
+                                    class="switchApplication"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="switchApplication-button"
+                                id="add-switchApplication-button"
+                                aria-label="add switchApplication"
+                                (click)="newRoutingForm()"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'SWITCHAPPLICATION.SESSIONCONFIG' | translate
+                            }}"
+                        >
+                            <mat-table
+                                class="sessionConfigs-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                [dataSource]="sessionConfigDataSource"
+                            >
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="Id">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.ID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.Id }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- SessionName Column -->
+                                <ng-container matColumnDef="SessionName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.SESSIONNAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.SessionName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ConfigKey Column -->
+                                <ng-container matColumnDef="ConfigKey">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.CONFIGKEY"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.ConfigKey }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ConfigValue Column -->
+                                <ng-container matColumnDef="ConfigValue">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.CONFIGVALUE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.ConfigValue }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                    >
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteSwitchApplicationSessionConfig(
+                                                            switchApplication
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "SWITCHAPPLICATION.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns4;
+                                        sticky: true
+                                    "
+                                    fusePerfectScrollbar
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let switchApplication;
+                                        columns: displayedColumns4
+                                    "
+                                    (click)="
+                                        EditSwitchApplicationSessionConfig(
+                                            switchApplication
+                                        )
+                                    "
+                                    class="switchApplication"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="switchApplication-button"
+                                id="add-switchApplication-button"
+                                (click)="newSessionConfigForm()"
+                                aria-label="add switchApplication"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'SWITCHAPPLICATION.SESSIONCONNECTION'
+                                    | translate
+                            }}"
+                        >
+                            <mat-table
+                                class="sessionConnections-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                [dataSource]="sessionConnectionDataSource"
+                            >
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="Id">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.ID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.Id }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- SessionName Column -->
+                                <ng-container matColumnDef="SessionName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.SESSIONNAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.SessionName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Priority Column -->
+                                <ng-container matColumnDef="Priority">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.PRIORITY"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.Priority }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Server Column -->
+                                <ng-container matColumnDef="Server">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.SERVER"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.Server }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Port Column -->
+                                <ng-container matColumnDef="Port">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.PORT" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{ switchApplication.Port }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- PermittedIpAddress Column -->
+                                <ng-container matColumnDef="PermittedIpAddress">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "SWITCHAPPLICATION.PERMITTEDIPADDRESS"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                switchApplication.PermittedIpAddress
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell
+                                        *matCellDef="let switchApplication"
+                                    >
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteSwitchApplicationSessionConnection(
+                                                            switchApplication
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "SWITCHAPPLICATION.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns5;
+                                        sticky: true
+                                    "
+                                    fusePerfectScrollbar
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let switchApplication;
+                                        columns: displayedColumns5
+                                    "
+                                    (click)="
+                                        EditSwitchApplicationSessionConnection(
+                                            switchApplication
+                                        )
+                                    "
+                                    class="switchApplication"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="switchApplication-button"
+                                id="add-switchApplication-button"
+                                aria-label="add switchApplication"
+                                (click)="newSessionConnectionForm()"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="hsmConnectionDataSource.filteredData?.length"
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

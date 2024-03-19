@@ -1,0 +1,36 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        UI: {
+            NEWUSERPROFILE: "Yeni Kullanıcı Profili",
+            USERPROFILEDETAIL: "Kullanıcı Profil Detayı",
+            ADD: "EKLE",
+            SAVE: "KAYDET",
+            USERPROFLEINFO: "Kullanıcı Profil Bilgisi",
+            FORCETWOFACTORAUTH: "İki Faktörlü Yetkilendirmeyi Zorlama",
+            PROFILECODE: "Profil Kodu",
+            SESSIONTIMEINMINUTES: "Dakika Seans Süresi",
+            HASSESSIONTIMEOUT: "Oturum Zaman Aşımı",
+            MINIMUMPASSWORDLENGTH: "Minimum Şifre Uzunluğu",
+            PASSWORDNUMERICLENGTH: "Şifre Sayısal Uzunluğu",
+            PASSWORDBIGLETTERLENGTH: "Şifre Büyük Harf Uzunluğu",
+            PASSWORDSMALLLETTERLENGTH: "Şifre Küçük Harf Uzunluğu",
+            PASSWORDSPECIALCHARACTERLENGTH: "Şifre Özel Karakter Uzunluğu",
+            PASSWORDRENEWPERIOD: "Şifre Yenileme Zamanı",
+            LASTPASSWORDCHECKCOUNT: "Son Şifre Kontrol Sayısı",
+            TEMPORARILYPASSWORDVALIDHOURS: "Geçici Şifre Geçerlilik Saatleri",
+            USERPROFILESAVED: "Kullanıcı Profili Kaydedildi",
+            OK: "TAMAM",
+            USERPROFILEADDED: "Kullanıcı Profili Eklendi",
+            ID: "Id",
+            PASSWORDBIGLETTERLENGTHREQUIRED:
+                "Şifre Büyük Harf Uzunluğu Zorunludur.",
+            SESSIONTIMEINMINUTESREQUIRED: "Dakika Seans Süresi Zorunludur. ",
+            PROFILECODEREQUIRED: "Profil Kodu Zorunludur.",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Lütfen geçerli bir bilgi giriniz",
+            OK: "TAMAM",
+        },
+    },
+};

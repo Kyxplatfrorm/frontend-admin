@@ -1,0 +1,192 @@
+<div id="tenantCardSchema" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "TENANT.TENANTDEFINITIONS" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'TENANT.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="tenantCardSchema-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                fusePerfectScrollbar
+                [dataSource]="tenantCardSchemaDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "TENANT.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let tenantCardSchema">
+                        <p class="text-truncate">{{ tenantCardSchema.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TenantName Column -->
+                <ng-container matColumnDef="TenantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "TENANT.TENANTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let tenantCardSchema">
+                        <p class="text-truncate">
+                            {{ tenantCardSchema.TenantName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TenantCode Column -->
+                <ng-container matColumnDef="TenantCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "TENANT.TENANTCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let tenantCardSchema">
+                        <p class="text-truncate">
+                            {{ tenantCardSchema.TenantCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- DefaultCurrencyCode Column -->
+                <ng-container matColumnDef="DefaultCurrencyCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "TENANT.DEFAULTCURRENCYCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let tenantCardSchema">
+                        <p class="text-truncate">
+                            {{ tenantCardSchema.DefaultCurrencyCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "TENANT.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let tenantCardSchema"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                tenantCardSchema.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-sm
+                        >{{
+                            "TENANT.UPDATEDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let tenantCardSchema"
+                        fxHide
+                        fxShow.gt-xs
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                tenantCardSchema.UpdateDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss"
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let tenantCardSchema; columns: displayedColumns"
+                    class="tenantCardSchema"
+                    [routerLink]="['/tenantCardSchema', tenantCardSchema.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="tenantCardSchemaDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

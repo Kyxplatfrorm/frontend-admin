@@ -1,0 +1,300 @@
+<div id="schedulerJobReports" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-schedulerJobReport-button fuse-white mt-24 mr-35"
+                        (click)="SearchSchedulerJobReports()"
+                    >
+                        <span>{{
+                            "SCHEDULERJOBREPORT.SEARCH" | translate
+                        }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-schedulerJobReport-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "SCHEDULERJOBREPORT.CLEAR" | translate }}
+                    </button>
+
+                    <!-- CLEAR BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="schedulerJobReportsForm"
+                    [formGroup]="schedulerJobReportsForm"
+                    class="schedulerJobReport w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SCHEDULERJOBREPORT.SEARCHSTARTDATE"
+                                        | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="SearchStartDate"
+                                    formControlName="SearchStartDate"
+                                    [matDatepicker]="pickerSearchStartDate"
+                                    [(ngModel)]="
+                                        schedulerJobReport.SearchStartDate
+                                    "
+                                    (dateChange)="
+                                        onSearchStartDateChange($event)
+                                    "
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerSearchStartDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerSearchStartDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SCHEDULERJOBREPORT.SEARCHENDDATE"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    [matDatepicker]="pickerSearchEndDate"
+                                    formControlName="SearchEndDate"
+                                    [(ngModel)]="
+                                        schedulerJobReport.SearchEndDate
+                                    "
+                                    (dateChange)="onSearchEndDateChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerSearchEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker
+                                    #pickerSearchEndDate
+                                ></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "NOTIFICATIONREPORT.ORDERID" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'NOTIFICATIONREPORT.ORDERID' | translate
+                                    }}"
+                                    name="OrderId"
+                                    formControlName="OrderId"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SCHEDULERJOBREPORT.TOTALELAPSED"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SCHEDULERJOBREPORT.TOTALELAPSED'
+                                            | translate
+                                    }}"
+                                    name="TotalElapsed"
+                                    formControlName="TotalElapsed"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SCHEDULERJOBREPORT.APPLICATION" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SCHEDULERJOBREPORT.APPLICATION'
+                                            | translate
+                                    }}"
+                                    name="ApplicationId"
+                                    formControlName="ApplicationId"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SCHEDULERJOBREPORT.RECURRINGTYPE"
+                                        | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="RecurringTypeId"
+                                    formControlName="RecurringTypeId"
+                                    [(value)]="
+                                        schedulerJobReport.RecurringTypeId
+                                    "
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let schedulerJobReport of schedulerRecurringType
+                                        "
+                                        [value]="schedulerJobReport.Id"
+                                    >
+                                        {{ schedulerJobReport.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SCHEDULERJOBREPORT.RUNSTATUS" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="RunStatusId"
+                                    formControlName="RunStatusId"
+                                    [(value)]="schedulerJobReport.RunStatusId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let schedulerJobReport of runStatus
+                                        "
+                                        [value]="schedulerJobReport.Id"
+                                    >
+                                        {{ schedulerJobReport.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SCHEDULERJOBREPORT.SCHEDULERJOBTYPE"
+                                        | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="SchedulerJobTypeId"
+                                    formControlName="SchedulerJobTypeId"
+                                    [(value)]="
+                                        schedulerJobReport.SchedulerJobTypeId
+                                    "
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let schedulerJobReport of schedulerJobType
+                                        "
+                                        [value]="schedulerJobReport.Id"
+                                    >
+                                        {{ schedulerJobReport.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SCHEDULERJOBREPORT.SCHEDULERJOB"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SCHEDULERJOBREPORT.SCHEDULERJOB'
+                                            | translate
+                                    }}"
+                                    name="SchedulerJobId"
+                                    formControlName="SchedulerJobId"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / CENTER -->
+</div>

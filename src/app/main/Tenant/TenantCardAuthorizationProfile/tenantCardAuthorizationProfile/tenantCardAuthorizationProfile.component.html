@@ -1,0 +1,413 @@
+<div
+    id="tenantCardAuthorizationProfile"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Tenants/TenantCardAuthorizationProfile/tenantCardAuthorizationProfiles'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="tenantCardAuthorization-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="tenantCardAuthorization.images[0]"
+                        [src]="tenantCardAuthorization.images[0].url"
+                    />
+                    <img
+                        *ngIf="!tenantCardAuthorization.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{
+                            "TENANTCARDAUTHORIZATION.NEWTENANTCARDAUTHORIZATIONPROFILE"
+                                | translate
+                        }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "TENANTCARDAUTHORIZATION.TENANTCARDAUTHORIZATIONPROFILEDETAIL"
+                                | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'TENANTCARDAUTHORIZATION.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+
+            <button
+                mat-raised-button
+                class="save-tenantCardAuthorization-button"
+                [disabled]="
+                    tenantCardAuthorizationForm.invalid ||
+                    tenantCardAuthorizationForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateTenantCardAuthorizationProfile()"
+            >
+                <span>{{ "TENANTCARDAUTHORIZATION.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="tenantCardAuthorizationForm"
+                    [formGroup]="tenantCardAuthorizationForm"
+                    class="tenantCardAuthorization w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'TENANTCARDAUTHORIZATION.TENANTCARDAUTHORIZATIONPROFILEINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    class="checkbox"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <mat-checkbox
+                                        name="HasExternalAuthorization"
+                                        formControlName="HasExternalAuthorization"
+                                        >{{
+                                            "TENANTCARDAUTHORIZATION.HASEXTERNALAUTHORIZATION"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    class="checkbox"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <mat-checkbox
+                                        name="SendDailySettlementFile"
+                                        formControlName="SendDailySettlementFile"
+                                        >{{
+                                            "TENANTCARDAUTHORIZATION.SENDDAILYSETTLEMENTFILE"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    class="checkbox"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <mat-checkbox
+                                        name="ExportDailySettlementFileToLocalFolder"
+                                        formControlName="ExportDailySettlementFileToLocalFolder"
+                                        >{{
+                                            "TENANTCARDAUTHORIZATION.EXPORTDAILYSETTLEMENTFILETOLOCALFOLDER"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TENANTCARDAUTHORIZATION.TENANT"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="
+                                                tenantCardAuthorization.TenantId
+                                            "
+                                            disabled
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let tenantCardAuthorization of tenantDefinitionList
+                                                "
+                                                [value]="
+                                                    tenantCardAuthorization.Id
+                                                "
+                                            >
+                                                {{
+                                                    tenantCardAuthorization.TenantName
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TENANTCARDAUTHORIZATION.AUTHORIZATIONURL"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TENANTCARDAUTHORIZATION.AUTHORIZATIONURL'
+                                                    | translate
+                                            }}"
+                                            name="AuthorizationUrl"
+                                            formControlName="AuthorizationUrl"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TENANTCARDAUTHORIZATION.ENCRYPTEDAPIKEY"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TENANTCARDAUTHORIZATION.ENCRYPTEDAPIKEY'
+                                                    | translate
+                                            }}"
+                                            name="EncryptedApiKey"
+                                            formControlName="EncryptedApiKey"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TENANTCARDAUTHORIZATION.ENCRYPTEDSECRETKEY"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TENANTCARDAUTHORIZATION.ENCRYPTEDSECRETKEY'
+                                                    | translate
+                                            }}"
+                                            name="EncryptedSecretKey"
+                                            formControlName="EncryptedSecretKey"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TENANTCARDAUTHORIZATION.SFTPSERVER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TENANTCARDAUTHORIZATION.SFTPSERVER'
+                                                    | translate
+                                            }}"
+                                            name="SftpServer"
+                                            formControlName="SftpServer"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TENANTCARDAUTHORIZATION.SFTPPORT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TENANTCARDAUTHORIZATION.SFTPPORT'
+                                                    | translate
+                                            }}"
+                                            name="SftpPort"
+                                            formControlName="SftpPort"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TENANTCARDAUTHORIZATION.SFTPUSERNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TENANTCARDAUTHORIZATION.SFTPUSERNAME'
+                                                    | translate
+                                            }}"
+                                            name="SftpUserName"
+                                            formControlName="SftpUserName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TENANTCARDAUTHORIZATION.SFTPENCRYPTEDPASSWORD"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TENANTCARDAUTHORIZATION.SFTPENCRYPTEDPASSWORD'
+                                                    | translate
+                                            }}"
+                                            name="SftpEncryptedPassword"
+                                            formControlName="SftpEncryptedPassword"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TENANTCARDAUTHORIZATION.SFTPPATH"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TENANTCARDAUTHORIZATION.SFTPPATH'
+                                                    | translate
+                                            }}"
+                                            name="SftpPath"
+                                            formControlName="SftpPath"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "TENANTCARDAUTHORIZATION.SETTLEMENTFILEPATH"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'TENANTCARDAUTHORIZATION.SETTLEMENTFILEPATH'
+                                                    | translate
+                                            }}"
+                                            name="SettlementFilePath"
+                                            formControlName="SettlementFilePath"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

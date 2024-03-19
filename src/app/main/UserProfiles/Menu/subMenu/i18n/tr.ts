@@ -1,0 +1,33 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        MENU: {
+            TRANSLATEKEY: "Çeviri Anahtarı",
+            MENUICON: "Menü Simgesi",
+            MENUURL: "Menü Url",
+            DELETE: "SİL",
+            ADD: "EKLE",
+            SAVE: "KAYDET",
+            MENUADDED: "Menü Eklendi",
+            MENUSAVED: "Menü Kaydedildi",
+            OK: "TAMAM",
+            NEWMENU: "Yeni Menü",
+            MENUDETAIL: "Menü Detayı",
+            SEARCHTEXT: "Menü arayınız",
+            MENU: "Menü",
+            MENUORDER: "Menü Sırası",
+            MENUCODE: "Menü Kodu",
+            MENUNAME: "Menü İsmi",
+            HASPARENTMENU: "Ana Menü",
+            PARENTMENUID: "Ana Menü ",
+            SUBMENU: "Alt Menü",
+            RELATEDCONTROLLERNAME: "İlgili Denetleyici İsmi",
+            CONTROLLERNAME: "Denetleyici İsmi",
+            REMOVE: "Sil",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Lütfen geçerli bir bilgi giriniz",
+            OK: "TAMAM",
+        },
+    },
+};

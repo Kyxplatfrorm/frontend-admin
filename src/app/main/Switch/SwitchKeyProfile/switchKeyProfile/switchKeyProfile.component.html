@@ -1,0 +1,353 @@
+<div id="switchKeyProfile" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Switch/SwitchKeyProfile/switchKeyProfiles'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="switchKey-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="switchKey.images[0]"
+                        [src]="switchKey.images[0].url"
+                    />
+                    <img
+                        *ngIf="!switchKey.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "SWITCHKEY.NEWSWITCHKEYPROFILE" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "SWITCHKEY.SWITCHKEYPROFILEDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'SWITCHKEY.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-switchKey-button"
+                [disabled]="
+                    switchKeyProfileForm.invalid ||
+                    switchKeyProfileForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateSwitchKeyProfile()"
+            >
+                <span>{{ "SWITCHKEY.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-switchKey-button"
+                [disabled]="
+                    switchKeyProfileForm.invalid ||
+                    switchKeyProfileForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateSwitchKeyProfile()"
+            >
+                <span>{{ "SWITCHKEY.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="switchKeyProfileForm"
+                    [formGroup]="switchKeyProfileForm"
+                    class="switchKey w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'SWITCHKEY.SWITCHKEYPROFILEINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                    >
+                                        <mat-label>{{
+                                            "SWITCHKEY.PROFILENAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SWITCHKEY.PROFILENAME'
+                                                    | translate
+                                            }}"
+                                            name="ProfileName"
+                                            formControlName="ProfileName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{ 'SWITCHKEY.SWITCHKEY' | translate }}"
+                        >
+                            <mat-table
+                                class="switchKeyProfiles-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                fusePerfectScrollbar
+                                [dataSource]="switchKeyProfileDataSource"
+                            >
+                                <!-- KeyIndex Column -->
+                                <ng-container matColumnDef="KeyIndex">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SWITCHKEY.KEYINDEX" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let switchKey">
+                                        <p class="text-truncate">
+                                            {{ switchKey.KeyIndex }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- KeyVariant Column -->
+                                <ng-container matColumnDef="KeyVariant">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SWITCHKEY.KEYVARIANT" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let switchKey">
+                                        <p class="text-truncate">
+                                            {{ switchKey.KeyVariant }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- KeyType Column -->
+                                <ng-container matColumnDef="KeyType">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SWITCHKEY.KEYTYPE" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let switchKey">
+                                        <p class="text-truncate">
+                                            {{ switchKey.KeyType }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- KeyValue Column -->
+                                <ng-container matColumnDef="KeyValue">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SWITCHKEY.KEYVALUE" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let switchKey">
+                                        <p class="text-truncate">
+                                            {{ switchKey.KeyValue }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- KeyCheckValue Column -->
+                                <ng-container matColumnDef="KeyCheckValue">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SWITCHKEY.KEYCHECKVALUE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let switchKey">
+                                        <p class="text-truncate">
+                                            {{ switchKey.KeyCheckValue }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- KeyLmkType Column -->
+                                <ng-container matColumnDef="KeyLmkType">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SWITCHKEY.KEYLMKTYPE" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let switchKey">
+                                        <p class="text-truncate">
+                                            {{ switchKey.KeyLmkType }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell *matCellDef="let switchKey">
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteSwitchKeyProfileDetail(
+                                                            switchKey
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "SWITCHKEY.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let switchKey;
+                                        columns: displayedColumns
+                                    "
+                                    class="switchKey"
+                                    (click)="EditSwitchKeyProfile(switchKey)"
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="switchKey-button"
+                                id="add-switchKey-button"
+                                (click)="newForm()"
+                                aria-label="add switchKey"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="
+                            switchKeyProfileDataSource.filteredData?.length
+                        "
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

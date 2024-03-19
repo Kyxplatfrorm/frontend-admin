@@ -1,0 +1,427 @@
+<div id="genericParameters" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Parameters/GenericParameter/genericParameterGroups'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="genericParameterGroup-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="genericParameterGroup.images[0]"
+                        [src]="genericParameterGroup.images[0].url"
+                    />
+                    <img
+                        *ngIf="!genericParameterGroup.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "GENERICPARAMETER.NEWGENERICPARAMETER" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "GENERICPARAMETER.GENERICPARAMETERDETAIL"
+                                | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'GENERICPARAMETER.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-genericParameterGroup-button"
+                [disabled]="
+                    genericParameterForm.invalid ||
+                    genericParameterForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateGenericParameterGroup()"
+            >
+                <span>{{ "GENERICPARAMETER.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-genericParameterGroup-button"
+                [disabled]="
+                    genericParameterForm.invalid ||
+                    genericParameterForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateGenericParameterGroup()"
+            >
+                <span>{{ "GENERICPARAMETER.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="genericParameterForm"
+                    [formGroup]="genericParameterForm"
+                    class="genericParameterGroup w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'GENERICPARAMETER.GENERICPARAMETERINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "GENERICPARAMETER.GROUPCODE" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'GENERICPARAMETER.GROUPCODE'
+                                                | translate
+                                        }}"
+                                        name="GroupCode"
+                                        formControlName="GroupCode"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "GENERICPARAMETER.DESCRIPTION"
+                                            | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'GENERICPARAMETER.DESCRIPTION'
+                                                | translate
+                                        }}"
+                                        name="Description"
+                                        formControlName="Description"
+                                        required
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'GENERICPARAMETER.GENERICPARAMETER' | translate
+                            }}"
+                        >
+                            <mat-table
+                                class="genericParameterGroups-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                fusePerfectScrollbar
+                                [dataSource]="genericParameterDataSource"
+                            >
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="Id">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "GENERICPARAMETER.ID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let genericParameterGroup"
+                                    >
+                                        <p class="text-truncate">
+                                            {{ genericParameterGroup.Id }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- GroupCode Column -->
+                                <ng-container matColumnDef="GroupCode">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "GENERICPARAMETER.GROUPCODE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let genericParameterGroup"
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                genericParameterGroup.GroupCode
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- ParameterKey Column -->
+                                <ng-container matColumnDef="ParameterKey">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "GENERICPARAMETER.PARAMETERKEY"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let genericParameterGroup"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                genericParameterGroup.ParameterKey
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ParameterValue Column -->
+                                <ng-container matColumnDef="ParameterValue">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "GENERICPARAMETER.PARAMETERVALUE"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let genericParameterGroup"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                genericParameterGroup.ParameterValue
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- ParameterValue1 Column -->
+                                <ng-container matColumnDef="ParameterValue1">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "GENERICPARAMETER.PARAMETERVALUE1"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let genericParameterGroup"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                genericParameterGroup.ParameterValue1
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Description Column -->
+                                <ng-container matColumnDef="Description">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        fxHide
+                                        fxShow.gt-xs
+                                        >{{
+                                            "GENERICPARAMETER.DESCRIPTION"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let genericParameterGroup"
+                                        fxHide
+                                        fxShow.gt-xs
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                genericParameterGroup.Description
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell
+                                        *matCellDef="let genericParameterGroup"
+                                    >
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteGenericParameter(
+                                                            genericParameterGroup
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "GENERICPARAMETER.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let genericParameterGroup;
+                                        columns: displayedColumns
+                                    "
+                                    class="genericParameterGroup"
+                                    (click)="
+                                        editGenericParameter(
+                                            genericParameterGroup
+                                        )
+                                    "
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="genericParameterGroup-button"
+                                id="add-genericParameterGroup-button"
+                                (click)="newForm()"
+                                aria-label="add genericParameterGroup"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="
+                            genericParameterDataSource.filteredData?.length
+                        "
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

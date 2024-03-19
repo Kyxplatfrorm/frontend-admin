@@ -1,0 +1,85 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="tenantCardSchemaForm">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                >
+                    <mat-label>{{
+                        "TENANTCARDSCHEMA.CARDSCHEMA" | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="CardSchemaId"
+                        formControlName="CardSchemaId"
+                        [(value)]="tenantCardSchema.CardSchemaId"
+                        placeholder="{{
+                            'TENANTCARDSCHEMA.CARDSCHEMA' | translate
+                        }}"
+                    >
+                        <mat-option
+                            *ngFor="let tenantCardSchema of binBrands"
+                            [value]="tenantCardSchema.Id"
+                        >
+                            {{ tenantCardSchema.Description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', tenantCardSchemaForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "TENANTCARDSCHEMA.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(tenantCardSchemaForm)"
+            [disabled]="tenantCardSchemaForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "TENANTCARDSCHEMA.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', tenantCardSchemaForm])"
+            [disabled]="tenantCardSchemaForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "TENANTCARDSCHEMA.SAVE" | translate }}
+        </button>
+    </div>
+</div>

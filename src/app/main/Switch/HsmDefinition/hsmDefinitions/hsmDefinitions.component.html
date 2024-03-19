@@ -1,0 +1,262 @@
+<div id="hsmDefinitions" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "HSM.HSMDEFINITION" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'HSM.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button
+                mat-raised-button
+                [routerLink]="'/hsmDefinitions/new'"
+                class="add-hsmDefinition-button fuse-white mt-24 mt-md-0"
+            >
+                <span>{{ "HSM.ADD" | translate }}</span>
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="hsmDefinition-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="hsmDefinitionsDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "HSM.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let hsmDefinition">
+                        <p class="text-truncate">
+                            {{ hsmDefinition.Id }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- HsmType Column -->
+                <ng-container matColumnDef="HsmType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "HSM.HSMTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let hsmDefinition">
+                        <p class="text-truncate">
+                            {{ hsmDefinition.HsmType }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- HsmIpAddress Column -->
+                <ng-container matColumnDef="HsmIpAddress">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "HSM.HSMIPADDRESS" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let hsmDefinition">
+                        <p class="text-truncate">
+                            {{ hsmDefinition.HsmIpAddress }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- PinLmkLength Column -->
+                <ng-container matColumnDef="PinLmkLength">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "HSM.PINLMKLENGTH" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let hsmDefinition">
+                        <p class="text-truncate">
+                            {{ hsmDefinition.PinLmkLength }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- LmkType Column -->
+                <ng-container matColumnDef="LmkType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "HSM.LMKTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let hsmDefinition">
+                        <p class="text-truncate">
+                            {{ hsmDefinition.LmkType }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- HsmPort Column -->
+                <ng-container matColumnDef="HsmPort">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "HSM.HSMPORT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let hsmDefinition">
+                        <p class="text-truncate">
+                            {{ hsmDefinition.HsmPort }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Description Column -->
+                <ng-container matColumnDef="Description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "HSM.DESCRIPTION" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let hsmDefinition">
+                        <p class="text-truncate">
+                            {{ hsmDefinition.Description }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{ "HSM.INSERTDATETIME" | translate }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let hsmDefinition"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                hsmDefinition.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-sm
+                        >{{ "HSM.UPDATEDATETIME" | translate }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let hsmDefinition"
+                        fxHide
+                        fxShow.gt-xs
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                hsmDefinition.UpdateDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss"
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let hsmDefinition">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="DeleteHsmDefinition(hsmDefinition)"
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                    <span>{{ "HSM.REMOVE" | translate }} </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let hsmDefinition; columns: displayedColumns"
+                    class="hsmDefinition"
+                    [routerLink]="['/hsmDefinitions', hsmDefinition.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="hsmDefinitionsDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

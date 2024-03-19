@@ -1,0 +1,227 @@
+<div id="searchSessions" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/UserProfiles/Session/sessions'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "SESSION.SESSIONREPORT" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'SESSION.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="searchSessions-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="searchSessionDataSource"
+            >
+                <!-- Id Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SESSION.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let session">
+                        <p class="text-truncate">{{ session.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- UserId Column -->
+                <ng-container matColumnDef="UserId">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SESSION.USERID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let session">
+                        <p class="text-truncate">{{ session.UserId }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- SessionStatus Column -->
+                <ng-container matColumnDef="SessionStatus">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SESSION.SESSIONSTATUS" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let session">
+                        <p class="text-truncate">{{ session.SessionStatus }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UserName Column -->
+                <ng-container matColumnDef="UserName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SESSION.USERNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let session">
+                        <p class="text-truncate">{{ session.UserName }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- UserType Column -->
+                <ng-container matColumnDef="UserType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SESSION.USERTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let session">
+                        <p class="text-truncate">{{ session.UserType }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Server Column -->
+                <ng-container matColumnDef="Server">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SESSION.SERVER" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let session">
+                        <p class="text-truncate">
+                            {{ session.Server }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- ClientIp Column -->
+                <ng-container matColumnDef="ClientIp">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SESSION.CLIENTIP" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let session">
+                        <p class="text-truncate">
+                            {{ session.ClientIp }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- StartDateTime Column -->
+                <ng-container matColumnDef="StartDateTime">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SESSION.STARTDATETIME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let session">
+                        <p class="text-truncate">
+                            {{ session.StartDateTime }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- EndDatetime Column -->
+                <ng-container matColumnDef="EndDatetime">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SESSION.ENDDATETIME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let session">
+                        <p class="text-truncate">
+                            {{ session.EndDatetime }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let session">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="editSearchSession(session)"
+                                >
+                                    <mat-icon>update</mat-icon>
+                                    <span
+                                        >{{ "SESSION.UPDATE" | translate }}
+                                    </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let session; columns: displayedColumns"
+                    class="session"
+                    [routerLink]="['/searchSession', session.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="searchSessionDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

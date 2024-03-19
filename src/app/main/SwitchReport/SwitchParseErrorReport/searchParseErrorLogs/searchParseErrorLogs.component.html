@@ -1,0 +1,243 @@
+<div
+    id="searchParseErrorLogs"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/SwitchReport/SwitchParseErrorReport/switchParseErrorLogs'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "SWITCHERRORLOG.SWITCHERRORLOG" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'SWITCHERRORLOG.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="searchParseErrorLogs-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                fusePerfectScrollbar
+                [dataSource]="searchSwitchParseErrorLogsDataSource"
+            >
+                <!-- Id Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHERRORLOG.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchParseError">
+                        <p class="text-truncate">{{ switchParseError.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- ApplicationType Column -->
+                <ng-container matColumnDef="ApplicationType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHERRORLOG.APPLICATIONTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchParseError">
+                        <p class="text-truncate">
+                            {{ switchParseError.ApplicationType }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- TransactionType Column -->
+                <ng-container matColumnDef="TransactionType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHERRORLOG.TRANSACTIONTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchParseError">
+                        <p class="text-truncate">
+                            {{ switchParseError.TransactionType }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- ServerName Column -->
+                <ng-container matColumnDef="ServerName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHERRORLOG.SERVERNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchParseError">
+                        <p class="text-truncate">
+                            {{ switchParseError.ServerName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- RemoteIpAddress Column -->
+                <ng-container matColumnDef="RemoteIpAddress">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHERRORLOG.REMOTEIPADDRESS" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchParseError">
+                        <p class="text-truncate">
+                            {{ switchParseError.RemoteIpAddress }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- RemotePort Column -->
+                <ng-container matColumnDef="RemotePort">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHERRORLOG.REMOTEPORT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchParseError">
+                        <p class="text-truncate">
+                            {{ switchParseError.RemotePort }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- LocalIpAddress Column -->
+                <ng-container matColumnDef="LocalIpAddress">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHERRORLOG.LOCALIPADDRESS" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchParseError">
+                        <p class="text-truncate">
+                            {{ switchParseError.LocalIpAddress }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- LocalPort Column -->
+                <ng-container matColumnDef="LocalPort">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SWITCHERRORLOG.LOCALPORT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let switchParseError">
+                        <p class="text-truncate">
+                            {{ switchParseError.LocalPort }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "SWITCHERRORLOG.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let switchParseError"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                switchParseError.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let switchParseError; columns: displayedColumns"
+                    class="searchParseErrorLog"
+                    [routerLink]="[
+                        '/searchParseErrorLogs',
+                        switchParseError.Id
+                    ]"
+                >
+                </mat-row>
+            </mat-table>
+            <button
+                style="margin-bottom: 50px"
+                mat-fab
+                class="switchParseError-button"
+                id="add-switchParseError-button"
+                (click)="exportToExcel()"
+                aria-label="add switchParseError"
+                [@animate]="{
+                    value: '*',
+                    params: { delay: '300ms', scale: '.2' }
+                }"
+            >
+                <mat-icon>vertical_align_bottom</mat-icon>
+            </button>
+
+            <mat-paginator
+                #paginator
+                [length]="
+                    searchSwitchParseErrorLogsDataSource.filteredData.length
+                "
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

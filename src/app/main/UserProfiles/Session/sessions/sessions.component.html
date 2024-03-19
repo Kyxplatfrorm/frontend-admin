@@ -1,0 +1,360 @@
+<div id="sessions" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-session-button fuse-white mt-24 mr-35"
+                        (click)="SearchSession()"
+                    >
+                        <span>{{ "SESSION.SEARCH" | translate }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-session-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "SESSION.CLEAR" | translate }}
+                    </button>
+
+                    <!-- CLEAR BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="sessionForm"
+                    [formGroup]="sessionForm"
+                    class="session w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div class="checkbox">
+                            <mat-checkbox
+                                #checkboxName
+                                [checked]="isChecked"
+                                [indeterminate]="isIndeterminate"
+                                [checked]="isChecked"
+                                (change)="onChangeCheckbox(checkboxName)"
+                                name="ShowActiveSessions"
+                                formControlName="ShowActiveSessions"
+                            >
+                                {{
+                                    "SESSION.SHOWACTIVESESSIONS" | translate
+                                }}</mat-checkbox
+                            >
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SESSION.SEARCHSTARTDATE" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="SearchStartDate"
+                                    formControlName="SearchStartDate"
+                                    [matDatepicker]="pickerStartDate"
+                                    [(ngModel)]="session.SearchStartDate"
+                                    value="SearchStartDate"
+                                    (dateChange)="onDateChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerStartDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerStartDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SESSION.SEARCHENDDATE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    [matDatepicker]="pickerEndDate"
+                                    formControlName="SearchEndDate"
+                                    [(ngModel)]="session.SearchEndDate"
+                                    value="SearchEndDate"
+                                    (dateChange)="onDateEndChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerEndDate></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SESSION.SEARCHSTARTTIME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SESSION.SEARCHSTARTTIME' | translate
+                                    }}"
+                                    name="SearchStartTime"
+                                    formControlName="SearchStartTime"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SESSION.SEARCHENDTIME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SESSION.SEARCHENDTIME' | translate
+                                    }}"
+                                    name="SearchEndTime"
+                                    formControlName="SearchEndTime"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SESSION.TENANTID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TenantId"
+                                    formControlName="TenantId"
+                                    [(value)]="session.TenantId"
+                                    placeholder="{{
+                                        'SESSION.TENANTID' | translate
+                                    }}"
+                                >
+                                    <mat-option
+                                        *ngFor="let session of tenantList"
+                                        [value]="session.Id"
+                                    >
+                                        {{ session.TenantName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SESSION.USERNAME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SESSION.USERNAME' | translate
+                                    }}"
+                                    name="UserName"
+                                    formControlName="UserName"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SESSION.USERID" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    type="number"
+                                    placeholder="{{
+                                        'SESSION.USERID' | translate
+                                    }}"
+                                    name="UserId"
+                                    formControlName="UserId"
+                                />
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SESSION.USERTYPEID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="UserTypeId"
+                                    formControlName="UserTypeId"
+                                    [(value)]="session.UserTypeId"
+                                    placeholder="{{
+                                        'SESSION.USERTYPEID' | translate
+                                    }}"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let session of parameterUserList
+                                        "
+                                        [value]="session.Id"
+                                    >
+                                        {{ session.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SESSION.SERVER" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SESSION.SERVER' | translate
+                                    }}"
+                                    name="Server"
+                                    formControlName="Server"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SESSION.CUSTOMERID" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    type="number"
+                                    placeholder="{{
+                                        'SESSION.CUSTOMERID' | translate
+                                    }}"
+                                    name="CustomerId"
+                                    formControlName="CustomerId"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SESSION.SELECTEDSESSIONSTATUS" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    multiple
+                                    name="SelectedSessionStatus"
+                                    formControlName="SelectedSessionStatus"
+                                    [(value)]="session.SelectedSessionStatus"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let session of sessionStatusList
+                                        "
+                                        [value]="session.Id"
+                                    >
+                                        {{ session.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SESSION.CLIENTIP" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SESSION.CLIENTIP' | translate
+                                    }}"
+                                    name="ClientIp"
+                                    formControlName="ClientIp"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- / CENTER -->
+</div>

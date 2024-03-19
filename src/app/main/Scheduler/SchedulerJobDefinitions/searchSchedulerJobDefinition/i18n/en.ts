@@ -1,0 +1,26 @@
+export const locale = {
+    lang: "en",
+    data: {
+        SCHEDULERJOB: {
+            SCHEDULERJOBDEFINATION: "Scheduler Job Definition",
+            SEARCHTEXT: "Search for a scheduler job definition",
+            ID: "Id",
+            TENANTNAME: "Tenant Name",
+            ADD: "ADD",
+            DESCRIPTION: "Description",
+            RECURRINGTYPENAME: "Recurring Type",
+            RECURRINGLEVELNAME: "Recurring Level",
+            RECURRINGWEEKDAYS: "Recurring Week Days",
+            LASTRUNDATE: "Last Run Date",
+            LASTRUNSTATUSNAME: "Last Run Status",
+            RECURRINGDAILYTIMES: "Recurring Daily Times",
+            MACHINENAME: "Machine Name",
+            LASTPROCESSEDSTEPCOUNT: "Last Processed Step Count",
+            LASTSUBSTEPCOUNT: "Last Sub Step Count",
+            SERVERCODE: "Server Code",
+            INSERTDATETIME: "Insert Date Time",
+            UPDATEDATETIME: "Update Date Time",
+            REMOVE: "Remove",
+        },
+    },
+};

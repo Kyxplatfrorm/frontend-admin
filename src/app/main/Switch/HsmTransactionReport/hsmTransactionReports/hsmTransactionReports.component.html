@@ -1,0 +1,277 @@
+<div
+    id="hsmTransactionReports"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-hsmTransaction-button fuse-white mt-24 mr-35"
+                        (click)="SearchHsmTransaction()"
+                    >
+                        <span>{{ "HSMTRANSACTION.SEARCH" | translate }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-hsmTransaction-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "HSMTRANSACTION.CLEAR" | translate }}
+                    </button>
+
+                    <!-- CLEAR BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="hsmTransactionReportsForm"
+                    [formGroup]="hsmTransactionReportsForm"
+                    class="hsmTransaction w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div class="checkbox">
+                            <mat-checkbox
+                                #checkboxName
+                                [checked]="isChecked"
+                                [indeterminate]="isIndeterminate"
+                                [checked]="isChecked"
+                                (change)="onChangeCheckbox(checkboxName)"
+                                name="ShowFailedTransactions"
+                                formControlName="ShowFailedTransactions"
+                            >
+                                {{
+                                    "HSMTRANSACTION.SHOWFAILEDTRANSACTIONS"
+                                        | translate
+                                }}</mat-checkbox
+                            >
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "HSMTRANSACTION.SEARCHSTARTDATE" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="SearchStartDate"
+                                    formControlName="SearchStartDate"
+                                    placeholder="{{
+                                        'HSMTRANSACTION.SEARCHSTARTDATE'
+                                            | translate
+                                    }}"
+                                    [matDatepicker]="pickerSearchStartDate"
+                                    value="SearchStartDate"
+                                    [(ngModel)]="hsmTransaction.SearchStartDate"
+                                    (dateChange)="onDateChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerSearchStartDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerSearchStartDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "HSMTRANSACTION.SEARCHENDDATE" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="SearchEndDate"
+                                    formControlName="SearchEndDate"
+                                    placeholder="{{
+                                        'HSMTRANSACTION.SEARCHENDDATE'
+                                            | translate
+                                    }}"
+                                    [matDatepicker]="pickerSearchEndDate"
+                                    value="SearchEndDate"
+                                    [(ngModel)]="hsmTransaction.SearchEndDate"
+                                    (dateChange)="onDateEndChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerSearchEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerSearchEndDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "HSMTRANSACTION.SEARCHSTARTTIME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'HSMTRANSACTION.SEARCHSTARTTIME'
+                                            | translate
+                                    }}"
+                                    name="SearchStartTime"
+                                    formControlName="SearchStartTime"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "HSMTRANSACTION.SEARCHENDTIME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'HSMTRANSACTION.SEARCHENDTIME'
+                                            | translate
+                                    }}"
+                                    name="SearchEndTime"
+                                    formControlName="SearchEndTime"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "HSMTRANSACTION.COMMANDCODE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'HSMTRANSACTION.COMMANDCODE' | translate
+                                    }}"
+                                    name="CommandCode"
+                                    formControlName="CommandCode"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "HSMTRANSACTION.RESPONSECODE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'HSMTRANSACTION.RESPONSECODE'
+                                            | translate
+                                    }}"
+                                    name="ResponseCode"
+                                    formControlName="ResponseCode"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "HSMTRANSACTION.HSMIPADDRESS" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'HSMTRANSACTION.HSMIPADDRESS'
+                                            | translate
+                                    }}"
+                                    name="HsmIpAddress"
+                                    formControlName="HsmIpAddress"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "HSMTRANSACTION.TOTALELAPSED" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'HSMTRANSACTION.TOTALELAPSED'
+                                            | translate
+                                    }}"
+                                    name="TotalElapsed"
+                                    formControlName="TotalElapsed"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- / CENTER -->
+</div>

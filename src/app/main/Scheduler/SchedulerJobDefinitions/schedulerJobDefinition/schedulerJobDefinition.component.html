@@ -1,0 +1,923 @@
+<div
+    id="schedulerJobDefinition"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Schedulers/SchedulerJobDefinitions/searchSchedulerJobDefinition'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="schedulerJob mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="schedulerJob.images[0]"
+                        [src]="schedulerJob.images[0].url"
+                    />
+                    <img
+                        *ngIf="!schedulerJob.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "SCHEDULERJOB.SCHEDULERJOB" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "SCHEDULERJOB.SCHEDULERJOBDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-schedulerJob-button"
+                [disabled]="
+                    schedulerJobDefinitionForm.invalid ||
+                    schedulerJobDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateSchedulerJobDefinition()"
+            >
+                <span>{{ "SCHEDULERJOB.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-schedulerJob-button"
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateSchedulerJobDefinition()"
+            >
+                <span>{{ "SCHEDULERJOB.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="schedulerJobDefinitionForm"
+                    [formGroup]="schedulerJobDefinitionForm"
+                    class="schedulerJob w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'SCHEDULERJOB.SCHEDULERJOBINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsActive"
+                                        formControlName="IsActive"
+                                        >{{
+                                            "SCHEDULERJOB.ISACTIVE" | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsTenantBasedJob"
+                                        formControlName="IsTenantBasedJob"
+                                        >{{
+                                            "SCHEDULERJOB.ISTENANTBASEDJOB"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="RunIfFails"
+                                        formControlName="RunIfFails"
+                                        >{{
+                                            "SCHEDULERJOB.RUNIFFAILS"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasMultiStep"
+                                        formControlName="HasMultiStep"
+                                        >{{
+                                            "SCHEDULERJOB.HASMULTISTEP"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.STARTDATETIME"
+                                                | translate
+                                        }}</mat-label>
+
+                                        <input
+                                            matInput
+                                            name="StartDateTime"
+                                            formControlName="StartDateTime"
+                                            [matDatepicker]="
+                                                pickerStartDateTime
+                                            "
+                                            [(ngModel)]="
+                                                schedulerJob.StartDateTime
+                                            "
+                                            (dateChange)="
+                                                onStartDateTimeChange($event)
+                                            "
+                                        />
+
+                                        <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="pickerStartDateTime"
+                                        >
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #pickerStartDateTime>
+                                        </mat-datepicker>
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.ENDDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            [matDatepicker]="pickerEndDateTime"
+                                            formControlName="EndDateTime"
+                                            [(ngModel)]="
+                                                schedulerJob.EndDateTime
+                                            "
+                                            (dateChange)="
+                                                onEndDateTimeChange($event)
+                                            "
+                                        />
+
+                                        <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="pickerEndDateTime"
+                                        >
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker
+                                            #pickerEndDateTime
+                                        ></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.STARTTIME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOB.STARTTIME'
+                                                    | translate
+                                            }}"
+                                            name="StartTime"
+                                            formControlName="StartTime"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.ENDTIME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOB.ENDTIME'
+                                                    | translate
+                                            }}"
+                                            name="EndTime"
+                                            formControlName="EndTime"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.TENANT" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="schedulerJob.TenantId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let schedulerJob of tenant
+                                                "
+                                                [value]="schedulerJob.Id"
+                                            >
+                                                {{ schedulerJob.TenantName }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="schedulerJob.TenantId"
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                onClearTenant();
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.SERVERCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOB.SERVERCODE'
+                                                    | translate
+                                            }}"
+                                            name="ServerCode"
+                                            formControlName="ServerCode"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.RECURRINGTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="RecurringTypeId"
+                                            formControlName="RecurringTypeId"
+                                            [(value)]="
+                                                schedulerJob.RecurringTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let schedulerJob of schedulerRecurringType
+                                                "
+                                                [value]="schedulerJob.Id"
+                                            >
+                                                {{ schedulerJob.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="schedulerJob.RecurringTypeId"
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                schedulerJob.RecurringTypeId =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.RECURRINGLEVEL"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="RecurringLevelId"
+                                            formControlName="RecurringLevelId"
+                                            [(value)]="
+                                                schedulerJob.RecurringLevelId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let schedulerJob of schedulerRecurringLevel
+                                                "
+                                                [value]="schedulerJob.Id"
+                                            >
+                                                {{ schedulerJob.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                schedulerJob.RecurringLevelId
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                schedulerJob.RecurringLevelId =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.LASTRUNSTATUS"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="LastRunStatusId"
+                                            formControlName="LastRunStatusId"
+                                            [(value)]="
+                                                schedulerJob.LastRunStatusId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let schedulerJob of schedulerJobStatus
+                                                "
+                                                [value]="schedulerJob.Id"
+                                            >
+                                                {{ schedulerJob.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="schedulerJob.LastRunStatusId"
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                schedulerJob.LastRunStatusId =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.DESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOB.DESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.RECURRINGEVERY"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOB.RECURRINGEVERY'
+                                                    | translate
+                                            }}"
+                                            name="RecurringEvery"
+                                            formControlName="RecurringEvery"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.RECURRINGWEEKDAYS"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            multiple
+                                            name="RecurringWeekDayList"
+                                            formControlName="RecurringWeekDayList"
+                                            [(value)]="
+                                                schedulerJob.RecurringWeekDayList
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let schedulerJob of recurringWeekDays
+                                                "
+                                                [value]="schedulerJob.Id"
+                                            >
+                                                {{ schedulerJob.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button
+                                            style="font-size: 13px"
+                                            *ngIf="
+                                                schedulerJob.RecurringWeekDayList
+                                            "
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="
+                                                schedulerJob.RecurringWeekDayList =
+                                                    undefined;
+                                                $event.stopPropagation()
+                                            "
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.RECURRINGDAILYTIMES"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOB.RECURRINGDAILYTIMES'
+                                                    | translate
+                                            }}"
+                                            name="RecurringDailyTimes"
+                                            formControlName="RecurringDailyTimes"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SCHEDULERJOB.ESTIMATEDEXECUTIONTIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SCHEDULERJOB.ESTIMATEDEXECUTIONTIME'
+                                                    | translate
+                                            }}"
+                                            name="EstimatedExecutionTime"
+                                            formControlName="EstimatedExecutionTime"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'SCHEDULERJOB.SCHEDULERJOBDETAIL' | translate
+                            }}"
+                        >
+                            <mat-table
+                                class="schedulerJobDefinition-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                [dataSource]="schedulerJobDetailDataSource"
+                            >
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="Id">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SCHEDULERJOB.ID" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <p class="text-truncate">
+                                            {{ schedulerJob.Id }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- IsActive Column -->
+                                <ng-container matColumnDef="IsActive">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SCHEDULERJOB.ISACTIVE" | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <mat-icon
+                                            *ngIf="schedulerJob.IsActive"
+                                            class="active-icon green-600 s-16"
+                                            >check</mat-icon
+                                        >
+                                        <mat-icon
+                                            *ngIf="!schedulerJob.IsActive"
+                                            class="active-icon red-500 s-16"
+                                            >close</mat-icon
+                                        >
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- SchedulerJobName Column -->
+                                <ng-container matColumnDef="SchedulerJobName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SCHEDULERJOB.SCHEDULERJOBNAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <p class="text-truncate">
+                                            {{ schedulerJob.SchedulerJobName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Description Column -->
+                                <ng-container matColumnDef="Description">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SCHEDULERJOB.DESCRIPTION"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <p class="text-truncate">
+                                            {{ schedulerJob.Description }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- SchedulerJobTypeName Column -->
+                                <ng-container
+                                    matColumnDef="SchedulerJobTypeName"
+                                >
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SCHEDULERJOB.SCHEDULERTYPENAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <p class="text-truncate">
+                                            {{
+                                                schedulerJob.SchedulerJobTypeName
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ApplicationPath Column -->
+                                <ng-container matColumnDef="ApplicationPath">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SCHEDULERJOB.APPLICATIONPATH"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <p class="text-truncate">
+                                            {{ schedulerJob.ApplicationPath }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- ApplicationName Column -->
+                                <ng-container matColumnDef="ApplicationName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SCHEDULERJOB.APPLICATIONNAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <p class="text-truncate">
+                                            {{ schedulerJob.ApplicationName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- ApplicationParameter Column -->
+                                <ng-container
+                                    matColumnDef="ApplicationParameter"
+                                >
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SCHEDULERJOB.APPLICATIONPARAMETER"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <p class="text-truncate">
+                                            {{
+                                                schedulerJob.ApplicationParameter
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- FullClassName Column -->
+                                <ng-container matColumnDef="FullClassName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SCHEDULERJOB.FULLCLASSNAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <p class="text-truncate">
+                                            {{ schedulerJob.FullClassName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- MethodName Column -->
+                                <ng-container matColumnDef="MethodName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SCHEDULERJOB.METHODNAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <p class="text-truncate">
+                                            {{ schedulerJob.MethodName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- ProcedureName Column -->
+                                <ng-container matColumnDef="ProcedureName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SCHEDULERJOB.PROCEDURENAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <p class="text-truncate">
+                                            {{ schedulerJob.ProcedureName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- LastRunStatus Column -->
+                                <ng-container matColumnDef="LastRunStatus">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "SCHEDULERJOB.LASTRUNSTATUS"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <p class="text-truncate">
+                                            {{ schedulerJob.LastRunStatus }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell *matCellDef="let schedulerJob">
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteSchedulerJobDefinitionDetail(
+                                                            schedulerJob
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "SCHEDULERJOB.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                    fusePerfectScrollbar
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let schedulerJob;
+                                        columns: displayedColumns
+                                    "
+                                    class="schedulerJob"
+                                    (click)="EditSchedulerJob(schedulerJob)"
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="schedulerJob-button"
+                                id="add-schedulerJob-button"
+                                (click)="SchedulerJobForm()"
+                                aria-label="add schedulerJob"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="
+                            schedulerJobDetailDataSource.filteredData?.length
+                        "
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

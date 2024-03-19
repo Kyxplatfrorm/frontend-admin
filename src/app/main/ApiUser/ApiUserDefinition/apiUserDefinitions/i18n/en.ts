@@ -1,0 +1,25 @@
+export const locale = {
+    lang: "en",
+    data: {
+        USER: {
+            SEARCH: "SEARCH",
+            CLEAR: "CLEAR",
+            HASAPIKEY: "Has Api Key",
+            UPDATEBEGINDATETIME: "Update Begin Date Time",
+            UPDATEENDDATETIME: "Update End Date Time",
+            INSERTBEGINDATETIME: "Insert Begin Date Time",
+            INSERTENDDATETIME: "Insert End Date Time",
+            USERTYPEID: "User Type",
+            USERNAME: "User Name",
+            USERFULLNAME: "User Full Name",
+            SELECTEDUSERSTATUS: "Selected User Status",
+            TENANTID: "Tenant",
+            CUSTOMERTYPEID: "Customer Type ",
+            CUSTOMERID: "Customer Id",
+            EMAIL: "Email",
+            APIKEY: "Api Key",
+            INTERNATIONALPHONECODE: "International Phone Code",
+            ADD: "ADD",
+        },
+    },
+};

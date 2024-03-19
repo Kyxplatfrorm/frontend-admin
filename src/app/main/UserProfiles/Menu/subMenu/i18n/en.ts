@@ -1,0 +1,33 @@
+export const locale = {
+    lang: "en",
+    data: {
+        MENU: {
+            TRANSLATEKEY: "Translate Key",
+            MENUICON: "Menu Icon",
+            MENUURL: "Menu Url",
+            DELETE: "DELETE",
+            ADD: "ADD",
+            SAVE: "SAVE",
+            MENUADDED: "Menu Added",
+            MENUSAVED: "Menu Saved",
+            OK: "OK",
+            NEWMENU: "New Menu",
+            MENUDETAIL: "Menu Detail",
+            SEARCHTEXT: "Search for a menu",
+            MENU: "Menu",
+            MENUORDER: "Menu Order",
+            MENUCODE: "Menu Code",
+            MENUNAME: "Menu Name",
+            HASPARENTMENU: "Has Parent Menu",
+            PARENTMENUID: "Parent Menu ",
+            SUBMENU: "Sub Menu",
+            REMOVE: "Delete",
+            RELATEDCONTROLLERNAME: "Related Controller Name",
+            CONTROLLERNAME: "Controller Name",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Please enter a valid information",
+            OK: "OK",
+        },
+    },
+};

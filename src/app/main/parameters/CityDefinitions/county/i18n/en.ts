@@ -1,0 +1,31 @@
+export const locale = {
+    lang: "en",
+    data: {
+        COUNTY: {
+            CITYCODE: "City Code",
+            CITYNAME: "City Name",
+            DELETE: "DELETE",
+            ADD: "ADD",
+            SAVE: "SAVE",
+            NEWCITY: "New City",
+            CITYDETAIL: "City Detail",
+            CITYINFORMATION: "City Information",
+            COUNTRYCODE: "Country Code",
+            STATECODE: "State Code",
+            COUNTY: "County",
+            ID: "Id",
+            COUNTYNAME: "County Name",
+            REMOVE: "Remove",
+            COUNTRYID: "Country Id",
+            STATEID: "State ",
+            OK: "OK",
+            CITYSAVED: "City Saved",
+            CITYADDED: "City Added",
+            SEARCHTEXT: "Search for a county",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Please enter valid information ",
+            OK: "OK",
+        },
+    },
+};

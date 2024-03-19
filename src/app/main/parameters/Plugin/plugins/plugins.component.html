@@ -1,0 +1,250 @@
+<div id="plugins" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "PLUGIN.PLUGINDEFINITION" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'PLUGIN.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button
+                mat-raised-button
+                [routerLink]="'/plugins/new'"
+                class="add-plugins-button fuse-white mt-24 mt-md-0"
+            >
+                <span>{{ "PLUGIN.ADD" | translate }}</span>
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="plugins-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="pluginsDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "PLUGIN.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let plugin">
+                        <p class="text-truncate">{{ plugin.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- TenantName Column -->
+                <ng-container matColumnDef="TenantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "PLUGIN.TENANTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let plugin">
+                        <p class="text-truncate">{{ plugin.TenantName }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- PluginCode Column -->
+                <ng-container matColumnDef="PluginCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "PLUGIN.PLUGINCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let plugin">
+                        <p class="text-truncate">
+                            {{ plugin.PluginCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- PluginDescription Column -->
+                <ng-container matColumnDef="PluginDescription">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "PLUGIN.PLUGINDESCRIPTION" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let plugin">
+                        <p class="text-truncate">
+                            {{ plugin.PluginDescription }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- PluginGroupCode Column -->
+                <ng-container matColumnDef="PluginGroupCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "PLUGIN.PLUGINGROUPCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let plugin">
+                        <p class="text-truncate">
+                            {{ plugin.PluginGroupCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- IsDefault Column -->
+                <ng-container matColumnDef="IsDefault">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "PLUGIN.ISDEFAULT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let plugin">
+                        <mat-icon
+                            *ngIf="plugin.IsDefault"
+                            class="active-icon green-600 s-16"
+                            >check</mat-icon
+                        >
+                        <mat-icon
+                            *ngIf="!plugin.IsDefault"
+                            class="active-icon red-500 s-16"
+                            >close</mat-icon
+                        >
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "PLUGIN.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let plugin" fxHide fxShow.gt-sm>
+                        <span class="text-truncate"
+                            >{{
+                                plugin.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-sm
+                        >{{
+                            "PLUGIN.UPDATEDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let plugin" fxHide fxShow.gt-xs>
+                        <span class="text-truncate"
+                            >{{
+                                plugin.UpdateDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss"
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let plugin">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="DeletePlugins(plugin)"
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                    <span
+                                        >{{ "PLUGIN.REMOVE" | translate }}
+                                    </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let plugin; columns: displayedColumns"
+                    class="plugin"
+                    [routerLink]="['/plugins', plugin.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="pluginsDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -1,0 +1,33 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        NOTIFICATIONTEMPLATE: {
+            NOTIFICATIONTEMPLATEADDED: "Bildirim Şablonu Eklendi",
+            OK: "TAMAM",
+            NOTIFICATIONTEMPLATESAVED: "Bildirim Şablonu Kaydedildi",
+            NOTIFICATIONTEMPLATEDETAIL: "Bildirim Şablon Detayı",
+            ADD: "EKLE",
+            SAVE: "KAYDET",
+            NOTIFICATIONTEMPLATEINFO: "Bildirim Şablon Bilgisi",
+            ISDEFAULTTEMPLATE: "Is Default Template",
+            ISCOMPANYTEMPLATE: "Is Company Template",
+            NOTIFICATIONTYPE: "Bildirim Tipi",
+            NOTIFICATIONTEMPLATE: "Bildirim Şablonu",
+            TEMPLATECODE: "Şablon Kodu",
+            TENANT: "Üye",
+            LANGUAGECODE: "Dil Kodu",
+            TEMPLATETYPE: "Şablon Tipi",
+            EXPIRYSECONDCOUNT: "Expriy Second Count",
+            COMPANY: "Şirket Id",
+            SUBJECT: "Açıklama",
+            CONTENT: "İçerik",
+            ISENCRYPTED: "Şifrelenmiş",
+            HASEXPIRYDATE: "Son Kullanma Tarihi Var mı?",
+            EXPIRYDATETIME: "Son Kullanma Tarihi",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Lütfen geçerli bir bilgi giriniz",
+            OK: "TAMAM",
+        },
+    },
+};

@@ -1,0 +1,143 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0">
+        <form [formGroup]="hsmConnectionForm">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHAPPLICATION.HSMSERVICEAPPLICATION" | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="HsmServiceApplicationId"
+                        formControlName="HsmServiceApplicationId"
+                        [(value)]="switchApplication.HsmServiceApplicationId"
+                    >
+                        <mat-option
+                            *ngFor="let switchApplication of hsmServiceList"
+                            [value]="switchApplication.Id"
+                        >
+                            {{ switchApplication.Description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHAPPLICATION.CONNECTIONCOUNT" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'SWITCHAPPLICATION.CONNECTIONCOUNT' | translate
+                        }}"
+                        name="ConnectionCount"
+                        formControlName="ConnectionCount"
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHAPPLICATION.CONNECTIONTIMEOUT" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'SWITCHAPPLICATION.CONNECTIONTIMEOUT' | translate
+                        }}"
+                        name="ConnectionTimeout"
+                        formControlName="ConnectionTimeout"
+                    />
+                </mat-form-field>
+
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "SWITCHAPPLICATION.CONNECTIONCHECKTIMESECOND"
+                            | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'SWITCHAPPLICATION.CONNECTIONCHECKTIMESECOND'
+                                | translate
+                        }}"
+                        name="ConnectionCheckTimeSecond"
+                        formControlName="ConnectionCheckTimeSecond"
+                    />
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', hsmConnectionForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "SWITCHAPPLICATION.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(hsmConnectionForm)"
+            [disabled]="hsmConnectionForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "SWITCHAPPLICATION.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', hsmConnectionForm])"
+            [disabled]="hsmConnectionForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "SWITCHAPPLICATION.SAVE" | translate }}
+        </button>
+    </div>
+</div>

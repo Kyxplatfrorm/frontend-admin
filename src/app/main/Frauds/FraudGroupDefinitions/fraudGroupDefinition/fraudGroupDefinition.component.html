@@ -1,0 +1,164 @@
+<div
+    id="fraudGroupDefinition"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Frauds/FraudGroupDefinitions/fraudGroupDefinitions'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="fraudGroup-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="fraudGroup.images[0]"
+                        [src]="fraudGroup.images[0].url"
+                    />
+                    <img
+                        *ngIf="!fraudGroup.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "FRAUDGROUP.NEWFRAUDGROUPDEFINITION" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "FRAUDGROUP.FRAUDGROUPDEFINITIONDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-fraudGroup-button"
+                [disabled]="
+                    fraudGroupDefinitionForm.invalid ||
+                    fraudGroupDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateFraudGroupDefinition()"
+            >
+                <span>{{ "FRAUDGROUP.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-fraudGroup-button"
+                [disabled]="
+                    fraudGroupDefinitionForm.invalid ||
+                    fraudGroupDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateFraudGroupDefinition()"
+            >
+                <span>{{ "FRAUDGROUP.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="fraudGroupDefinitionForm"
+                    [formGroup]="fraudGroupDefinitionForm"
+                    class="fraudGroup w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'FRAUDGROUP.FRAUDGROUPDEFINITIONINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="IsBuiltInDefinition"
+                                        formControlName="IsBuiltInDefinition"
+                                        >{{
+                                            "FRAUDGROUP.ISBUILTINDEFINITION"
+                                                | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "FRAUDGROUP.DESCRIPTION" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'FRAUDGROUP.DESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                            required
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

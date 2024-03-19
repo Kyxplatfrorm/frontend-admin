@@ -1,0 +1,25 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        RESTAPILOG: {
+            RESTAPILOG: "Rest Api Log",
+            SEARCHTEXT: "Rest api logu arayınız",
+            ID: "Id",
+            APICHANNEL: "Api Kanalı",
+            USERNAME: "Kullanıcı İsmi",
+            SERVERTYPE: "Sunucu Tipi",
+            SERVICENAME: "Servis İsmi",
+            SERVERNAME: "Sunucu İsmi",
+            APINAME: "Api İsmi",
+            APISTATUS: "Api Durumu",
+            ERRORCODE: "Hata Kodu",
+            ERRORDESCRIPTION: "Hata Açıklaması",
+            TOTALELAPSED: "Toplam Geçen Süre(ms)",
+            EXCEPTION: "Exception",
+            INSERTDATETIME: "Ekleme Tarihi",
+            CLIENTIP: "Ip Adresi",
+            CONTROLLERNAME: "Denetleyici İsmi",
+            HTTPMETHOD: "Http Methodu",
+        },
+    },
+};

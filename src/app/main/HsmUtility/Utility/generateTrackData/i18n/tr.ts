@@ -1,0 +1,31 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        GENERATETRACKDATA: {
+            GENERATETRACKDATA: "Track Datası Oluşturma",
+            GENERATETRACKDATAINFO: "Track Datası Oluşturma Bilgisi",
+            CVKUNDERLMK: "Cv Under Lmk",
+            CARDNUMBER: "Kart Numarası",
+            EXPIRYDATEYYMM: "Son Kullanma Tarihi YYMM",
+            SERVICECODE: "Servis Kodu",
+            EMBOSSNAME: "Basım İsmi",
+            PVVKEYINDEX: "Pvv Key Indexi",
+            PVV: "Pvv",
+            CVVOFFSET: "Cvv Ofseti",
+            CLEAR: "Temizle",
+            HSMERRORCODE: "Hsm Hata Kodu",
+            HSMERRORDESCRIPTION: "Hsm Hata Açıklaması",
+            GENERATETRACKDATA1: "Track Data Oluştur",
+            TRACK1: "Track1",
+            TRACK2: "Track2",
+            TRACK2CHIP: "Tranck2 Chipi",
+            CVV: "Cvv",
+            ICVV: "ICvv",
+            CVV2: "Cvv2",
+        },
+        ERROR: {
+            ERRORMESSAGE: "Lütfen geçerli bir bilgi giriniz",
+            OK: "TAMAM",
+        },
+    },
+};

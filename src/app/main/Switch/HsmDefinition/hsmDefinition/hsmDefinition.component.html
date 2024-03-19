@@ -1,0 +1,253 @@
+<div id="hsmDefinition" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Switch/HsmDefinition/hsmDefinitions'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="hsmDefinition-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="hsmDefinition.images[0]"
+                        [src]="hsmDefinition.images[0].url"
+                    />
+                    <img
+                        *ngIf="!hsmDefinition.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "HSM.NEWHSMDEFINITION" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "HSM.HSMDEFINITIONDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-hsmDefinition-button"
+                [disabled]="
+                    hsmDefinitionForm.invalid || hsmDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateHsmDefinition()"
+            >
+                <span>{{ "HSM.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-hsmDefinition-button"
+                [disabled]="
+                    hsmDefinitionForm.invalid || hsmDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateHsmDefinition()"
+            >
+                <span>{{ "HSM.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="hsmDefinitionForm"
+                    [formGroup]="hsmDefinitionForm"
+                    class="hsmDefinition w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{ 'HSM.HSMDEFINITIONINFO' | translate }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSM.HSMTYPEID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="HsmTypeId"
+                                            formControlName="HsmTypeId"
+                                            [(value)]="hsmDefinition.HsmTypeId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let hsmDefinition of hsmTypeList
+                                                "
+                                                [value]="hsmDefinition.Id"
+                                            >
+                                                {{ hsmDefinition.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSM.LMKTYPEID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="LmkTypeId"
+                                            formControlName="LmkTypeId"
+                                            [(value)]="hsmDefinition.LmkTypeId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let hsmDefinition of hsmLmkTypeList
+                                                "
+                                                [value]="hsmDefinition.Id"
+                                            >
+                                                {{ hsmDefinition.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSM.HSMIPADDRESS" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSM.HSMIPADDRESS' | translate
+                                            }}"
+                                            name="HsmIpAddress"
+                                            formControlName="HsmIpAddress"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSM.HSMPORT" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSM.HSMPORT' | translate
+                                            }}"
+                                            name="HsmPort"
+                                            formControlName="HsmPort"
+                                            type="number"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSM.PINLMKLENGTH" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSM.PINLMKLENGTH' | translate
+                                            }}"
+                                            name="PinLmkLength"
+                                            formControlName="PinLmkLength"
+                                            type="number"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSM.DESCRIPTION" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSM.DESCRIPTION' | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

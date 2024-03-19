@@ -1,0 +1,146 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="tenantCurrencyProfileForm">
+            <div class="checkbox">
+                <mat-checkbox
+                    style="margin-bottom: 20px"
+                    name="IsActive"
+                    formControlName="IsActive"
+                    fxFlex="52"
+                    >{{ "TENANTCURRENCY.ISACTIVE" | translate }}</mat-checkbox
+                >
+                <mat-checkbox
+                    style="margin-bottom: 20px"
+                    name="IsSettlementCurrency"
+                    formControlName="IsSettlementCurrency"
+                    >{{
+                        "TENANTCURRENCY.ISSETTLEMENTCURRENCY" | translate
+                    }}</mat-checkbox
+                >
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "TENANTCURRENCY.CURRENCYCODE" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'TENANTCURRENCY.CURRENCYCODE' | translate
+                        }}"
+                        name="CurrencyCode"
+                        formControlName="CurrencyCode"
+                        required
+                    />
+                </mat-form-field>
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "TENANTCURRENCY.CURRENCYCODENUMERIC" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'TENANTCURRENCY.CURRENCYCODENUMERIC' | translate
+                        }}"
+                        name="CurrencyCodeNumeric"
+                        formControlName="CurrencyCodeNumeric"
+                    />
+                </mat-form-field>
+            </div>
+            <div class="checkbox">
+                <mat-checkbox
+                    style="margin-bottom: 20px"
+                    name="IsCryptoCurrency"
+                    formControlName="IsCryptoCurrency"
+                    >{{
+                        "TENANTCURRENCY.ISCRYPTOCURRENCY" | translate
+                    }}</mat-checkbox
+                >
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "TENANTCURRENCY.CURRENCYNAME" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'TENANTCURRENCY.CURRENCYNAME' | translate
+                        }}"
+                        name="CurrencyName"
+                        formControlName="CurrencyName"
+                    />
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', tenantCurrencyProfileForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "TENANTCURRENCY.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(tenantCurrencyProfileForm)"
+            [disabled]="tenantCurrencyProfileForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "TENANTCURRENCY.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', tenantCurrencyProfileForm])"
+            [disabled]="tenantCurrencyProfileForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "TENANTCURRENCY.SAVE" | translate }}
+        </button>
+    </div>
+</div>

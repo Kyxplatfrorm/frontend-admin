@@ -1,0 +1,513 @@
+<div id="webHookMonitoring" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/WebHooks/WebHookMonitoring/webHookMonitoring'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="webHookMonitoring-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="webHookMonitoring.images[0]"
+                        [src]="webHookMonitoring.images[0].url"
+                    />
+                    <img
+                        *ngIf="!webHookMonitoring.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "WEBHOOKMONITORING.WEBHOOKMONITORING" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "WEBHOOKMONITORING.WEBHOOKMONITORINGDETAIL"
+                                | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-webHookMonitoring-button"
+                [disabled]="
+                    webHookMonitoringForm.invalid ||
+                    webHookMonitoringForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateWebHookMonitoring()"
+            >
+                <span>{{ "WEBHOOKMONITORING.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-webHookMonitoring-button"
+                [disabled]="
+                    webHookMonitoringForm.invalid ||
+                    webHookMonitoringForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateWebHookMonitoring()"
+            >
+                <span>{{ "WEBHOOKMONITORING.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="webHookMonitoringForm"
+                    [formGroup]="webHookMonitoringForm"
+                    class="webHookMonitoring w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'WEBHOOKMONITORING.WEBHOOKMONITORINGINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.TENANT"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="
+                                                webHookMonitoring.TenantId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let webHookMonitoring of tenant
+                                                "
+                                                [value]="webHookMonitoring.Id"
+                                            >
+                                                {{
+                                                    webHookMonitoring.TenantName
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.RUNSTATUS"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="RunStatusId"
+                                            formControlName="RunStatusId"
+                                            [(value)]="
+                                                webHookMonitoring.RunStatusId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let webHookMonitoring of webHookRunStatus
+                                                "
+                                                [value]="webHookMonitoring.Id"
+                                            >
+                                                {{
+                                                    webHookMonitoring.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.WEBHOOKTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="WebHookTypeId"
+                                            formControlName="WebHookTypeId"
+                                            [(value)]="
+                                                webHookMonitoring.WebHookTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let webHookMonitoring of webHookType
+                                                "
+                                                [value]="webHookMonitoring.Id"
+                                            >
+                                                {{
+                                                    webHookMonitoring.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.WEBHOOKPROFILEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKMONITORING.WEBHOOKPROFILEID'
+                                                    | translate
+                                            }}"
+                                            name="WebHookProfileId"
+                                            formControlName="WebHookProfileId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.COMPANYID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKMONITORING.COMPANYID'
+                                                    | translate
+                                            }}"
+                                            name="CompanyId"
+                                            formControlName="CompanyId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.REFERENCENUMBER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKMONITORING.REFERENCENUMBER'
+                                                    | translate
+                                            }}"
+                                            name="ReferenceNumber"
+                                            formControlName="ReferenceNumber"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.REFERENCENUMBERTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKMONITORING.REFERENCENUMBERTYPE'
+                                                    | translate
+                                            }}"
+                                            name="ReferenceNumberType"
+                                            formControlName="ReferenceNumberType"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.HTTPPOSTURL"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKMONITORING.HTTPPOSTURL'
+                                                    | translate
+                                            }}"
+                                            name="HttpPostUrl"
+                                            formControlName="HttpPostUrl"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.RECORDTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKMONITORING.RECORDTYPE'
+                                                    | translate
+                                            }}"
+                                            name="RecordType"
+                                            formControlName="RecordType"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="pageType === 'edit'"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.HTTPSTATUSCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKMONITORING.HTTPSTATUSCODE'
+                                                    | translate
+                                            }}"
+                                            name="HttpStatusCode"
+                                            formControlName="HttpStatusCode"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="pageType === 'edit'"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.APPLICATIONID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKMONITORING.APPLICATIONID'
+                                                    | translate
+                                            }}"
+                                            name="ApplicationId"
+                                            formControlName="ApplicationId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="pageType === 'edit'"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.RESULTMESSAGE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKMONITORING.RESULTMESSAGE'
+                                                    | translate
+                                            }}"
+                                            name="ResultMessage"
+                                            formControlName="ResultMessage"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="pageType === 'edit'"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.RETRYCOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKMONITORING.RETRYCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="RetryCount"
+                                            formControlName="RetryCount"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="pageType === 'edit'"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.MACHINENAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKMONITORING.MACHINENAME'
+                                                    | translate
+                                            }}"
+                                            name="MachineName"
+                                            formControlName="MachineName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'WEBHOOKMONITORING.WEBHOOKPAYLOAD' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKMONITORING.WEBHOOKPAYLOAD"
+                                                | translate
+                                        }}</mat-label>
+                                        <textarea
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKMONITORING.WEBHOOKPAYLOAD'
+                                                    | translate
+                                            }}"
+                                            name="WebHookPayLoad"
+                                            formControlName="WebHookPayLoad"
+                                            rows="25"
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -1,0 +1,310 @@
+<div
+    id="searchSystemFileInformation"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/System/SystemFileInformation/systemFileInformations'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{
+                        "SYSTEMFILEINFORMATION.SYSTEMFILEINFORMATION"
+                            | translate
+                    }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'SYSTEMFILEINFORMATION.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="searchSystemFileInformations-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="searchSystemFileInformationDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <p class="text-truncate">
+                            {{ systemFileInformation.Id }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TenantName Column -->
+                <ng-container matColumnDef="TenantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.TENANTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <p class="text-truncate">
+                            {{ systemFileInformation.TenantName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- FileFormatCode Column -->
+                <ng-container matColumnDef="FileFormatCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.FILEFORMATCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <p class="text-truncate">
+                            {{ systemFileInformation.FileFormatCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- FileName Column -->
+                <ng-container matColumnDef="FileName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.FILENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <p class="text-truncate">
+                            {{ systemFileInformation.FileName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- FileSourceName Column -->
+                <ng-container matColumnDef="FileSourceName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.FILESOURCENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <p class="text-truncate">
+                            {{ systemFileInformation.FileSourceName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- FileStatusName Column -->
+                <ng-container matColumnDef="FileStatusName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.FILESTATUSNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <p class="text-truncate">
+                            {{ systemFileInformation.FileStatusName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- FileFormatTypeName Column -->
+                <ng-container matColumnDef="FileFormatTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.FILEFORMATTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <p class="text-truncate">
+                            {{ systemFileInformation.FileFormatTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- FileDirectionTypeName Column -->
+                <ng-container matColumnDef="FileDirectionTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.FILEDIRECTIONTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <p class="text-truncate">
+                            {{ systemFileInformation.FileDirectionTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- FileSize Column -->
+                <ng-container matColumnDef="FileSize">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.FILESIZE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <p class="text-truncate">
+                            {{ systemFileInformation.FileSize }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- DailyFileIndex Column -->
+                <ng-container matColumnDef="DailyFileIndex">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.DAILYFILEINDEX" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <p class="text-truncate">
+                            {{ systemFileInformation.DailyFileIndex }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- RecordCount Column -->
+                <ng-container matColumnDef="RecordCount">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.RECORDCOUNT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <p class="text-truncate">
+                            {{ systemFileInformation.RecordCount }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- RejectCount Column -->
+                <ng-container matColumnDef="RejectCount">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.REJECTCOUNT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <p class="text-truncate">
+                            {{ systemFileInformation.RejectCount }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- IsTenantFile Column -->
+                <ng-container matColumnDef="IsTenantFile">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "SYSTEMFILEINFORMATION.ISTENANTFILE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let systemFileInformation">
+                        <mat-icon
+                            *ngIf="systemFileInformation.IsTenantFile"
+                            class="active-icon green-600 s-16"
+                            >check</mat-icon
+                        >
+                        <mat-icon
+                            *ngIf="!systemFileInformation.IsTenantFile"
+                            class="active-icon red-500 s-16"
+                            >close</mat-icon
+                        >
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "SYSTEMFILEINFORMATION.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let systemFileInformation"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                systemFileInformation.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="
+                        let systemFileInformation;
+                        columns: displayedColumns
+                    "
+                    class="systemFileInformation"
+                    [routerLink]="[
+                        '/searchSystemFileInformation',
+                        systemFileInformation.Id
+                    ]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="
+                    searchSystemFileInformationDataSource.filteredData.length
+                "
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

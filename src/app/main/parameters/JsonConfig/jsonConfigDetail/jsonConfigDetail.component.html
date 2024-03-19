@@ -1,0 +1,200 @@
+<div id="jsonConfigDetails" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Parameters/JsonConfig/jsonConfigs'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="jsonConfigDetail-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="jsonConfig.images[0]"
+                        [src]="jsonConfig.images[0].url"
+                    />
+                    <img
+                        *ngIf="!jsonConfig.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "JSONCONFIG.NEWJSONCONFIG" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "JSONCONFIG.JSONCONFIGDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-jsonConfigDetail-button"
+                [disabled]="
+                    jsonConfigDetailForm.invalid ||
+                    jsonConfigDetailForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateJsonConfigDetail()"
+            >
+                <span>{{ "JSONCONFIG.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-jsonConfigDetail-button"
+                [disabled]="
+                    jsonConfigDetailForm.invalid ||
+                    jsonConfigDetailForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateJsonConfigDetail()"
+            >
+                <span>{{ "JSONCONFIG.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="jsonConfigDetailForm"
+                    [formGroup]="jsonConfigDetailForm"
+                    class="jsonConfigDetail w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'JSONCONFIG.JSONCONFIGINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "JSONCONFIG.TENANTID" | translate
+                                    }}</mat-label>
+                                    <mat-select
+                                        name="TenantId"
+                                        formControlName="TenantId"
+                                        [(value)]="jsonConfig.TenantId"
+                                    >
+                                        <mat-option
+                                            *ngFor="let tenant of tenantList"
+                                            [value]="tenant.Id"
+                                        >
+                                            {{ tenant.TenantName }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "JSONCONFIG.CONFIGCODE" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'JSONCONFIG.CONFIGCODE' | translate
+                                        }}"
+                                        name="ConfigCode"
+                                        formControlName="ConfigCode"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "JSONCONFIG.DESCRIPTION" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'JSONCONFIG.DESCRIPTION' | translate
+                                        }}"
+                                        name="Description"
+                                        formControlName="Description"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "JSONCONFIG.CONFIGVALUE" | translate
+                                    }}</mat-label>
+                                    <textarea
+                                        matInput
+                                        placeholder="{{
+                                            'JSONCONFIG.CONFIGVALUE' | translate
+                                        }}"
+                                        name="ConfigValue"
+                                        formControlName="ConfigValue"
+                                        rows="5"
+                                        required
+                                    >
+                                    </textarea>
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

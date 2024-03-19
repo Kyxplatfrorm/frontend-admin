@@ -1,0 +1,559 @@
+<div id="webHookReport" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/WebHook/WebHookReport/searchWebHookReport'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="webHookReport-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="webHookReport.images[0]"
+                        [src]="webHookReport.images[0].url"
+                    />
+                    <img
+                        *ngIf="!webHookReport.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "WEBHOOKREPORT.WEBHOOKREPORT" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "WEBHOOKREPORT.WEBHOOKREPORTDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="webHookReportForm"
+                    [formGroup]="webHookReportForm"
+                    class="webHookReport w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'WEBHOOKREPORT.WEBHOOKREPORTINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.STARTDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.STARTDATETIME'
+                                                    | translate
+                                            }}"
+                                            name="StartDateTime"
+                                            formControlName="StartDateTime"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.ENDDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.ENDDATETIME'
+                                                    | translate
+                                            }}"
+                                            name="EndDateTime"
+                                            formControlName="EndDateTime"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.QUEUEDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.QUEUEDATETIME'
+                                                    | translate
+                                            }}"
+                                            name="QueueDateTime"
+                                            formControlName="QueueDateTime"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.DUEDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.DUEDATETIME'
+                                                    | translate
+                                            }}"
+                                            name="DueDateTime"
+                                            formControlName="DueDateTime"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.TENANT" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="webHookReport.TenantId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let webHookReport of tenant
+                                                "
+                                                [value]="webHookReport.Id"
+                                            >
+                                                {{ webHookReport.TenantName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.RUNSTATUS"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="RunStatusId"
+                                            formControlName="RunStatusId"
+                                            [(value)]="
+                                                webHookReport.RunStatusId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let webHookReport of webHookRunStatus
+                                                "
+                                                [value]="webHookReport.Id"
+                                            >
+                                                {{ webHookReport.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.WEBHOOKTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="WebHookTypeId"
+                                            formControlName="WebHookTypeId"
+                                            [(value)]="
+                                                webHookReport.WebHookTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let webHookReport of webHookType
+                                                "
+                                                [value]="webHookReport.Id"
+                                            >
+                                                {{ webHookReport.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.WEBHOOKPROFILEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.WEBHOOKPROFILEID'
+                                                    | translate
+                                            }}"
+                                            name="WebHookProfileId"
+                                            formControlName="WebHookProfileId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.COMPANYID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.COMPANYID'
+                                                    | translate
+                                            }}"
+                                            name="CompanyId"
+                                            formControlName="CompanyId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.APPLICATIONID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.APPLICATIONID'
+                                                    | translate
+                                            }}"
+                                            name="ApplicationId"
+                                            formControlName="ApplicationId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.REFERENCENUMBER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.REFERENCENUMBER'
+                                                    | translate
+                                            }}"
+                                            name="ReferenceNumber"
+                                            formControlName="ReferenceNumber"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.REFERENCENUMBERTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.REFERENCENUMBERTYPE'
+                                                    | translate
+                                            }}"
+                                            name="ReferenceNumberType"
+                                            formControlName="ReferenceNumberType"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.RESULTMESSAGE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.RESULTMESSAGE'
+                                                    | translate
+                                            }}"
+                                            name="ResultMessage"
+                                            formControlName="ResultMessage"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.RETRYCOUNT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.RETRYCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="RetryCount"
+                                            formControlName="RetryCount"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.MACHINENAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.MACHINENAME'
+                                                    | translate
+                                            }}"
+                                            name="MachineName"
+                                            formControlName="MachineName"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.HTTPPOSTURL"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.HTTPPOSTURL'
+                                                    | translate
+                                            }}"
+                                            name="HttpPostUrl"
+                                            formControlName="HttpPostUrl"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.HTTPSTATUSCODE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            type="number"
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.HTTPSTATUSCODE'
+                                                    | translate
+                                            }}"
+                                            name="HttpStatusCode"
+                                            formControlName="HttpStatusCode"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.RECORDTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.RECORDTYPE'
+                                                    | translate
+                                            }}"
+                                            name="RecordType"
+                                            formControlName="RecordType"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'WEBHOOKREPORT.WEBHOOKPAYLOAD' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKREPORT.WEBHOOKPAYLOAD"
+                                                | translate
+                                        }}</mat-label>
+                                        <textarea
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKREPORT.WEBHOOKPAYLOAD'
+                                                    | translate
+                                            }}"
+                                            name="WebHookPayLoad"
+                                            formControlName="WebHookPayLoad"
+                                            rows="25"
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -1,0 +1,239 @@
+<div id="systemKeyDefinition" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/System/SystemKeyDefinition/searchSystemKeyDefinition'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="systemKey-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="systemKey.images[0]"
+                        [src]="systemKey.images[0].url"
+                    />
+                    <img
+                        *ngIf="!systemKey.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "SYSTEMKEY.NEWSYSTEMKEYDEFINITION" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "SYSTEMKEY.SYSTEMKEYDEFINITIONDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-systemKey-button"
+                [disabled]="
+                    systemKeyDefinitionForm.invalid ||
+                    systemKeyDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateSystemKeyDefinition()"
+            >
+                <span>{{ "SYSTEMKEY.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-systemKey-button"
+                [disabled]="
+                    systemKeyDefinitionForm.invalid ||
+                    systemKeyDefinitionForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateSystemKeyDefinition()"
+            >
+                <span>{{ "SYSTEMKEY.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="systemKeyDefinitionForm"
+                    [formGroup]="systemKeyDefinitionForm"
+                    class="systemKey w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'SYSTEMKEY.SYSTEMKEYDEFINITIONINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMKEY.KEYTYPE" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="KeyTypeId"
+                                            formControlName="KeyTypeId"
+                                            [(value)]="systemKey.KeyTypeId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let systemKey of keyType
+                                                "
+                                                [value]="systemKey.Id"
+                                            >
+                                                {{ systemKey.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMKEY.KEYCODE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMKEY.KEYCODE' | translate
+                                            }}"
+                                            name="KeyCode"
+                                            formControlName="KeyCode"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMKEY.KEYVALUE" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMKEY.KEYVALUE' | translate
+                                            }}"
+                                            name="KeyValue"
+                                            formControlName="KeyValue"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMKEY.ENCRYPTEDKEYSECRETPASSWORD"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMKEY.ENCRYPTEDKEYSECRETPASSWORD'
+                                                    | translate
+                                            }}"
+                                            name="EncryptedKeySecretPassword"
+                                            formControlName="EncryptedKeySecretPassword"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "SYSTEMKEY.DESCRIPTION" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'SYSTEMKEY.DESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

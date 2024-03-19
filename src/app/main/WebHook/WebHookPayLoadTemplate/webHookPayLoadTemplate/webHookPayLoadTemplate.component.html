@@ -1,0 +1,195 @@
+<div
+    id="webHookPayLoadTemplate"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/WebHooks/WebHookPayloadTemplate/webHookPayloadTemplate'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="webHookPayLoadTemplate-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="webHookPayLoadTemplate.images[0]"
+                        [src]="webHookPayLoadTemplate.images[0].url"
+                    />
+                    <img
+                        *ngIf="!webHookPayLoadTemplate.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{
+                            "WEBHOOKPAYLOADTEMPLATE.WEBHOOKPAYLOADTEMPLATE"
+                                | translate
+                        }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "WEBHOOKPAYLOADTEMPLATE.WEBHOOKPAYLOADTEMPLATEDETAIL"
+                                | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-webHookPayLoadTemplate-button"
+                [disabled]="
+                    webHookPayLoadTemplateForm.invalid ||
+                    webHookPayLoadTemplateForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateWebHookPayLoadTemplate()"
+            >
+                <span>{{ "WEBHOOKPAYLOADTEMPLATE.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-webHookPayLoadTemplate-button"
+                [disabled]="
+                    webHookPayLoadTemplateForm.invalid ||
+                    webHookPayLoadTemplateForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateWebHookPayLoadTemplate()"
+            >
+                <span>{{ "WEBHOOKPAYLOADTEMPLATE.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="webHookPayLoadTemplateForm"
+                    [formGroup]="webHookPayLoadTemplateForm"
+                    class="webHookPayLoadTemplate w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'WEBHOOKPAYLOADTEMPLATE.WEBHOOKPAYLOADTEMPLATEINFO'
+                                    | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKPAYLOADTEMPLATE.WEBHOOKTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="WebHookTypeId"
+                                            formControlName="WebHookTypeId"
+                                            [(value)]="
+                                                webHookPayLoadTemplate.WebHookTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let webHookPayLoadTemplate of webHookType
+                                                "
+                                                [value]="
+                                                    webHookPayLoadTemplate.Id
+                                                "
+                                            >
+                                                {{
+                                                    webHookPayLoadTemplate.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "WEBHOOKPAYLOADTEMPLATE.WEBHOOKPAYLOAD"
+                                                | translate
+                                        }}</mat-label>
+                                        <textarea
+                                            matInput
+                                            placeholder="{{
+                                                'WEBHOOKPAYLOADTEMPLATE.WEBHOOKPAYLOAD'
+                                                    | translate
+                                            }}"
+                                            name="WebHookPayload"
+                                            formControlName="WebHookPayload"
+                                            rows="25"
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

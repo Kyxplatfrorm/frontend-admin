@@ -1,0 +1,433 @@
+<div
+    id="apiPermissionProfile"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/ApiUser/ApiPermissionProfile/apiPermissionProfiles'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="apiPermissionProfile-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="apiPermissionProfile.images[0]"
+                        [src]="apiPermissionProfile.images[0].url"
+                    />
+                    <img
+                        *ngIf="!apiPermissionProfile.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{
+                            "APIPERMISSION.NEWAPIPERMISSIONPROFILE" | translate
+                        }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "APIPERMISSION.APIPERMISSIONDETAIL1" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'APIPERMISSION.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-apiPermissionProfile-button"
+                [disabled]="
+                    apiPermissionProfileForm.invalid ||
+                    apiPermissionProfileForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateApiPermissionProfile()"
+            >
+                <span>{{ "APIPERMISSION.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-apiPermissionProfile-button"
+                [disabled]="
+                    apiPermissionProfileForm.invalid ||
+                    apiPermissionProfileForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateApiPermissionProfile()"
+            >
+                <span>{{ "APIPERMISSION.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="apiPermissionProfileForm"
+                    [formGroup]="apiPermissionProfileForm"
+                    class="apiPermissionProfile w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'APIPERMISSION.APIPERMISSIONPROFILE' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APIPERMISSION.TENANTID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="
+                                                apiPermissionProfile.TenantId
+                                            "
+                                            placeholder="{{
+                                                'APIPERMISSION.TENANTID'
+                                                    | translate
+                                            }}"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let apiPermissionProfile of tenantList
+                                                "
+                                                [value]="
+                                                    apiPermissionProfile.Id
+                                                "
+                                            >
+                                                {{
+                                                    apiPermissionProfile.TenantName
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APIPERMISSION.PROFILENAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'APIPERMISSION.PROFILENAME'
+                                                    | translate
+                                            }}"
+                                            name="ProfileName"
+                                            formControlName="ProfileName"
+                                            required
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="pageType == 'new'"
+                                    >
+                                        <mat-label>{{
+                                            "APIPERMISSION.USERTYPEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="UserTypeId"
+                                            formControlName="UserTypeId"
+                                            [(value)]="
+                                                apiPermissionProfile.UserTypeId
+                                            "
+                                            placeholder="{{
+                                                'APIPERMISSION.USERTYPEID'
+                                                    | translate
+                                            }}"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let apiPermissionProfile of userTypeList
+                                                "
+                                                [value]="
+                                                    apiPermissionProfile.Id
+                                                "
+                                            >
+                                                {{
+                                                    apiPermissionProfile.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "APIPERMISSION.PERMISSIONCHECKTYPE"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="PermissionCheckTypeId"
+                                            formControlName="PermissionCheckTypeId"
+                                            [(value)]="
+                                                apiPermissionProfile.PermissionCheckTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let apiPermissionProfile of companyRestrictionProfile
+                                                "
+                                                [value]="
+                                                    apiPermissionProfile.Id
+                                                "
+                                            >
+                                                {{
+                                                    apiPermissionProfile.Description
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{
+                                'APIPERMISSION.APIPERMISSIONDETAIL' | translate
+                            }}"
+                        >
+                            <mat-table
+                                class="apiPermissionProfiles-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                fusePerfectScrollbar
+                                [dataSource]="apiPermissionProfileDataSource"
+                            >
+                                <!-- ApiDefinitionName Column -->
+                                <ng-container matColumnDef="ApiDefinitionName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "APIPERMISSION.APIDEFINITIONNAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let apiPermissionProfile"
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                apiPermissionProfile.ApiDefinitionName
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- ApiLimitProfileName Column -->
+                                <ng-container
+                                    matColumnDef="ApiLimitProfileName"
+                                >
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "APIPERMISSION.APILIMITPROFILENAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        *matCellDef="let apiPermissionProfile"
+                                    >
+                                        <p class="text-truncate">
+                                            {{
+                                                apiPermissionProfile.ApiLimitProfileName
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell
+                                        *matCellDef="let apiPermissionProfile"
+                                    >
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteApiPermissionProfileDetail(
+                                                            apiPermissionProfile
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span
+                                                        >{{
+                                                            "APIPERMISSION.REMOVE"
+                                                                | translate
+                                                        }}
+                                                    </span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let apiPermissionProfile;
+                                        columns: displayedColumns
+                                    "
+                                    class="apiPermissionProfile"
+                                    (click)="
+                                        EditApiPermissionProfile(
+                                            apiPermissionProfile
+                                        )
+                                    "
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="apiPermissionProfile-button"
+                                id="add-apiPermissionProfile-button"
+                                aria-label="add apiPermissionProfile"
+                                (click)="ApiPermissionProfile()"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="
+                            apiPermissionProfileDataSource.filteredData?.length
+                        "
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

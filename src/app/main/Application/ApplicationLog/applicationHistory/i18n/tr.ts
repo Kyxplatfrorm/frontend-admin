@@ -1,0 +1,26 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        APPLICATIONLOG: {
+            ID: "Id",
+            APPLICATIONID: "Uygulama Id",
+            INSERTDATETIME: "Ekleme Tarihi",
+            SERVICENAME: "Servis İsmi",
+            SERVERNAME: "Sunucu İsmi",
+            APPLICATIONTYPE: "Uygulama Tipi",
+            SEARCHTEXT: "Uygulama log detayı arayınız",
+            STARTDATETIME: "Başlangıç Tarihi",
+            ENDDATETIME: "Bitiş Tarihi",
+            APPLICATIONLOG: "Uygulama Logları",
+            HISTORY: "Tarihçe",
+            APPLICATIONLOGDETAIL: "Uygulama Log Detayı",
+            APPLICATIONLOGINFO: "Uygulama Log Bilgisi",
+            ISRUNNING: "Çalışma Durumu",
+            PROCESSID: "İşlem Id",
+            LASTLOGID: "Son Log Id",
+            SERVİCENAME: "Servis İsmi",
+            PROCESSNAME: "İşlem İsmi",
+            FIRSTSTARTDATETIME: "İlk Başlangıç Tarihi",
+        },
+    },
+};

@@ -1,0 +1,305 @@
+<div id="searchUsers" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/UserProfiles/User/users'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "USER.USER" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'USER.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+            <!-- ADD BUTTON -->
+            <button
+                mat-raised-button
+                [routerLink]="'/UserProfiles/User/userNew'"
+                class="add-user-button fuse-white mt-24 mt-md-0"
+            >
+                <span>{{ "USER.ADD" | translate }}</span>
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="searchUsers-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="searchUserDataSource"
+            >
+                <!-- Id Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "USER.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{ user.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- TenantName Column -->
+                <ng-container matColumnDef="TenantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "USER.TENANTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{ user.TenantName }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- UserType Column -->
+                <ng-container matColumnDef="UserType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "USER.USERTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{ user.UserType }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UserName Column -->
+                <ng-container matColumnDef="UserName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "USER.USERNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{ user.UserName }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- UserStatus Column -->
+                <ng-container matColumnDef="UserStatus">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "USER.USERSTATUS" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{ user.UserStatus }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- WrongAttemptCount Column -->
+                <ng-container matColumnDef="WrongAttemptCount">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "USER.WRONGATTEMPTCOUNT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">
+                            {{ user.WrongAttemptCount }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- UserProfile Column -->
+                <ng-container matColumnDef="UserProfile">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "USER.USERPROFILE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">
+                            {{ user.UserProfile }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- Email Column -->
+                <ng-container matColumnDef="Email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "USER.EMAIL" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">
+                            {{ user.Email }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- PhoneNumber Column -->
+                <ng-container matColumnDef="PhoneNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "USER.PHONENUMBER" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">
+                            {{ user.PhoneNumber }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "USER.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let user" fxHide fxShow.gt-sm>
+                        <span class="text-truncate"
+                            >{{
+                                user.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-sm
+                        >{{
+                            "USER.UPDATEDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let user" fxHide fxShow.gt-xs>
+                        <span class="text-truncate"
+                            >{{
+                                user.UpdateDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss"
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    (click)="ResetPasswordRetryCount(user)"
+                                >
+                                    <mat-icon>update</mat-icon>
+                                    <span
+                                        >{{
+                                            "USER.RESETPASSWORDRETRYCOUNT"
+                                                | translate
+                                        }}
+                                    </span>
+                                </button>
+                                <button
+                                    mat-menu-item
+                                    (click)="ResetPassword(user)"
+                                >
+                                    <mat-icon>update</mat-icon>
+                                    <span
+                                        >{{ "USER.RESETPASSWORD" | translate }}
+                                    </span>
+                                </button>
+                                <button
+                                    mat-menu-item
+                                    (click)="SearchUserForm(user)"
+                                >
+                                    <mat-icon>create</mat-icon>
+                                    <span
+                                        >{{ "USER.SETPASSWORD" | translate }}
+                                    </span>
+                                </button>
+                                <button
+                                    mat-menu-item
+                                    (click)="DeleteUser(user)"
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                    <span
+                                        >{{ "USER.DELETE" | translate }}
+                                    </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let user; columns: displayedColumns"
+                    class="user"
+                    [routerLink]="['/searchUser', user.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="searchUserDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

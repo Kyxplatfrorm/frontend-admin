@@ -1,0 +1,178 @@
+<div id="menuProduct" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/UserProfiles/Menu/menuProducts'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "PRODUCT.PRODUCTMODULE" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'PRODUCT.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="menuProduct-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                fusePerfectScrollbar
+                [dataSource]="menuProductDataSource"
+            >
+                <!-- Id Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "PRODUCT.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let product">
+                        <p class="text-truncate">
+                            {{ product.Id }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- ProductName Column -->
+                <ng-container matColumnDef="ProductName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "PRODUCT.PRODUCTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let product">
+                        <p class="text-truncate">
+                            {{ product.ProductName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ApplicationType Column -->
+                <ng-container matColumnDef="ApplicationType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "PRODUCT.APPLICATIONTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let product">
+                        <p class="text-truncate">
+                            {{ product.ApplicationType }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- UserType Column -->
+                <ng-container matColumnDef="UserType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "PRODUCT.USERTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let product">
+                        <p class="text-truncate">
+                            {{ product.UserType }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Description Column -->
+                <ng-container matColumnDef="Description">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "PRODUCT.DESCRIPTION" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
+                        <p class="text-truncate">
+                            {{ product.Description }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "PRODUCT.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-sm>
+                        <span class="text-truncate"
+                            >{{
+                                product.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let product; columns: displayedColumns"
+                    class="product"
+                    [routerLink]="['/menuProduct', product.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="menuProductDataSource.filteredData?.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

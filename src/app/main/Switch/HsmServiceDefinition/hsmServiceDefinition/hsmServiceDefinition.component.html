@@ -1,0 +1,616 @@
+<div
+    id="hsmServiceDefinition"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="
+                        '/Switch/HsmServiceDefinition/hsmServiceDefinitions'
+                    "
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="hsmService-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="hsmService.images[0]"
+                        [src]="hsmService.images[0].url"
+                    />
+                    <img
+                        *ngIf="!hsmService.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "HSMSERVICE.NEWHSMSERVICE" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "HSMSERVICE.HSMSERVICEDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'HSMSERVICE.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <button
+                mat-raised-button
+                class="save-hsmService-button"
+                [disabled]="hsmServiceForm.invalid || hsmServiceForm.pristine"
+                *ngIf="pageType === 'new'"
+                (click)="CreateHsmServiceDefinition()"
+            >
+                <span>{{ "HSMSERVICE.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-hsmService-button"
+                [disabled]="hsmServiceForm.invalid || hsmServiceForm.pristine"
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateHsmServiceDefinition()"
+            >
+                <span>{{ "HSMSERVICE.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="hsmServiceForm"
+                    [formGroup]="hsmServiceForm"
+                    class="hsmService w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'HSMSERVICE.HSMSERVICEINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSMSERVICE.USERTYPEID" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="UserTypeId"
+                                            formControlName="UserTypeId"
+                                            [(value)]="hsmService.UserTypeId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let hsmService of userTypeList
+                                                "
+                                                [value]="hsmService.Id"
+                                            >
+                                                {{ hsmService.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSMSERVICE.APPLICATIONPROFILEID"
+                                                | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="ApplicationProfileId"
+                                            formControlName="ApplicationProfileId"
+                                            [(value)]="
+                                                hsmService.ApplicationProfileId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let hsmService of applicationProfileList
+                                                "
+                                                [value]="hsmService.Id"
+                                            >
+                                                {{ hsmService.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSMSERVICE.SERVERADDRESS"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSMSERVICE.SERVERADDRESS'
+                                                    | translate
+                                            }}"
+                                            name="ServerAddress"
+                                            formControlName="ServerAddress"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSMSERVICE.SERVERPORT" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSMSERVICE.SERVERPORT'
+                                                    | translate
+                                            }}"
+                                            name="ServerPort"
+                                            formControlName="ServerPort"
+                                            type="number"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSMSERVICE.CLUSTERID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSMSERVICE.CLUSTERID'
+                                                    | translate
+                                            }}"
+                                            name="ClusterId"
+                                            formControlName="ClusterId"
+                                            type="number"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSMSERVICE.INSTANCEID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSMSERVICE.INSTANCEID'
+                                                    | translate
+                                            }}"
+                                            name="InstanceId"
+                                            formControlName="InstanceId"
+                                            type="number"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSMSERVICE.THREADCOUNT" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSMSERVICE.THREADCOUNT'
+                                                    | translate
+                                            }}"
+                                            name="ThreadCount"
+                                            formControlName="ThreadCount"
+                                            type="number"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                        *ngIf="hsmService.HasRestApi"
+                                    >
+                                        <mat-label>{{
+                                            "HSMSERVICE.RESTAPIPORT" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSMSERVICE.RESTAPIPORT'
+                                                    | translate
+                                            }}"
+                                            name="RestApiPort"
+                                            formControlName="RestApiPort"
+                                            type="number"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div class="checkbox">
+                                    <mat-checkbox
+                                        name="HasRestApi"
+                                        formControlName="HasRestApi"
+                                        [(ngModel)]="hsmService.HasRestApi"
+                                        >{{
+                                            "HSMSERVICE.HASRESTAPI" | translate
+                                        }}</mat-checkbox
+                                    >
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSMSERVICE.CONNECTIONTIMEOUT"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSMSERVICE.CONNECTIONTIMEOUT'
+                                                    | translate
+                                            }}"
+                                            name="ConnectionTimeout"
+                                            formControlName="ConnectionTimeout"
+                                            type="number"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSMSERVICE.CONNECTIONCHECKTIMESECOND"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSMSERVICE.CONNECTIONCHECKTIMESECOND'
+                                                    | translate
+                                            }}"
+                                            name="ConnectionCheckTimeSecond"
+                                            formControlName="ConnectionCheckTimeSecond"
+                                            type="number"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSMSERVICE.SERVICENAME" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSMSERVICE.SERVICENAME'
+                                                    | translate
+                                            }}"
+                                            name="ServiceName"
+                                            formControlName="ServiceName"
+                                        />
+                                    </mat-form-field>
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "HSMSERVICE.DESCRIPTION" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'HSMSERVICE.DESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab
+                            label="{{ 'HSMSERVICE.HSMCONNECTION' | translate }}"
+                        >
+                            <mat-table
+                                class="hsmServiceDefinition-table"
+                                #table
+                                matSort
+                                [@animateStagger]="{ value: '50' }"
+                                fusePerfectScrollbar
+                                [dataSource]="hsmServiceDefinitionDataSource"
+                            >
+                                <!-- ApplicationId Column -->
+                                <ng-container matColumnDef="ApplicationId">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "HSMSERVICE.APPLICATIONID"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let hsmService">
+                                        <p class="text-truncate">
+                                            {{ hsmService.ApplicationId }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- HsmDeviceName Column -->
+                                <ng-container matColumnDef="HsmDeviceName">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "HSMSERVICE.HSMDEVICENAME"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let hsmService">
+                                        <p class="text-truncate">
+                                            {{ hsmService.HsmDeviceName }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ConnectionCount Column -->
+                                <ng-container matColumnDef="ConnectionCount">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "HSMSERVICE.CONNECTIONCOUNT"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let hsmService">
+                                        <p class="text-truncate">
+                                            {{ hsmService.ConnectionCount }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ConnectionTimeout Column -->
+                                <ng-container matColumnDef="ConnectionTimeout">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "HSMSERVICE.CONNECTIONTIMEOUT"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let hsmService">
+                                        <p class="text-truncate">
+                                            {{ hsmService.ConnectionTimeout }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <!-- ConnectionCheckTimeSecond Column -->
+                                <ng-container
+                                    matColumnDef="ConnectionCheckTimeSecond"
+                                >
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >{{
+                                            "HSMSERVICE.CONNECTIONCHECKTIMESECOND"
+                                                | translate
+                                        }}</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let hsmService">
+                                        <p class="text-truncate">
+                                            {{
+                                                hsmService.ConnectionCheckTimeSecond
+                                            }}
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Buttons Column -->
+                                <ng-container matColumnDef="Buttons">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                    ></mat-header-cell>
+                                    <mat-cell *matCellDef="let hsmService">
+                                        <div
+                                            fxFlex="row"
+                                            fxLayoutAlign="end center"
+                                        >
+                                            <button
+                                                mat-icon-button
+                                                [matMenuTriggerFor]="moreMenu"
+                                                aria-label="More"
+                                                (click)="
+                                                    $event.stopPropagation()
+                                                "
+                                            >
+                                                <mat-icon class="secondary-text"
+                                                    >more_vert</mat-icon
+                                                >
+                                            </button>
+
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button
+                                                    mat-menu-item
+                                                    aria-label="remove"
+                                                    (click)="
+                                                        DeleteHsmDeviceConnection(
+                                                            hsmService
+                                                        )
+                                                    "
+                                                >
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{
+                                                        "HSMSERVICE.REMOVE"
+                                                            | translate
+                                                    }}</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="
+                                        displayedColumns;
+                                        sticky: true
+                                    "
+                                ></mat-header-row>
+
+                                <mat-row
+                                    *matRowDef="
+                                        let hsmService;
+                                        columns: displayedColumns
+                                    "
+                                    class="hsmService"
+                                    (click)="EditHsmService(hsmService)"
+                                    [@animate]="{
+                                        value: '*',
+                                        params: { y: '100%' }
+                                    }"
+                                >
+                                </mat-row>
+                            </mat-table>
+                            <button
+                                mat-fab
+                                class="hsmService-button"
+                                id="add-hsmService-button"
+                                (click)="newForm()"
+                                aria-label="add hsmService"
+                                [@animate]="{
+                                    value: '*',
+                                    params: { delay: '300ms', scale: '.2' }
+                                }"
+                            >
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <mat-paginator
+                        #paginator
+                        [length]="
+                            hsmServiceDefinitionDataSource.filteredData?.length
+                        "
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                    </mat-paginator>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

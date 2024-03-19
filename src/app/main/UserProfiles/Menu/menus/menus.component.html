@@ -1,0 +1,231 @@
+<div id="menus" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="['/menuProducts', menuProductId]"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "MENU.MENUDEFINITION" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'MENU.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button
+                mat-raised-button
+                [routerLink]="'/menus/new'"
+                class="add-menu-button fuse-white mt-24 mt-md-0"
+            >
+                <span>{{ "MENU.ADD" | translate }}</span>
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="menus-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                fusePerfectScrollbar
+                [dataSource]="menusDataSource"
+            >
+                <!-- ID Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "MENU.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let menu">
+                        <p class="text-truncate">{{ menu.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- MenuOrder Column -->
+                <ng-container matColumnDef="MenuOrder">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "MENU.MENUORDER" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let menu">
+                        <p class="text-truncate">{{ menu.MenuOrder }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- MenuName Column -->
+                <ng-container matColumnDef="MenuName">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        fxHide
+                        mat-sort-header
+                        fxShow.gt-md
+                        >{{ "MENU.MENUNAME" | translate }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let menu" fxHide fxShow.gt-md>
+                        <p class="text-truncate">
+                            {{ menu.MenuName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ParentMenuName Column -->
+                <ng-container matColumnDef="ParentMenuName">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "MENU.PARENTMENUNAME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let menu" fxHide fxShow.gt-xs>
+                        <p class="text-truncate">
+                            {{ menu.ParentMenuName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "MENU.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let menu" fxHide fxShow.gt-sm>
+                        <span class="text-truncate"
+                            >{{
+                                menu.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-sm
+                        >{{
+                            "MENU.UPDATEDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell *matCellDef="let menu" fxHide fxShow.gt-xs>
+                        <span class="text-truncate"
+                            >{{
+                                menu.UpdateDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss"
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let menu">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="DeleteMenu(menu)"
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                    <span
+                                        >{{ "MENU.REMOVE" | translate }}
+                                    </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let menu; columns: displayedColumns"
+                    class="menu"
+                    [routerLink]="['/menus', menu.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="menusDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

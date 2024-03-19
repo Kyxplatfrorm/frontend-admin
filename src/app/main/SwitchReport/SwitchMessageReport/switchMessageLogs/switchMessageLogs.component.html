@@ -1,0 +1,453 @@
+<div id="switchMessageLogs" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-switchMessage-button fuse-white mt-24 mr-35"
+                        (click)="SearchSwitchMessageLog()"
+                    >
+                        <span>{{ "SWITCHMESSAGE.SEARCH" | translate }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-switchMessage-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "SWITCHMESSAGE.CLEAR" | translate }}
+                    </button>
+
+                    <!-- CLEAR BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="switchMessageLogsForm"
+                    [formGroup]="switchMessageLogsForm"
+                    class="switchMessage w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.SEARCHSTARTDATE" | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="SearchStartDate"
+                                    formControlName="SearchStartDate"
+                                    [matDatepicker]="pickerStartDate"
+                                    [(ngModel)]="switchMessage.SearchStartDate"
+                                    (dateChange)="onDateChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerStartDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerStartDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.SEARCHENDDATE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    [matDatepicker]="pickerEndDate"
+                                    formControlName="SearchEndDate"
+                                    [(ngModel)]="switchMessage.SearchEndDate"
+                                    (dateChange)="onDateEndChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerEndDate></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.SEARCHSTARTTIME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.SEARCHSTARTTIME'
+                                            | translate
+                                    }}"
+                                    name="SearchStartTime"
+                                    formControlName="SearchStartTime"
+                                />
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.SEARCHENDTIME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.SEARCHENDTIME'
+                                            | translate
+                                    }}"
+                                    name="SearchEndTime"
+                                    formControlName="SearchEndTime"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.APPLICATIONTYPE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.APPLICATIONTYPE'
+                                            | translate
+                                    }}"
+                                    name="ApplicationType"
+                                    formControlName="ApplicationType"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.SERVERNAME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.SERVERNAME' | translate
+                                    }}"
+                                    name="ServerName"
+                                    formControlName="ServerName"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.APPLICATIONID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="ApplicationId"
+                                    formControlName="ApplicationId"
+                                    [(value)]="switchMessage.ApplicationId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let switchMessage of switchApplicationsList
+                                        "
+                                        [value]="switchMessage.Id"
+                                    >
+                                        {{ switchMessage.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.SESSIONID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="SessionId"
+                                    formControlName="SessionId"
+                                    [(value)]="switchMessage.SessionId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let switchMessage of switchApplicationSessionList
+                                        "
+                                        [value]="switchMessage.Id"
+                                    >
+                                        {{ switchMessage.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.REMOTEIPADDRESS" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.REMOTEIPADDRESS'
+                                            | translate
+                                    }}"
+                                    name="RemoteIpAddress"
+                                    formControlName="RemoteIpAddress"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.REMOTEPORT" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    type="number"
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.REMOTEPORT' | translate
+                                    }}"
+                                    name="RemotePort"
+                                    formControlName="RemotePort"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.LOCALIPADDRESS" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.LOCALIPADDRESS'
+                                            | translate
+                                    }}"
+                                    name="LocalIpAddress"
+                                    formControlName="LocalIpAddress"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.LOCALPORT" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    type="number"
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.LOCALPORT' | translate
+                                    }}"
+                                    name="LocalPort"
+                                    formControlName="LocalPort"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.CARDTOKENNUMBER" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.CARDTOKENNUMBER'
+                                            | translate
+                                    }}"
+                                    name="CardTokenNumber"
+                                    formControlName="CardTokenNumber"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.MERCHANTCODE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.MERCHANTCODE' | translate
+                                    }}"
+                                    name="MerchantCode"
+                                    formControlName="MerchantCode"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.TERMINALID" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.TERMINALID' | translate
+                                    }}"
+                                    name="TerminalId"
+                                    formControlName="TerminalId"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.MTI" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    type="number"
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.MTI' | translate
+                                    }}"
+                                    name="Mti"
+                                    formControlName="Mti"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.RRN" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.RRN' | translate
+                                    }}"
+                                    name="Rrn"
+                                    formControlName="Rrn"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SWITCHMESSAGE.AUTHORIZATIONCODE"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SWITCHMESSAGE.AUTHORIZATIONCODE'
+                                            | translate
+                                    }}"
+                                    name="AuthorizationCode"
+                                    formControlName="AuthorizationCode"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / CENTER -->
+</div>

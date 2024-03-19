@@ -1,0 +1,212 @@
+<div id="tenantdetails" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Tenant/TenantDefinition/tenantDefinitions'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="tenantdetail-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="tenant.images[0]"
+                        [src]="tenant.images[0].url"
+                    />
+                    <img
+                        *ngIf="!tenant.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/tenant-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="h2" *ngIf="pageType === 'new'">
+                        {{ "TENANT.NEWTENANT" | translate }}
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>{{ "TENANT.TENANTDETAIL" | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button
+                mat-raised-button
+                class="save-tenantdetail-button"
+                [disabled]="
+                    tenantDetailForm.invalid || tenantDetailForm.pristine
+                "
+                *ngIf="pageType === 'new'"
+                (click)="CreateTenant()"
+            >
+                <span>{{ "TENANT.ADD" | translate }}</span>
+            </button>
+
+            <button
+                mat-raised-button
+                class="save-tenantdetail-button"
+                [disabled]="
+                    tenantDetailForm.invalid || tenantDetailForm.pristine
+                "
+                *ngIf="pageType === 'edit'"
+                (click)="UpdateTenant()"
+            >
+                <span>{{ "TENANT.SAVE" | translate }}</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="tenantDetailForm"
+                    [formGroup]="tenantDetailForm"
+                    class="tenantdetail w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab label="{{ 'TENANT.TENANTINFO' | translate }}">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                    *ngIf="pageType === 'new'"
+                                >
+                                    <mat-label>{{
+                                        "TENANT.ID" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'TENANT.ID' | translate
+                                        }}"
+                                        name="Id"
+                                        formControlName="Id"
+                                        required
+                                    />
+                                    <mat-error>
+                                        {{ "TENANT.IDREQUIRED" | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "TENANT.TENANTNAME" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'TENANT.TENANTNAME' | translate
+                                        }}"
+                                        name="TenantName"
+                                        formControlName="TenantName"
+                                        required
+                                    />
+                                    <mat-error>
+                                        {{
+                                            "TENANT.TENANTNAMEREQUIRED"
+                                                | translate
+                                        }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "TENANT.TENANTCODE" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'TENANT.TENANTCODE' | translate
+                                        }}"
+                                        name="TenantCode"
+                                        formControlName="TenantCode"
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "TENANT.DEFAULTCURRENCYCODE" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'TENANT.DEFAULTCURRENCYCODE'
+                                                | translate
+                                        }}"
+                                        name="DefaultCurrencyCode"
+                                        formControlName="DefaultCurrencyCode"
+                                    />
+                                </mat-form-field>
+                                <mat-form-field
+                                    appearance="outline"
+                                    floatLabel="always"
+                                    class="w-100-p"
+                                >
+                                    <mat-label>{{
+                                        "TENANT.TENANTLOGOURL" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        placeholder="{{
+                                            'TENANT.TENANTLOGOURL' | translate
+                                        }}"
+                                        name="TenantLogoUrl"
+                                        formControlName="TenantLogoUrl"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

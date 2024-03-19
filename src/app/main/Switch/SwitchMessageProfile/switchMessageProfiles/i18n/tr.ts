@@ -1,0 +1,27 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        SWITCHMESSAGE: {
+            SWITCHMESSAGE: "Switch Mesajı ",
+            SEARCHTEXT: "Switch mesaj profili arayınız",
+            ADD: "EKLE",
+            SAVE: "KAYDET",
+            DELETE: "SİL",
+            ID: "Id",
+            REMOVE: "Sil",
+            UPDATEDATETIME: "Güncelleme Tarihi",
+            INSERTDATETIME: "Ekleme Tarihi",
+            NETWORKTYPENAME: "Network Tipinin İsmi",
+            NETWORKMESSAGETYPENAME: "Network Mesaj Tipinin İsmi",
+            REQUESTMTI: "Request Mti",
+            RESPONSEMTI: "Response Mti",
+            REQUESTMESSAGEPROFILE: "Request Mesaj Profili",
+            RESPONSEMESSAGEPROFILE: "Response Mesaj Profili",
+            NETWORKMESSAGETYPE: "Network Mesaj Tipi",
+            NETWORKTYPE: "Network Tipi",
+            SWITCHMESSAGEPROFILEADDED: "Switch Mesaj Profili Eklendi",
+            SWITCHMESSAGEPROFILESAVED: "Switch Mesaj Profili Kaydedildi",
+            OK: "TAMAM",
+        },
+    },
+};

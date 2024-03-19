@@ -1,0 +1,347 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="tenantLimitProfileForm">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "LIMIT.TRANSACTIONGROUPID" | translate
+                    }}</mat-label>
+                    <mat-select
+                        name="TransactionGroupId"
+                        formControlName="TransactionGroupId"
+                        [(ngModel)]="tenantLimit.TransactionGroupId"
+                        [(value)]="tenantLimit.TransactionGroupId"
+                    >
+                        <mat-option
+                            *ngFor="let tenantLimit of limitCardTransaction"
+                            [value]="tenantLimit.Id"
+                        >
+                            {{ tenantLimit.Description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="checkbox" style="margin-bottom: 10px">
+                <mat-checkbox
+                    name="HasOneTimeMaxAmount"
+                    formControlName="HasOneTimeMaxAmount"
+                    [(ngModel)]="tenantLimit.HasOneTimeMaxAmount"
+                    >{{ "LIMIT.HASONETIMEMAXAMOUNT" | translate }}</mat-checkbox
+                >
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    *ngIf="tenantLimit.HasOneTimeMaxAmount"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "LIMIT.ONETIMEMAXAMOUNT" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'LIMIT.ONETIMEMAXAMOUNT' | translate }}"
+                        name="OneTimeMaxAmount"
+                        formControlName="OneTimeMaxAmount"
+                        [(ngModel)]="tenantLimit.OneTimeMaxAmount"
+                    />
+                </mat-form-field>
+            </div>
+
+            <div class="checkbox" style="margin-bottom: 10px">
+                <mat-checkbox
+                    name="HasDailyLimitAmount"
+                    formControlName="HasDailyLimitAmount"
+                    fxFlex="52"
+                    [(ngModel)]="tenantLimit.HasDailyLimitAmount"
+                    >{{ "LIMIT.HASDAILYLIMITAMOUNT" | translate }}</mat-checkbox
+                >
+                <mat-checkbox
+                    name="HasDailyLimitCount"
+                    formControlName="HasDailyLimitCount"
+                    [(ngModel)]="tenantLimit.HasDailyLimitCount"
+                    >{{ "LIMIT.HASDAILYLIMITCOUNT" | translate }}</mat-checkbox
+                >
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    *ngIf="tenantLimit.HasDailyLimitAmount"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "LIMIT.DAILYLIMITAMOUNT" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'LIMIT.DAILYLIMITAMOUNT' | translate }}"
+                        name="DailyLimitAmount"
+                        [(ngModel)]="tenantLimit.DailyLimitAmount"
+                        formControlName="DailyLimitAmount"
+                    />
+                </mat-form-field>
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    *ngIf="tenantLimit.HasDailyLimitCount"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "LIMIT.DAILYLIMITCOUNT" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'LIMIT.DAILYLIMITCOUNT' | translate }}"
+                        name="DailyLimitCount"
+                        [(ngModel)]="tenantLimit.DailyLimitCount"
+                        formControlName="DailyLimitCount"
+                    />
+                </mat-form-field>
+            </div>
+
+            <div class="checkbox" style="margin-bottom: 10px">
+                <mat-checkbox
+                    name="HasWeeklyLimitAmount"
+                    formControlName="HasWeeklyLimitAmount"
+                    fxFlex="52"
+                    [(ngModel)]="tenantLimit.HasWeeklyLimitAmount"
+                    >{{
+                        "LIMIT.HASWEEKLYLIMITAMOUNT" | translate
+                    }}</mat-checkbox
+                >
+                <mat-checkbox
+                    name="HasWeeklyLimitCount"
+                    formControlName="HasWeeklyLimitCount"
+                    [(ngModel)]="tenantLimit.HasWeeklyLimitCount"
+                    >{{ "LIMIT.HASWEEKLYLIMITCOUNT" | translate }}</mat-checkbox
+                >
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    *ngIf="tenantLimit.HasWeeklyLimitAmount"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "LIMIT.WEEKLYLIMITAMOUNT" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'LIMIT.WEEKLYLIMITAMOUNT' | translate
+                        }}"
+                        name="WeeklyLimitAmount"
+                        formControlName="WeeklyLimitAmount"
+                        [(ngModel)]="tenantLimit.WeeklyLimitAmount"
+                    />
+                </mat-form-field>
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    *ngIf="tenantLimit.HasWeeklyLimitCount"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "LIMIT.WEEKLYLIMITCOUNT" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'LIMIT.WEEKLYLIMITCOUNT' | translate }}"
+                        name="WeeklyLimitCount"
+                        formControlName="WeeklyLimitCount"
+                        [(ngModel)]="tenantLimit.WeeklyLimitCount"
+                    />
+                </mat-form-field>
+            </div>
+
+            <div class="checkbox" style="margin-bottom: 10px">
+                <mat-checkbox
+                    name="HasMonthlyLimitAmount"
+                    formControlName="HasMonthlyLimitAmount"
+                    fxFlex="52"
+                    [(ngModel)]="tenantLimit.HasMonthlyLimitAmount"
+                    >{{
+                        "LIMIT.HASMONTHLYLIMITAMOUNT" | translate
+                    }}</mat-checkbox
+                >
+                <mat-checkbox
+                    name="HasMonthlyLimitCount"
+                    formControlName="HasMonthlyLimitCount"
+                    [(ngModel)]="tenantLimit.HasMonthlyLimitCount"
+                    >{{
+                        "LIMIT.HASMONTHLYLIMITCOUNT" | translate
+                    }}</mat-checkbox
+                >
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    *ngIf="tenantLimit.HasMonthlyLimitAmount"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "LIMIT.MONTHLYLIMITAMOUNT" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'LIMIT.MONTHLYLIMITAMOUNT' | translate
+                        }}"
+                        name="MonthlyLimitAmount"
+                        formControlName="MonthlyLimitAmount"
+                        [(ngModel)]="tenantLimit.MonthlyLimitAmount"
+                    />
+                </mat-form-field>
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    *ngIf="tenantLimit.HasMonthlyLimitCount"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "LIMIT.MONTHLYLIMITCOUNT" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'LIMIT.MONTHLYLIMITCOUNT' | translate
+                        }}"
+                        name="MonthlyLimitCount"
+                        formControlName="MonthlyLimitCount"
+                        [(ngModel)]="tenantLimit.MonthlyLimitCount"
+                    />
+                </mat-form-field>
+            </div>
+
+            <div class="checkbox" style="margin-bottom: 10px">
+                <mat-checkbox
+                    name="HasYearlyLimitAmount"
+                    formControlName="HasYearlyLimitAmount"
+                    fxFlex="52"
+                    [(ngModel)]="tenantLimit.HasYearlyLimitAmount"
+                    >{{ "LIMIT.YEARLYLIMITAMOUNT" | translate }}</mat-checkbox
+                >
+                <mat-checkbox
+                    name="HasYearlyLimitCount"
+                    formControlName="HasYearlyLimitCount"
+                    [(ngModel)]="tenantLimit.HasYearlyLimitCount"
+                    >{{ "LIMIT.HASYEARLYLIMITCOUNT" | translate }}</mat-checkbox
+                >
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    *ngIf="tenantLimit.HasYearlyLimitAmount"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "LIMIT.YEARLYLIMITAMOUNT" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{
+                            'LIMIT.YEARLYLIMITAMOUNT' | translate
+                        }}"
+                        name="YearlyLimitAmount"
+                        formControlName="YearlyLimitAmount"
+                        [(ngModel)]="tenantLimit.YearlyLimitAmount"
+                    />
+                </mat-form-field>
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    *ngIf="tenantLimit.HasYearlyLimitCount"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "LIMIT.YEARLYLIMITCOUNT" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'LIMIT.YEARLYLIMITCOUNT' | translate }}"
+                        name="YearlyLimitCount"
+                        formControlName="YearlyLimitCount"
+                        [(ngModel)]="tenantLimit.YearlyLimitCount"
+                    />
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="mr-8"
+            (click)="matDialogRef.close(['delete', tenantLimitProfileForm])"
+            aria-label="Delete"
+            matTooltip="Delete"
+        >
+            {{ "LIMIT.DELETE" | translate }}
+        </button>
+
+        <button
+            *ngIf="action !== 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(tenantLimitProfileForm)"
+            [disabled]="tenantLimitProfileForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "LIMIT.ADD" | translate }}
+        </button>
+
+        <button
+            *ngIf="action === 'edit'"
+            mat-button
+            class="save-button"
+            (click)="matDialogRef.close(['save', tenantLimitProfileForm])"
+            [disabled]="tenantLimitProfileForm.invalid"
+            aria-label="SAVE"
+        >
+            {{ "LIMIT.SAVE" | translate }}
+        </button>
+    </div>
+</div>
