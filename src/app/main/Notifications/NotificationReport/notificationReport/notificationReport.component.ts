@@ -17,6 +17,7 @@ import {
     NotificationTemplateEntity,
     NotificationTypeEntity,
     SentStatusEntity,
+    TenantDefinitionEntity,
 } from "app/ui/notificationReport";
 import { NotificationReportService } from "./notificationReport.service";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
@@ -38,6 +39,7 @@ export class NotificationReportComponent implements OnInit, OnDestroy {
     languageCode: LanguageCodeEntity[];
     sentStatus: SentStatusEntity[];
     notificationTemplate: NotificationTemplateEntity[];
+    tenant: TenantDefinitionEntity[];
     notificationReportForm: FormGroup;
     confirmDialogRef: MatDialogRef<FuseConfirmDialogComponent>;
     private _unsubscribeAll: Subject<any>;
@@ -71,21 +73,22 @@ export class NotificationReportComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        this.notificationReportsService.GetTenants().then(() => {
+            this.tenant =
+                this.notificationReportsService.tenantApiResponse.TenantDefinitionList;
+        });
         this.notificationReportsService.GetLanguageCodes().then(() => {
             this.languageCode =
                 this.notificationReportsService.languageCodeApiResponse.ParameterList;
         });
-
         this.notificationReportsService.GetNotificationTemplates().then(() => {
             this.notificationTemplate =
                 this.notificationReportsService.notificationTemplateApiResponse.ParameterList;
         });
-
         this.notificationReportsService.GetNotificationTypes().then(() => {
             this.notificationType =
                 this.notificationReportsService.notificationTypeApiResponse.ParameterList;
         });
-
         this.notificationReportsService.GetNotificationSentStatus().then(() => {
             this.sentStatus =
                 this.notificationReportsService.sentStatusApiResponse.ParameterList;
@@ -121,6 +124,7 @@ export class NotificationReportComponent implements OnInit, OnDestroy {
     createNotificationReportForm(): FormGroup {
         return this._formBuilder.group({
             Id: [this.notificationReport.Id],
+            TenantId: [this.notificationReport.TenantId],
             CustomerName: [this.notificationReport.CustomerName],
             CompanyId: [this.notificationReport.CompanyId],
             SessionId: [this.notificationReport.SessionId],

@@ -135,7 +135,31 @@
                                 fxFlex="48"
                             >
                                 <mat-label>{{
-                                    "NOTIFICATIONREPORT.ORDERID" | translate
+                                    "SCHEDULERJOBREPORT.TENANT" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TenantId"
+                                    formControlName="TenantId"
+                                    [(value)]="schedulerJobReport.TenantId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let schedulerJobReport of tenant
+                                        "
+                                        [value]="schedulerJobReport.Id"
+                                    >
+                                        {{ schedulerJobReport.TenantName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "SCHEDULERJOBREPORT.ORDERID" | translate
                                 }}</mat-label>
                                 <input
                                     matInput
@@ -146,6 +170,8 @@
                                     formControlName="OrderId"
                                 />
                             </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
                             <mat-form-field
                                 appearance="outline"
                                 floatLabel="always"
@@ -166,8 +192,6 @@
                                     formControlName="TotalElapsed"
                                 />
                             </mat-form-field>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="space-between">
                             <mat-form-field
                                 appearance="outline"
                                 floatLabel="always"
@@ -187,6 +211,8 @@
                                     formControlName="ApplicationId"
                                 />
                             </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
                             <mat-form-field
                                 appearance="outline"
                                 floatLabel="always"
@@ -214,8 +240,6 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="space-between">
                             <mat-form-field
                                 appearance="outline"
                                 floatLabel="always"
@@ -240,6 +264,9 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
                             <mat-form-field
                                 appearance="outline"
                                 floatLabel="always"
@@ -267,9 +294,6 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                        </div>
-
-                        <div fxLayout="row" fxLayoutAlign="space-between">
                             <mat-form-field
                                 appearance="outline"
                                 floatLabel="always"

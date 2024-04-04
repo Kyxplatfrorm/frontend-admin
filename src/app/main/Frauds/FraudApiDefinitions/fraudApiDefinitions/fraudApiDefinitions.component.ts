@@ -54,7 +54,6 @@ export class FraudApiDefinitionsComponent {
         return this._formBuilder.group({
             ApplicationTypeId: [this.fraudApi.ApplicationTypeId],
             Description: [this.fraudApi.Description],
-            ControllerName: [this.fraudApi.ControllerName],
             ActionName: [this.fraudApi.ActionName],
             SearchStartDate: [this.fraudApi.SearchStartDate],
             SearchEndDate: [this.fraudApi.SearchEndDate],

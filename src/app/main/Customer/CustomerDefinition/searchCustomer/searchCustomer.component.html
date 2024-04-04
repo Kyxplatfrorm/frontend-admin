@@ -1,0 +1,251 @@
+<div id="searchCustomer" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Customer/CustomerDefinition/customers'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "CUSTOMER.CUSTOMERDEFINITION" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{ 'CUSTOMER.SEARCHTEXT' | translate }}"
+                    />
+                </div>
+            </div>
+            <button
+                mat-raised-button
+                color="basic"
+                class="add-searchCustomer-button fuse-white m-20"
+                [routerLink]="'/Customer/CustomerDefinition/createCustomer'"
+            >
+                {{ "CUSTOMER.ADD" | translate }}
+            </button>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="searchCustomers-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="searchCustomerDataSource"
+            >
+                <!-- Id Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CUSTOMER.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let searchCustomer">
+                        <p class="text-truncate">{{ searchCustomer.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- CustomerFullName Column -->
+                <ng-container matColumnDef="CustomerFullName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CUSTOMER.CUSTOMERFULLNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let searchCustomer">
+                        <p class="text-truncate">
+                            {{ searchCustomer.CustomerFullName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- CustomerType Column -->
+                <ng-container matColumnDef="CustomerType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CUSTOMER.CUSTOMERTYPE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let searchCustomer">
+                        <p class="text-truncate">
+                            {{ searchCustomer.CustomerType }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- CustomerStatus Column -->
+                <ng-container matColumnDef="CustomerStatus">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CUSTOMER.CUSTOMERSTATUS" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let searchCustomer">
+                        <p class="text-truncate">
+                            {{ searchCustomer.CustomerStatus }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- CustomerSegment Column -->
+                <ng-container matColumnDef="CustomerSegment">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CUSTOMER.CUSTOMERSEGMENT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let searchCustomer">
+                        <p class="text-truncate">
+                            {{ searchCustomer.CustomerSegment }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- CustomerNumber Column -->
+                <ng-container matColumnDef="CustomerNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CUSTOMER.CUSTOMERNUMBER" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let searchCustomer">
+                        <p class="text-truncate">
+                            {{ searchCustomer.CustomerNumber }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- FullCellPhoneNumber Column -->
+                <ng-container matColumnDef="FullCellPhoneNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CUSTOMER.FULLCELLPHONENUMBER" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let searchCustomer">
+                        <p class="text-truncate">
+                            {{ searchCustomer.FullCellPhoneNumber }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CUSTOMER.INSERTDATETIME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let searchCustomer">
+                        <p class="text-truncate">
+                            {{ searchCustomer.InsertDateTime }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- UpdateDateTime Column -->
+                <ng-container matColumnDef="UpdateDateTime">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CUSTOMER.UPDATEDATETIME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let searchCustomer">
+                        <p class="text-truncate">
+                            {{ searchCustomer.UpdateDateTime }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!--Buttons Column  -->
+                <ng-container matColumnDef="Buttons">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let searchCustomer">
+                        <div fxFlex="row" fxLayoutAlign="end center">
+                            <button
+                                mat-icon-button
+                                [matMenuTriggerFor]="moreMenu"
+                                aria-label="More"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <mat-icon class="secondary-text"
+                                    >more_vert</mat-icon
+                                >
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="EditSearchCustomer(searchCustomer)"
+                                >
+                                    <mat-icon>update</mat-icon>
+                                    <span
+                                        >{{ "CUSTOMER.UPDATE" | translate }}
+                                    </span>
+                                </button>
+                                <button
+                                    mat-menu-item
+                                    aria-label="remove"
+                                    (click)="DeleteCustomer(searchCustomer)"
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                    <span
+                                        >{{ "CUSTOMER.REMOVE" | translate }}
+                                    </span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let searchCustomer; columns: displayedColumns"
+                    class="searchCustomer"
+                    [routerLink]="['/searchCustomer', searchCustomer.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="searchCustomerDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

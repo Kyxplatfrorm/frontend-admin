@@ -67,9 +67,6 @@ export class HsmTransactionReportsComponent {
             CommandCode: [this.hsmTransaction.CommandCode],
             ResponseCode: [this.hsmTransaction.ResponseCode],
             HsmIpAddress: [this.hsmTransaction.HsmIpAddress],
-            ShowFailedTransactions: [
-                this.hsmTransaction.ShowFailedTransactions,
-            ],
             TotalElapsed: [this.hsmTransaction.TotalElapsed],
             SearchStartDate: [this.hsmTransaction.SearchStartDate],
             SearchEndDate: [this.hsmTransaction.SearchEndDate],

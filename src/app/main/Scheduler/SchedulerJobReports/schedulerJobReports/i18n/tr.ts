@@ -16,6 +16,7 @@ export const locale = {
             SCHEDULERJOB: "Zamanlayıcı İşi",
             TOTALELAPSED: "Toplam Geçen Süre(ms)",
             ORDERID: "Order Id",
+            TENANT: "Üye",
         },
     },
 };

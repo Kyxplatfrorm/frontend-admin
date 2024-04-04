@@ -16,6 +16,7 @@ export const locale = {
             SCHEDULERJOB: "Scheduler Job",
             TOTALELAPSED: "Total Elapsed(ms)",
             ORDERID: "Order Id",
+            TENANT: "Tenant",
         },
     },
 };

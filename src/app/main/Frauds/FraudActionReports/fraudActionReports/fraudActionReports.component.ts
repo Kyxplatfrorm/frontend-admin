@@ -107,6 +107,7 @@ export class FraudActionReportsComponent {
     ClearButton() {
         this.fraudActionReportsForm.controls["TenantId"].reset();
         this.fraudActionReportsForm.controls["CompanyId"].reset();
+        this.fraudActionReportsForm.controls["CustomerId"].reset();
         this.fraudActionReportsForm.controls["ApplicationTypeId"].reset();
         this.fraudActionReportsForm.controls["FraudRuleActionStatusId"].reset();
         this.fraudActionReportsForm.controls["FraudRuleActionTypeId"].reset();

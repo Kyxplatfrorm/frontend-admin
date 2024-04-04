@@ -102,6 +102,10 @@ export class SchedulerInstantJobProfilesComponent {
         this.schedulerInstantJobProfilesForm.controls[
             "SchedulerJobTypeId"
         ].reset();
+        this.schedulerInstantJobProfilesForm.controls[
+            "SearchStartDate"
+        ].reset();
+        this.schedulerInstantJobProfilesForm.controls["SearchEndDate"].reset();
     }
 
     onSearchStartDateChange(event: MatDatepickerInputEvent<Date>) {

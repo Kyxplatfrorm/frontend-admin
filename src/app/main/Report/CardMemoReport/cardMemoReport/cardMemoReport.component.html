@@ -1,0 +1,466 @@
+<div id="cardMemoReport" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Report/CardMemoReport/searchCardMemoReport'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="cardMemoReport-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="cardMemoReport.images[0]"
+                        [src]="cardMemoReport.images[0].url"
+                    />
+                    <img
+                        *ngIf="!cardMemoReport.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "CARDMEMOREPORT.CARDMEMOREPORTDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="cardMemoReportForm"
+                    [formGroup]="cardMemoReportForm"
+                    class="cardMemoReport w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'CARDMEMOREPORT.CARDMEMOREPORTINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.TENANT" | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            name="TenantId"
+                                            formControlName="TenantId"
+                                            [(value)]="cardMemoReport.TenantId"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let cardMemoReport of tenant
+                                                "
+                                                [value]="cardMemoReport.Id"
+                                            >
+                                                {{ cardMemoReport.TenantName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.CUSTOMERID"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDMEMOREPORT.CUSTOMERID'
+                                                    | translate
+                                            }}"
+                                            name="CustomerId"
+                                            formControlName="CustomerId"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.APPLICATIONTYPE"
+                                                | translate
+                                        }}</mat-label>
+
+                                        <mat-select
+                                            name="ApplicationTypeId"
+                                            formControlName="ApplicationTypeId"
+                                            [(ngModel)]="
+                                                cardMemoReport.ApplicationTypeId
+                                            "
+                                            [(value)]="
+                                                cardMemoReport.ApplicationTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let cardMemoReport of applicationType
+                                                "
+                                                [value]="cardMemoReport.Id"
+                                            >
+                                                {{ cardMemoReport.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.MEMOCHANNELTYPE"
+                                                | translate
+                                        }}</mat-label>
+
+                                        <mat-select
+                                            name="MemoChannelTypeId"
+                                            formControlName="MemoChannelTypeId"
+                                            [(ngModel)]="
+                                                cardMemoReport.MemoChannelTypeId
+                                            "
+                                            [(value)]="
+                                                cardMemoReport.MemoChannelTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let cardMemoReport of memoChannelType
+                                                "
+                                                [value]="cardMemoReport.Id"
+                                            >
+                                                {{ cardMemoReport.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.MEMOKEYTYPE"
+                                                | translate
+                                        }}</mat-label>
+
+                                        <mat-select
+                                            name="MemoKeyTypeId"
+                                            formControlName="MemoKeyTypeId"
+                                            [(ngModel)]="
+                                                cardMemoReport.MemoKeyTypeId
+                                            "
+                                            [(value)]="
+                                                cardMemoReport.MemoKeyTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let cardMemoReport of memoKeyType
+                                                "
+                                                [value]="cardMemoReport.Id"
+                                            >
+                                                {{ cardMemoReport.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.MEMOTYPE"
+                                                | translate
+                                        }}</mat-label>
+
+                                        <mat-select
+                                            name="MemoTypeId"
+                                            formControlName="MemoTypeId"
+                                            [(ngModel)]="
+                                                cardMemoReport.MemoTypeId
+                                            "
+                                            [(value)]="
+                                                cardMemoReport.MemoTypeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let cardMemoReport of memoType
+                                                "
+                                                [value]="cardMemoReport.Id"
+                                            >
+                                                {{ cardMemoReport.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.MEMOCODE"
+                                                | translate
+                                        }}</mat-label>
+
+                                        <mat-select
+                                            name="MemoCodeId"
+                                            formControlName="MemoCodeId"
+                                            [(ngModel)]="
+                                                cardMemoReport.MemoCodeId
+                                            "
+                                            [(value)]="
+                                                cardMemoReport.MemoCodeId
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let cardMemoReport of memoCode
+                                                "
+                                                [value]="cardMemoReport.Id"
+                                            >
+                                                {{ cardMemoReport.Description }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.DESCRIPTION"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDMEMOREPORT.DESCRIPTION'
+                                                    | translate
+                                            }}"
+                                            name="Description"
+                                            formControlName="Description"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.INSERTDATETIME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDMEMOREPORT.INSERTDATETIME'
+                                                    | translate
+                                            }}"
+                                            name="InsertDateTime"
+                                            formControlName="InsertDateTime"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.MEMODATE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDMEMOREPORT.MEMODATE'
+                                                    | translate
+                                            }}"
+                                            name="MemoDate"
+                                            formControlName="MemoDate"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.MEMOKEY" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDMEMOREPORT.MEMOKEY'
+                                                    | translate
+                                            }}"
+                                            name="MemoKey"
+                                            formControlName="MemoKey"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.OLDVALUE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDMEMOREPORT.OLDVALUE'
+                                                    | translate
+                                            }}"
+                                            name="OldValue"
+                                            formControlName="OldValue"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.NEWVALUE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDMEMOREPORT.NEWVALUE'
+                                                    | translate
+                                            }}"
+                                            name="NewValue"
+                                            formControlName="NewValue"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="48"
+                                    >
+                                        <mat-label>{{
+                                            "CARDMEMOREPORT.INSERTUSERNAME"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDMEMOREPORT.INSERTUSERNAME'
+                                                    | translate
+                                            }}"
+                                            name="InsertUserName"
+                                            formControlName="InsertUserName"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

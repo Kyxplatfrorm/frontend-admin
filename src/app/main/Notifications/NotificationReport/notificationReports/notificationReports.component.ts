@@ -11,6 +11,7 @@ import {
     NotificationTemplateEntity,
     NotificationTypeEntity,
     SentStatusEntity,
+    TenantDefinitionEntity,
 } from "app/ui/notificationReport";
 import { NotificationReportsService } from "./notificationReports.service";
 import { SearchNotificationReportService } from "../searchNotificationReport/searchNotificationReport.service";
@@ -27,6 +28,7 @@ export class NotificationReportsComponent {
     languageCode: LanguageCodeEntity[];
     sentStatus: SentStatusEntity[];
     notificationTemplate: NotificationTemplateEntity[];
+    tenant: TenantDefinitionEntity[];
 
     /**
      * Constructor
@@ -46,21 +48,22 @@ export class NotificationReportsComponent {
     }
 
     ngOnInit(): void {
+        this.notificationReportsService.GetTenants().then(() => {
+            this.tenant =
+                this.notificationReportsService.tenantApiResponse.TenantDefinitionList;
+        });
         this.notificationReportsService.GetLanguageCodes().then(() => {
             this.languageCode =
                 this.notificationReportsService.languageCodeApiResponse.ParameterList;
         });
-
         this.notificationReportsService.GetNotificationTemplates().then(() => {
             this.notificationTemplate =
                 this.notificationReportsService.notificationTemplateApiResponse.ParameterList;
         });
-
         this.notificationReportsService.GetNotificationTypes().then(() => {
             this.notificationType =
                 this.notificationReportsService.notificationTypeApiResponse.ParameterList;
         });
-
         this.notificationReportsService.GetNotificationSentStatus().then(() => {
             this.sentStatus =
                 this.notificationReportsService.sentStatusApiResponse.ParameterList;
@@ -77,6 +80,7 @@ export class NotificationReportsComponent {
     createNotificationReportsForm(): FormGroup {
         return this._formBuilder.group({
             CustomerId: [this.notificationReport.CustomerId],
+            TenantId: [this.notificationReport.TenantId],
             CompanyId: [this.notificationReport.CompanyId],
             SessionId: [this.notificationReport.SessionId],
             NotificationTypeId: [this.notificationReport.NotificationTypeId],
@@ -113,6 +117,7 @@ export class NotificationReportsComponent {
 
     ClearButton() {
         this.notificationReportsForm.controls["CustomerId"].reset();
+        this.notificationReportsForm.controls["TenantId"].reset();
         this.notificationReportsForm.controls["CompanyId"].reset();
         this.notificationReportsForm.controls["SessionId"].reset();
         this.notificationReportsForm.controls["NotificationTypeId"].reset();
@@ -121,6 +126,7 @@ export class NotificationReportsComponent {
         this.notificationReportsForm.controls["ReceiverAddress"].reset();
         this.notificationReportsForm.controls["Subject"].reset();
         this.notificationReportsForm.controls["Content"].reset();
+        this.notificationReportsForm.controls["SearchStartDate"].reset();
         this.notificationReportsForm.controls["SearchEndDate"].reset();
         this.notificationReportsForm.controls["SearchStartTime"].reset();
         this.notificationReportsForm.controls["SearchEndTime"].reset();

@@ -1,0 +1,651 @@
+<div id="cardTransactions" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            ></div>
+            <!-- / APP TITLE -->
+            <div class="headerButton">
+                <div>
+                    <!-- SEARCH BUTTON -->
+                    <button
+                        mat-raised-button
+                        class="add-cardTransaction-button fuse-white mt-24 mr-35"
+                        (click)="SearchCardTransaction()"
+                    >
+                        <span>{{ "CARDTRANSACTION.SEARCH" | translate }}</span>
+                    </button>
+                    <!-- SEARCH BUTTON -->
+                    <!-- CLEAR BUTTON -->
+                    <button
+                        mat-raised-button
+                        color="basic"
+                        class="add-cardTransaction-button fuse-white m-20"
+                        (click)="ClearButton()"
+                    >
+                        {{ "CARDTRANSACTION.CLEAR" | translate }}
+                    </button>
+
+                    <!-- CLEAR BUTTON -->
+                </div>
+            </div>
+        </div>
+        <!-- / ADD BUTTON -->
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="cardTransactionsForm"
+                    [formGroup]="cardTransactionsForm"
+                    class="cardTransaction w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <div class="tab-content p-24" fusePerfectScrollbar>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.SEARCHSTARTDATE"
+                                        | translate
+                                }}</mat-label>
+
+                                <input
+                                    matInput
+                                    name="SearchStartDate"
+                                    formControlName="SearchStartDate"
+                                    [matDatepicker]="pickerStartDate"
+                                    [(ngModel)]="
+                                        cardTransaction.SearchStartDate
+                                    "
+                                    (dateChange)="onDateChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerStartDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerStartDate>
+                                </mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.SEARCHENDDATE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    [matDatepicker]="pickerEndDate"
+                                    formControlName="SearchEndDate"
+                                    [(ngModel)]="cardTransaction.SearchEndDate"
+                                    (dateChange)="onDateEndChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="pickerEndDate"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #pickerEndDate></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.TENANT" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TenantId"
+                                    formControlName="TenantId"
+                                    [(value)]="cardTransaction.TenantId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let cardTransaction of tenantDefinition
+                                        "
+                                        [value]="cardTransaction.Id"
+                                    >
+                                        {{ cardTransaction.TenantName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.CARDID" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.CARDID' | translate
+                                    }}"
+                                    name="CardId"
+                                    formControlName="CardId"
+                                />
+                                <button
+                                    matSuffix
+                                    mat-icon-button
+                                    aria-label="Search"
+                                    (click)="CardList()"
+                                >
+                                    <mat-icon>search</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.CARDTOKENNUMBER"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.CARDTOKENNUMBER'
+                                            | translate
+                                    }}"
+                                    name="CardTokenNumber"
+                                    formControlName="CardTokenNumber"
+                                />
+                                <button
+                                    matSuffix
+                                    mat-icon-button
+                                    aria-label="Search"
+                                    (click)="CardList()"
+                                >
+                                    <mat-icon>search</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.CARDTYPE" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="CardTypeId"
+                                    formControlName="CardTypeId"
+                                    [(value)]="cardTransaction.CardTypeId"
+                                >
+                                    <mat-option
+                                        *ngFor="let cardTransaction of cardType"
+                                        [value]="cardTransaction.Id"
+                                    >
+                                        {{ cardTransaction.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.CARDBRAND" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="CardBrandId"
+                                    formControlName="CardBrandId"
+                                    [(value)]="cardTransaction.CardBrandId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let cardTransaction of cardBrand
+                                        "
+                                        [value]="cardTransaction.Id"
+                                    >
+                                        {{ cardTransaction.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.TRANSACTIONCODE"
+                                        | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TransactionCodeId"
+                                    formControlName="TransactionCodeId"
+                                    [(value)]="
+                                        cardTransaction.TransactionCodeId
+                                    "
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let cardTransaction of transactionCode
+                                        "
+                                        [value]="cardTransaction.Id"
+                                    >
+                                        {{ cardTransaction.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.TRANSACTIONEFFECT"
+                                        | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TransactionEffectId"
+                                    formControlName="TransactionEffectId"
+                                    [(value)]="
+                                        cardTransaction.TransactionEffectId
+                                    "
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let cardTransaction of transactionEffect
+                                        "
+                                        [value]="cardTransaction.Id"
+                                    >
+                                        {{ cardTransaction.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.TOTALELAPSED" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.TOTALELAPSED'
+                                            | translate
+                                    }}"
+                                    name="TotalElapsed"
+                                    formControlName="TotalElapsed"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.CUSTOMERID" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.CUSTOMERID' | translate
+                                    }}"
+                                    name="CustomerId"
+                                    formControlName="CustomerId"
+                                />
+                                <button
+                                    matSuffix
+                                    mat-icon-button
+                                    aria-label="Search"
+                                    (click)="newForm()"
+                                >
+                                    <mat-icon>search</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.COMPANYID" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.COMPANYID' | translate
+                                    }}"
+                                    name="CompanyId"
+                                    formControlName="CompanyId"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.CARDFINANCIALID"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.CARDFINANCIALID'
+                                            | translate
+                                    }}"
+                                    name="CardFinancialId"
+                                    formControlName="CardFinancialId"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.ACCOUNTID" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.ACCOUNTID' | translate
+                                    }}"
+                                    name="AccountId"
+                                    formControlName="AccountId"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.ERRORCODE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.ERRORCODE' | translate
+                                    }}"
+                                    name="ErrorCode"
+                                    formControlName="ErrorCode"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.RESPONSECODE" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.RESPONSECODE'
+                                            | translate
+                                    }}"
+                                    name="ResponseCode"
+                                    formControlName="ResponseCode"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.APPLICATIONNETWORK"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.APPLICATIONNETWORK'
+                                            | translate
+                                    }}"
+                                    name="ApplicationNetwork"
+                                    formControlName="ApplicationNetwork"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.APPLICATIONID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="ApplicationId"
+                                    formControlName="ApplicationId"
+                                    [(value)]="cardTransaction.ApplicationId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let cardTransaction of switchApplicationList
+                                        "
+                                        [value]="cardTransaction.Id"
+                                    >
+                                        {{ cardTransaction.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.SESSIONID" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="SessionId"
+                                    formControlName="SessionId"
+                                    [(value)]="cardTransaction.SessionId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let cardTransaction of switchApplicationSessionList
+                                        "
+                                        [value]="cardTransaction.Id"
+                                    >
+                                        {{ cardTransaction.Description }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.REFERENCENUMBER"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.REFERENCENUMBER'
+                                            | translate
+                                    }}"
+                                    name="ReferenceNumber"
+                                    formControlName="ReferenceNumber"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.PROVISIONTRANSACTIONTYPE"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.PROVISIONTRANSACTIONTYPE'
+                                            | translate
+                                    }}"
+                                    name="ProvisionTransactionType"
+                                    formControlName="ProvisionTransactionType"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.SERVERNAME" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.SERVERNAME' | translate
+                                    }}"
+                                    name="ServerName"
+                                    formControlName="ServerName"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.MTI" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.MTI' | translate
+                                    }}"
+                                    name="Mti"
+                                    formControlName="Mti"
+                                />
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.ATC" | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.ATC' | translate
+                                    }}"
+                                    name="Atc"
+                                    formControlName="Atc"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
+                                    "CARDTRANSACTION.EMVTRANSACTIONID"
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'CARDTRANSACTION.EMVTRANSACTIONID'
+                                            | translate
+                                    }}"
+                                    name="EmvTransactionId"
+                                    formControlName="EmvTransactionId"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -27,6 +27,7 @@ import {
     SchedulerJobStatusEntity,
     SchedulerJobTypeEntity,
     SchedulerRecurringTypeEntity,
+    TenantDefinitionEntity,
 } from "app/ui/schedulerJobReport";
 import { SchedulerJobReportService } from "./schedulerJobReport.service";
 
@@ -42,6 +43,7 @@ export class SchedulerJobReportComponent implements OnInit, OnDestroy {
     schedulerJobReport: SchedulerJobReport;
     pageType: string;
     runStatus: SchedulerJobStatusEntity[];
+    tenant: TenantDefinitionEntity[];
     schedulerJobType: SchedulerJobTypeEntity[];
     schedulerRecurringType: SchedulerRecurringTypeEntity[];
     schedulerJobReportForm: FormGroup;
@@ -78,16 +80,18 @@ export class SchedulerJobReportComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        this.schedulerJobReportsService.GetTenants().then(() => {
+            this.tenant =
+                this.schedulerJobReportsService.tenantApiResponse.TenantDefinitionList;
+        });
         this.schedulerJobReportsService.GetSchedulerJobStatus().then(() => {
             this.runStatus =
                 this.schedulerJobReportsService.schedulerJobStatusApiResponse.ParameterList;
         });
-
         this.schedulerJobReportsService.GetSchedulerJobTypes().then(() => {
             this.schedulerJobType =
                 this.schedulerJobReportsService.schedulerJobTypeApiResponse.ParameterList;
         });
-
         this.schedulerJobReportsService
             .GetSchedulerRecurringTypes()
             .then(() => {
@@ -129,6 +133,7 @@ export class SchedulerJobReportComponent implements OnInit, OnDestroy {
     createSchedulerJobReportForm(): FormGroup {
         return this._formBuilder.group({
             Id: [this.schedulerJobReport.Id],
+            TenantId: [this.schedulerJobReport.TenantId],
             Description: [this.schedulerJobReport.Description],
             IsTenantBasedJob: [this.schedulerJobReport.IsTenantBasedJob],
             InsertDate: [this.schedulerJobReport.InsertDate],

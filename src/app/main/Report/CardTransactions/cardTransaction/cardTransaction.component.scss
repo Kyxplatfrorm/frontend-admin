@@ -1,0 +1,213 @@
+#cardTransaction {
+    .header {
+        .cardTransaction-image {
+            overflow: hidden;
+            width: 56px;
+            min-width: 56px;
+            max-width: 56px;
+            height: 56px;
+            min-height: 56px;
+            max-height: 56px;
+            border-radius: 4px;
+            img {
+                height: 100%;
+                width: auto;
+                max-width: none;
+            }
+        }
+        .subtitle {
+            margin: 6px 0 0 0;
+        }
+    }
+    .search-wrapper {
+        width: 100%;
+        max-width: 480px;
+        border-radius: 28px;
+        overflow: hidden;
+        .search {
+            width: 100%;
+            height: 48px;
+            line-height: 48px;
+            padding: 0 18px;
+            background-color: white;
+            color: gray;
+
+            input {
+                width: 100%;
+                height: 48px;
+                min-height: 48px;
+                max-height: 48px;
+                padding: 0 16px;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+    .cardEmvs-table {
+        flex: 1 1 auto;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        .mat-header-row {
+            min-height: 64px;
+        }
+        .cardTransaction {
+            position: relative;
+            cursor: pointer;
+            height: 84px;
+        }
+        .mat-cell {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .mat-column-Id {
+            flex: 0 1 80px;
+            justify-content: center;
+        }
+        .mat-column-CardTokenNumber {
+            flex: 0 1 300px;
+            justify-content: center;
+        }
+        .mat-column-ReferenceNumber {
+            flex: 0 1 300px;
+            justify-content: center;
+        }
+        .mat-column-F55Length {
+            flex: 0 1 300px;
+            justify-content: center;
+        }
+    }
+    .switchMessages-table {
+        flex: 1 1 auto;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        .mat-header-row {
+            min-height: 64px;
+            width: 400vh;
+        }
+        .cardTransaction {
+            position: relative;
+            cursor: pointer;
+            height: 84px;
+            width: 400vh;
+        }
+        .mat-cell {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .mat-column-Id {
+            flex: 0 1 150px;
+            justify-content: center;
+        }
+        .mat-column-InsertDateTime {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+        .mat-column-ApplicationType {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+
+        .mat-column-TransactionType {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+        .mat-column-MerchantCode {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+
+        .mat-column-ReferenceNumber {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+
+        .mat-column-ResponseCode {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+
+        .mat-column-Mti {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+        .mat-column-ProcessingCode {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+        .mat-column-TraceNumber {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+
+        .mat-column-Rrn {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+
+        .mat-column-TransactionAmount {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+        .mat-column-ServerName {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+        .mat-column-CardTokenNumber {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+        .mat-column-SettlementCurrencyCode {
+            flex: 0 1 400px;
+            justify-content: center;
+        }
+    }
+    .content {
+        .mat-tab-group,
+        .mat-tab-body-wrapper,
+        .tab-content {
+            flex: 1 1 auto;
+            max-width: 100%;
+        }
+        .mat-tab-body-content {
+            display: flex;
+        }
+        .mat-tab-label {
+            height: 64px;
+        }
+        .cardTransaction-image {
+            overflow: hidden;
+            width: 128px;
+            height: 128px;
+            margin-right: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            img {
+                height: 100%;
+                width: auto;
+                max-width: none;
+            }
+        }
+        .checkbox {
+            margin-bottom: 20px;
+        }
+
+        // Temporary prefix alignment fix
+        .mat-form-field-appearance-outline .mat-form-field-prefix,
+        .mat-form-field-appearance-outline .mat-form-field-suffix {
+            top: 0;
+        }
+    }
+}
+#add-cardTransaction-button {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    padding: 0;
+    z-index: 99;
+}

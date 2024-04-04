@@ -1,0 +1,27 @@
+export const locale = {
+    lang: "en",
+    data: {
+        CARDMEMOREPORT: {
+            SEARCH: "SEARCH",
+            CLEAR: "CLEAR",
+            APPLICATIONTYPE: "Application Type",
+            SEARCHSTARTDATE: "Search Start Date",
+            SEARCHENDDATE: "Search End Date",
+            MEMOCHANNELTYPE: "Memo Channel Type",
+            CUSTOMERID: "Customer",
+            MEMOKEYTYPE: "Memo Key Type",
+            MEMOTYPE: "Memo Type",
+            MEMOCODE: "Memo Code",
+            DESCRIPTION: "Description",
+            INSERTUSERNAME: "Insert User Name",
+            NEWVALUE: "New Value",
+            OLDVALUE: "Old Value",
+            MEMOKEY: "Memo Key",
+            MEMODATE: "Memo Date",
+            INSERTDATETIME: "Insert Date Time",
+            CARDMEMOREPORTDETAIL: "Card Memo Report Detail",
+            CARDMEMOREPORTINFO: "Card Memo Report Information",
+            TENANT: "Tenant",
+        },
+    },
+};

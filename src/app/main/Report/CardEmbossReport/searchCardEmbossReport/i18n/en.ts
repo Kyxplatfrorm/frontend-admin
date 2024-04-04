@@ -1,0 +1,25 @@
+export const locale = {
+    lang: "en",
+    data: {
+        CARDEMBOSSREPORT: {
+            CARDEMBOSSREPORT: "Card Emboss Report",
+            SEARCHTEXT: "Search for a card emboss report",
+            ID: "Id",
+            EMBOSSNAME1: "Emboss Name1",
+            EMBOSSNAME2: "Emboss Name2",
+            ISNONAMECARD: "Is Noname Card",
+            ISEXPORTED: "Is Exported",
+            CARDTOKENNUMBER: "Card Token Number",
+            PANSEQUENCENUMBER: "Pan Sequence Number",
+            FILENAME: "File Name",
+            ERRORCODE: "Error Code",
+            CARDISSUINGREASONTYPE: "Card Issuing Reason Type",
+            EMBOSSSTATUS: "Emboss Status",
+            CONTRACTTYPE: "Contract Type",
+            INSERTDATETIME: "Insert Date Time",
+            EXPIRYDATE: "Expiry Date",
+            EXPORTDATETIME: "Export Date Time",
+            TENANTNAME: "Tenant Name",
+        },
+    },
+};

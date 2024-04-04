@@ -104,6 +104,8 @@ export class NotificationTemplateDefinitionsComponent {
     }
 
     ClearButton() {
+        this.notificationTemplateDefinitionsForm.controls["CompanyId"].reset();
+        this.notificationTemplateDefinitionsForm.controls["TenantId"].reset();
         this.notificationTemplateDefinitionsForm.controls[
             "TemplateTypeId"
         ].reset();

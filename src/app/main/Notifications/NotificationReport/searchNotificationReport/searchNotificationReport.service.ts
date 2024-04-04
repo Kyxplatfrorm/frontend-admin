@@ -74,6 +74,7 @@ export class SearchNotificationReportService implements Resolve<any> {
                     {
                         CustomerName: notificationReport.CustomerName,
                         CompanyId: notificationReport.CompanyId,
+                        TenantId: notificationReport.TenantId,
                         NotificationTypeId:
                             notificationReport.NotificationTypeId,
                         TemplateId: notificationReport.TemplateId,

@@ -1,4 +1,3 @@
 {
-    "ApiUrl": "https://testadminapi.kyxplatform.com",
-    "ApiUrlLocal": "http://localhost:10000"
+    "ApiUrl": "http://localhost:10000"
 }

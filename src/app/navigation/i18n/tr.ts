@@ -135,10 +135,10 @@ export const locale = {
             SYSTEMKEYDEFINITION: "Sistem Key Tanımı",
             SYSTEMFILEFORMAT: "Sistem Dosya Formatı",
             SYSTEMFILEINFORMATION: "Sistem Dosya Bilgisi",
-        },
-        ERROR: {
-            ERRORMESSAGE: "Lütfen geçerli bir bilgi giriniz",
-            OK: "TAMAM",
+            REPORT: "Rapor",
+            CARDTRANSACTION: "Kart İşlem Raporu",
+            CARDEMBOSSREPORT: "Kart Basım Raporu",
+            CARDMEMOREPORT: "Memo Kart Raporu",
         },
     },
 };

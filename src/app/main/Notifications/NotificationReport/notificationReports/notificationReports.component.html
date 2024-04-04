@@ -178,6 +178,30 @@
                                 fxFlex="48"
                             >
                                 <mat-label>{{
+                                    "NOTIFICATIONREPORT.TENANT" | translate
+                                }}</mat-label>
+                                <mat-select
+                                    name="TenantId"
+                                    formControlName="TenantId"
+                                    [(value)]="notificationReport.TenantId"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let notificationReport of tenant
+                                        "
+                                        [value]="notificationReport.Id"
+                                    >
+                                        {{ notificationReport.TenantName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                floatLabel="always"
+                                class="w-100-p"
+                                fxFlex="48"
+                            >
+                                <mat-label>{{
                                     "NOTIFICATIONREPORT.CUSTOMER" | translate
                                 }}</mat-label>
                                 <input
@@ -190,6 +214,8 @@
                                     formControlName="CustomerId"
                                 />
                             </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
                             <mat-form-field
                                 appearance="outline"
                                 floatLabel="always"
@@ -217,8 +243,6 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="space-between">
                             <mat-form-field
                                 appearance="outline"
                                 floatLabel="always"
@@ -244,6 +268,8 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
                             <mat-form-field
                                 appearance="outline"
                                 floatLabel="always"
@@ -271,8 +297,6 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="space-between">
                             <mat-form-field
                                 appearance="outline"
                                 floatLabel="always"
@@ -297,7 +321,9 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
+                        </div>
 
+                        <div fxLayout="row" fxLayoutAlign="space-between">
                             <mat-form-field
                                 appearance="outline"
                                 floatLabel="always"
@@ -316,9 +342,6 @@
                                     formControlName="Subject"
                                 />
                             </mat-form-field>
-                        </div>
-
-                        <div fxLayout="row" fxLayoutAlign="space-between">
                             <mat-form-field
                                 appearance="outline"
                                 floatLabel="always"

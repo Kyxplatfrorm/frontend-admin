@@ -9,11 +9,13 @@ import {
     NotificationTemplateApiResponse,
     NotificationTypeApiResponse,
     SentStatusApiResponse,
+    TenantApiResponse,
 } from "app/ui/notificationReport";
 
 @Injectable({ providedIn: "root" })
 export class NotificationReportsService {
     notificationTypeApiResponse: NotificationTypeApiResponse;
+    tenantApiResponse: TenantApiResponse;
     languageCodeApiResponse: LanguageCodeApiResponse;
     sentStatusApiResponse: SentStatusApiResponse;
     notificationTemplateApiResponse: NotificationTemplateApiResponse;
@@ -62,7 +64,7 @@ export class NotificationReportsService {
                 }, reject);
         });
     }
-    
+
     /**
      * GetLanguageCodes
      *
@@ -120,6 +122,27 @@ export class NotificationReportsService {
                     this.notificationTemplateApiResponse = response;
                     this.onNotificationReportsChanged.next(
                         this.notificationTemplateApiResponse
+                    );
+                    resolve(response);
+                }, reject);
+        });
+    }
+
+    /**
+     * GetTenants
+     *
+     * @returns {Promise<any>}
+     */
+    GetTenants(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.http
+                .get<TenantApiResponse>(
+                    `${environment.apiUrl}/core/coreapi/v1.0/NotificationReport/GetTenants`
+                )
+                .subscribe((response: TenantApiResponse) => {
+                    this.tenantApiResponse = response;
+                    this.onNotificationReportsChanged.next(
+                        this.tenantApiResponse
                     );
                     resolve(response);
                 }, reject);

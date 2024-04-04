@@ -1,0 +1,243 @@
+<div
+    id="searchCardMemoReport"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Report/CardMemoReport/cardMemoReports'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "CARDMEMOREPORT.CARDMEMOREPORT" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'CARDMEMOREPORT.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="searchCardMemoReports-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="searchCardMemoReportDataSource"
+            >
+                <!-- Id Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDMEMOREPORT.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardMemoReport">
+                        <p class="text-truncate">{{ cardMemoReport.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- Description Column -->
+                <ng-container matColumnDef="Description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDMEMOREPORT.DESCRIPTION" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardMemoReport">
+                        <p class="text-truncate">
+                            {{ cardMemoReport.Description }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- TenantName Column -->
+                <ng-container matColumnDef="TenantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDMEMOREPORT.TENANTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardMemoReport">
+                        <p class="text-truncate">
+                            {{ cardMemoReport.TenantName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- CustomerId Column -->
+                <ng-container matColumnDef="CustomerId">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDMEMOREPORT.CUSTOMERID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardMemoReport">
+                        <p class="text-truncate">
+                            {{ cardMemoReport.CustomerId }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ApplicationTypeName Column -->
+                <ng-container matColumnDef="ApplicationTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDMEMOREPORT.APPLICATIONTYPENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardMemoReport">
+                        <p class="text-truncate">
+                            {{ cardMemoReport.ApplicationTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- MemoChannelTypeName Column -->
+                <ng-container matColumnDef="MemoChannelTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDMEMOREPORT.MEMOCHANNELTYPENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardMemoReport">
+                        <p class="text-truncate">
+                            {{ cardMemoReport.MemoChannelTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- MemoKey Column -->
+                <ng-container matColumnDef="MemoKey">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDMEMOREPORT.MEMOKEY" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardMemoReport">
+                        <p class="text-truncate">
+                            {{ cardMemoReport.MemoKey }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- MemoKeyTypeName Column -->
+                <ng-container matColumnDef="MemoKeyTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDMEMOREPORT.MEMOKEYTYPENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardMemoReport">
+                        <p class="text-truncate">
+                            {{ cardMemoReport.MemoKeyTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- MemoTypeName Column -->
+                <ng-container matColumnDef="MemoTypeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDMEMOREPORT.MEMOTYPENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardMemoReport">
+                        <p class="text-truncate">
+                            {{ cardMemoReport.MemoTypeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- MemoCodeName Column -->
+                <ng-container matColumnDef="MemoCodeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDMEMOREPORT.MEMOCODENAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardMemoReport">
+                        <p class="text-truncate">
+                            {{ cardMemoReport.MemoCodeName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "CARDMEMOREPORT.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let cardMemoReport"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                cardMemoReport.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                    fusePerfectScrollbar
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let cardMemoReport; columns: displayedColumns"
+                    class="cardMemoReport"
+                    [routerLink]="['/searchCardMemoReport', cardMemoReport.Id]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="searchCardMemoReportDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

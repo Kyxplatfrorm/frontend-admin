@@ -30,6 +30,7 @@ export class SearchNotificationReportComponent implements OnInit {
     searchNotificationReportDataSource: SearchNotificationReportDataSource | null;
     displayedColumns = [
         "Id",
+        "TenantName",
         "CustomerName",
         "NotificationTypeName",
         "LanguageCodeName",

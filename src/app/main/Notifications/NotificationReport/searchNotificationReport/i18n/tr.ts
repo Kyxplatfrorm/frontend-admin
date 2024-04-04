@@ -11,7 +11,7 @@ export const locale = {
             RECEIVERADDRESS: "Alıcı Adresi",
             SUBJECT: "Konu",
             SENTSTATUSNAME: "Gönderi Durumu",
-            TENANTNAME: "Üye",
+            TENANTNAME: "Üye İsmi",
         },
     },
 };

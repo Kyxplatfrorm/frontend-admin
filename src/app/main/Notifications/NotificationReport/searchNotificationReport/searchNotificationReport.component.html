@@ -94,7 +94,17 @@
                         </p>
                     </mat-cell>
                 </ng-container>
-
+                <!-- TenantName Column -->
+                <ng-container matColumnDef="TenantName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "NOTIFICATIONREPORT.TENANTNAME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let notificationReport">
+                        <p class="text-truncate">
+                            {{ notificationReport.TenantName }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
                 <!-- CustomerName Column -->
                 <ng-container matColumnDef="CustomerName">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>{{

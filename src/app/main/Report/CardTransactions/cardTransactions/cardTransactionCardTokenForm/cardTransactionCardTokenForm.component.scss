@@ -1,0 +1,85 @@
+@import "src/@fuse/scss/fuse";
+.cardTransactionCardTokenForm-dialog {
+    @include media-breakpoint("xs") {
+        width: 100%;
+    }
+
+    @include media-breakpoint("gt-xs") {
+        width: 1000px;
+        height: 800px;
+    }
+
+    .mat-dialog-container {
+        padding: 0;
+
+        .mat-toolbar {
+            flex: 1 0 auto;
+            min-height: initial;
+        }
+
+        .toolbar-bottom {
+            height: auto;
+        }
+    }
+
+    .dialog-content-wrapper {
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cardTransactionCardTokens-table {
+        flex: 1 1 auto;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+
+        .mat-header-row {
+            min-height: 64px;
+        }
+
+        .searchCard {
+            position: relative;
+            cursor: pointer;
+            height: 84px;
+        }
+
+        .mat-cell {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+        }
+        .mat-column-Id {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+
+        .mat-column-CardBrand {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+
+        .mat-column-CardTokenNumber {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+
+        .mat-column-CardHolderName {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+        .mat-column-CardStatus {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+        .mat-column-FullCellPhoneNumber {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+
+        .mat-column-Email {
+            flex: 0 1 200px;
+            justify-content: center;
+        }
+    }
+}

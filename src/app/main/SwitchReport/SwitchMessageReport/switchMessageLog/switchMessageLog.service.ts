@@ -7,7 +7,6 @@ import {
 } from "@angular/router";
 import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "environments/environment";
-import { SwitchTimeoutLogApiResponse } from "app/ui/switchReport";
 
 @Injectable()
 export class SwitchMessageLogService implements Resolve<any> {

@@ -61,7 +61,7 @@ export class SchedulerJobErrorReportService implements Resolve<any> {
                     )
                     .subscribe((response: any) => {
                         this.schedulerJobErrorReport =
-                            response.SchedulerJobQErrorReport;
+                            response.SchedulerJobErrorReport;
                         this.onSchedulerJobErrorReportChanged.next(
                             this.schedulerJobErrorReport
                         );
