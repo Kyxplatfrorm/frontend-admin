@@ -1,0 +1,27 @@
+export const locale = {
+    lang: "tr",
+    data: {
+        CARDMEMOREPORT: {
+            SEARCH: "ARAMA",
+            CLEAR: "TEMİZLE",
+            CUSTOMERID: "Müşteri Id",
+            SEARCHSTARTDATE: "Arama Başlangıç Tarihi",
+            SEARCHENDDATE: "Arama Bitiş Tarihi",
+            APPLICATIONTYPE: "Uygulama Tipi",
+            MEMOCHANNELTYPE: "Memo Kanal Tipi",
+            MEMOKEYTYPE: "Memo Key Tipi",
+            MEMOTYPE: "Memo Tipi",
+            MEMOCODE: "Memo Kodu",
+            DESCRIPTION: "Açıklama",
+            INSERTUSERNAME: "Kullanıcı İsmi Ekle",
+            NEWVALUE: "Yeni Değer",
+            OLDVALUE: "Eski Değer",
+            MEMOKEY: "Memo Key",
+            MEMODATE: "Memo Tarihi",
+            INSERTDATETIME: "Ekleme Tarihi",
+            CARDMEMOREPORTDETAIL: "Kart Memo Rapor Detayı",
+            CARDMEMOREPORTINFO: "Kart Memo Rapor Bilgisi",
+            TENANT: "Üye",
+        },
+    },
+};

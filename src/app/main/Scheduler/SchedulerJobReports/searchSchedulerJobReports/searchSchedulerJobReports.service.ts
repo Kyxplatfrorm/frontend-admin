@@ -74,6 +74,7 @@ export class SearchSchedulerJobReportsService implements Resolve<any> {
                 .post(
                     `${environment.apiUrl}/core/coreapi/v1.0/SchedulerJobReport/SearchSchedulerJobReport`,
                     {
+                        TenantId: schedulerJobReport.TenantId,
                         ApplicationId: schedulerJobReport.ApplicationId,
                         TotalElapsed: schedulerJobReport.TotalElapsed,
                         SchedulerJobId: schedulerJobReport.SchedulerJobId,

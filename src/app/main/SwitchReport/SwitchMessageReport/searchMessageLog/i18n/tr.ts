@@ -10,6 +10,7 @@ export const locale = {
             SESSIONNAME: "Oturum İsmi",
             APPLICATIONTYPE: "Uygulama Tipi",
             TRANSACTIONTYPE: "İşlem Tipi",
+            TENANTNAME: "Üye İsmi",
             CARDTOKENNUMBER: "Kart Token Numarası",
             TXNDESCRIPTION: "Txn Açıklaması",
             AUTHORIZATIONCODE: "Yetki Kodu",

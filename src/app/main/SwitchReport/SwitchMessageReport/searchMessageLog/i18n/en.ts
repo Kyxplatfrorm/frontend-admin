@@ -9,6 +9,7 @@ export const locale = {
             APPLICATIONNAME: "Application Name",
             SESSIONNAME: "Session Name",
             APPLICATIONTYPE: "Application Type",
+            TENANTNAME: "Tenant Name",
             TRANSACTIONTYPE: "Transaction Type",
             CARDTOKENNUMBER: "Card Token Number",
             TXNDESCRIPTION: "Txn Description",

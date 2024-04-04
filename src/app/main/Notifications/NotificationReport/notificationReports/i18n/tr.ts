@@ -10,6 +10,7 @@ export const locale = {
             SEARCHSTARTTIME: "Arama Başlangıç Saati",
             SEARCHENDTIME: "Arama Bitiş Saati",
             CUSTOMER: "Müşteri İsmi",
+            TENANT: "Üye",
             NOTIFICATIONTYPE: "Bildirim Tipi",
             NOTIFICATIONTEMPLATE: "Bildirim Şablonu",
             LANGUAGECODE: "Dil Kodu",

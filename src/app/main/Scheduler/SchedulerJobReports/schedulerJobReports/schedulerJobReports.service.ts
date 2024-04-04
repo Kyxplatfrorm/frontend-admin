@@ -7,10 +7,12 @@ import {
     SchedulerJobStatusApiResponse,
     SchedulerJobTypeApiResponse,
     SchedulerRecurringTypeApiResponse,
+    TenantApiResponse,
 } from "app/ui/schedulerJobReport";
 
 @Injectable({ providedIn: "root" })
 export class SchedulerJobReportsService {
+    tenantApiResponse: TenantApiResponse;
     schedulerJobStatusApiResponse: SchedulerJobStatusApiResponse;
     schedulerJobTypeApiResponse: SchedulerJobTypeApiResponse;
     schedulerRecurringTypeApiResponse: SchedulerRecurringTypeApiResponse;
@@ -95,6 +97,27 @@ export class SchedulerJobReportsService {
                     this.schedulerRecurringTypeApiResponse = response;
                     this.onSchedulerJobReportsChanged.next(
                         this.schedulerRecurringTypeApiResponse
+                    );
+                    resolve(response);
+                }, reject);
+        });
+    }
+
+    /**
+     * GetTenants
+     *
+     * @returns {Promise<any>}
+     */
+    GetTenants(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.http
+                .get<TenantApiResponse>(
+                    `${environment.apiUrl}/core/coreapi/v1.0/SchedulerJobReport/GetTenants`
+                )
+                .subscribe((response: TenantApiResponse) => {
+                    this.tenantApiResponse = response;
+                    this.onSchedulerJobReportsChanged.next(
+                        this.tenantApiResponse
                     );
                     resolve(response);
                 }, reject);

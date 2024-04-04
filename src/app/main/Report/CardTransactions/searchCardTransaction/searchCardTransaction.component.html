@@ -1,0 +1,305 @@
+<div
+    id="searchCardTransaction"
+    class="page-layout carded fullwidth inner-scroll"
+>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Report/CardTransactions/cardTransactions'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    shopping_basket
+                </mat-icon>
+                <span
+                    class="logo-text h1"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ "CARDTRANSACTION.CARDTRANSACTION" | translate }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        placeholder="{{
+                            'CARDTRANSACTION.SEARCHTEXT' | translate
+                        }}"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="searchCardTransactions-table"
+                #table
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                [dataSource]="searchCardTransactionDataSource"
+            >
+                <!-- Id Column -->
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.ID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">{{ cardTransaction.Id }}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- CardTokenNumber Column -->
+                <ng-container matColumnDef="CardTokenNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.CARDTOKENNUMBER" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">
+                            {{ cardTransaction.CardTokenNumber }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TotalElapsed Column -->
+                <ng-container matColumnDef="TotalElapsed">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.TOTALELAPSED" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">
+                            {{ cardTransaction.TotalElapsed }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- CustomerId Column -->
+                <ng-container matColumnDef="CustomerId">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.CUSTOMERID" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">
+                            {{ cardTransaction.CustomerId }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ReferenceNumber Column -->
+                <ng-container matColumnDef="ReferenceNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.REFERENCENUMBER" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">
+                            {{ cardTransaction.ReferenceNumber }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- BillingAmount Column -->
+                <ng-container matColumnDef="BillingAmount">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.BILLINGAMOUNT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">
+                            {{ cardTransaction.BillingAmount }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- FeeAmount Column -->
+                <ng-container matColumnDef="FeeAmount">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.FEEAMOUNT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">
+                            {{ cardTransaction.FeeAmount }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TransactionLocalDateTime Column -->
+                <ng-container matColumnDef="TransactionLocalDateTime">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.TRANSACTIONLOCALDATETIME" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">
+                            {{ cardTransaction.TransactionLocalDateTime }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- BillingCurrencyCode Column -->
+                <ng-container matColumnDef="BillingCurrencyCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.BILLINGCURRENCYCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">
+                            {{ cardTransaction.BillingCurrencyCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TransactionCode Column -->
+                <ng-container matColumnDef="TransactionCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.TRANSACTIONCODE" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">
+                            {{ cardTransaction.TransactionCode }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- TransactionEffect Column -->
+                <ng-container matColumnDef="TransactionEffect">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.TRANSACTIONEFFECT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">
+                            {{ cardTransaction.TransactionEffect }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- CommissionAmount Column -->
+                <ng-container matColumnDef="CommissionAmount">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.COMMISSIONAMOUNT" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">
+                            {{ cardTransaction.CommissionAmount }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ApplicationNetwork Column -->
+                <ng-container matColumnDef="ApplicationNetwork">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                        "CARDTRANSACTION.APPLICATIONNETWORK" | translate
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let cardTransaction">
+                        <p class="text-truncate">
+                            {{ cardTransaction.ApplicationNetwork }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- InsertDateTime Column -->
+                <ng-container matColumnDef="InsertDateTime">
+                    <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        fxHide
+                        fxShow.gt-xs
+                        >{{
+                            "CARDTRANSACTION.INSERTDATETIME" | translate
+                        }}</mat-header-cell
+                    >
+                    <mat-cell
+                        *matCellDef="let cardTransaction"
+                        fxHide
+                        fxShow.gt-sm
+                    >
+                        <span class="text-truncate"
+                            >{{
+                                cardTransaction.InsertDateTime
+                                    | date : "dd/MM/YYYY HH:mm:ss "
+                            }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let cardTransaction; columns: displayedColumns"
+                    class="cardTransaction"
+                    [routerLink]="[
+                        '/searchCardTransaction',
+                        cardTransaction.Id
+                    ]"
+                >
+                </mat-row>
+            </mat-table>
+
+            <button
+                style="margin-bottom: 50px"
+                mat-fab
+                class="cardTransaction-button"
+                id="add-cardTransaction-button"
+                (click)="exportToExcel()"
+                aria-label="add cardTransaction"
+                [@animate]="{
+                    value: '*',
+                    params: { delay: '300ms', scale: '.2' }
+                }"
+            >
+                <mat-icon>vertical_align_bottom</mat-icon>
+            </button>
+
+            <mat-paginator
+                #paginator
+                [length]="searchCardTransactionDataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -9,6 +9,7 @@ export const locale = {
             SEARCHENDDATE: "Search End Date",
             SEARCHSTARTTIME: "Search Start Time",
             SEARCHENDTIME: "Search End Time",
+            TENANT: "Tenant",
             CUSTOMER: "Customer Name",
             NOTIFICATIONTYPE: "Notification Type",
             NOTIFICATIONTEMPLATE: "Notification Template",

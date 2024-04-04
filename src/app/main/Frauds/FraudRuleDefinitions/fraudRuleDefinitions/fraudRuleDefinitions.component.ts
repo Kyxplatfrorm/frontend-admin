@@ -116,11 +116,11 @@ export class FraudRuleDefinitionsComponent {
         this.fraudRuleDefinitionsForm.controls["TenantId"].reset();
         this.fraudRuleDefinitionsForm.controls["Description"].reset();
         this.fraudRuleDefinitionsForm.controls["FraudGroupId"].reset();
-        this.fraudRuleDefinitionsForm.controls["FraudQuery"].reset();
         this.fraudRuleDefinitionsForm.controls["FraudRuleActionTypeId"].reset();
         this.fraudRuleDefinitionsForm.controls[
             "FraudRuleCheckTimeTypeId"
         ].reset();
+        this.fraudRuleDefinitionsForm.controls["NotificationTypeId"].reset();
         this.fraudRuleDefinitionsForm.controls["SearchStartDate"].reset();
         this.fraudRuleDefinitionsForm.controls["SearchEndDate"].reset();
     }

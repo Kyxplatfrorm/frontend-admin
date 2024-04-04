@@ -46,6 +46,9 @@ import { NotificationModule } from "app/main/Notifications/notification.module";
 import { SchedulerModule } from "app/main/Scheduler/scheduler.module";
 import { FraudsModule } from "app/main/Frauds/frauds.module";
 import { WebHookModule } from "app/main/WebHook/webHook.module";
+import { ReportModule } from "app/main/Report/report.module";
+import { CustomerModule } from "app/main/Customer/customer.module";
+import { CardModule } from "app/main/Card/card.module";
 
 const appRoutes: Routes = [
     {
@@ -80,6 +83,26 @@ const appRoutes: Routes = [
             import("app/main/Application/application.module").then(
                 (m) => m.ApplicationModule
             ),
+    },
+
+    {
+        path: "Report",
+        loadChildren: () =>
+            import("app/main/Report/report.module").then((m) => m.ReportModule),
+    },
+
+    {
+        path: "Customer",
+        loadChildren: () =>
+            import("app/main/Customer/customer.module").then(
+                (m) => m.CustomerModule
+            ),
+    },
+
+    {
+        path: "Card",
+        loadChildren: () =>
+            import("app/main/Card/card.module").then((m) => m.CardModule),
     },
 
     {
@@ -196,6 +219,9 @@ const appRoutes: Routes = [
         SchedulerModule,
         FraudsModule,
         WebHookModule,
+        ReportModule,
+        CustomerModule,
+        CardModule,
     ],
     providers: [
         AuthenticationService,

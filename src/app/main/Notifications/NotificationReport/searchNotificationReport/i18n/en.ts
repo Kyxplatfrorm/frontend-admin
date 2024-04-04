@@ -5,7 +5,7 @@ export const locale = {
             NOTIFICATIONREPORT: "Notification Report",
             SEARCHTEXT: "Search for a notification report",
             ID: "Id",
-            TENANTNAME: "Tenant",
+            TENANTNAME: "Tenant Name",
             CUSTOMERNAME: "Customer Name",
             NOTIFICATIONTYPENAME: "Notification Type",
             LANGUAGECODENAME: "Language",

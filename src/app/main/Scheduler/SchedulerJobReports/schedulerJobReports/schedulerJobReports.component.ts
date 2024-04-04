@@ -10,6 +10,7 @@ import {
     SchedulerJobStatusEntity,
     SchedulerJobTypeEntity,
     SchedulerRecurringTypeEntity,
+    TenantDefinitionEntity,
 } from "app/ui/schedulerJobReport";
 import { SchedulerJobReportsService } from "./schedulerJobReports.service";
 import { SearchSchedulerJobReportsService } from "../searchSchedulerJobReports/searchSchedulerJobReports.service";
@@ -24,6 +25,7 @@ export class SchedulerJobReportsComponent {
     schedulerJobReportsForm: FormGroup;
     runStatus: SchedulerJobStatusEntity[];
     schedulerJobType: SchedulerJobTypeEntity[];
+    tenant: TenantDefinitionEntity[];
     schedulerRecurringType: SchedulerRecurringTypeEntity[];
 
     /**
@@ -43,16 +45,18 @@ export class SchedulerJobReportsComponent {
     }
 
     ngOnInit(): void {
+        this.schedulerJobReportsService.GetTenants().then(() => {
+            this.tenant =
+                this.schedulerJobReportsService.tenantApiResponse.TenantDefinitionList;
+        });
         this.schedulerJobReportsService.GetSchedulerJobStatus().then(() => {
             this.runStatus =
                 this.schedulerJobReportsService.schedulerJobStatusApiResponse.ParameterList;
         });
-
         this.schedulerJobReportsService.GetSchedulerJobTypes().then(() => {
             this.schedulerJobType =
                 this.schedulerJobReportsService.schedulerJobTypeApiResponse.ParameterList;
         });
-
         this.schedulerJobReportsService
             .GetSchedulerRecurringTypes()
             .then(() => {
@@ -72,6 +76,7 @@ export class SchedulerJobReportsComponent {
      */
     createSchedulerJobReportsForm(): FormGroup {
         return this._formBuilder.group({
+            TenantId: [this.schedulerJobReport.TenantId],
             ApplicationId: [this.schedulerJobReport.ApplicationId],
             TotalElapsed: [this.schedulerJobReport.TotalElapsed],
             RecurringTypeId: [this.schedulerJobReport.RecurringTypeId],
@@ -103,6 +108,7 @@ export class SchedulerJobReportsComponent {
 
     ClearButton() {
         this.schedulerJobReportsForm.controls["ApplicationId"].reset();
+        this.schedulerJobReportsForm.controls["TenantId"].reset();
         this.schedulerJobReportsForm.controls["TotalElapsed"].reset();
         this.schedulerJobReportsForm.controls["RecurringTypeId"].reset();
         this.schedulerJobReportsForm.controls["RunStatusId"].reset();

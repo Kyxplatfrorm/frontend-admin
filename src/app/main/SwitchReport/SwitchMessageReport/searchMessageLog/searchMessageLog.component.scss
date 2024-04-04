@@ -58,14 +58,14 @@ searchMessageLog {
 
         .mat-header-row {
             min-height: 64px;
-            width: 200vw;
+            width: 500vh;
         }
 
         .searchMessageLog {
             position: relative;
             cursor: pointer;
             height: 84px;
-            width: 200vw;
+            width: 500vh;
         }
 
         .mat-cell {
@@ -74,7 +74,7 @@ searchMessageLog {
             align-items: center;
         }
         .mat-column-Id {
-            flex: 0 1 100px;
+            flex: 0 1 200px;
             justify-content: center;
         }
 

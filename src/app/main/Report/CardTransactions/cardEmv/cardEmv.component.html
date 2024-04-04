@@ -1,0 +1,637 @@
+<div id="cardEmv" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header accent"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button
+                    mat-icon-button
+                    class="mr-0 mr-sm-16"
+                    [routerLink]="'/Report/CardTransactions/cardTransactions'"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div
+                    class="cardTransaction-image mr-8 mr-sm-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    <img
+                        *ngIf="cardTransaction.images[0]"
+                        [src]="cardTransaction.images[0].url"
+                    />
+                    <img
+                        *ngIf="!cardTransaction.images[0]"
+                        [src]="
+                            'assets/images/ecommerce/resource-image-placeholder.png'
+                        "
+                    />
+                </div>
+
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="start start"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    <div class="h2" *ngIf="pageType === 'edit'"></div>
+                    <div class="subtitle secondary-text">
+                        <span>{{
+                            "CARDTRANSACTION.CARDEMVDETAIL" | translate
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <form
+                    name="cardEmvForm"
+                    [formGroup]="cardEmvForm"
+                    class="cardTransaction w-100-p"
+                    fxLayout="column"
+                    fxFlex
+                >
+                    <mat-tab-group>
+                        <mat-tab
+                            label="{{
+                                'CARDTRANSACTION.CARDEMVINFO' | translate
+                            }}"
+                        >
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.CARDID" | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.CARDID'
+                                                    | translate
+                                            }}"
+                                            name="CardId"
+                                            formControlName="CardId"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.CARDTOKENNUMBER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.CARDTOKENNUMBER'
+                                                    | translate
+                                            }}"
+                                            name="CardTokenNumber"
+                                            formControlName="CardTokenNumber"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.REFERENCENUMBER"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.REFERENCENUMBER'
+                                                    | translate
+                                            }}"
+                                            name="ReferenceNumber"
+                                            formControlName="ReferenceNumber"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55LENGTH"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55LENGTH'
+                                                    | translate
+                                            }}"
+                                            name="F55Length"
+                                            formControlName="F55Length"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG5F34"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG5F34'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag5F34"
+                                            formControlName="F55Tag5F34"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG5F2A"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG5F2A'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag5F2A"
+                                            formControlName="F55Tag5F2A"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG82"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG82'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag82"
+                                            formControlName="F55Tag82"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG84"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG84'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag84"
+                                            formControlName="F55Tag84"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG95"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG95'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag95"
+                                            formControlName="F55Tag95"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG9A"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG9A'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag9A"
+                                            formControlName="F55Tag9A"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG9C"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG9C'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag9C"
+                                            formControlName="F55Tag9C"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG9F02"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG9F02'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag9F02"
+                                            formControlName="F55Tag9F02"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG9F03"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG9F03'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag9F03"
+                                            formControlName="F55Tag9F03"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG9F10"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG9F10'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag9F10"
+                                            formControlName="F55Tag9F10"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG9F1A"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG9F1A'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag9F1A"
+                                            formControlName="F55Tag9F1A"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG9F26"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG9F26'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag9F26"
+                                            formControlName="F55Tag9F26"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG9F27"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG9F27'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag9F27"
+                                            formControlName="F55Tag9F27"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG9F33"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG9F33'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag9F33"
+                                            formControlName="F55Tag9F33"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG9F34"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG9F34'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag9F34"
+                                            formControlName="F55Tag9F34"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG9F36"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG9F36'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag9F36"
+                                            formControlName="F55Tag9F36"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG9F37"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG9F37'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag9F37"
+                                            formControlName="F55Tag9F37"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG71"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG71'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag71"
+                                            formControlName="F55Tag71"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG72"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG72'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag72"
+                                            formControlName="F55Tag72"
+                                        />
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.F55TAG91"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.F55TAG91'
+                                                    | translate
+                                            }}"
+                                            name="F55Tag91"
+                                            formControlName="F55Tag91"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutAlign="space-between"
+                                >
+                                    <mat-form-field
+                                        appearance="outline"
+                                        floatLabel="always"
+                                        class="w-100-p"
+                                        fxFlex="30"
+                                    >
+                                        <mat-label>{{
+                                            "CARDTRANSACTION.INSERTDATE"
+                                                | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'CARDTRANSACTION.INSERTDATE'
+                                                    | translate
+                                            }}"
+                                            name="InsertDate"
+                                            formControlName="InsertDate"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

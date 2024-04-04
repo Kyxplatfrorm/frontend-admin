@@ -48,13 +48,14 @@ export class WebHookReportsComponent {
             this.webHookRunStatus =
                 this.webHookReportsService.webHookRunStatusApiResponse.ParameterList;
         });
-
         this.webHookReportsService.GetWebHookTypes().then(() => {
             this.webHookType =
                 this.webHookReportsService.webHookTypeApiResponse.ParameterList;
         });
-
         this.webHookReportsService.GetTenants().then(() => {
+            this.tenant =
+                this.webHookReportsService.tenantApiResponse.TenantDefinitionList;
+        });  this.webHookReportsService.GetTenants().then(() => {
             this.tenant =
                 this.webHookReportsService.tenantApiResponse.TenantDefinitionList;
         });
@@ -103,6 +104,7 @@ export class WebHookReportsComponent {
     ClearButton() {
         this.webHookReportsForm.controls["WebHookProfileId"].reset();
         this.webHookReportsForm.controls["CompanyId"].reset();
+        this.webHookReportsForm.controls["TenantId"].reset();
         this.webHookReportsForm.controls["WebHookTypeId"].reset();
         this.webHookReportsForm.controls["RunStatusId"].reset();
         this.webHookReportsForm.controls["HttpStatusCode"].reset();
@@ -111,8 +113,6 @@ export class WebHookReportsComponent {
         this.webHookReportsForm.controls["TotalElapsed"].reset();
         this.webHookReportsForm.controls["ReferenceNumber"].reset();
         this.webHookReportsForm.controls["HttpPostUrl"].reset();
-        this.webHookReportsForm.controls["ResultMessage"].reset();
-        this.webHookReportsForm.controls["RecordType"].reset();
         this.webHookReportsForm.controls["SearchStartDate"].reset();
         this.webHookReportsForm.controls["SearchEndDate"].reset();
     }

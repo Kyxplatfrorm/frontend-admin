@@ -284,3 +284,4 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/package-lock.json

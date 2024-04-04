@@ -136,10 +136,10 @@ export const locale = {
             SYSTEMKEYDEFINITION: "System Key Definition",
             SYSTEMFILEFORMAT: "System File Format",
             SYSTEMFILEINFORMATION: "System File Information",
-        },
-        ERROR: {
-            ERRORMESSAGE: "Please enter a valid information",
-            OK: "OK",
+            REPORT: "Report",
+            CARDTRANSACTION: "Card Transaction Report",
+            CARDEMBOSSREPORT: "Card Emboss Report",
+            CARDMEMOREPORT: "Card Memo Report",
         },
     },
 };

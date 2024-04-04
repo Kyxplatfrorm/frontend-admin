@@ -1,0 +1,235 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button
+                mat-icon-button
+                (click)="matDialogRef.close()"
+                aria-label="Close dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0">
+        <form [formGroup]="cardTransactionCardTokenForm">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{ "CARD.CUSTOMERNAME" | translate }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'CARD.CUSTOMERNAME' | translate }}"
+                        name="CustomerName"
+                        formControlName="CustomerName"
+                    />
+                </mat-form-field>
+
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "CARD.IDENTITYNUMBER" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'CARD.IDENTITYNUMBER' | translate }}"
+                        name="IdentityNumber"
+                        formControlName="IdentityNumber"
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "CARD.CELLPHONENUMBER" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'CARD.CELLPHONENUMBER' | translate }}"
+                        name="CellPhoneNumber"
+                        formControlName="CellPhoneNumber"
+                    />
+                </mat-form-field>
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{ "CARD.EMAIL" | translate }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'CARD.EMAIL' | translate }}"
+                        name="Email"
+                        formControlName="Email"
+                    />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field
+                    appearance="outline"
+                    floatLabel="always"
+                    class="w-100-p"
+                    fxFlex="48"
+                >
+                    <mat-label>{{
+                        "CARD.CARDTOKENNUMBER" | translate
+                    }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'CARD.CARDTOKENNUMBER' | translate }}"
+                        name="CardTokenNumber"
+                        formControlName="CardTokenNumber"
+                    />
+                </mat-form-field>
+            </div>
+        </form>
+
+        <div
+            mat-dialog-actions
+            class="m-0 p-16"
+            fxLayout="row"
+            fxLayoutAlign="end center"
+        >
+            <button mat-button (click)="CardSearch()">
+                {{ "CARD.SEARCH" | translate }}
+            </button>
+
+            <div
+                mat-dialog-actions
+                class="m-0 p-0"
+                fxLayout="row"
+                fxLayoutAlign="end center"
+            >
+                <button mat-button (click)="ClearSearch()">
+                    {{ "CARD.CLEAR" | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div
+        id="cardTransactionCardTokenForm"
+        class="page-layout carded fullwidth inner-scroll"
+        fusePerfectScrollbar
+    >
+        <!-- CENTER -->
+        <div class="center">
+            <!-- CONTENT CARD -->
+            <div class="content-card">
+                <mat-table
+                    class="cardTransactionCardTokens-table"
+                    #table
+                    matSort
+                    [dataSource]="cardTransactionCardTokenFormDataSource"
+                >
+                    <!-- Id Column -->
+                    <ng-container matColumnDef="Id">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                            "CARD.ID" | translate
+                        }}</mat-header-cell>
+                        <mat-cell *matCellDef="let searchCard">
+                            <p class="text-truncate">
+                                {{ searchCard.Id }}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- CardBrand Column -->
+                    <ng-container matColumnDef="CardBrand">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                            "CARD.CARDBRAND" | translate
+                        }}</mat-header-cell>
+                        <mat-cell *matCellDef="let searchCard">
+                            <p class="text-truncate">
+                                {{ searchCard.CardBrand }}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                    <!-- CardTokenNumber Column -->
+                    <ng-container matColumnDef="CardTokenNumber">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                            "CARD.CARDTOKENNUMBER" | translate
+                        }}</mat-header-cell>
+                        <mat-cell *matCellDef="let searchCard">
+                            <p class="text-truncate">
+                                {{ searchCard.CardTokenNumber }}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                    <!-- CardHolderName Column -->
+                    <ng-container matColumnDef="CardHolderName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                            "CARD.CARDHOLDERNAME" | translate
+                        }}</mat-header-cell>
+                        <mat-cell *matCellDef="let searchCard">
+                            <p class="text-truncate">
+                                {{ searchCard.CardHolderName }}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                    <!-- CardStatus Column -->
+                    <ng-container matColumnDef="CardStatus">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                            "CARD.CARDSTATUS" | translate
+                        }}</mat-header-cell>
+                        <mat-cell *matCellDef="let searchCard">
+                            <p class="text-truncate">
+                                {{ searchCard.CardStatus }}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                    <!-- FullCellPhoneNumber Column -->
+                    <ng-container matColumnDef="FullCellPhoneNumber">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                            "CARD.CELLPHONENUMBER" | translate
+                        }}</mat-header-cell>
+                        <mat-cell *matCellDef="let searchCard">
+                            <p class="text-truncate">
+                                {{ searchCard.FullCellPhoneNumber }}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="Email">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+                            "CARD.EMAIL" | translate
+                        }}</mat-header-cell>
+                        <mat-cell *matCellDef="let searchCard">
+                            <p class="text-truncate">
+                                {{ searchCard.Email }}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row
+                        *matHeaderRowDef="displayedColumns; sticky: true"
+                    ></mat-header-row>
+
+                    <mat-row
+                        *matRowDef="let searchCard; columns: displayedColumns"
+                        class="searchCard"
+                        (dblclick)="loadCardTokenData(searchCard)"
+                    >
+                    </mat-row>
+                </mat-table>
+            </div>
+            <!-- / CONTENT CARD -->
+        </div>
+        <!-- / CENTER -->
+    </div>
+</div>

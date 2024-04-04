@@ -123,6 +123,7 @@ export class RestApiLogsComponent {
         this.restApiLogsForm.controls["ClientIp"].reset();
         this.restApiLogsForm.controls["UserTypeId"].reset();
         this.restApiLogsForm.controls["HttpMethodId"].reset();
+        this.restApiLogsForm.controls["TenantId"].reset();
     }
 
     onDateChange(event: MatDatepickerInputEvent<Date>) {
